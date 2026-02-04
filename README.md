@@ -3,74 +3,72 @@
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
 |:--- |:--- |:--- |
-| [Nombre 1] | [email1]@alumnos.urjc.es | [User1] |
-| [Nombre 2] | [email2]@alumnos.urjc.es | [User2] |
-| [Nombre 3] | [email3]@alumnos.urjc.es | [User3] |
-| [Nombre 4] | [email4]@alumnos.urjc.es | [User4] |
+| Sara Torres García | s.torresg.2017@alumnos.urjc.es | saratorres99 |
+| Alexis Maestro López | a.maestro.2023@alumnos.urjc.es | alexissmaestroo |
+| Diego Iglesias Peña | d.iglesias.2023@alumnos.urjc.es | diegoigle3 |
+| Rodrigo de Frutos Suárez| r.defrutos.2023@alumnos.urjc.es | rodrigodefrutos |
 
 ---
 
 ## 🎭 **Preparación: Definición del Proyecto**
 
 ### **Descripción del Tema**
-[Escribe aquí una descripción breve y concisa de qué trata tu aplicación, el sector al que pertenece y qué valor aporta al usuario].
+Esta aplicación web es un buscador colaborativo de restaurantes especializados en oferta **sin gluten**, diseñado para facilitar la vida social y gastronómica del colectivo celíaco. La plataforma organiza la información geográficamente por **municipios**, permitiendo a los usuarios localizar de forma rápida establecimientos seguros en su localidad específica. El valor diferencial de la aplicación reside en la confianza de la comunidad: los usuarios no solo consultan, sino que validan la seguridad y calidad de los restaurantes mediante un sistema de reseñas y valoraciones, creando así un directorio fiable y actualizado de zonas seguras para comer.
 
 ### **Entidades**
 Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
 
-1. **[Entidad 1]**: [Ej: Usuario]
-2. **[Entidad 2]**: [Ej: Producto]
-3. **[Entidad 3]**: [Ej: Pedido]
-4. **[Entidad 4]**: [Ej: Categoría]
+1. **Usuario**: Personas que utilizan la aplicación para buscar o valorar sitios.
+2. **Restaurante**: Los establecimientos que ofrecen comida apta para celíacos.
+3. **Reseña**: La valoración (estrellas) y comentario que deja un usuario sobre su experiencia.
+4. **Municipio**: La localidad donde se agrupan los restaurantes (Ej: Madrid, Móstoles, Alcorcón).
 
 **Relaciones entre entidades:**
-- [Ej: Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)]
-- [Ej: Pedido - Producto: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)]
-- [Ej: Producto - Categoría: Un producto pertenece a una categoría (N:1)]
-- [Descripción de otras relaciones relevantes]
+- **Usuario - Reseña**: Un usuario puede escribir múltiples reseñas, pero una reseña pertenece a un único autor (1:N).
+- **Restaurante - Reseña**: Un restaurante puede recibir múltiples reseñas de distintos usuarios (1:N).
+- **Restaurante - Municipio**: Un restaurante pertenece físicamente a un único municipio, pero un municipio contiene muchos restaurantes (N:1).
+- **Usuario - Restaurante**: Un usuario puede guardar múltiples restaurantes como favoritos y un restaurante puede ser guardado por múltiples usuarios (N:M).
 
 ### **Permisos de los Usuarios**
 Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
 
 * **Usuario Anónimo**: 
-  - Permisos: [Ej: Visualización de catálogo, búsqueda de productos, registro]
-  - No es dueño de ninguna entidad
+  - Permisos: Visualizar listado de municipios, buscar restaurantes, ver detalles y leer reseñas.
+  - No es dueño de ninguna entidad.
 
 * **Usuario Registrado**: 
-  - Permisos: [Ej: Gestión de perfil, realizar pedidos, crear valoraciones]
-  - Es dueño de: [Ej: Sus propios Pedidos, su Perfil de Usuario, sus Valoraciones]
+  - Permisos: Todo lo anterior + Publicar reseñas, gestionar su perfil, guardar favoritos.
+  - Es dueño de: Su **Perfil de Usuario** y sus propias **Reseñas**.
 
 * **Administrador**: 
-  - Permisos: [Ej: Gestión completa de productos (CRUD), visualización de estadísticas, moderación de contenido]
-  - Es dueño de: [Ej: Productos, Categorías, puede gestionar todos los Pedidos y Usuarios]
+  - Permisos: Crear, editar y borrar Restaurantes (CRUD), gestionar Municipios (crear nuevas zonas), moderar reseñas ofensivas y bloquear usuarios.
+  - Es dueño de: **Restaurantes**, **Municipios** y la gestión global de la plataforma.
 
 ### **Imágenes**
 Indicar qué entidades tendrán asociadas una o varias imágenes:
 
-- **[Entidad con imágenes 1]**: [Ej: Usuario - Una imagen de avatar por usuario]
-- **[Entidad con imágenes 2]**: [Ej: Producto - Múltiples imágenes por producto (galería)]
-- **[Entidad con imágenes 3]**: [Ej: Categoría - Una imagen representativa por categoría]
+- **Usuario**: Una imagen de avatar por usuario.
+- **Restaurante**: Una imagen de portada del establecimiento.
+- **Municipio**: Una imagen representativa de la ciudad (Ej: Plaza Mayor para Madrid) para mostrar en las tarjetas de búsqueda.
 
 ### **Gráficos**
 Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 
-- **Gráfico 1**: [Ej: Ventas mensuales - Gráfico de barras]
-- **Gráfico 2**: [Ej: Productos más vendidos - Gráfico de tarta/circular]
-- **Gráfico 3**: [Ej: Evolución de usuarios registrados - Gráfico de líneas]
-- **Gráfico 4**: [Ej: Distribución de pedidos por categoría - Gráfico de barras horizontales]
+- **Gráfico 1**: Top 5 Restaurantes mejor valorados de la plataforma - Gráfico de barras.
+- **Gráfico 2**: Distribución de restaurantes por Municipio (Ej: % en Madrid vs Móstoles) - Gráfico de tarta/circular.
+- **Gráfico 3**: Evolución de reseñas publicadas en el último año - Gráfico de líneas.
 
 ### **Tecnología Complementaria**
 Indicar qué tecnología complementaria se empleará:
 
-- [Ej: Envío de correos electrónicos automáticos mediante JavaMailSender]
-- [Ej: Generación de PDFs de facturas usando iText o similar]
+- Generación de PDFs de la "Ficha de Seguridad" del restaurante (con dirección y alérgenos) para descargar.
+- Envío de correos electrónicos automáticos de bienvenida al registrarse.
 
 ### **Algoritmo o Consulta Avanzada**
 Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 
-- **Algoritmo/Consulta**: [Ej: Sistema de recomendaciones basado en el historial de compras del usuario]
-- **Descripción**: [Ej: Analiza los productos comprados previamente y sugiere productos similares o complementarios utilizando filtrado colaborativo]
-- **Alternativa**: [Ej: Consulta compleja que agrupe ventas por categoría, mes y región, con cálculo de tendencias]
+- **Algoritmo/Consulta**: Ranking de "Restaurantes Seguros por Zona".
+- **Descripción**: El sistema filtra los restaurantes por el **Municipio** seleccionado y los ordena calculando un índice de calidad. Este índice pondera la **valoración media** (estrellas) con la **cantidad total de reseñas**, priorizando aquellos sitios que tienen muchas opiniones positivas frente a los que tienen pocas aunque sean buenas (para evitar falsos positivos).
 
 ---
 
