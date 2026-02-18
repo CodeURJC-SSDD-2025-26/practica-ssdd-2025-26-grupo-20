@@ -1,0 +1,52 @@
+body {
+    background-image: url(https://imgs.search.brave.com/Vj_aE0_1DtelH5AkHxZK7YojwVwSrcsUtaVbIWdNfJQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMTcv/MTUzLzI0Ni9zbWFs/bC90YWJsZS1uZWFy/LXRoZS13aW5kb3ct/aW4tdGhlLXJlc3Rh/dXJhbnQtb3Zlcmxv/b2tpbmctdGhlLXJv/YWQtcGhvdG8uanBn);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.main-nav .logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 5px;
+    padding-left: 0;
+}
+
+.logo-design {
+    width: 55px;
+    height: 55px;
+    background-color: #c41;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 0 20px 0 20px;
+}
+
+/* Margen para que el header no tape el contenido */
+.admin-section {
+    padding-top: 120px; 
+    padding-bottom: 60px;
+}
+
+.cuadro_admin {
+    background: #fff; /* Un fondo blanco queda más "limpio" que el gris #888 */
+    border: 1px solid #eee;
+    padding: 30px;
+    border-radius: 25px; /* Menos exagerado que 50px */
+    box-shadow: 0px 10px 20px rgba(0,0,0,0.05); /* Efecto de sombra suave */
+    text-align: center;
+    transition: all .3s;
+    margin-bottom: 30px;
+    height: 60vh;
+    display: flex;
+    flex-direction: column; /* Para que el h3 esté arriba del p */
+    justify-content: center; /* Centrado vertical */
+    align-items: center;
+}
+
+/* Efecto hover para que se vea interactivo */
+.cuadro_admin:hover {
+    transform: translateY(-10px);
+    border-color: #c41; /* Color azul de la plantilla Woox */
+}
