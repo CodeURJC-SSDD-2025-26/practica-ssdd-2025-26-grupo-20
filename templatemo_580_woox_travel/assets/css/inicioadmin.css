@@ -1,0 +1,114 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Centrar todo el contenido en pantalla */
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2b2b2b;
+}
+
+/* Tarjeta de fondo con degradado */
+.background {
+  width: 95%;
+  height: 95vh;
+  border-radius: 25px;
+  background-image: url("../images/Aesthetic\ Macbook\ _\ Desktop\ Wallpaper.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+/* Contenedor principal del login */
+.login-container {
+  text-align: center;
+  color: #fec58f;
+}
+
+.login-container h2 {
+  color: #2b2b2b; /* el color que quieras para el título */
+  letter-spacing: 4px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* Tarjeta del formulario */
+.login-card {
+  background: rgba(26, 17, 12, 0.6);
+  padding: 40px;
+  width: 350px;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(38, 20, 20, 0.5);
+  margin-bottom: 20px;
+}
+
+/* Input + icono */
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background: rgb(92, 80, 76);
+}
+
+.input-group .icon {
+  padding: 10px;
+  background: rgb(92, 80, 76);
+}
+
+.input-group input {
+  border: none;
+  padding: 10px;
+  width: 100%;
+  background: #e1e1e1;
+  outline: none;
+}
+
+/* Recordar contraseña + enlace */
+.options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 25px;
+}
+
+.options a {
+  color: #e1e1e1;
+  text-decoration: none;
+}
+
+.options a:hover {
+  text-decoration: underline;
+}
+
+/* Botón de iniciar sesión */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #c41;
+  border: none;
+  color: #e1e1e1;
+  font-weight: 600;
+  letter-spacing: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  background: #c41;
+}
+
