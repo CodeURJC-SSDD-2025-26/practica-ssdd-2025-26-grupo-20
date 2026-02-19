@@ -2166,6 +2166,12 @@ Reservation Page Style
   padding: 260px 0px 190px 0px;
   text-align: center;
 }
+.second-page-heading {
+  height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
 
 .second-page-heading h4 {
   font-size: 20px;
@@ -2213,6 +2219,11 @@ Reservation Page Style
   background-color: #626262;
   color: #ffffff;
 }
+
+.second-page-heading {
+  overflow: hidden;
+}
+
 
 
 

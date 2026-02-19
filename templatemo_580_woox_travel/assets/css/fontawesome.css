@@ -28,6 +28,14 @@
   line-height: 1;
   text-rendering: auto; }
 
+.register-section {
+  display: flex;
+  flex-direction: column; /* uno encima de otro */
+  align-items: center;    /* centrado horizontal */
+  gap: 8px;               /* separación entre texto y botón */
+}
+
+
 .fa-1x {
   font-size: 1em; }
 
