@@ -1,7 +1,11 @@
 body {
-    background-image: url(https://imgs.search.brave.com/Vj_aE0_1DtelH5AkHxZK7YojwVwSrcsUtaVbIWdNfJQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMTcv/MTUzLzI0Ni9zbWFs/bC90YWJsZS1uZWFy/LXRoZS13aW5kb3ct/aW4tdGhlLXJlc3Rh/dXJhbnQtb3Zlcmxv/b2tpbmctdGhlLXJv/YWQtcGhvdG8uanBn);
+    background-image: url(../images/admin-bg.jpg);
     background-size: cover;
     background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 5px 0px 0px 0px;
+    
 }
 
 .main-nav .logo {
@@ -30,10 +34,11 @@ body {
 }
 
 .cuadro_admin {
-    background: #fff; /* Un fondo blanco queda más "limpio" que el gris #888 */
+    color: #222;
+    background: #fff;
     border: 1px solid #eee;
     padding: 30px;
-    border-radius: 25px; /* Menos exagerado que 50px */
+    border-radius: 25px;
     box-shadow: 0px 10px 20px rgba(0,0,0,0.05); /* Efecto de sombra suave */
     text-align: center;
     transition: all .3s;
@@ -49,4 +54,16 @@ body {
 .cuadro_admin:hover {
     transform: translateY(-10px);
     border-color: #c41; /* Color azul de la plantilla Woox */
+}
+
+.titulo-cuadro {
+    color: #666;
+}
+
+.gestion-restarante {
+    background-image: url(../images/gestion-restaurate-bg.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
 }
