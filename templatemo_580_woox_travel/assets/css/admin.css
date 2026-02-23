@@ -72,3 +72,8 @@ html, body {
     opacity: 0.9;
     background-color: #a31; /* Un tono un poco más oscuro al pasar el ratón */
 }
+
+.card-text {
+    font-weight: 300;
+    color: #2a2a2a;
+}
