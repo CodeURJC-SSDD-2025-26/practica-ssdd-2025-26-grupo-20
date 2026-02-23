@@ -1,0 +1,80 @@
+.header-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.admin-section {
+    padding-top: 150px; /* Este padding es el que crea el espacio visual para el menú, pero la IMAGEN sí sube */
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../images/options-admin-bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 0 !important;
+    min-height: 100vh;
+}
+
+/* Contenedor de la tabla */
+.user-list-container {
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Ajuste de la tabla nativa de Bootstrap */
+.table thead {
+    background-color: #2a2a2a;
+}
+
+.modal-content {
+    border-radius: 25px;
+    border: none;
+}
+
+.modal-header {
+    background-color: #c41;
+    color: #fff;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.modal-header .btn-close {
+    filter: invert(1); /* Hace la X blanca para que se vea sobre el fondo oscuro */
+}
+
+.modal-title {
+    font-weight: 600;
+}
+
+/* Botón pequeño con tu color corporativo #c41 */
+.main-button-small {
+    background-color: #c41;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.main-button-small:hover {
+    background-color: #a31;
+    transform: scale(1.05);
+}
+
+.card-review {
+    border-left: 4px solid #c41;
+    border-bottom: 0.5px solid #c41;
+}
+
+.user-profile {
+    width: 50px;
+    object-fit: cover;
+    border: 2px solid #c41;
+}
+
+.user-profile-info {
+    color: #2a2a2a;
+}
