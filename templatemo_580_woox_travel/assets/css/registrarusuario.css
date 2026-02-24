@@ -1,0 +1,139 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+/* Centrar todo el contenido en pantalla */
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2b2b2b;
+}
+
+/* Tarjeta de fondo con imagen */
+.background {
+  width: 95%;
+  height: 95vh;
+  border-radius: 25px;
+  background-image: url("../images/Aesthetic\ Macbook\ _\ Desktop\ Wallpaper.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+/* Wrapper que divide en dos columnas */
+.register-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 780px;
+  padding: 20px;
+}
+
+/* Panel izquierdo: avatar + texto motivacional */
+.left-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  color: #000000;
+}
+
+.left-panel h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+  color: #000000;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Tarjeta del formulario */
+.register-card {
+  background: rgba(0, 0, 0, 0.419);
+  padding: 28px 24px;
+  width: 400px;
+  max-width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(5, 5, 5, 0.5);
+}
+
+.register-card h2 {
+  color: rgb(255, 255, 255);
+  letter-spacing: 3px;
+  font-weight: 700;
+  margin-bottom: 28px;
+  font-size: 1.3rem;
+}
+
+/* Fila con dos campos */
+.form-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 4px;
+  min-width: 0;
+}
+.form-group input {
+  border: none;
+  padding: 8px 10px;
+  background: #c41;
+  outline: none;
+  border-radius: 3px;
+  font-size: 12px;
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+}
+.terms {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px; 
+  margin-top: 4px;
+}
+
+
+.create-btn {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.577);
+  border: none;
+  color: #e1e1e1;
+  font-weight: 600;
+  letter-spacing: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+}
+
+.create-btn:hover {
+  background: rgb(0, 0, 0);
+}
+
+
+.form-group label {
+  font-size: 12px;
+}
