@@ -106,6 +106,7 @@ body {
   letter-spacing: 5px;
   cursor: pointer;
   transition: 0.3s;
+  border-radius: 4px;
 }
 
 .login-btn:hover {
@@ -123,6 +124,7 @@ body {
   letter-spacing: 5px;
   cursor: pointer;
   transition: 0.3s;
+  border-radius: 4px;
 }
 
 .register-btn:hover {

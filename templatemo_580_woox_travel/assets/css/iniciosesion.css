@@ -74,6 +74,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   margin-bottom: 15px;
+  border-radius: 4px;
 }
 
 .login-btn:hover {
@@ -96,6 +97,7 @@ body {
   box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
+  border-radius: 4px;
 }
 
 .register-btn:hover {
