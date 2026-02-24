@@ -1059,10 +1059,11 @@ Visit Country Style
 --------------------------------------------- 
 */
 
+/* --- SECCIÓN DE RESTAURANTES (VISIT COUNTRY) --- */
 .visit-country {
-  margin-top: 120px;
-  background-color: transparent !important; /* Gris antracita muy oscuro */
-  padding: 60px 0; /* Espacio arriba y abajo para que el color se note bien */
+  margin-top: 40px; /* ANTES: 120px. Lo reducimos drásticamente para pegarlo a los filtros */
+  background-color: transparent !important;
+  padding: 20px 0 60px 0; /* ANTES: 60px 0. Le quitamos espacio por arriba, pero mantenemos el de abajo */
 }
 
 .visit-country .side-bar-map {
@@ -1083,6 +1084,10 @@ Visit Country Style
 
 .visit-country .item .image img {
   border-radius: 23px;
+  width: 100%; /* Obliga a ocupar todo el ancho de su columna */
+  height: 250px; /* FORZAMOS LA MISMA ALTURA PARA TODAS. Puedes subirlo a 300px si las ves muy finas */
+  object-fit: cover; /* LA MAGIA: Recorta la foto perfectamente sin deformarla */
+  object-position: center; /* Centra el recorte para que no corte cabezas/platos */
 }
 
 .visit-country .item .right-content h4 {
@@ -2007,11 +2012,13 @@ Deals Page Style
 .page-heading .border-button a:hover {
   border-color: #c41;
 }
+.search-form {
+  margin-top: 100px;
+}
 
 .search-form #search-form {
   background-color: #c41;
-  border-bottom-left-radius: 23px;
-  border-bottom-right-radius: 23px;
+  border-radius: 23px;
   padding: 35px 60px;
 }
 
@@ -2206,12 +2213,11 @@ Reservation Page Style
   margin-bottom: 30px;
 }
 .second-page-heading button {
-  font-weight: 600;  
+  font-weight: 600;
   border-width: 4px;
-
 }
 .second-page-heading .btn {
-  color: #2B2B2B;
+  color: #2b2b2b;
   border-color: #2b2b2b;
 }
 
@@ -2223,9 +2229,6 @@ Reservation Page Style
 .second-page-heading {
   overflow: hidden;
 }
-
-
-
 
 .second-page-heading .main-button a {
   border-color: #fff;
