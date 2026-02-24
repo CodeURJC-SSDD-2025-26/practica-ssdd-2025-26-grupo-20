@@ -1,0 +1,105 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #2b2b2b;
+}
+
+.background {
+  width: 95%;
+  height: 95vh;
+  border-radius: 25px;
+  background-image: url("../images/Aesthetic\ Macbook\ _\ Desktop\ Wallpaper.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.login-container {
+  text-align: center;
+}
+
+.login-container h2 {
+  color: #2b2b2b;
+  letter-spacing: 4px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.login-card {
+  background: rgba(26, 17, 12, 0.6);
+  padding: 40px;
+  width: 350px;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(38, 20, 20, 0.5);
+  margin-bottom: 20px;
+}
+
+.selector-text {
+  color: #e1e1e1;
+  font-size: 14px;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.65);
+  border: none;
+  color: #c41;
+  font-weight: 600;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: block;
+  font-size: 14px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.login-btn:hover {
+  background: #c41;
+  color: #ffffff;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.65);
+  border: none;
+  color: #c41;
+  font-weight: 600;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: 0.3s;
+  display: block;
+  font-size: 14px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.register-btn:hover {
+  background: #c41;
+  color: #ffffff;
+}
+

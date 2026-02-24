@@ -2164,7 +2164,7 @@ Deals Page Style
 inicio de sesion Page Style
 --------------------------------------------- 
 */
-
+/*
 .second-page-heading {
   width: 95%;
   height: 95vh;
@@ -2218,11 +2218,11 @@ inicio de sesion Page Style
   margin-bottom: 30px;
 }
 .second-page-heading button {
-  width: 100%;        /* ya lo tienes, asegúrate de que esté */
-  box-sizing: border-box;  /* AÑADE esta línea */
-  overflow: hidden;        /* AÑADE esta línea */
-  white-space: nowrap;     /* AÑADE esta línea, evita que salte de línea */
-  font-size: 13px;         /* BAJA un poco el tamaño si sigue justo */
+  width: 100%;        
+  box-sizing: border-box;  
+  overflow: hidden;        
+  white-space: nowrap;     
+  font-size: 13px;         
   letter-spacing: 3px;
 }
 .second-page-heading .btn {
@@ -2246,6 +2246,7 @@ inicio de sesion Page Style
   color: #fff;
 }
 
+*/
 .reservation-info {
   margin-top: -99px;
 }
