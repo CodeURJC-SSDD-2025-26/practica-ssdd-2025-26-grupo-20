@@ -37,7 +37,7 @@ body {
 /* Contenedor principal del login */
 .login-container {
   text-align: center;
-  color: #fec58f;
+  color: #eb7e34;
 }
 
 .login-container h2 {
@@ -49,11 +49,11 @@ body {
 
 /* Tarjeta del formulario */
 .login-card {
-  background: rgba(26, 17, 12, 0.6);
+  background: rgba(5, 5, 5, 0.5);
   padding: 40px;
   width: 350px;
   border-radius: 6px;
-  box-shadow: 0 10px 30px rgba(38, 20, 20, 0.5);
+  box-shadow: 0 10px 30px rgba(5, 5, 5, 0.5);
   margin-bottom: 20px;
 }
 
@@ -62,12 +62,12 @@ body {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  background: rgb(92, 80, 76);
+  background: rgba(5, 5, 5, 0.5);
 }
 
 .input-group .icon {
   padding: 10px;
-  background: rgb(92, 80, 76);
+  background: rgba(5, 5, 5, 0.5);
 }
 
 .input-group input {
