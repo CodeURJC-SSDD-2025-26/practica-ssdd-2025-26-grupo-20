@@ -10,25 +10,26 @@ html, body {
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   background: #2b2b2b;
 }
 
 .background {
-  width: 95%;
-  height: 95vh;
-  border-radius: 25px;
+  width: 100%;
   background-image: url("../images/Aesthetic\ Macbook\ _\ Desktop\ Wallpaper.jpg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
+  margin: auto;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  padding-top: 70px;
+
+
 }
 
 .login-container {
@@ -74,7 +75,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   margin-bottom: 15px;
-  border-radius: 4px;
+
 }
 
 .login-btn:hover {
@@ -97,7 +98,7 @@ body {
   box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
-  border-radius: 4px;
+
 }
 
 .register-btn:hover {

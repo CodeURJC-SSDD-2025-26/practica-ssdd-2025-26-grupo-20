@@ -6,38 +6,38 @@
   font-family: "Poppins", sans-serif;
 }
 
-html, body {
-  height: 100%;
-}
 
 /* Centrar todo el contenido en pantalla */
+.header-area .main-nav .nav {
+  display: flex !important;
+  flex-direction: row !important;
+}
 body {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   background: #2b2b2b;
 }
 
 /* Tarjeta de fondo con degradado */
 .background {
-  width: 95%;
-  height: 95vh;
-  border-radius: 25px;
+  width: 100%;
   background-image: url("../images/Aesthetic\ Macbook\ _\ Desktop\ Wallpaper.jpg");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
+  margin: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: auto;
+  padding-top: 120px; /* espacio header */
+  align-items: flex-start;
 }
 
 /* Contenedor principal del login */
 .login-container {
   text-align: center;
   color: #eb7e34;
+  margin-top: 80px;
 }
 
 .login-container h2 {
@@ -50,8 +50,8 @@ body {
 /* Tarjeta del formulario */
 .login-card {
   background: rgba(5, 5, 5, 0.5);
-  padding: 40px;
-  width: 350px;
+  padding: 30px;
+  width: 300px;
   border-radius: 6px;
   box-shadow: 0 10px 30px rgba(5, 5, 5, 0.5);
   margin-bottom: 20px;
