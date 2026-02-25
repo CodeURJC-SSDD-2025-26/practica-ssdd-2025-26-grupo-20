@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="assets/css/owl.css" />
     <link rel="stylesheet" href="assets/css/animate.css" />
     <link rel="stylesheet" href="assets/css/restaurantes-mod.css">
+    <link rel="stylesheet" href="assets/css/lista-usuarios.css">
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
@@ -67,7 +68,7 @@ https://templatemo.com/tm-580-woox-travel
                   <tr>
                       <td><img src="assets/images/Pizza-Natura-sin-gluten.jpg" alt="Pizza Natura" class="tabla-imagen"></td>
                       <td>Pizza Natura</td>
-                      <td>Madrid Centro</td>
+                      <td>Madrid</td>
                       <td>Pizzeria</td>
                       <td>15€</td>
                       <td class="acciones">
@@ -94,7 +95,7 @@ https://templatemo.com/tm-580-woox-travel
                 <input type="text" id="nombre" required>
               </div>
 
-              <div class="form-row">
+              <div class="form-columns">
                 <div class="form-group">
                   <label for="municipio">Municipio</label>
                   <select id="municipio" required>
@@ -105,8 +106,28 @@ https://templatemo.com/tm-580-woox-travel
                 </div>
 
                 <div class="form-group">
+                  <label for="especialidad">Especialidad</label>
+                  <input type="text" id="especialidad" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="direccion">Dirección</label>
+                  <input type="text" id="direccion" required>
+                </div>
+
+                <div class="form-group">
                   <label for="precio">Precio Medio (€)</label>
                   <input type="number" id="precio" min="1" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="telefono">Teléfono</label>
+                  <input type="tel" id="telefono" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="descripcion">Descripción</label>
+                  <textarea id="descripcion" required></textarea>
                 </div>
               </div>
 

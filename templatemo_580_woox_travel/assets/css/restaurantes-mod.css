@@ -142,3 +142,7 @@
     gap: 10px;
     margin-top: 1.5rem;
 }
+
+#descripcion {
+    min-width: 100%;
+}
