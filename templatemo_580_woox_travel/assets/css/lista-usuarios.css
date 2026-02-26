@@ -1,3 +1,18 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+    flex: 1;
+}
+
 .header-area {
     position: absolute;
     top: 0;
@@ -73,12 +88,45 @@
     border-bottom: 0.5px solid #c41;
 }
 
-.user-profile {
-    width: 50px;
+.tabla-imagen{
+    width: 120px;
     object-fit: cover;
-    border: 2px solid #c41;
+    border-radius: 4px;
+    border: 1px solid #c41;
 }
 
 .user-profile-info {
     color: #2a2a2a;
+}
+
+/* Ajuste de la tabla nativa de Bootstrap */
+.table thead {
+    background-color: #2a2a2a;
+    color: #ffffff; /* Letra blanca para que se lea bien en el encabezado oscuro */
+}
+
+/* --- EFECTO HOVER CHULO PARA LA TABLA --- */
+
+/* 1. Transición suave y cursor de manita */
+.table tbody tr {
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+/* 2. Al pasar el ratón: fondo gris oscuro, letra blanca y se levanta un poco */
+.table tbody tr:hover {
+    background-color: #383838 !important; /* Fuerza el fondo oscuro sobre Bootstrap */
+    color: #ffffff !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Fuerza el color del texto en las celdas al hacer hover (Bootstrap a veces es peleón con esto) */
+.table tbody tr:hover td {
+    color: #ffffff !important;
+    background-color: transparent !important; 
+}
+
+/* 3. La barrita naranja/roja lateral en la primera celda */
+.table tbody tr:hover td:first-child {
+    box-shadow: inset 4px 0 0 #c41;
 }
