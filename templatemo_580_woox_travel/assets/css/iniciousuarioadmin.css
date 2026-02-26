@@ -24,7 +24,7 @@ body {
 .background {
   width: 100% !important;
   height: 100vh !important;
-  background-image: url("../images/Aesthetic\ Macbook\ _\ Desktop\ Wallpaper.jpg");
+  background: #f8f9fa !important;
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
