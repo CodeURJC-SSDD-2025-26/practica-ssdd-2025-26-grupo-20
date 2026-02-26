@@ -6,24 +6,25 @@
   font-family: "Poppins", sans-serif;
 }
 
-html, body {
-  height: 100%;
+.header-area .main-nav .nav {
+  display: flex !important;
+  flex-direction: row !important;
 }
+
 
 /* Centrar todo el contenido en pantalla */
 body {
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   background: #2b2b2b;
 }
 
 /* Tarjeta de fondo con imagen */
 .background {
-  width: 95%;
-  height: 95vh;
-  border-radius: 25px;
+  width: 100%;
+  height: 100vh;
+
   background-image: url("../images/Aesthetic\ Macbook\ _\ Desktop\ Wallpaper.jpg");
   background-position: center center;
   background-size: cover;
@@ -32,6 +33,9 @@ body {
   justify-content: center;
   align-items: center;
   margin: auto;
+  padding-top: 100px; /* espacio header */
+  padding-bottom: 50px;
+  position: relative !important;
 }
 
 /* Wrapper que divide en dos columnas */

@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="assets/css/owl.css" />
     <link rel="stylesheet" href="assets/css/animate.css" />
     <link rel="stylesheet" href="assets/css/restaurantes-mod.css">
+    <link rel="stylesheet" href="assets/css/lista-usuarios.css">
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
@@ -52,9 +53,9 @@ https://templatemo.com/tm-580-woox-travel
         </div>
 
         <div class="tabla-formato">
-            <table class="tabla-datos">
-                <thead>
-                  <tr>
+            <table class="table table-hover align-middle">
+                <thead class="table-dark">
+                  <tr class="text-center">
                     <th>Portada</th>
                     <th>Nombre</th>
                     <th>Municipio</th>
@@ -67,8 +68,8 @@ https://templatemo.com/tm-580-woox-travel
                   <tr>
                       <td><img src="assets/images/Pizza-Natura-sin-gluten.jpg" alt="Pizza Natura" class="tabla-imagen"></td>
                       <td>Pizza Natura</td>
-                      <td>Madrid Centro</td>
-                      <td>Pizzeria</td>
+                      <td>Madrid</td>
+                      <td>Italiano</td>
                       <td>15€</td>
                       <td class="acciones">
                         <button class="boton boton-edit">Editar</button>
@@ -77,6 +78,25 @@ https://templatemo.com/tm-580-woox-travel
                   </tr>
                 </tbody>
             </table>
+             <div class="col-lg-12 visit-country">
+                <ul class="page-numbers">
+                  <li>
+                      <a href="#"><i class="fa fa-arrow-left"></i></a>
+                  </li>
+                  <li class="active">
+                      <a href="#">1</a>
+                  </li>
+                  <li>
+                      <a href="#">2</a>
+                  </li>
+                  <li>
+                      <a href="#">3</a>
+                  </li>
+                  <li>
+                      <a href="#"><i class="fa fa-arrow-right"></i></a>
+                  </li>
+                </ul>
+              </div>
         </div>
     </main>
 
@@ -94,7 +114,7 @@ https://templatemo.com/tm-580-woox-travel
                 <input type="text" id="nombre" required>
               </div>
 
-              <div class="form-row">
+              <div class="form-columns">
                 <div class="form-group">
                   <label for="municipio">Municipio</label>
                   <select id="municipio" required>
@@ -105,8 +125,34 @@ https://templatemo.com/tm-580-woox-travel
                 </div>
 
                 <div class="form-group">
+                  <label for="especialidad">Especialidad</label>
+                  <select id="especialidad" required>
+                    <option value="">Seleccionar</option>
+                    <option value="italiano">Italiano</option>
+                    <option value="japones">Japonés</option>
+                    <option value="mexicano">Mexicano</option>
+                    <option value="mediterraneo">Mediterráneo</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="direccion">Dirección</label>
+                  <input type="text" id="direccion" required>
+                </div>
+
+                <div class="form-group">
                   <label for="precio">Precio Medio (€)</label>
                   <input type="number" id="precio" min="1" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="telefono">Teléfono</label>
+                  <input type="tel" id="telefono" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="descripcion">Descripción</label>
+                  <textarea id="descripcion" required></textarea>
                 </div>
               </div>
 
