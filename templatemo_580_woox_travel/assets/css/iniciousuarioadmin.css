@@ -58,12 +58,16 @@ body {
 /* Tarjeta del formulario */
 .login-card {
   background: rgba(5, 5, 5, 0.5);
-  padding: 30px;
+  padding: 20px 30px;
   width: 100% !important;
   height: auto !important;
   border-radius: 6px;
   box-shadow: 0 10px 30px rgba(5, 5, 5, 0.5);
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column; /* Alinea los elementos uno debajo de otro */
+  align-items: center;    /* Centra los elementos horizontalmente */
+  gap: 20px;
 }
 
 /* Input + icono */
@@ -136,7 +140,8 @@ body {
   cursor: pointer;
   transition: 0.3s;
   border-radius: 4px;
-  margin-bottom: 70px;
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
 .register-btn:hover {
