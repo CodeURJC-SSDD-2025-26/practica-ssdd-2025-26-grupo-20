@@ -11,7 +11,7 @@
 .admin-section {
     margin-top: 0 !important;
     padding-top: 150px; /* Este padding es el que crea el espacio visual para el menú, pero la IMAGEN sí sube */
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../images/admin-bg.jpg);
+    background-color: #f8f9fa;
     background-size: cover;
     min-height: 100vh;
 }
@@ -21,6 +21,10 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
+}
+
+.header-text {
+    color: #2a2a2a !important;
 }
 
 /* 3. Estilo de las tarjetas (Admin Card) */
@@ -39,7 +43,7 @@ html, body {
 
 .admin-card .image img {
     width: 100%;
-    height: 220px;
+    height: 320px;
     object-fit: cover;
 }
 

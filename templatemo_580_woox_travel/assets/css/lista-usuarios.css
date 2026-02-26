@@ -6,9 +6,13 @@
     z-index: 100;
 }
 
+.header-text {
+    color: #2a2a2a !important;
+}
+
 .admin-section {
     padding-top: 150px; /* Este padding es el que crea el espacio visual para el menú, pero la IMAGEN sí sube */
-    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(../images/options-admin-bg.jpg);
+    background-color: #f8f9fa;
     background-size: cover;
     background-repeat: no-repeat;
     margin-top: 0 !important;
