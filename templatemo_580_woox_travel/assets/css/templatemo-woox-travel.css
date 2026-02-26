@@ -138,7 +138,7 @@ hgroup {
 
 html,
 body {
-  background: #2b2b2b !important; /* Forzamos tu color favorito para TODA la web */
+  background: #f8f9fa !important;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -160,7 +160,7 @@ h5,
 h6 {
   margin-top: 0px;
   margin-bottom: 0px;
-  color: #ffffff;
+  color: #2a2a2a;
   font-weight: 700;
 }
 
@@ -254,11 +254,10 @@ body {
 }
 
 .main-button a:hover {
-  background-color: #fff;
-  color: #c41; /* Naranja */
-  border: 1px solid #fff;
+  background-color: #a30 !important; /* Un naranja más oscuro y profundo */
+  color: #fff !important; /* Mantenemos el texto blanco */
+  border: 1px solid #a30 !important; /* El borde acompaña al fondo oscuro */
 }
-
 section {
   margin-top: 120px;
 }
@@ -278,7 +277,12 @@ section {
   font-size: 30px;
   font-weight: 700;
   text-transform: capitalize;
-  color: #ffffff;
+  color: #2a2a2a;
+}
+.section-heading p {
+  color: #555 !important;
+  font-size: 16px;
+  margin-top: 15px;
 }
 
 /* 
@@ -1084,10 +1088,11 @@ Visit Country Style
 
 .visit-country .item .image img {
   border-radius: 23px;
-  width: 100%; /* Obliga a ocupar todo el ancho de su columna */
-  height: 250px; /* FORZAMOS LA MISMA ALTURA PARA TODAS. Puedes subirlo a 300px si las ves muy finas */
-  object-fit: cover; /* LA MAGIA: Recorta la foto perfectamente sin deformarla */
-  object-position: center; /* Centra el recorte para que no corte cabezas/platos */
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.08);
 }
 
 .visit-country .item .right-content h4 {
@@ -1097,7 +1102,7 @@ Visit Country Style
 
 .visit-country .item .right-content span {
   font-size: 15px;
-  color: #afafaf;
+  color: #555;
   display: block;
 }
 
@@ -1108,26 +1113,28 @@ Visit Country Style
 }
 
 .visit-country .item .right-content .main-button a:hover {
-  background-color: #c41;
-  border-color: #c41;
+  background-color: #a30;
+  border-color: #a30;
   color: #fff;
   opacity: 0.8;
 }
 
 .visit-country .item .right-content p {
   margin: 18px 0px;
+  color: #4a4a4a !important;
+  line-height: 26px;
 }
 
 .visit-country .item .right-content ul {
-  border-top: 1px solid #eee;
-  border-bottom: 1px solid #eee;
+  border-top: 1px solid #555;
+  border-bottom: 1px solid #555;
   padding: 15px 0px;
 }
 
 .visit-country .item .right-content ul li {
   display: inline-block;
   width: 32%;
-  color: #afafaf;
+  color: #555;
   font-size: 14px;
 }
 
@@ -1172,12 +1179,12 @@ Visit Country Style
 }
 
 .visit-country ul.page-numbers li a:hover {
-  background-color: #c41;
+  background-color: #a30;
   color: #fff;
 }
 
 .visit-country ul.page-numbers li.active a {
-  background-color: #c41;
+  background-color: #a30;
   color: #fff;
 }
 
@@ -1227,7 +1234,7 @@ Call To Action Style
 
 .call-to-action .border-button a:hover {
   background-color: #fff;
-  color: #c41;
+  color: #a30;
 }
 
 /* 
@@ -1487,8 +1494,8 @@ About Page Style
 }
 
 .weekly-offers .item .thumb .text .main-button a:hover {
-  background-color: #c41;
-  border-color: #c41;
+  background-color: #a30;
+  border-color: #a30;
   color: #fff;
   opacity: 0.85;
 }
@@ -1969,9 +1976,9 @@ body .options .option .label .info .sub {
 }
 
 .best-locations .main-button a:hover {
-  background-color: #c41;
+  background-color: #a30;
   color: #fff;
-  border-color: #c41;
+  border-color: #a30;
   opacity: 0.85;
 }
 
@@ -2020,6 +2027,7 @@ Deals Page Style
   background-color: #c41;
   border-radius: 23px;
   padding: 35px 60px;
+  box-shadow: 0px 15px 30px rgba(196, 68, 17, 0.25);
 }
 
 .search-form #search-form h4 {
@@ -2044,7 +2052,15 @@ Deals Page Style
 }
 
 .search-form #search-form option {
-  background-color: #1ea0ad;
+  background-color: #f8f9fa; /* Fondo blanco inmaculado */
+  color: #2a2a2a; /* Texto en gris oscuro para que se lea perfecto */
+}
+
+/* El efecto naranja al pasar el ratón (hover) y al hacer click (checked) */
+.search-form #search-form option:hover,
+.search-form #search-form option:focus {
+  background-color: #a30 !important; /* Tu color naranja */
+  color: #f8f9fa !important; /* El texto se vuelve blanco al resaltar */
 }
 
 .search-form #search-form button {
@@ -2067,7 +2083,7 @@ Deals Page Style
 
 .search-form #search-form button:hover {
   background-color: #fff;
-  color: #c41;
+  color: #a30;
 }
 
 .amazing-deals {
@@ -2404,4 +2420,34 @@ body {
   .weekly-offers .container-fluid {
     padding: 0px;
   }
+}
+/* --- BOTÓN DE FAVORITOS (CORAZÓN FLOTANTE) --- */
+.favorite-badge {
+  position: absolute;
+  top: 15px;
+  right: 25px; /* Lo separamos un poco del borde */
+  background: #ffffff;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ccc; /* Corazón en gris clarito por defecto */
+  font-size: 22px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  z-index: 10;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.favorite-badge:hover {
+  transform: scale(1.1); /* Efecto de latido al pasar el ratón */
+  color: #c41; /* Se vuelve naranja al rozarlo */
+}
+
+/* Clase activa cuando el usuario le da click */
+.favorite-badge.saved {
+  color: #c41;
 }

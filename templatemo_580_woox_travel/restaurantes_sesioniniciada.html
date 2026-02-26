@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
 
-    <title>Celis&Ud</title>
+    <title>Celis&Ud|Restaurantes</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -40,7 +40,11 @@ https://templatemo.com/tm-580-woox-travel
     <div id="js-preloader" class="js-preloader">
       <div class="preloader-inner">
         <span class="dot"></span>
-        <div class="dots"></div>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </div>
     <!-- ***** Preloader End ***** -->
@@ -63,16 +67,14 @@ https://templatemo.com/tm-580-woox-travel
               <!-- ***** Logo End ***** -->
               <!-- ***** Menu Start ***** -->
               <ul class="nav">
+                <li><a href="index.html">Inicio</a></li>
+
                 <li>
-                  <a href="index_sesioniniciada.html" class="active">Inicio</a>
+                  <a href="restaurantes.html" class="active">Restaurantes</a>
                 </li>
 
                 <li>
-                  <a href="restaurantes.html">Restaurantes</a>
-                </li>
-
-                <li>
-                  <a href="iniciosesion.html">Mi Perfil</a>
+                  <a href="iniciosesion.html">Iniciar Sesión</a>
                 </li>
               </ul>
               <a class="menu-trigger">
@@ -86,60 +88,96 @@ https://templatemo.com/tm-580-woox-travel
     </header>
     <!-- ***** Header Area End ***** -->
 
-    <!-- ***** Main Banner Area Start ***** -->
-    <section id="section-1">
-      <div class="content-slider">
-        <input
-          type="radio"
-          id="banner1"
-          class="sec-1-input"
-          name="banner"
-          checked
-        />
-        <div class="slider">
-          <div id="top-banner-1" class="banner">
-            <div class="banner-inner-wrapper header-text">
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="more-info">
-                      <form id="search-form" action="deals.html" method="get">
-                        <div class="row align-items-center">
-                          <div class="col-lg-10 col-sm-9 col-8">
-                            <input
-                              type="text"
-                              name="q"
-                              class="searchText"
-                              placeholder="¿En qué municipio buscas?"
-                              autocomplete="on"
-                              required
-                            />
-                          </div>
-                          <div class="col-lg-2 col-sm-3 col-4">
-                            <button class="main-button">Buscar</button>
-                          </div>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
+    <div class="search-form">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <form
+              id="search-form"
+              name="gs"
+              method="get"
+              role="search"
+              action="#"
+            >
+              <div class="row align-items-center">
+                <div class="col-lg-2">
+                  <h4>Filtrar por:</h4>
+                </div>
+
+                <div class="col-lg-3">
+                  <fieldset>
+                    <select
+                      name="Municipio"
+                      class="form-select"
+                      aria-label="Municipio"
+                      id="chooseLocation"
+                    >
+                      <option selected>Municipio</option>
+                      <option value="Madrid">Madrid</option>
+                      <option value="Mostoles">Móstoles</option>
+                      <option value="Alcorcon">Alcorcón</option>
+                      <option value="Getafe">Villalba</option>
+                      <option value="Leganes">Navalcarnero</option>
+                    </select>
+                  </fieldset>
+                </div>
+
+                <div class="col-lg-3">
+                  <fieldset>
+                    <select
+                      name="Comida"
+                      class="form-select"
+                      aria-label="Tipo de comida"
+                      id="chooseCategory"
+                    >
+                      <option selected>Tipo de comida</option>
+                      <option value="Italiana">Italiana</option>
+                      <option value="Mexicana">Mexicana</option>
+                      <option value="Oriental">Oriental</option>
+                      <option value="Mediterranea">Mediterránea</option>
+                    </select>
+                  </fieldset>
+                </div>
+
+                <div class="col-lg-2">
+                  <fieldset>
+                    <select
+                      name="Price"
+                      class="form-select"
+                      aria-label="Precio"
+                      id="choosePrice"
+                    >
+                      <option selected>Precio / pers.</option>
+                      <option value="1">Menos de 15€</option>
+                      <option value="2">15€ - 35€</option>
+                      <option value="3">25€ - 35€</option>
+                      <option value="4">Más de 35€</option>
+                    </select>
+                  </fieldset>
+                </div>
+
+                <div class="col-lg-2">
+                  <fieldset>
+                    <button class="border-button">Aplicar</button>
+                  </fieldset>
                 </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
-    </section>
-    <!-- ***** Main Banner Area End ***** -->
+    </div>
 
     <div class="visit-country">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
             <div class="section-heading">
-              <h2>Recomendaciones para ti</h2>
+              <h2>Restaurantes Disponibles</h2>
               <p>
-                Basado en tus preferencias, estos son los mejores restaurantes
-                100% Sin Gluten en Madrid para hoy.
+                Explora nuestra selección de locales 100% sin gluten. Utiliza
+                los filtros de arriba para encontrar exactamente lo que te
+                apetece hoy.
               </p>
             </div>
           </div>
@@ -152,7 +190,18 @@ https://templatemo.com/tm-580-woox-travel
                   <div class="item">
                     <div class="row">
                       <div class="col-lg-4 col-sm-5">
-                        <div class="image">
+                        <div class="image" style="position: relative">
+                          <a
+                            href="#"
+                            class="favorite-badge"
+                            onclick="
+                              this.classList.toggle('saved');
+                              return false;
+                            "
+                            title="Guardar en favoritos"
+                          >
+                            <i class="fa fa-heart"></i>
+                          </a>
                           <img
                             src="assets/images/Pizza-Natura-sin-gluten.jpg"
                             alt="Pizza-Natura"
@@ -186,7 +235,18 @@ https://templatemo.com/tm-580-woox-travel
                   <div class="item">
                     <div class="row">
                       <div class="col-lg-4 col-sm-5">
-                        <div class="image">
+                        <div class="image" style="position: relative">
+                          <a
+                            href="#"
+                            class="favorite-badge"
+                            onclick="
+                              this.classList.toggle('saved');
+                              return false;
+                            "
+                            title="Guardar en favoritos"
+                          >
+                            <i class="fa fa-heart"></i>
+                          </a>
                           <img
                             src="assets/images/As-De-Bastos-Sin-Gluten.jpg"
                             alt="As-De-Bastos"
@@ -221,7 +281,18 @@ https://templatemo.com/tm-580-woox-travel
                   <div class="item last-item">
                     <div class="row">
                       <div class="col-lg-4 col-sm-5">
-                        <div class="image">
+                        <div class="image" style="position: relative">
+                          <a
+                            href="#"
+                            class="favorite-badge"
+                            onclick="
+                              this.classList.toggle('saved');
+                              return false;
+                            "
+                            title="Guardar en favoritos"
+                          >
+                            <i class="fa fa-heart"></i>
+                          </a>
                           <img
                             src="assets/images/Okashi-Sanda.jpg"
                             alt="Okashi-Sanda"
@@ -252,18 +323,32 @@ https://templatemo.com/tm-580-woox-travel
                     </div>
                   </div>
                 </div>
+                <div class="col-lg-12">
+                  <ul class="page-numbers">
+                    <li>
+                      <a href="#"><i class="fa fa-arrow-left"></i></a>
+                    </li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li>
+                      <a href="#"><i class="fa fa-arrow-right"></i></a>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
             <div class="copyright-text">
-              <p>Copyright © 2026 Celis&Ud. Todos los derechos reservados.</p>
+              <p>Copyright © 2026 Celis&Ud. Todos los derechos reservados</p>
             </div>
           </div>
         </div>
@@ -283,17 +368,9 @@ https://templatemo.com/tm-580-woox-travel
     <script src="assets/js/custom.js"></script>
 
     <script>
-      function bannerSwitcher() {
-        next = $(".sec-1-input").filter(":checked").next(".sec-1-input");
-        if (next.length) next.prop("checked", true);
-        else $(".sec-1-input").first().prop("checked", true);
-      }
-
-      var bannerTimer = setInterval(bannerSwitcher, 5000);
-
-      $("nav .controls label").click(function () {
-        clearInterval(bannerTimer);
-        bannerTimer = setInterval(bannerSwitcher, 5000);
+      $(".option").click(function () {
+        $(".option").removeClass("active");
+        $(this).addClass("active");
       });
     </script>
   </body>
