@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Celis&Ud|Restaurantes</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css" />
+    <link rel="stylesheet" href="assets/css/owl.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
+    />
+    <!--
+
+TemplateMo 580 Woox Travel
+
+https://templatemo.com/tm-580-woox-travel
+
+-->
+  </head>
+
+  <body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a class="logo">
+                <img
+                  src="assets/images/logo_placeholder.jpeg"
+                  width="55"
+                  height="55"
+                  alt=""
+                />
+              </a>
+              <!-- ***** Logo End ***** -->
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li><a href="index.html">Inicio</a></li>
+
+                <li>
+                  <a href="restaurantes.html" class="active">Restaurantes</a>
+                </li>
+
+                <li>
+                  <a href="iniciosesion.html">Iniciar Sesión</a>
+                </li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <div class="search-form">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <form
+              id="search-form"
+              name="gs"
+              method="get"
+              role="search"
+              action="#"
+            >
+              <div class="row align-items-center">
+                <div class="col-lg-2">
+                  <h4>Filtrar por:</h4>
+                </div>
+
+                <div class="col-lg-3">
+                  <fieldset>
+                    <select
+                      name="Municipio"
+                      class="form-select"
+                      aria-label="Municipio"
+                      id="chooseLocation"
+                    >
+                      <option selected>Municipio</option>
+                      <option value="Madrid">Madrid</option>
+                      <option value="Mostoles">Móstoles</option>
+                      <option value="Alcorcon">Alcorcón</option>
+                      <option value="Getafe">Villalba</option>
+                      <option value="Leganes">Navalcarnero</option>
+                    </select>
+                  </fieldset>
+                </div>
+
+                <div class="col-lg-3">
+                  <fieldset>
+                    <select
+                      name="Comida"
+                      class="form-select"
+                      aria-label="Tipo de comida"
+                      id="chooseCategory"
+                    >
+                      <option selected>Tipo de comida</option>
+                      <option value="Italiana">Italiana</option>
+                      <option value="Mexicana">Mexicana</option>
+                      <option value="Oriental">Oriental</option>
+                      <option value="Mediterranea">Mediterránea</option>
+                    </select>
+                  </fieldset>
+                </div>
+
+                <div class="col-lg-2">
+                  <fieldset>
+                    <select
+                      name="Price"
+                      class="form-select"
+                      aria-label="Precio"
+                      id="choosePrice"
+                    >
+                      <option selected>Precio / pers.</option>
+                      <option value="1">Menos de 15€</option>
+                      <option value="2">15€ - 35€</option>
+                      <option value="3">25€ - 35€</option>
+                      <option value="4">Más de 35€</option>
+                    </select>
+                  </fieldset>
+                </div>
+
+                <div class="col-lg-2">
+                  <fieldset>
+                    <button class="border-button">Aplicar</button>
+                  </fieldset>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="visit-country">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-heading">
+              <h2>Restaurantes Disponibles</h2>
+              <p>
+                Explora nuestra selección de locales 100% sin gluten. Utiliza
+                los filtros de arriba para encontrar exactamente lo que te
+                apetece hoy.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="items">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="item">
+                    <div class="row">
+                      <div class="col-lg-4 col-sm-5">
+                        <div class="image" style="position: relative">
+                          <a
+                            href="#"
+                            class="favorite-badge"
+                            onclick="
+                              this.classList.toggle('saved');
+                              return false;
+                            "
+                            title="Guardar en favoritos"
+                          >
+                            <i class="fa fa-heart"></i>
+                          </a>
+                          <img
+                            src="assets/images/Pizza-Natura-sin-gluten.jpg"
+                            alt="Pizza-Natura"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-sm-7">
+                        <div class="right-content">
+                          <h4>Pizza Natura</h4>
+                          <span>Pizzas con harinas alternativas</span>
+                          <div class="main-button">
+                            <a href="about.html">Ver detalles</a>
+                          </div>
+                          <p>
+                            Pizzas con masa de mijo y quinoa. 100% Sin Gluten y
+                            opciones veganas deliciosas en el corazón de Madrid.
+                          </p>
+                          <ul class="info">
+                            <li>
+                              <i class="fa fa-map-marker"></i> Madrid - Centro
+                            </li>
+                            <li><i class="fa fa-star"></i> 4.9 Valoración</li>
+                            <li><i class="fa fa-money-bill"></i> 15-25€</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="item">
+                    <div class="row">
+                      <div class="col-lg-4 col-sm-5">
+                        <div class="image" style="position: relative">
+                          <a
+                            href="#"
+                            class="favorite-badge"
+                            onclick="
+                              this.classList.toggle('saved');
+                              return false;
+                            "
+                            title="Guardar en favoritos"
+                          >
+                            <i class="fa fa-heart"></i>
+                          </a>
+                          <img
+                            src="assets/images/As-De-Bastos-Sin-Gluten.jpg"
+                            alt="As-De-Bastos"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-sm-7">
+                        <div class="right-content">
+                          <h4>AS DE BASTOS</h4>
+                          <span>El pionero</span>
+                          <div class="main-button">
+                            <a href="about.html">Ver Detalles</a>
+                          </div>
+                          <p>
+                            El templo del celíaco. Fue el primer restaurante con
+                            una carta 100% sin gluten en Madrid.
+                          </p>
+                          <ul class="info">
+                            <li>
+                              <i class="fa fa-map-marker"></i> Majadahonda
+                            </li>
+                            <li><i class="fa fa-star"></i> 4.8 Valoración</li>
+                            <li><i class="fa fa-money-bill"></i> 25-35€</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="item last-item">
+                    <div class="row">
+                      <div class="col-lg-4 col-sm-5">
+                        <div class="image" style="position: relative">
+                          <a
+                            href="#"
+                            class="favorite-badge"
+                            onclick="
+                              this.classList.toggle('saved');
+                              return false;
+                            "
+                            title="Guardar en favoritos"
+                          >
+                            <i class="fa fa-heart"></i>
+                          </a>
+                          <img
+                            src="assets/images/Okashi-Sanda.jpg"
+                            alt="Okashi-Sanda"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-sm-7">
+                        <div class="right-content">
+                          <h4>OKASHI SANDA</h4>
+                          <span>Japonés 100% Gluten Free</span>
+                          <div class="main-button">
+                            <a href="about.html">Ver Detalles</a>
+                          </div>
+                          <p>
+                            El primer japonés certificado sin gluten de Madrid.
+                            Takoyakis, Katsu Curry y postres increíbles sin
+                            lácteos.
+                          </p>
+                          <ul class="info">
+                            <li>
+                              <i class="fa fa-map-marker"></i> Madrid - Lavapies
+                            </li>
+                            <li><i class="fa fa-star"></i> 4.7 Valoración</li>
+                            <li><i class="fa fa-money-bill"></i> 20-30€</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <ul class="page-numbers">
+                    <li>
+                      <a href="#"><i class="fa fa-arrow-left"></i></a>
+                    </li>
+                    <li class="active"><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li>
+                      <a href="#"><i class="fa fa-arrow-right"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="copyright-text">
+              <p>Copyright © 2026 Celis&Ud. Todos los derechos reservados</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="assets/js/isotope.min.js"></script>
+    <script src="assets/js/owl-carousel.js"></script>
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/popup.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+    <script>
+      $(".option").click(function () {
+        $(".option").removeClass("active");
+        $(this).addClass("active");
+      });
+    </script>
+  </body>
+</html>
