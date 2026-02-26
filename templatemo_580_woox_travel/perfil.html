@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Mi Perfil – CelisUd</title>
+
+  <!-- Bootstrap -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- CSS del proyecto -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css">
+  <link rel="stylesheet" href="assets/css/perfil.css">
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header-area">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <a href="index.html" class="logo">
+              <img src="assets/images/logoplaceholder.jpeg" width="55" height="55" alt="CelisUd">
+            </a>
+            <ul class="nav">
+              <li><a href="index.html">Inicio</a></li>
+              <li><a href="restaurantes.html">Restaurantes</a></li>
+              <li><a href="#">Sobre Nosotros</a></li>
+              <li><a href="perfilusuario.html" class="active">Mi Perfil</a></li>
+            </ul>
+            <a class="menu-trigger"><span>Menu</span></a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <section class="profile-section">
+    <div class="container">
+      <div class="row">
+
+        <!-- COLUMNA IZQUIERDA: datos del perfil -->
+        <div class="col-lg-3 col-md-4">
+          <div class="profile-card">
+
+            <!-- Avatar -->
+            <div class="avatar-wrapper">
+              <img src="https://i.pravatar.cc/150?img=12" alt="Foto de perfil" class="avatar-img" id="avatarPreview">
+              <label class="avatar-edit-btn" title="Cambiar foto">
+                <i class="fa fa-camera"></i>
+                <input type="file" accept="image/*" hidden onchange="previewAvatar(this)">
+              </label>
+            </div>
+
+            <!-- Nombre -->
+            <div class="profile-field">
+              <span class="field-value" id="nombreVal">María García</span>
+              <button class="edit-icon" onclick="toggleEdit('nombre')" title="Editar"><i class="fa fa-pencil"></i></button>
+              <div class="edit-row hidden" id="nombreEdit">
+                <input type="text" value="María García" placeholder="Nombre completo">
+                <button class="confirm-btn" onclick="confirmEdit('nombre')"><i class="fa fa-check"></i></button>
+              </div>
+            </div>
+
+            <!-- Username -->
+            <div class="profile-field">
+              <span class="field-value username-text" id="usernameVal">@mgarcia_gluten</span>
+              <button class="edit-icon" onclick="toggleEdit('username')"><i class="fa fa-pencil"></i></button>
+              <div class="edit-row hidden" id="usernameEdit">
+                <input type="text" value="@mgarcia_gluten" placeholder="Usuario">
+                <button class="confirm-btn" onclick="confirmEdit('username')"><i class="fa fa-check"></i></button>
+              </div>
+            </div>
+
+            <!-- Bio -->
+            <div class="profile-field bio-field">
+              <span class="field-value bio-text" id="bioVal">Celíaca desde 2018. Buscando los mejores rincones sin gluten de Madrid 🍽️</span>
+              <button class="edit-icon" onclick="toggleEdit('bio')"><i class="fa fa-pencil"></i></button>
+              <div class="edit-row hidden" id="bioEdit">
+                <textarea placeholder="Escribe una bio...">Celíaca desde 2018. Buscando los mejores rincones sin gluten de Madrid 🍽️</textarea>
+                <button class="confirm-btn" onclick="confirmEdit('bio')"><i class="fa fa-check"></i></button>
+              </div>
+            </div>
+
+            <div class="profile-divider"></div>
+
+            <!-- Datos de cuenta -->
+            <div class="account-info">
+              <div class="account-row">
+                <i class="fa fa-envelope"></i>
+                <span id="emailVal">maria@email.com</span>
+                <button class="edit-icon" onclick="toggleEdit('email')"><i class="fa fa-pencil"></i></button>
+              </div>
+              <div class="edit-row hidden" id="emailEdit">
+                <input type="email" value="maria@email.com" placeholder="Email">
+                <button class="confirm-btn" onclick="confirmEdit('email')"><i class="fa fa-check"></i></button>
+              </div>
+
+              <div class="account-row">
+                <i class="fa fa-lock"></i>
+                <span>••••••••</span>
+                <button class="edit-icon" onclick="toggleEdit('password')"><i class="fa fa-pencil"></i></button>
+              </div>
+              <div class="edit-row hidden" id="passwordEdit">
+                <input type="password" placeholder="Nueva contraseña">
+                <button class="confirm-btn" onclick="confirmEdit('password')"><i class="fa fa-check"></i></button>
+              </div>
+
+              <div class="account-row readonly">
+                <i class="fa fa-calendar"></i>
+                <span>Miembro desde enero 2024</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- COLUMNA DERECHA -->
+        <div class="col-lg-9 col-md-8">
+
+          <!-- Recuadro: Mis Listas -->
+          <div class="profile-block">
+            <div class="section-heading profile-section-heading">
+              <h2><i class="fa fa-list"></i> Mis Listas</h2>
+              <div class="main-button">
+                <a href="#" onclick="return false;"><i class="fa fa-plus"></i> Nueva lista</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="list-card">
+                  <div class="list-icon" style="background:#c41"><i class="fa fa-star"></i></div>
+                  <span class="list-name">Favoritos</span>
+                  <span class="list-count">12 restaurantes</span>
+                  <div class="list-actions">
+                    <button><i class="fa fa-edit"></i></button>
+                    <button class="del"><i class="fa fa-trash"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="list-card">
+                  <div class="list-icon" style="background:#3a86ff"><i class="fa fa-map-marker"></i></div>
+                  <span class="list-name">Por visitar</span>
+                  <span class="list-count">8 restaurantes</span>
+                  <div class="list-actions">
+                    <button><i class="fa fa-edit"></i></button>
+                    <button class="del"><i class="fa fa-trash"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="list-card">
+                  <div class="list-icon" style="background:#06d6a0"><i class="fa fa-heart"></i></div>
+                  <span class="list-name">Románticos</span>
+                  <span class="list-count">5 restaurantes</span>
+                  <div class="list-actions">
+                    <button><i class="fa fa-edit"></i></button>
+                    <button class="del"><i class="fa fa-trash"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="list-card">
+                  <div class="list-icon" style="background:#e76f51"><i class="fa fa-cutlery"></i></div>
+                  <span class="list-name">Menú diario</span>
+                  <span class="list-count">3 restaurantes</span>
+                  <div class="list-actions">
+                    <button><i class="fa fa-edit"></i></button>
+                    <button class="del"><i class="fa fa-trash"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recuadro: Mis Reseñas (scroll horizontal) -->
+          <div class="profile-block">
+            <div class="section-heading profile-section-heading">
+              <h2><i class="fa fa-comment"></i> Mis Reseñas</h2>
+            </div>
+            <div class="reviews-scroll">
+              <div class="review-card">
+                <span class="review-restaurant">La Mesa Celíaca</span>
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"Increíble carta sin gluten, personal muy atento."</p>
+                <span class="review-date">12 feb 2026</span>
+              </div>
+              <div class="review-card">
+                <span class="review-restaurant">Bío Bistró</span>
+                <div class="stars">★★★★☆</div>
+                <p class="review-text">"Muy buenas opciones veganas y sin gluten. Ambiente acogedor."</p>
+                <span class="review-date">5 ene 2026</span>
+              </div>
+              <div class="review-card">
+                <span class="review-restaurant">Trigo Libre</span>
+                <div class="stars">★★★☆☆</div>
+                <p class="review-text">"Bien de sabor pero el servicio fue algo lento."</p>
+                <span class="review-date">28 dic 2025</span>
+              </div>
+              <div class="review-card">
+                <span class="review-restaurant">Singluten Bar</span>
+                <div class="stars">★★★★★</div>
+                <p class="review-text">"El mejor sitio que he encontrado en Malasaña."</p>
+                <span class="review-date">10 nov 2025</span>
+              </div>
+              <div class="review-card">
+                <span class="review-restaurant">Verde Puro</span>
+                <div class="stars">★★★★☆</div>
+                <p class="review-text">"Ensaladas buenísimas, postres sin gluten sorprendentes."</p>
+                <span class="review-date">2 oct 2025</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="copyright-text">
+            <p>Copyright 2026 CelisUd. Todos los derechos reservados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts del proyecto -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/custom.js"></script>
+  <script>
+    function toggleEdit(field) {
+      document.getElementById(field + 'Edit').classList.toggle('hidden');
+    }
+    function confirmEdit(field) {
+      const editDiv = document.getElementById(field + 'Edit');
+      const input = editDiv.querySelector('input, textarea');
+      const valSpan = document.getElementById(field + 'Val');
+      if (valSpan && input) valSpan.textContent = input.value;
+      editDiv.classList.add('hidden');
+    }
+    function previewAvatar(input) {
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => document.getElementById('avatarPreview').src = e.target.result;
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
+</body>
+</html>
+
