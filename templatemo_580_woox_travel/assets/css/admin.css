@@ -1,3 +1,18 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+    flex: 1;
+}
+
 /* Forzamos a que el área del header no ocupe espacio físico */
 .header-area {
     position: absolute;
@@ -5,15 +20,6 @@
     left: 0;
     right: 0;
     z-index: 100;
-}
-
-/* Ajustamos nuestra sección para que empiece en el píxel 0 */
-.admin-section {
-    margin-top: 0 !important;
-    padding-top: 150px; /* Este padding es el que crea el espacio visual para el menú, pero la IMAGEN sí sube */
-    background-color: #f8f9fa;
-    background-size: cover;
-    min-height: 100vh;
 }
 
 /* 1. Reseteo fundamental para eliminar el hueco gris/blanco del top */
