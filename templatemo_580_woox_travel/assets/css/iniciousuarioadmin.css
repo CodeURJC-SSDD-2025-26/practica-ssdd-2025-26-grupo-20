@@ -1,18 +1,3 @@
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-
-/* Centrar todo el contenido en pantalla */
-.header-area .main-nav .nav {
-  display: flex !important;
-  flex-direction: row !important;
-}
-
 body {
   min-height: 100vh;
   display: flex;
@@ -29,7 +14,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   display: flex !important;
-  justify-content: center !important; 
+  justify-content: center !important;
   align-items: flex-start !important;
   padding-top: 100px; /* espacio header */
   padding-bottom: 50px;
@@ -40,12 +25,11 @@ body {
 .login-container {
   text-align: center;
   color: #eb7e34;
-  width: 350px !important;        /* Ocupa el ancho disponible... */
+  width: 350px !important; /* Ocupa el ancho disponible... */
   max-width: 350px !important;
-  height: auto !important; 
+  height: auto !important;
   display: block !important;
   margin: 0 auto !important;
-  
 }
 
 .login-container h2 {
@@ -66,7 +50,7 @@ body {
   margin-bottom: 10px;
   display: flex;
   flex-direction: column; /* Alinea los elementos uno debajo de otro */
-  align-items: center;    /* Centra los elementos horizontalmente */
+  align-items: center; /* Centra los elementos horizontalmente */
   gap: 20px;
 }
 
@@ -116,7 +100,7 @@ body {
   padding: 12px;
   background: #c41;
   border: none;
-  color: #e1e1e1;
+  color: #e1e1e1 !important;
   font-weight: 600;
   letter-spacing: 5px;
   cursor: pointer;
@@ -125,7 +109,17 @@ body {
 }
 
 .login-btn:hover {
-  background: #c41;
+  background: #a30;
+}
+/* Corrección del color de texto del botón USUARIO */
+.login-btn a {
+  color: #e1e1e1 !important; /* Fuerza a que el texto sea blanco */
+  text-decoration: none;
+}
+
+/* Opcional: para asegurar que siga blanco al pasar el ratón */
+.login-btn:hover a {
+  color: #e1e1e1 !important;
 }
 
 /* Botón de registro debajo del formulario */
@@ -143,9 +137,17 @@ body {
   margin-top: 10px;
   margin-bottom: 30px;
 }
+.register-btn a {
+  color: rgb(231, 111, 63) !important;
+  text-decoration: none;
+}
 
 .register-btn:hover {
   background: rgba(0, 0, 0, 0.8);
+}
+
+.register-btn:hover a {
+  color: rgb(231, 111, 63) !important;
 }
 
 /* (Opcional) Contenedor para el texto + botón de registro */
@@ -160,4 +162,3 @@ body {
   color: #2b2b2b;
   font-size: 14px;
 }
-

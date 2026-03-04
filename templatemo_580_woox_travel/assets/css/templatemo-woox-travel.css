@@ -393,6 +393,8 @@ Header Style
 
 .header-area,
 .background-header {
+  color: white;
+  padding: 1rem 0;
   background-color: #c41 !important; /* Tu color naranja */
   position: absolute !important; /* Quieto arriba */
   height: 70px !important;
@@ -403,32 +405,77 @@ Header Style
   box-shadow: none !important; /* Sin sombras raras al hacer scroll */
 }
 
+/* Ajustes para el Header Unificado */
 .header-area .main-nav {
-  background: transparent;
   display: flex;
-  padding: 0px 30px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-area .main-nav .logo {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+.header-area .main-nav .logo i {
+  margin-right: 10px;
+  font-size: 28px;
+}
+
+/* Contenedor de usuario/login a la derecha */
+.header-area .main-nav .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-profile-nav {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  gap: 12px;
+  padding: 5px 10px;
+  border-radius: 30px;
+  transition: all 0.3s;
+}
+
+.user-profile-nav img {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.logout-icon {
+  color: #fff;
+  font-size: 18px;
+  margin-left: 10px;
+  opacity: 0.7;
+}
+
+.logout-icon:hover {
+  opacity: 1;
+  color: #ffcccc;
+}
+
+/* Ajuste responsive para el menu trigger */
+@media (max-width: 991px) {
+  .header-area .main-nav .nav-right {
+    position: absolute;
+    right: 80px;
+    top: 15px;
+  }
 }
 
 .background-header .main-nav {
   padding: 0px;
   background-color: transparent;
-}
-
-.header-area .main-nav .logo {
-  flex-basis: 30%;
-  -webkit-transition: all 0.3s ease 0s;
-  -moz-transition: all 0.3s ease 0s;
-  -o-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-}
-
-.header-area .main-nav .logo img {
-  width: 159px;
-  margin-top: 15px;
-}
-
-.background-header .main-nav .logo img {
-  width: 159px;
 }
 
 .header-area .main-nav .nav {
@@ -2450,4 +2497,97 @@ body {
 /* Clase activa cuando el usuario le da click */
 .favorite-badge.saved {
   color: #c41;
+}
+/* =========================================
+   AJUSTES FINOS HEADER UNIFICADO (CORREGIDO)
+   ========================================= */
+
+/* 1. Forzar el centrado vertical y quitar márgenes que empujan hacia abajo */
+.header-area .main-nav {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: 40px; /* Misma altura que el header para que nada "baile" */
+}
+
+/* 2. Logo: quitamos cualquier margen que lo empuje hacia abajo */
+.header-area .main-nav .logo {
+  margin: 0 !important; /* Anulamos márgenes anteriores */
+  display: flex;
+  align-items: center;
+  line-height: 1; /* Evita que el texto genere un espacio invisible arriba/abajo */
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.header-area .main-nav .logo i {
+  margin-right: 10px;
+  font-size: 26px;
+}
+
+.header-area .main-nav .nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 0 !important; /* Anula el margin-top: 15px del template original */
+}
+
+/* 2. Iniciar Sesión como texto normal (sin fondo) */
+.header-area .main-nav .nav li.login-item {
+  margin-left: 0;
+}
+
+.header-area .main-nav .nav li.login-item a {
+  background-color: transparent !important; /* Quitamos el fondo semitransparente */
+  padding: 8px 15px !important; /* Mismo espaciado que los demás enlaces */
+  font-weight: 400; /* Mismo grosor que el resto */
+  border-radius: 0 !important;
+}
+
+/* 3. Perfil de Usuario (Sesión iniciada) */
+.header-area .main-nav .nav li.user-profile-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: 20px;
+}
+
+.header-area .main-nav .nav li.user-profile-item span {
+  color: #fff;
+  font-size: 15px;
+}
+
+.header-area .main-nav .nav li.user-profile-item .avatar-link {
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.header-area .main-nav .nav li.user-profile-item .avatar-link:hover::after {
+  display: none; /* Quita la rayita blanca al pasar el ratón por la foto */
+}
+
+.header-area .main-nav .nav li.user-profile-item img {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.header-area .main-nav .nav li.user-profile-item a.logout-btn {
+  padding: 0 !important;
+  background: transparent !important;
+  color: #fff !important;
+  font-size: 20px;
+  opacity: 0.8;
+}
+
+.header-area .main-nav .nav li.user-profile-item a.logout-btn:hover {
+  opacity: 1;
+  color: #ffcccc !important;
+}
+
+.header-area .main-nav .nav li.user-profile-item a.logout-btn:hover::after {
+  display: none; /* Quita la rayita blanca al pasar el ratón por el icono de salir */
 }
