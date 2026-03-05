@@ -8,7 +8,7 @@ body {
 /* Tarjeta de fondo con degradado */
 .background {
   width: 100% !important;
-  height: 100vh !important;
+  height: 100% !important;
   background: #f8f9fa !important;
   background-position: center center;
   background-size: cover;
@@ -44,7 +44,7 @@ body {
   background: rgba(5, 5, 5, 0.5);
   padding: 20px 30px;
   width: 100% !important;
-  height: auto !important;
+  height: 80% !important;
   border-radius: 6px;
   box-shadow: 0 10px 30px rgba(5, 5, 5, 0.5);
   margin-bottom: 10px;
@@ -56,10 +56,13 @@ body {
 
 /* Input + icono */
 .input-group {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
+  display: flex !important;
+  align-items: stretch !important;
+  flex-wrap: initial !important;
+  margin-bottom: 10px;
   background: rgba(5, 5, 5, 0.5);
+  border: 1px solid rgba(200, 200, 200, 0.2);
+  border-radius: 4px;
 }
 
 .input-group .icon {
