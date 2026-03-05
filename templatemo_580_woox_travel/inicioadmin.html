@@ -43,21 +43,23 @@
       <div id="login-especial" class="login-container">
         <h2>Administrador</h2>
         <div class="login-card">
-          <div class="input-group">
-            <span class="icon"><i class="fa-solid fa-user"></i></span>
-            <input type="text" placeholder="Nombre admin" />
-          </div>
-          <div class="input-group">
-            <span class="icon"><i class="fa-solid fa-lock"></i></span>
-            <input type="password" placeholder="Contraseña" />
-          </div>
-          <div class="options">
-            <label><input type="checkbox" /> Recuerdame</label>
-            <a href="#">¿Olvidaste tu contraseña?</a>
-          </div>
-          <button class="login-btn">
-            <a href="admin.html">INICIAR SESIÓN</a>
-          </button>
+          <form action="admin.html" method="get">
+            <div class="input-group">
+              <span class="icon"><i class="fa-solid fa-user"></i></span>
+              <input type="text" placeholder="Nombre admin" required/>
+            </div>
+            <div class="input-group">
+              <span class="icon"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" placeholder="Contraseña" required/>
+            </div>
+            <div class="options">
+              <label><input type="checkbox" /> Recuerdame</label>
+              <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+            <button class="login-btn">
+              INICIAR SESIÓN
+            </button>
+          </form>
         </div>
       </div>
     </div>

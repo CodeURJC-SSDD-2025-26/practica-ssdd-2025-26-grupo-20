@@ -1,11 +1,11 @@
 body {
-  min-height: 100vh;
+  min-height: 100% !important;
   display: flex;
   flex-direction: column;
   background: #2b2b2b;
 }
 
-/* Tarjeta de fondo con degradado */
+
 .background {
   width: 100% !important;
   height: 100% !important;

@@ -43,21 +43,23 @@
       <div id="login-especial" class="login-container">
         <h2>Usuario</h2>
         <div class="login-card">
-          <div class="input-group">
-            <span class="icon"><i class="fa-solid fa-user"></i></span>
-            <input type="text" placeholder="Nombre usuario" />
-          </div>
-          <div class="input-group">
-            <span class="icon"><i class="fa-solid fa-lock"></i></span>
-            <input type="password" placeholder="Contraseña" />
-          </div>
-          <div class="options">
-            <label><input type="checkbox" /> Recuerdame</label>
-            <a href="#">¿Olvidaste tu contraseña?</a>
-          </div>
-          <button class="login-btn">
-            <a href="index_sesioniniciada.html">INICIAR SESIÓN</a>
-          </button>
+          <form action="index_sesioniniciada.html" method="get">
+            <div class="input-group">
+              <span class="icon"><i class="fa-solid fa-user"></i></span>
+              <input type="text" placeholder="Nombre usuario" required />
+            </div>
+            <div class="input-group">
+              <span class="icon"><i class="fa-solid fa-lock"></i></span>
+              <input type="password" placeholder="Contraseña" required />
+            </div>
+            <div class="options">
+              <label><input type="checkbox" /> Recuerdame</label>
+              <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+            <button class="login-btn">
+              INICIAR SESIÓN
+            </button>
+          </form>
         </div>
         <div class="register-section">
           <p class="no-account">¿No tienes cuenta con nosotros?</p>

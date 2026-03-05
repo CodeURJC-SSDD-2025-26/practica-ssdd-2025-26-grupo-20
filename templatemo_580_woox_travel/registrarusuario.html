@@ -2,40 +2,32 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>CelisUd - Crear Cuenta</title>
+  <title>Celis&Ud</title>
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="assets/css/registrarusuario.css">
   <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css" />
 </head>
 <body>
-    <header class="header-area">
+      <header class="header-area header-sticky">
       <div class="container">
         <div class="row">
           <div class="col-12">
             <nav class="main-nav">
-              <!-- ***** Logo Start ***** -->
-              <a class="logo">
-                <img
-                  src="assets/images/logo_placeholder.jpeg"
-                  width="55"
-                  height="55"
-                  alt=""
-                />
+              <a href="index.html" class="logo">
+                <i class="fa fa-utensils"></i> Celis&Ud
               </a>
-              <!-- ***** Logo End ***** -->
-              <!-- ***** Menu Start ***** -->
               <ul class="nav">
                 <li><a href="index.html">Inicio</a></li>
-
                 <li><a href="restaurantes.html">Restaurantes</a></li>
+                <li class="login-item">
+                  <a href="iniciosesion.html" class="active">Iniciar Sesión</a>
                 </li>
-                <li><a href="restaurantes.html" class="active">Iniciar sesion</a></li>
               </ul>
               <a class="menu-trigger">
                 <span>Menu</span>
               </a>
-              <!-- ***** Menu End ***** -->
             </nav>
           </div>
         </div>
@@ -50,43 +42,44 @@
       </div>
 
       <!-- Lado derecho: formulario -->
-      <div class="register-card">
-        <h2>Crea una cuenta:</h2>
+      <form action="index_sesioniniciada.html" method="get">
+        <div class="register-card">
+          <h2>Crea una cuenta:</h2>
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" id="first-name" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="last-name" placeholder="Apellido"required>
+            </div>
+          </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <input type="text" id="first-name" placeholder="Nombre">
+          <div class="form-row">
+            <div class="form-group">
+              <input type="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <input type="text" id="address" placeholder="Nombre de usuario" required>
+            </div>
           </div>
-          <div class="form-group">
-            <input type="text" id="last-name" placeholder="Apellido">
+
+          <div class="form-row">
+            <div class="form-group">
+              <input type="password"  placeholder="Crear contraseña" required>
+            </div>
+            <div class="form-group">
+              <input type="password"  placeholder="Confirmar contraseña" required>
+            </div>
           </div>
+
+          <div class="terms">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">Aceptas los terminos y condiciones.</label>
+          </div>
+
+          <button class="create-btn">Crear cuenta</button>
         </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <input type="email" id="email" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <input type="text" id="address" placeholder="Nombre de usuario">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <input type="password" id="password" placeholder="Crear contraseña">
-          </div>
-          <div class="form-group">
-            <input type="password" id="confirm-password" placeholder="Confirmar contraseña">
-          </div>
-        </div>
-
-        <div class="terms">
-          <input type="checkbox" id="terms">
-          <label for="terms">Aceptas los terminos y condiciones.</label>
-        </div>
-
-        <button class="create-btn">Crear cuenta</button>
-      </div>
+      </form>
 
     </div>
 </div>
