@@ -2499,23 +2499,23 @@ body {
   color: #c41;
 }
 /* =========================================
-   AJUSTES FINOS HEADER UNIFICADO (CORREGIDO)
+   AJUSTES FINOS HEADER UNIFICADO (CORREGIDO Y RESPONSIVE)
    ========================================= */
 
-/* 1. Forzar el centrado vertical y quitar márgenes que empujan hacia abajo */
+/* 1. Ajustes base (para todas las pantallas) */
 .header-area .main-nav {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  height: 40px; /* Misma altura que el header para que nada "baile" */
+  /* QUITAMOS el height fijo de aquí para que no corte el menú en móvil */
 }
 
-/* 2. Logo: quitamos cualquier margen que lo empuje hacia abajo */
+/* 2. Logo impecable */
 .header-area .main-nav .logo {
-  margin: 0 !important; /* Anulamos márgenes anteriores */
+  margin: 0 !important;
   display: flex;
   align-items: center;
-  line-height: 1; /* Evita que el texto genere un espacio invisible arriba/abajo */
+  line-height: 1;
   color: #fff;
   font-size: 24px;
   font-weight: 700;
@@ -2526,26 +2526,26 @@ body {
   font-size: 26px;
 }
 
+/* 3. Menú derecho */
 .header-area .main-nav .nav {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-top: 0 !important; /* Anula el margin-top: 15px del template original */
+  margin-top: 0 !important;
 }
 
-/* 2. Iniciar Sesión como texto normal (sin fondo) */
 .header-area .main-nav .nav li.login-item {
   margin-left: 0;
 }
 
 .header-area .main-nav .nav li.login-item a {
-  background-color: transparent !important; /* Quitamos el fondo semitransparente */
-  padding: 8px 15px !important; /* Mismo espaciado que los demás enlaces */
-  font-weight: 400; /* Mismo grosor que el resto */
+  background-color: transparent !important;
+  padding: 8px 15px !important;
+  font-weight: 400;
   border-radius: 0 !important;
 }
 
-/* 3. Perfil de Usuario (Sesión iniciada) */
+/* Perfil de Usuario */
 .header-area .main-nav .nav li.user-profile-item {
   display: flex;
   align-items: center;
@@ -2564,7 +2564,7 @@ body {
 }
 
 .header-area .main-nav .nav li.user-profile-item .avatar-link:hover::after {
-  display: none; /* Quita la rayita blanca al pasar el ratón por la foto */
+  display: none;
 }
 
 .header-area .main-nav .nav li.user-profile-item img {
@@ -2589,5 +2589,85 @@ body {
 }
 
 .header-area .main-nav .nav li.user-profile-item a.logout-btn:hover::after {
-  display: none; /* Quita la rayita blanca al pasar el ratón por el icono de salir */
+  display: none;
+}
+
+/* =========================================
+   LA CLAVE: AJUSTES SOLO PARA PANTALLAS GRANDES Y MÓVILES
+   ========================================= */
+
+/* En escritorio, forzamos la altura para que todo quede en línea */
+@media (min-width: 992px) {
+  .header-area .main-nav {
+    height: 40px !important; /* Tu altura original que dejaba todo perfecto */
+  }
+  /* ¡Esta es la clave! Obliga a mostrar el menú en PC anulando el JS del móvil */
+  .header-area .main-nav .nav {
+    display: flex !important;
+  }
+}
+
+/* En móvil/tablet, soltamos el menú para que pueda desplegarse hacia abajo */
+@media (max-width: 991px) {
+  .header-area .main-nav {
+    display: block !important;
+    height: auto !important;
+  }
+
+  .header-area .main-nav .nav {
+    display: none;
+    flex-direction: column;
+    align-items: center; /* ¡AQUÍ ESTÁ EL CAMBIO! Alineamos los botones al centro */
+    width: 100%;
+    background-color: #f7f7f7;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    padding: 15px 0;
+  }
+
+  .header-area .main-nav .nav li {
+    width: 100%;
+    text-align: center; /* Aseguramos que el contenedor del li también centre */
+  }
+
+  /* Enlaces centrados */
+  .header-area .main-nav .nav li a,
+  .header-area .main-nav .nav li.login-item a {
+    color: #1e1e1e !important;
+    padding: 12px 20px !important;
+    width: 100%;
+    text-align: center; /* ¡AQUÍ ESTÁ EL CAMBIO! Texto al centro */
+  }
+
+  /* --- AJUSTE PERFIL DE USUARIO EN MÓVIL --- */
+  .header-area .main-nav .nav li.user-profile-item {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important; /* Fuerza a que todo se agrupe en el medio */
+    align-items: center !important;
+    gap: 15px !important; /* Espacio exacto entre nombre, foto y botón */
+    padding: 20px 0 !important;
+  }
+
+  /* Evitamos que "Hola," y "Manín" se partan en dos líneas */
+  .header-area .main-nav .nav li.user-profile-item span {
+    color: #1e1e1e !important;
+    margin: 0 !important;
+    white-space: nowrap !important; /* Mantiene el saludo en una sola línea */
+    text-align: right !important;
+  }
+
+  /* Quitamos márgenes que puedan empujar el icono de salir a la derecha */
+  .header-area .main-nav .nav li.user-profile-item a.logout-btn,
+  .header-area .main-nav .nav li.user-profile-item .avatar-link {
+    margin: 0 !important;
+    width: auto !important;
+    padding: 0 !important;
+  }
+
+  .header-area .main-nav .nav li.user-profile-item a.logout-btn {
+    color: #c41 !important;
+    font-size: 22px !important;
+  }
 }
