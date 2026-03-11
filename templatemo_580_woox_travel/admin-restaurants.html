@@ -14,26 +14,17 @@
 
     <title>Gestión | Celis&Ud</title>
 
-    <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Additional CSS Files -->
     <link rel="stylesheet" href="assets/css/fontawesome.css" />
     <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css" />
     <link rel="stylesheet" href="assets/css/owl.css" />
     <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/new-admin.css"/>
+    <link rel="stylesheet" href="assets/css/admin-style.css"/>
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
     />
-<!--
-
-TemplateMo 580 Woox Travel
-
-https://templatemo.com/tm-580-woox-travel
-
--->
   </head>
   <body>
     <header class="admin-header header-sticky">
@@ -61,16 +52,23 @@ https://templatemo.com/tm-580-woox-travel
               <h2 class="header-text">Listado de restaurantes</h2>
               <p class="header-text">Añadir, editar o eliminar locales registrados.</p>
             </div>
-            
-            <div class="text-end mb-3">
-              <button class="boton boton-add" data-bs-toggle="modal" data-bs-target="#modalRestaurante">
+            <div class="col-lg-12">
+              <div class="d-flex align-items-center justify-content-end gap-2">
+    
+                <button class="boton boton-graphics" data-bs-toggle="modal" data-bs-target="#modalEstadisticas">
+                  Estadisticas
+                </button>
+    
+                <button class="boton boton-add" data-bs-toggle="modal" data-bs-target="#modalRestaurante">
                   + Añadir Restaurante
-              </button>
+                </button>
+    
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="tabla-formato">
+        <div class="format-table">
           <table class="table align-middle">
             <thead>
               <tr class="text-center">
@@ -84,7 +82,7 @@ https://templatemo.com/tm-580-woox-travel
             </thead>
             <tbody>
               <tr class="text-center">
-                <td><img src="assets/images/Pizza-Natura-sin-gluten.jpg" alt="Pizza Natura" class="tabla-imagen"></td>
+                <td><img src="assets/images/Pizza-Natura-sin-gluten.jpg" alt="Pizza Natura" class="image-table"></td>
                 <td>Pizza Natura</td>
                 <td>Madrid</td>
                 <td>Italiano</td>
@@ -187,7 +185,48 @@ https://templatemo.com/tm-580-woox-travel
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="modal fade" id="modalEstadisticas" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal">
+          <div class="modal-header">
+            <h5 class="modal-title">Tipos de Restaurantes</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body d-flex flex-column align-items-center">
+            
+            <div class="pie-chart my-4"></div>
+
+            <div class="w-100 px-4 mt-2" style="color: #2a2a2a;">
+              <div class="d-flex justify-content-between mb-2">
+                <div><span class="color-box bg-italiana"></span> Italiana</div>
+                <div class="fw-bold">35%</div>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <div><span class="color-box bg-asiatica"></span> Asiática</div>
+                <div class="fw-bold">25%</div>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <div><span class="color-box bg-mexicana"></span> Mexicana</div>
+                <div class="fw-bold">20%</div>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <div><span class="color-box bg-mediterranea"></span> Mediterránea</div>
+                <div class="fw-bold">15%</div>
+              </div>
+              <div class="d-flex justify-content-between mb-2">
+                <div><span class="color-box bg-otras"></span> Otras</div>
+                <div class="fw-bold">5%</div>
+              </div>
+            </div>
+
+          </div>
+          <div class="modal-footer" style="border-top: none;">
+            <button type="button" class="boton boton-cancel" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -202,6 +241,6 @@ https://templatemo.com/tm-580-woox-travel
            </div>
          </div>
        </div>
-     </div>
+      </div>
 </footer>
 </html>

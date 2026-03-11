@@ -118,6 +118,9 @@ footer {
 .boton-add, .boton-guardar { background-color: rgb(12, 143, 12); }
 .boton-add:hover { background-color: rgb(10, 120, 10); }
 
+.boton-graphics {background-color: #1976d2;}
+.boton-graphics:hover {background-color: #115293;}
+
 .boton-edit { background-color: #1976d2; font-size: 0.85rem; }
 .boton-edit:hover { background-color: #115293; }
 
@@ -156,7 +159,7 @@ footer {
     color: #fff;
 }
 
-.tabla-formato {
+.format-table {
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -164,7 +167,7 @@ footer {
     box-shadow: 0px 15px 25px rgba(0,0,0,0.2);
 }
 
-.tabla-formato td {
+.format-table td {
     padding: 1rem;
     text-align: center;
     border-bottom: 1px, solid #ddd;
@@ -177,7 +180,7 @@ footer {
 }
 
 .table tbody tr:hover {
-    background-color: #383838 !important;
+    background-color: #ccc !important;
     color: #ffffff !important;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
@@ -191,7 +194,7 @@ footer {
     box-shadow: inset 4px 0 0 #c41;
 }
 
-.tabla-imagen {
+.image-table {
     width: 120px;
     object-fit: cover;
     border-radius: 4px;
@@ -255,3 +258,35 @@ footer {
 .user-profile-info {
     color: #2a2a2a;
 }
+
+/* ==========================================
+   8. ESTADÍSTICAS Y GRÁFICOS
+   ========================================== */
+.pie-chart {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #ff6384 0% 35%,    /* Italiana: 35% */
+        #ffce56 35% 60%,   /* Asiática: 25% */
+        #4bc0c0 60% 80%,   /* Mexicana: 20% */
+        #c41 80% 95%,      /* Mediterránea: 15% (He usado tu color corporativo aquí) */
+        #9966ff 95% 100%   /* Otras: 5% */
+    );
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.color-box {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    border-radius: 4px;
+    vertical-align: text-bottom;
+}
+
+.bg-italiana { background-color: #ff6384; }
+.bg-asiatica { background-color: #ffce56; }
+.bg-mexicana { background-color: #4bc0c0; }
+.bg-mediterranea { background-color: #c41; }
+.bg-otras { background-color: #9966ff; }
