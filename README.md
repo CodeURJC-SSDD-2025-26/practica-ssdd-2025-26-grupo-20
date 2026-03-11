@@ -83,39 +83,64 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ### **Capturas de Pantalla y Descripción de Páginas**
 
-#### **1. Página Principal / Home**
-![Página Principal](images/home-page.png)
+#### **1. Página Principal / index**
+![Página Principal](images/index.png)
 
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
+> Página principal de Celis&Ud. Permite buscar los restaurantes e iniciar sesión
 
 #### **AQUÍ AÑADIR EL RESTO DE PÁGINAS**
+#### **2. Página Principal Con Sesión Iniciada / index_user**
+![Página Principal Con Sesión Iniciada](images/index_user.png)
 
-#### **2. Panel principal de administración / Admin-Index**
+> Página principal con los privilegios de tener una cuenta(poner reseñas y guardar restaurantes favoritos)
+
+#### **3. Página del listado de restaurantes/ restaurants**
+![Página del listado de restaurantes](images/restaurants.png)
+
+> Página que muestra el listado de restaurantes. Permite filtrar restaurantes por ubicación,tipo de comida y precio
+
+#### **4. Página del listado de restaurantes con sesión iniciada / restaurants_user**
+![Página del listado de restaurantes con sesión iniciada](images/restaurants_user.png)
+
+> Listado de restaurantes con privilegios de tener cuenta.
+
+#### **5. Detalles del restaurante / details**
+![Detalles del restaurante](images/details.png)
+
+> Página que muestra los detalles del restaurante "Pizza Natura". Permite ver su ubicación y sus reseñas. Además muestra sugerencias de otros restaurantes que pueden interesar al usuario.
+
+#### **6. Detalles del restaurante con sesión iniciada/ details_user**
+![Detalles del restaurante con sesión](images/details_user.png)
+
+> Pagina de detalles con privilegios de tener cuenta.
+
+
+#### **7. Panel principal de administración / Admin-Index**
 ![Panel principal de administrador](images/admin-index.PNG)
 
 > Página de inicio de los administradores que muestra en el header quién ha iniciado sesión y todas las opciones de gestión que puede hacer el administrador.
 
-#### **3. Listado de restaurantes / Admin-Restaurants**
+#### **8. Listado de restaurantes / Admin-Restaurants**
 ![Listado de restaurantes](images/admin-restaurants.PNG)
 
 > Página de listado de restaurantes dónde se muestran todos los restaurantes registrados en la base de datos. Se incluyen botones de acción individuales para editar y eliminar el registro, así como botones superiores para añadir nuevos restaurantes y ver estadísticas.
 
-#### **4. Formulario de restaurantes / Restaurant form**
+#### **9. Formulario de restaurantes / Restaurant form**
 ![Formulario de restaurantes](images/admin-restaurants-add-edit.PNG)
 
 > Formulario para añadir restaurantes al darle a los botones de acción de añadir o editar  restaurantes.
 
-#### **5. Estadisticas de restaurantes / Restaurant statitics**
+#### **10. Estadisticas de restaurantes / Restaurant statitics**
 ![Estadisticas de restaurantes](images/admin-restaurants-graphics.PNG)
 
 > Gráficos con diferentes estadísticas de los restaurantes, como por ejemplo el porcentaje de restaurantes que hay de cada especialidad.
 
-#### **6. Gestión de usuarios / User management**
+#### **11. Gestión de usuarios / User management**
 ![Gestión de usuarios](images/admin-users.PNG)
 
 > Página de gestión de usuarios donde se muestra una lista con todos los usuarios registrados en la base de datos. Se incluye un botón de acción para ver mas detalles de cada usuario como por ejemplo las reseñas.
 
-#### **7. Listado de reseñas / Reviews**
+#### **12. Listado de reseñas / Reviews**
 ![Listado de reseñas](images/admin-users-reviews.PNG)
 
 > Menú que se muestra al darle al botón de acción de ver detalles a un usuario del listado de usuarios. Se muestran todas las reseñas hechas por dicho usuario dónde se podrán gestionar.
@@ -150,25 +175,28 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ---
 
-#### **Alumno 3 - Alexis Maestro López**
+#### **Alumno 3 - Diego Iglesias Peña**
 
-Responsable del desarrollo integral del panel de administración en colaboración con Alexis Maestro. En muchos casos usando un mismo ordenador. 
+Responsable del desarrollo de las páginas principales de la web
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [He cambiado un poco la pagina de inicio para saber mas o menos como va a ser metiendo unos place holder](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/12e90d79fcdec363717b1c65f2b24e4778bc9300)  | [index.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/12e90d79fcdec363717b1c65f2b24e4778bc9300#diff-1fcabbc07c2537428bcf441d635066cf4eb1cdfd7dfed7f7c09326bc4782ce86)   |
-|2| [gestion de los restaurantes, me falta extablecer bien los margenes y poner la tipografia correcta](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/a547071b669c3581abd32e53a02c2607a75338b0)  | [restaurantes-mod.css, restaurantes-mod.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/a547071b669c3581abd32e53a02c2607a75338b0#diff-6f04fc30b0c411c1654e4238afee1bfc2d31ba51cc1f88988b80bc192603054a)   |
-|3| [Margenes de administracion de restaurantes](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/4114937f253fe5716da19f1a470e6a6928d6502f)  | [restaurantes-mod.css, restaurantes-mod.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/4114937f253fe5716da19f1a470e6a6928d6502f#diff-6f04fc30b0c411c1654e4238afee1bfc2d31ba51cc1f88988b80bc192603054a)   |
-|4| [Ajustado el mod restaurantes para que tenga mas consistencia con el listado de usuarios.](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/b9b8975bf1d636592382d4290bac28c33103c921)  | [restaurantes-mod.css, restaurantes-mod.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/b9b8975bf1d636592382d4290bac28c33103c921#diff-6f04fc30b0c411c1654e4238afee1bfc2d31ba51cc1f88988b80bc192603054a)   |
-|5| [Cambios de algunas clases de las tablas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/e5219d413685b331eaee44c0263d19907f2938c8)  | [restaurantes-mod.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/e5219d413685b331eaee44c0263d19907f2938c8#diff-e3e62f7943c3653b00ac926892715646ae436ff7932f5d5c9b5c182fbecbbbc5)   |
-|6| [Ajustes en otras clases para la parte de admin y sus css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3b448020ec53fa20964eea7bb7090ffe5b372cdb)  | [admin.html, lista-usuarios.html, restaurantes-mod.html, admin.css, lista-usuarios.css, restaurantes-mod.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3b448020ec53fa20964eea7bb7090ffe5b372cdb#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
-|7| [todo hecho](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/ce2c9bfd4bbc3bc57bef96efda34dd21ed0f7de9)  | [lista-usuarios.html, restaurantes-mod.html, lista-usuarios.css, restaurantes-mod.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/ce2c9bfd4bbc3bc57bef96efda34dd21ed0f7de9#diff-59ea846676e2f39636ad61a32f79e9af6e606ffec004b0d38e4897b5d295a080)   |
-|8| [Headers de admin](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/cdcf2ecda5a0f6c78b1ae1115d1786101a57e629)  | [lista-usuarios.html, lista-usuarios.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/cdcf2ecda5a0f6c78b1ae1115d1786101a57e629#diff-e426e4a80c7307b5153dc2c6b5e0a7bab7c0c8d9aee1069396086fe15d2bdb78)   |
-|9| [Administra, Manin!](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/71e61e7a4681b4ebc82fc25630c5042d996d1496)  | [admin.html, lista-usuarios.html, admin.css, lista-usuarios.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/71e61e7a4681b4ebc82fc25630c5042d996d1496#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
-|10| [página admin](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/e96cf4e0d0852494f3265d01ae3d17c6a78c4cfc)  | [admin.html, lista-usuarios.html, lista-usuarios.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/e96cf4e0d0852494f3265d01ae3d17c6a78c4cfc#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
-|11| [Tablas color](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/25eb76cb74e9663bcb982e19b9afa3b6290eaec6)  | [admin.html, lista-usuarios.html, restaurantes.html, new-admin.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/25eb76cb74e9663bcb982e19b9afa3b6290eaec6#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
-|12| [Nombres, grafico, y cosas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/6846dc17c128ec9f0e07e0051e15d4fba1f4df3a)  | [admin-restaurants.html, user-list.html, admin-style.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/6846dc17c128ec9f0e07e0051e15d4fba1f4df3a#diff-78706f2131de5c1dfac9c1bb894b142ce884824d4c7190cf6159de0b09778d1d)   |
-|13| [Ultimos retoques](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3305612594770d5f36ac4c6da3627028b30a1b36)  | [admin-restaurants.html, admin-html, user-list.html, admin-style.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3305612594770d5f36ac4c6da3627028b30a1b36#diff-78706f2131de5c1dfac9c1bb894b142ce884824d4c7190cf6159de0b09778d1d)   |
+|1| [Plantilla+primeros cambios](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/312ec4aa38218fe4422e0cbac7355d365a09e846)  | [index.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/312ec4aa38218fe4422e0cbac7355d365a09e846#diff-1fcabbc07c2537428bcf441d635066cf4eb1cdfd7dfed7f7c09326bc4782ce86)   |
+|2| [Pila cambios en la pag principal](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/bd6b54ad940bf6bf4f5f53d4d73c51b112b992f9) | [index.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/bd6b54ad940bf6bf4f5f53d4d73c51b112b992f9#diff-1fcabbc07c2537428bcf441d635066cf4eb1cdfd7dfed7f7c09326bc4782ce86)  |
+|3| [Index acabado](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/424ac774bd1ef59c10dcd543ea74455d72323f1a)  | [templatemo-woox-travel.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/424ac774bd1ef59c10dcd543ea74455d72323f1a#diff-212448a9c086205a66b0922f7a12186fe58392dd8e4e7263b086115fa3d833c2)   |
+|4| [index.html y restaurantes.html terminado](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/871be78b67112d6d4db8045fc0ba00243d811606) | [restaurantes.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/871be78b67112d6d4db8045fc0ba00243d811606#diff-137bc198eb169c36daff37adfa44f647e0179bb0c00afb1208c5a9d4e196aad8)   |
+|5| [Add restaurant details page styles](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/18f19622c7c7c7ee52e29e1e645e892b88b14b4c)  | [detalles.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/18f19622c7c7c7ee52e29e1e645e892b88b14b4c#diff-d69efd3e2d86e908fa461f8942da634f2f6f2ea34fb7c6225d6829a57237264a)   |
+|6| [Add restaurantes_sesioniniciada.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/1505e26ddb75b048c28d7d0fa499cbda68c21bff)  | [restaurantes_sesioniniciada.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/1505e26ddb75b048c28d7d0fa499cbda68c21bff#diff-f0814d3fbfbbce63f92f49ae40587e644df94d497374c6f7d8bf8cc200a87a48)   |
+|7| [Add detalles_sesioniniciada.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/87a0a609b5c985e8368e118e5f8f302f3f8b1b54)| [detalles_sesioniniciada.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/87a0a609b5c985e8368e118e5f8f302f3f8b1b54#diff-6faa09c0cb5f79cc3964ac6477201a3fa788519a707d5b75be2bb37ed4c5a024)   |
+|8| [Add restaurant details page styles](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/18f19622c7c7c7ee52e29e1e645e892b88b14b4c)  | [detalles.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/18f19622c7c7c7ee52e29e1e645e892b88b14b4c#diff-d69efd3e2d86e908fa461f8942da634f2f6f2ea34fb7c6225d6829a57237264a)   |
+|9| [paginas principales acabadas(por revisar)](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/e5c4964721c73e16912f8ccb415ad4bf8a772e4a)  | [detalles.html,index_sesioniniciada.html ](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/e5c4964721c73e16912f8ccb415ad4bf8a772e4a#diff-6b387f7801aa1c2d4e56b74cde280f37a10e0e9506430fce98c69c2011c90b78)   |
+|10| [arreglados los headers y ajustes menores](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/06e18f267cb8bfdd12eb4c32930885acd40699e8)  | [templatemo-woox-travel.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/06e18f267cb8bfdd12eb4c32930885acd40699e8#diff-212448a9c086205a66b0922f7a12186fe58392dd8e4e7263b086115fa3d833c2)   |
+|11| [solucionado un problema con el header y algunos enlaces mal puestos](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/5df2a3c8e2e2f1decce5b6b6702216894ab2dc91)  | [templatemo-woox-travel.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/5df2a3c8e2e2f1decce5b6b6702216894ab2dc91#diff-212448a9c086205a66b0922f7a12186fe58392dd8e4e7263b086115fa3d833c2)   |
+|12| [rename details.html, details_user.html & index.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/b293b3650d894abe3c59e020e2c3f29db1d8bf52)  | [details_user.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/b293b3650d894abe3c59e020e2c3f29db1d8bf52#diff-4af244b0654c6a41ef0a7547af5dde847aa1d58b4223969db94ccd9fa9a777ce)   |
+|13| [retoques del user](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3b9c43145f511cbb603e1e7ee7d6624d46f00593)  | [index_user.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3b9c43145f511cbb603e1e7ee7d6624d46f00593#diff-93e2aff39ea78fb85b6f3b8cc42d77103008272fa11ac6a9699bc1ce22335692)   |
+
+
+
 
 ---
 
