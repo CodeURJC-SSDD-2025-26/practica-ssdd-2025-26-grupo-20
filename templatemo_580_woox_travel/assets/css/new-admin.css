@@ -1,0 +1,257 @@
+/* ==========================================
+   1. RESET & BASE STYLES
+   ========================================== */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    min-height: 100vh;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* ==========================================
+   2. LAYOUT & CONTAINERS
+   ========================================== */
+.admin-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+    flex: 1;
+}
+
+.header-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.admin-header {
+    background-color: #c41;
+    color: white;
+    padding: 1rem 0;
+}
+
+.admin-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.header-text {
+    color: #2a2a2a !important;
+}
+
+footer {
+    width: 100%;
+    padding: 1.5rem 0;
+    margin-top: auto;
+}
+
+/* ==========================================
+   3. COMPONENTES: TARJETAS (CARDS)
+   ========================================== */
+.admin-card {
+    background-color: #fff;
+    border-radius: 25px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    box-shadow: 0px 15px 25px rgba(0,0,0,0.2);
+    transition: all .3s ease;
+}
+
+.admin-card:hover {
+    transform: translateY(-10px);
+}
+
+.admin-card .image img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+}
+
+.admin-card .down-content {
+    padding: 30px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.admin-card .down-content h4 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #2a2a2a;
+}
+
+.card-text {
+    font-weight: 300;
+    color: #2a2a2a;
+    margin-bottom: 10px;
+}
+
+.card-review {
+    border-left: 4px solid #c41;
+    border-bottom: 0.5px solid #c41;
+}
+
+/* ==========================================
+   4. BOTONES Y ACCIONES
+   ========================================== */
+.boton {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+    transition: background-color 0.2s;
+}
+
+/* Colores específicos de botones */
+.boton-add, .boton-guardar { background-color: rgb(12, 143, 12); }
+.boton-add:hover { background-color: rgb(10, 120, 10); }
+
+.boton-edit { background-color: #1976d2; font-size: 0.85rem; }
+.boton-edit:hover { background-color: #115293; }
+
+.boton-eliminar { background-color: #d32f2f; font-size: 0.85rem; }
+.boton-eliminar:hover { background-color: #9a0007; }
+
+.boton-cancel { background-color: #757575; }
+
+/* Botones con estilo corporativo #c41 */
+.admin-card .main-button a, 
+.main-button-small {
+    background-color: #c41 !important;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    display: inline-block;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.admin-card .main-button a { padding: 12px 30px; font-size: 15px; font-weight: 500; }
+.main-button-small { padding: 8px 15px; font-size: 15px; border-radius: 20px; font-weight: 500; }
+
+.admin-card .main-button a:hover, 
+.main-button-small:hover {
+    background-color: #a31 !important;
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+/* ==========================================
+   5. TABLAS Y LISTADOS
+   ========================================== */
+.table thead {
+    background-color: #c41 !important;
+    color: #fff;
+}
+
+.tabla-formato {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    box-shadow: 0px 15px 25px rgba(0,0,0,0.2);
+}
+
+.tabla-formato td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px, solid #ddd;
+    color: #2a2a2a;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease-in-out;
+    cursor:pointer;
+}
+
+.table tbody tr:hover {
+    background-color: #383838 !important;
+    color: #ffffff !important;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.table tbody tr:hover td {
+    color: #ffffff !important;
+    background-color: transparent !important;
+}
+
+.table tbody tr:hover td:first-child {
+    box-shadow: inset 4px 0 0 #c41;
+}
+
+.tabla-imagen {
+    width: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #c41;
+}
+
+/* ==========================================
+   6. FORMULARIOS
+   ========================================== */
+.admin-form .form-group { margin-bottom: 1rem; }
+
+.admin-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.admin-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.admin-form input, .admin-form select, .admin-form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 1.5rem;
+}
+
+#descripcion { min-width: 100%; }
+
+/* ==========================================
+   7. MODALES Y OTROS
+   ========================================== */
+.modal-content {
+    border-radius: 25px;
+    border: none;
+}
+
+.modal-header {
+    background-color: #c41;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+.modal-title {
+    color: #fff !important;
+}
+
+.user-profile-info {
+    color: #2a2a2a;
+}
