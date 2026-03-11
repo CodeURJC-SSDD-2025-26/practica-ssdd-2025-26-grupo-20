@@ -141,6 +141,10 @@ footer {
     text-decoration: none;
 }
 
+.my-margin {
+    margin-bottom: 5px;
+}
+
 .admin-card .main-button a { padding: 12px 30px; font-size: 15px; font-weight: 500; }
 .main-button-small { padding: 8px 15px; font-size: 15px; border-radius: 20px; font-weight: 500; }
 
