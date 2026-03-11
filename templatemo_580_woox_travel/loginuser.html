@@ -12,7 +12,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="assets/css/iniciousuarioadmin.css" />
+    <link rel="stylesheet" href="assets/css/loginuseradmin.css" />
     <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css" />
   </head>
   <body>
@@ -26,9 +26,9 @@
               </a>
               <ul class="nav">
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="restaurantes.html">Restaurantes</a></li>
+                <li><a href="restaurants.html">Restaurantes</a></li>
                 <li class="login-item">
-                  <a href="iniciosesion.html" class="active">Iniciar Sesión</a>
+                  <a href="login.html" class="active">Iniciar Sesión</a>
                 </li>
               </ul>
               <a class="menu-trigger">
@@ -41,16 +41,16 @@
     </header>
     <div class="background">
       <div id="login-especial" class="login-container">
-        <h2>Administrador</h2>
+        <h2>Usuario</h2>
         <div class="login-card">
-          <form action="admin.html" method="get">
+          <form action="index_user.html" method="get">
             <div class="input-group">
               <span class="icon"><i class="fa-solid fa-user"></i></span>
-              <input type="text" placeholder="Nombre admin" required/>
+              <input type="text" placeholder="Nombre usuario" required />
             </div>
             <div class="input-group">
               <span class="icon"><i class="fa-solid fa-lock"></i></span>
-              <input type="password" placeholder="Contraseña" required/>
+              <input type="password" placeholder="Contraseña" required />
             </div>
             <div class="options">
               <label><input type="checkbox" /> Recuerdame</label>
@@ -60,6 +60,12 @@
               INICIAR SESIÓN
             </button>
           </form>
+        </div>
+        <div class="register-section">
+          <p class="no-account">¿No tienes cuenta con nosotros?</p>
+          <button class="register-btn">
+            <a href="registeruser.html">REGISTRARSE</a>
+          </button>
         </div>
       </div>
     </div>
