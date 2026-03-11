@@ -134,17 +134,26 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Rodrigo de Frutos Suárez**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Responsable del desarrollo integral del panel de administración en colaboración con Alexis Maestro. En muchos casos usando un mismo ordenador. 
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [He cambiado un poco la pagina de inicio para saber mas o menos como va a ser metiendo unos place holder](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/12e90d79fcdec363717b1c65f2b24e4778bc9300)  | [index.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/12e90d79fcdec363717b1c65f2b24e4778bc9300#diff-1fcabbc07c2537428bcf441d635066cf4eb1cdfd7dfed7f7c09326bc4782ce86)   |
+|2| [gestion de los restaurantes, me falta extablecer bien los margenes y poner la tipografia correcta](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/a547071b669c3581abd32e53a02c2607a75338b0)  | [restaurantes-mod.css, restaurantes-mod.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/a547071b669c3581abd32e53a02c2607a75338b0#diff-6f04fc30b0c411c1654e4238afee1bfc2d31ba51cc1f88988b80bc192603054a)   |
+|3| [Margenes de administracion de restaurantes](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/4114937f253fe5716da19f1a470e6a6928d6502f)  | [restaurantes-mod.css, restaurantes-mod.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/4114937f253fe5716da19f1a470e6a6928d6502f#diff-6f04fc30b0c411c1654e4238afee1bfc2d31ba51cc1f88988b80bc192603054a)   |
+|4| [Ajustado el mod restaurantes para que tenga mas consistencia con el listado de usuarios.](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/b9b8975bf1d636592382d4290bac28c33103c921)  | [restaurantes-mod.css, restaurantes-mod.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/b9b8975bf1d636592382d4290bac28c33103c921#diff-6f04fc30b0c411c1654e4238afee1bfc2d31ba51cc1f88988b80bc192603054a)   |
+|5| [Cambios de algunas clases de las tablas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/e5219d413685b331eaee44c0263d19907f2938c8)  | [restaurantes-mod.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/e5219d413685b331eaee44c0263d19907f2938c8#diff-e3e62f7943c3653b00ac926892715646ae436ff7932f5d5c9b5c182fbecbbbc5)   |
+|6| [Ajustes en otras clases para la parte de admin y sus css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3b448020ec53fa20964eea7bb7090ffe5b372cdb)  | [admin.html, lista-usuarios.html, restaurantes-mod.html, admin.css, lista-usuarios.css, restaurantes-mod.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3b448020ec53fa20964eea7bb7090ffe5b372cdb#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
+|7| [todo hecho](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/ce2c9bfd4bbc3bc57bef96efda34dd21ed0f7de9)  | [lista-usuarios.html, restaurantes-mod.html, lista-usuarios.css, restaurantes-mod.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/ce2c9bfd4bbc3bc57bef96efda34dd21ed0f7de9#diff-59ea846676e2f39636ad61a32f79e9af6e606ffec004b0d38e4897b5d295a080)   |
+|8| [Headers de admin](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/cdcf2ecda5a0f6c78b1ae1115d1786101a57e629)  | [lista-usuarios.html, lista-usuarios.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/cdcf2ecda5a0f6c78b1ae1115d1786101a57e629#diff-e426e4a80c7307b5153dc2c6b5e0a7bab7c0c8d9aee1069396086fe15d2bdb78)   |
+|9| [Administra, Manin!](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/71e61e7a4681b4ebc82fc25630c5042d996d1496)  | [admin.html, lista-usuarios.html, admin.css, lista-usuarios.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/71e61e7a4681b4ebc82fc25630c5042d996d1496#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
+|10| [página admin](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/e96cf4e0d0852494f3265d01ae3d17c6a78c4cfc)  | [admin.html, lista-usuarios.html, lista-usuarios.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/e96cf4e0d0852494f3265d01ae3d17c6a78c4cfc#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
+|11| [Tablas color](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/25eb76cb74e9663bcb982e19b9afa3b6290eaec6)  | [admin.html, lista-usuarios.html, restaurantes.html, new-admin.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/25eb76cb74e9663bcb982e19b9afa3b6290eaec6#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
+|12| [Nombres, grafico, y cosas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/6846dc17c128ec9f0e07e0051e15d4fba1f4df3a)  | [admin-restaurants.html, user-list.html, admin-style.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/6846dc17c128ec9f0e07e0051e15d4fba1f4df3a#diff-78706f2131de5c1dfac9c1bb894b142ce884824d4c7190cf6159de0b09778d1d)   |
+|13| [Ultimos retoques](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3305612594770d5f36ac4c6da3627028b30a1b36)  | [admin-restaurants.html, admin-html, user-list.html, admin-style.css](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/3305612594770d5f36ac4c6da3627028b30a1b36#diff-78706f2131de5c1dfac9c1bb894b142ce884824d4c7190cf6159de0b09778d1d)   |
+
 
 ---
 
