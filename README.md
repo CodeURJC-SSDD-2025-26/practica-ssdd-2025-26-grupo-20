@@ -173,9 +173,9 @@ Igualmente se encuentra un boton por si eres un nuevo usuario y quieres registra
 
 ### **Participación de Miembros en la Práctica 1**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Sara Torres García**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Responsable de crear las páginas de inicio de sesión, de eleccion, de usuario, de administrador, de registro de usuario y el perfil del usuario.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
