@@ -88,7 +88,6 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 > Página principal de Celis&Ud. Permite buscar los restaurantes e iniciar sesión
 
-#### **AQUÍ AÑADIR EL RESTO DE PÁGINAS**
 #### **2. Página Principal Con Sesión Iniciada / index_user**
 ![Página Principal Con Sesión Iniciada](images/index_user.png)
 
@@ -144,6 +143,27 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 ![Listado de reseñas](images/admin-users-reviews.PNG)
 
 > Menú que se muestra al darle al botón de acción de ver detalles a un usuario del listado de usuarios. Se muestran todas las reseñas hechas por dicho usuario dónde se podrán gestionar.
+
+#### **13. Página de inicio**
+![Pagina de inicio de sesión]()
+
+> Página que muestra a la persona un panel para elegir si quiere entrar en la página como usuario o como administrador.
+
+#### **14. Página de inicio usuario**
+![Pagina de inicio usuario]()
+
+> Página que muestra al usuario un espacio para meter sus credenciales y si quiere ser recordado o si ha olvidado su contraseña.
+Igualmente se encuentra un boton por si eres un nuevo usuario y quieres registrarte en la página.
+
+#### **15. Página de inicio administrador**
+![Pagina de inicio administrador]()
+
+> Página que muestra al administrador un espacio en la que meter sus credenciales y si quiere ser recordado o si ha olvidado su contraseña.
+
+#### **16. Página de registro**
+![Pagina de registro]()
+
+> Página en la cual se muestra un espacio en el cual el nuevo usuario debera meter los datos pertinentes para poder crearse una cuenta nueva.
 
 ### **Participación de Miembros en la Práctica 1**
 
