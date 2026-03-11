@@ -90,6 +90,36 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 #### **AQUÍ AÑADIR EL RESTO DE PÁGINAS**
 
+#### **2. Panel principal de administración / Admin-Index**
+![Panel principal de administrador](images/admin-index.PNG)
+
+> Página de inicio de los administradores que muestra en el header quién ha iniciado sesión y todas las opciones de gestión que puede hacer el administrador.
+
+#### **3. Listado de restaurantes / Admin-Restaurants**
+![Listado de restaurantes](images/admin-restaurants.PNG)
+
+> Página de listado de restaurantes dónde se muestran todos los restaurantes registrados en la base de datos. Se incluyen botones de acción individuales para editar y eliminar el registro, así como botones superiores para añadir nuevos restaurantes y ver estadísticas.
+
+#### **4. Formulario de restaurantes / Restaurant form**
+![Formulario de restaurantes](images/admin-restaurants-add-edit.PNG)
+
+> Formulario para añadir restaurantes al darle a los botones de acción de añadir o editar  restaurantes.
+
+#### **5. Estadisticas de restaurantes / Restaurant statitics**
+![Estadisticas de restaurantes](images/admin-restaurants-graphics.PNG)
+
+> Gráficos con diferentes estadísticas de los restaurantes, como por ejemplo el porcentaje de restaurantes que hay de cada especialidad.
+
+#### **6. Gestión de usuarios / User management**
+![Gestión de usuarios](images/admin-users.PNG)
+
+> Página de gestión de usuarios donde se muestra una lista con todos los usuarios registrados en la base de datos. Se incluye un botón de acción para ver mas detalles de cada usuario como por ejemplo las reseñas.
+
+#### **7. Listado de reseñas / Reviews**
+![Listado de reseñas](images/admin-users-reviews.PNG)
+
+> Menú que se muestra al darle al botón de acción de ver detalles a un usuario del listado de usuarios. Se muestran todas las reseñas hechas por dicho usuario dónde se podrán gestionar.
+
 ### **Participación de Miembros en la Práctica 1**
 
 #### **Alumno 1 - [Nombre Completo]**
