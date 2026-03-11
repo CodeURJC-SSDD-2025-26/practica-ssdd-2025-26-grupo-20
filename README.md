@@ -179,11 +179,13 @@ Responsable de crear las páginas de inicio de sesión, de eleccion, de usuario,
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Creación inicio sesión](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/1fabfeba0c73d2ba5aba35b2152e4f1d2020f889)  | [iniciousuario.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/1fabfeba0c73d2ba5aba35b2152e4f1d2020f889)   |
+|2| [Edición inicio usuario](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/8faaafec2a003c87c128e26db5c658c66db2d968)  | [iniciousuario.html iniciousuario.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/8faaafec2a003c87c128e26db5c658c66db2d968)   |
+|3| [Creacion inicio admin](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/cb059c4812668fcda95abfbebe20c1ba9e94e3e7)  | [inicioadmin.css inicioadmin.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/cb059c4812668fcda95abfbebe20c1ba9e94e3e7)   |
+|4| [Creacion registro de usuario](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/2393f2f81d2cb1a9e5aa101c12c396dca32bc63d)  | [registrarusuario.css registrarusuario.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/2393f2f81d2cb1a9e5aa101c12c396dca32bc63d)   |
+|5| [Arreglos de los inicio de usuario y admin, y union del css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/16f626b7d32507fcb8561831433c7973b6ef2831) | [inicioadmin.html iniciousuario.html registrarusuario.html iniciousuarioadmin.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/16f626b7d32507fcb8561831433c7973b6ef2831)   |
+|6| [Creacion perfil usuario](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/baef2daaae344aac8385fbe09ec49bbd805aa6b1) | [perfil.html perfil.css](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/baef2daaae344aac8385fbe09ec49bbd805aa6b1) |
+|7| [Arreglos finales y traduccion de titulos](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/32e025b7b6c5dc8244766750323ec65c6f58a7d5) | [profile.html profile.css loginuseradmin.css registeruser.css loginadmin.html loginuser.html login.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/32e025b7b6c5dc8244766750323ec65c6f58a7d5)|
 
 ---
 
