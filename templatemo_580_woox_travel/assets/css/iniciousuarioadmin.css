@@ -1,5 +1,5 @@
 body {
-  min-height: 100% !important;
+  min-height: 100vh !important;
   display: flex;
   flex-direction: column;
   background: #2b2b2b;
@@ -164,4 +164,8 @@ body {
 .no-account {
   color: #2b2b2b;
   font-size: 14px;
+}
+
+footer {
+  margin-top: 18em !important;
 }
