@@ -166,9 +166,12 @@ Igualmente se encuentra un boton por si eres un nuevo usuario y quieres registra
 > Página en la cual se muestra un espacio en el cual el nuevo usuario debera meter los datos pertinentes para poder crearse una cuenta nueva.
 
 #### **17. Página perfil del usuario**
-![Pagina de registro](images/register.png)
+![Pagina de registro](images/profile.png)
+![Pagina de registro](images/profile2.png)
 
 > Página en la cual se muestra el perfil del usuario, con sus  listas y sus reseñas, asi como la informacion general de este con opcion de edición de cualquier campo.
+
+
 ### **Participación de Miembros en la Práctica 1**
 
 #### **Alumno 1 - [Nombre Completo]**
