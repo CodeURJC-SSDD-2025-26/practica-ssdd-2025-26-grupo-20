@@ -161,17 +161,18 @@ Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicac
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Alexis Maestro López**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Responsable del desarrollo integral del panel de administración en colaboración con Rodrigo De Frutos Suárez. En muchos casos usando un mismo ordenador.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [modificación color interfaz y página admin](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/9bfd12052d3a3b9300291f691a0e54db010f126e)  | [admin.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/9bfd12052d3a3b9300291f691a0e54db010f126e#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
+|2| [modificación enlaces inicio sesión](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/7133e64930ea607c761218af1995c97fdc86006d)  | [index.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/7133e64930ea607c761218af1995c97fdc86006d#diff-1fcabbc07c2537428bcf441d635066cf4eb1cdfd7dfed7f7c09326bc4782ce86)   |
+|3| [modificación admin](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/64fac34074390355d55ec0da7d4015cab71acaf0)  | [admin.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/64fac34074390355d55ec0da7d4015cab71acaf0#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
+|4| [main admin terminado](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/cace287637dc4a834b10c4a43e49373b8c058024)  | [admin.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/cace287637dc4a834b10c4a43e49373b8c058024#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
+|5| [lista usuarios terminada](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/7893de3c88c88a16d3a5c60fcc18525c527b40c5)  | [user-list.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/7893de3c88c88a16d3a5c60fcc18525c527b40c5#diff-59ea846676e2f39636ad61a32f79e9af6e606ffec004b0d38e4897b5d295a080)   |
+|6| [corrección](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/161645ba8c6eed73008e8828de06d406bf4c63e9)  | [admin.html](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/161645ba8c6eed73008e8828de06d406bf4c63e9#diff-f378857c48c89c42921b1cc021e9da2a35865c1178d1eda0a2afec3c87a78c0f)   |
 
 ---
 
