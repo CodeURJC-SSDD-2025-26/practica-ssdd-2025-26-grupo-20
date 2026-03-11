@@ -240,10 +240,21 @@
             <div class="items">
               <div class="row">
                 <div class="col-lg-12">
-                  <div class="item last-item" style="border-bottom: none">
+                  <div class="item last-item">
                     <div class="row">
                       <div class="col-lg-4 col-sm-5">
-                        <div class="image">
+                        <div class="image" style="position: relative">
+                          <a
+                            href="#"
+                            class="favorite-badge"
+                            onclick="
+                              this.classList.toggle('saved');
+                              return false;
+                            "
+                            title="Guardar en favoritos"
+                          >
+                            <i class="fa fa-heart"></i>
+                          </a>
                           <img
                             src="assets/images/Okashi-Sanda.jpg"
                             alt="Okashi-Sanda"
@@ -260,11 +271,11 @@
                           <p>
                             El primer japonés certificado sin gluten de Madrid.
                             Takoyakis, Katsu Curry y postres increíbles sin
-                            lácteos en pleno Lavapiés.
+                            lácteos.
                           </p>
                           <ul class="info">
                             <li>
-                              <i class="fa fa-map-marker"></i> Madrid - Lavapiés
+                              <i class="fa fa-map-marker"></i> Madrid - Lavapies
                             </li>
                             <li><i class="fa fa-star"></i> 4.7 Valoración</li>
                             <li><i class="fa fa-money-bill"></i> 20-30€</li>
