@@ -21,12 +21,13 @@ Indicar las entidades principales que gestionará la aplicación y las relacione
 1. **Usuario**: Personas que utilizan la aplicación para buscar o valorar sitios.
 2. **Restaurante**: Los establecimientos que ofrecen comida apta para celíacos.
 3. **Reseña**: La valoración (estrellas) y comentario que deja un usuario sobre su experiencia.
-4. **Municipio**: La localidad donde se agrupan los restaurantes (Ej: Madrid, Móstoles, Alcorcón).
+4. **Lista**: Agrupaciones temáticas creadas por los usuarios (Ej: "Mis sitios top para cenar", "Terrazas sin gluten").
 
 **Relaciones entre entidades:**
 - **Usuario - Reseña**: Un usuario puede escribir múltiples reseñas, pero una reseña pertenece a un único autor (1:N).
 - **Restaurante - Reseña**: Un restaurante puede recibir múltiples reseñas de distintos usuarios (1:N).
-- **Restaurante - Municipio**: Un restaurante pertenece físicamente a un único municipio, pero un municipio contiene muchos restaurantes (N:1).
+- **Usuario - Lista**: Un usuario puede crear muchas listas personales, pero cada lista pertenece a un "dueño" (propietario) (1:N).
+- **Lista - Restaurante**: Una lista puede contener muchos restaurantes (ej: la lista "Favoritos" tiene 10 locales) y un mismo restaurante puede aparecer en las listas de muchos usuarios diferentes (N:M).
 - **Usuario - Restaurante**: Un usuario puede guardar múltiples restaurantes como favoritos y un restaurante puede ser guardado por múltiples usuarios (N:M).
 
 ### **Permisos de los Usuarios**
