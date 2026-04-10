@@ -199,73 +199,68 @@ Celíaco desde 2018. Buscando los mejores rincones sin gluten de Madrid 🍽️<
             </div>
           </div>
 
-          <!-- COLUMNA DERECHA -->
-          <div class="col-lg-9 col-md-8">
-            <!-- Recuadro: Mis Listas -->
-            <div class="profile-block">
+          <div class="profile-block">
               <div class="section-heading profile-section-heading">
                 <h2><i class="fa fa-list"></i> Mis Listas</h2>
                 <div class="main-button">
-                  <a href="#" onclick="return false;"
-                    ><i class="fa fa-plus"></i> Nueva lista</a
-                  >
+                  <a href="#" onclick="document.getElementById('form-nueva-lista').classList.toggle('d-none'); return false;">
+                    <i class="fa fa-plus"></i> Nueva lista
+                  </a>
                 </div>
               </div>
+
+              <div id="form-nueva-lista" class="d-none mb-4 p-3" style="background: #f8f9fa; border-radius: 15px;">
+                <form action="/lists/create" method="post">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <input type="text" name="name" class="form-control" placeholder="Nombre (ej: Favoritos)" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="description" class="form-control" placeholder="Descripción breve">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary w-100" style="border-radius: 20px;">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+              </div>
+
               <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                  <div class="list-card">
-                    <div class="list-icon" style="background: #c41">
-                      <i class="fa fa-star"></i>
-                    </div>
-                    <span class="list-name">Favoritos</span>
-                    <span class="list-count">12 restaurantes</span>
-                    <div class="list-actions">
-                      <button><i class="fa fa-edit"></i></button>
-                      <button class="del"><i class="fa fa-trash"></i></button>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
+                
+                {{#myLists}}
+                <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
                   <div class="list-card">
                     <div class="list-icon" style="background: #3a86ff">
                       <i class="fa fa-map-marker"></i>
                     </div>
-                    <span class="list-name">Por visitar</span>
-                    <span class="list-count">8 restaurantes</span>
+                    
+                    <span class="list-name">{{name}}</span>
+                    <span class="list-count" style="font-size: 11px;">{{description}}</span>
+                    
                     <div class="list-actions">
-                      <button><i class="fa fa-edit"></i></button>
-                      <button class="del"><i class="fa fa-trash"></i></button>
+                      <button title="Ver/Editar"><i class="fa fa-edit"></i></button>
+                      
+                      <form action="/lists/delete/{{id}}" method="post" style="display:inline;">
+                          <input type="hidden" name="_csrf" value="{{_csrf.token}}"/> 
+                          <button type="submit" class="del" title="Borrar lista"><i class="fa fa-trash"></i></button>
+                      </form>
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                  <div class="list-card">
-                    <div class="list-icon" style="background: #06d6a0">
-                      <i class="fa fa-heart"></i>
-                    </div>
-                    <span class="list-name">Románticos</span>
-                    <span class="list-count">5 restaurantes</span>
-                    <div class="list-actions">
-                      <button><i class="fa fa-edit"></i></button>
-                      <button class="del"><i class="fa fa-trash"></i></button>
-                    </div>
+                {{/myLists}}
+
+                {{^myLists}}
+                <div class="col-12">
+                  <div class="alert alert-info text-center" style="border-radius: 20px;">
+                    Aún no tienes listas. ¡Crea una para guardar tus restaurantes sin gluten favoritos!
                   </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                  <div class="list-card">
-                    <div class="list-icon" style="background: #e76f51">
-                      <i class="fa fa-cutlery"></i>
-                    </div>
-                    <span class="list-name">Menú diario</span>
-                    <span class="list-count">3 restaurantes</span>
-                    <div class="list-actions">
-                      <button><i class="fa fa-edit"></i></button>
-                      <button class="del"><i class="fa fa-trash"></i></button>
-                    </div>
-                  </div>
-                </div>
+                {{/myLists}}
+
               </div>
             </div>
+
 
             <!-- Recuadro: Mis Reseñas (scroll horizontal) -->
             <div class="profile-block">
