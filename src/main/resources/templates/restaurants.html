@@ -18,13 +18,6 @@
   </head>
 
   <body>
-    <div id="js-preloader" class="js-preloader">
-      <div class="preloader-inner">
-        <span class="dot"></span>
-        <div class="dots"></div>
-      </div>
-    </div>
-
     <header class="header-area header-sticky">
       <div class="container">
         <div class="row">
@@ -37,7 +30,7 @@
                 <li><a href="/">Inicio</a></li>
                 <li><a href="/restaurants" class="active">Restaurantes</a></li>
 
-                {{#user}}
+                {{#isAuthenticated}}
                 <li class="user-profile-item">
                   <span class="d-none d-md-block"
                     >Hola, <strong>{{user.username}}</strong></span
@@ -49,7 +42,7 @@
                     ><i class="fa fa-sign-out-alt"></i
                   ></a>
                 </li>
-                {{/user}} {{^user}}
+                {{/isAuthenticated}} {{^isAuthenticated}}
                 <li class="login-item">
                   <a
                     href="/login"
@@ -58,7 +51,7 @@
                     >Iniciar Sesión</a
                   >
                 </li>
-                {{/user}}
+                {{/isAuthenticated}}
               </ul>
               <a class="menu-trigger"><span>Menu</span></a>
             </nav>
@@ -67,7 +60,7 @@
       </div>
     </header>
 
-    <div class="search-form">
+    <div class="search-form" style="margin-top: 100px">
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
@@ -124,12 +117,12 @@
                     <div class="row">
                       <div class="col-lg-4 col-sm-5">
                         <div class="image" style="position: relative">
-                          {{#user}}
+                          {{#isAuthenticated}}
                           <a
                             href="#"
                             class="favorite-badge"
-                            data-toggle="modal"
-                            data-target="#listasModal-{{id}}"
+                            data-bs-toggle="modal"
+                            data-bs-target="#listasModal-rest-{{id}}"
                             style="
                               position: absolute;
                               right: 20px;
@@ -150,7 +143,7 @@
 
                           <div
                             class="modal fade"
-                            id="listasModal-{{id}}"
+                            id="listasModal-rest-{{id}}"
                             tabindex="-1"
                             role="dialog"
                             aria-hidden="true"
@@ -170,25 +163,22 @@
                                   </h5>
                                   <button
                                     type="button"
-                                    class="close"
-                                    data-dismiss="modal"
-                                  >
-                                    <span>&times;</span>
-                                  </button>
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Cerrar"
+                                  ></button>
                                 </div>
                                 <div class="modal-body text-left">
                                   <div class="list-group">
                                     {{#userListsWithStatus}}
                                     <form
-                                      action="/lists/{{id}}/toggleRestaurant/{{../id}}"
+                                      action="/lists/{{id}}/toggleRestaurant/{{restaurantId}}"
                                       method="post"
                                       class="mb-2"
+                                      onsubmit="
+                                        toggleRestaurantList(event, this)
+                                      "
                                     >
-                                      <input
-                                        type="hidden"
-                                        name="_csrf"
-                                        value="{{_csrf.token}}"
-                                      />
                                       <button
                                         type="submit"
                                         class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
@@ -214,7 +204,7 @@
                               </div>
                             </div>
                           </div>
-                          {{/user}} {{^user}}
+                          {{/isAuthenticated}} {{^isAuthenticated}}
                           <a
                             href="/login"
                             class="favorite-badge"
@@ -226,10 +216,10 @@
                             "
                             ><i class="fa fa-heart-o" style="color: #333"></i
                           ></a>
-                          {{/user}}
+                          {{/isAuthenticated}}
 
                           <img
-                            src="/assets/images/{{imageFile}}"
+                            src="/assets/images/Pizza-Natura-sin-gluten.jpg"
                             alt="{{name}}"
                           />
                         </div>
@@ -237,14 +227,14 @@
                       <div class="col-lg-8 col-sm-7">
                         <div class="right-content">
                           <h4>{{name}}</h4>
-                          <span>{{category}}</span>
+                          <span>{{specialty}}</span>
                           <div class="main-button">
                             <a href="/restaurant/{{id}}">Ver detalles</a>
                           </div>
                           <p>{{description}}</p>
                           <ul class="info">
                             <li>
-                              <i class="fa fa-map-marker"></i> {{location}}
+                              <i class="fa fa-map-marker"></i> {{municipality}}
                             </li>
                             <li>
                               <i class="fa fa-money-bill"></i> {{averagePrice}}€
@@ -275,8 +265,34 @@
         </div>
       </div>
     </footer>
+
     <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/custom.js"></script>
+
+    <script>
+      function toggleRestaurantList(event, form) {
+        event.preventDefault();
+        fetch(form.action, { method: "POST" }).then((response) => {
+          if (response.ok) {
+            const badge = form.querySelector(".badge");
+            const icon = badge.querySelector("i");
+            if (badge.classList.contains("badge-success")) {
+              badge.classList.replace("badge-success", "badge-secondary");
+              badge.style.backgroundColor = "";
+              icon.classList.replace("fa-check", "fa-plus");
+            } else {
+              badge.classList.replace("badge-secondary", "badge-success");
+              badge.style.backgroundColor = "#28a745";
+              icon.classList.replace("fa-plus", "fa-check");
+            }
+          }
+        });
+      }
+
+      $(document).on("hidden.bs.modal", ".modal", function () {
+        location.reload();
+      });
+    </script>
   </body>
 </html>

@@ -31,55 +31,36 @@ public class ListsController {
         this.restaurantRepository = restaurantRepository;
     }
 
-    // ==========================================
-    // 1. MOSTRAR LAS LISTAS EN EL PERFIL
-    // ==========================================
     @GetMapping("/profile")
     public String showProfileAndLists(Model model, Principal principal) {
-        // HACK TEMPORAL: Forzamos a Chicote para poder probar sin login real
         User user = userService.findByUsername("chicote_gluten").orElse(null);
-
         if (user != null) {
             model.addAttribute("user", user);
+            model.addAttribute("isAuthenticated", true);
             List<Lists> userLists = listsService.getListsByUser(user);
             model.addAttribute("myLists", userLists);
         }
-        
         return "profile"; 
     }
 
-    // ==========================================
-    // 2. CREAR UNA LISTA NUEVA
-    // ==========================================
     @PostMapping("/lists/create")
     public String createNewList(@RequestParam String name, @RequestParam String description, Principal principal) {
         if (name == null || name.trim().isEmpty()) {
             return "redirect:/profile?error=NombreVacio"; 
         }
-
-        // HACK TEMPORAL: Forzamos a Chicote
         User user = userService.findByUsername("chicote_gluten").orElse(null);
-        
         if (user != null) {
             Lists newList = new Lists(name, description, user);
             listsService.saveList(newList);
         }
-        
         return "redirect:/profile";
     }
 
-    // ==========================================
-    // 3. BORRAR UNA LISTA
-    // ==========================================
     @PostMapping("/lists/delete/{id}")
     public String deleteList(@PathVariable Long id, Principal principal) {
-        // HACK TEMPORAL: Forzamos a Chicote
         User user = userService.findByUsername("chicote_gluten").orElse(null);
-        
         if (user != null) {
             Lists listToDelete = listsService.getListById(id).orElse(null);
-            
-            // Comprobamos que la lista existe y pertenece al usuario
             if (listToDelete != null && listToDelete.getOwner().getId().equals(user.getId())) {
                 listsService.deleteList(id);
             }
@@ -87,33 +68,48 @@ public class ListsController {
         return "redirect:/profile";
     }
 
-    // ==========================================
-    // 4. METER O SACAR UN RESTAURANTE (Estilo Spotify)
-    // ==========================================
     @PostMapping("/lists/{listId}/toggleRestaurant/{restaurantId}")
     public String toggleRestaurantInList(@PathVariable Long listId, @PathVariable Long restaurantId, Principal principal, HttpServletRequest request) {
-        // HACK TEMPORAL: Forzamos a Chicote
         User user = userService.findByUsername("chicote_gluten").orElse(null);
-
         if (user != null) {
             Lists list = listsService.getListById(listId).orElse(null);
             Restaurant restaurant = restaurantRepository.findById(restaurantId).orElse(null); 
             
             if (list != null && restaurant != null && list.getOwner().getId().equals(user.getId())) {
-                // Si el restaurante ya está en la lista, lo quitamos. Si no está, lo añadimos.
-                if (list.getRestaurants().contains(restaurant)) {
-                    listsService.removeRestaurantFromList(list, restaurant);
+                boolean contains = false;
+                Restaurant foundRest = null;
+                for (Restaurant r : list.getRestaurants()) {
+                    if (r.getId().equals(restaurant.getId())) {
+                        contains = true;
+                        foundRest = r;
+                        break;
+                    }
+                }
+                
+                if (contains) {
+                    listsService.removeRestaurantFromList(list, foundRest);
                 } else {
                     listsService.addRestaurantToList(list, restaurant);
                 }
             }
         }
-        
-        // Te devuelve a la página exacta en la que hiciste clic (portada, catálogo o detalles)
-        String referer = request.getHeader("Referer");
-        if (referer != null) {
-            return "redirect:" + referer;
+        return "redirect:/restaurants"; 
+    }
+
+    @GetMapping("/lista/{id}")
+    public String showListDetails(@PathVariable Long id, Model model, Principal principal) {
+        User user = userService.findByUsername("chicote_gluten").orElse(null);
+        if (user != null) {
+            model.addAttribute("user", user);
+            model.addAttribute("isAuthenticated", true);
         }
-        return "redirect:/restaurants";
+        
+        Lists list = listsService.getListById(id).orElse(null);
+        if (list != null) {
+            model.addAttribute("list", list);
+            model.addAttribute("listRestaurants", list.getRestaurants());
+            model.addAttribute("isEmpty", list.getRestaurants().isEmpty());
+        }
+        return "listdetails";
     }
 }

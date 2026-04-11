@@ -11,28 +11,20 @@
       rel="stylesheet"
     />
     <title>Mi Perfil – CelisUd</title>
-
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/fontawesome.css" />
     <link rel="stylesheet" href="/assets/css/templatemo-woox-travel.css" />
     <link rel="stylesheet" href="/assets/css/profile.css" />
   </head>
   <body>
-    <div id="js-preloader" class="js-preloader">
-      <div class="preloader-inner">
-        <span class="dot"></span>
-        <div class="dots"><span></span><span></span><span></span></div>
-      </div>
-    </div>
-
     <header class="header-area header-sticky">
       <div class="container">
         <div class="row">
           <div class="col-12">
             <nav class="main-nav">
-              <a href="/" class="logo">
-                <i class="fa fa-utensils"></i> Celis&Ud
-              </a>
+              <a href="/" class="logo"
+                ><i class="fa fa-utensils"></i> Celis&Ud</a
+              >
               <ul class="nav">
                 <li><a href="/">Inicio</a></li>
                 <li><a href="/restaurants">Restaurantes</a></li>
@@ -40,16 +32,15 @@
                   <span class="d-none d-md-block"
                     >Hola, <strong>{{user.firstName}}</strong></span
                   >
-                  <a href="/profile" class="avatar-link">
-                    <img
+                  <a href="/profile" class="avatar-link"
+                    ><img
                       src="/assets/images/chochote.jpg"
                       class="avatar-img"
                       id="avatarPreview"
-                    />
-                  </a>
-                  <a href="/logout" class="logout-btn" title="Cerrar sesión">
-                    <i class="fa fa-sign-out-alt"></i>
-                  </a>
+                  /></a>
+                  <a href="/logout" class="logout-btn" title="Cerrar sesión"
+                    ><i class="fa fa-sign-out-alt"></i
+                  ></a>
                 </li>
               </ul>
               <a class="menu-trigger"><span>Menu</span></a>
@@ -70,15 +61,14 @@
                   class="avatar-img"
                   id="avatarPreview"
                 />
-                <label class="avatar-edit-btn" title="Cambiar foto">
-                  <i class="fa fa-camera"></i>
-                  <input
+                <label class="avatar-edit-btn" title="Cambiar foto"
+                  ><i class="fa fa-camera"></i
+                  ><input
                     type="file"
                     accept="image/*"
                     hidden
                     onchange="previewAvatar(this)"
-                  />
-                </label>
+                /></label>
               </div>
 
               <div class="profile-field">
@@ -139,14 +129,12 @@
                   </button>
                 </div>
               </div>
-
               <div class="profile-divider"></div>
-
               <div class="account-info">
                 <div class="account-row">
-                  <i class="fa fa-envelope"></i>
-                  <span id="emailVal">{{user.email}}</span>
-                  <button class="edit-icon" onclick="toggleEdit('email')">
+                  <i class="fa fa-envelope"></i
+                  ><span id="emailVal">{{user.email}}</span
+                  ><button class="edit-icon" onclick="toggleEdit('email')">
                     <i class="fa fa-pencil"></i>
                   </button>
                 </div>
@@ -155,29 +143,30 @@
                     type="email"
                     value="{{user.email}}"
                     placeholder="Email"
-                  />
-                  <button class="confirm-btn" onclick="confirmEdit('email')">
+                  /><button class="confirm-btn" onclick="confirmEdit('email')">
                     <i class="fa fa-check"></i>
                   </button>
                 </div>
-
                 <div class="account-row">
-                  <i class="fa fa-lock"></i>
-                  <span>••••••••</span>
-                  <button class="edit-icon" onclick="toggleEdit('password')">
+                  <i class="fa fa-lock"></i><span>••••••••</span
+                  ><button class="edit-icon" onclick="toggleEdit('password')">
                     <i class="fa fa-pencil"></i>
                   </button>
                 </div>
                 <div class="edit-row hidden" id="passwordEdit">
-                  <input type="password" placeholder="Nueva contraseña" />
-                  <button class="confirm-btn" onclick="confirmEdit('password')">
+                  <input
+                    type="password"
+                    placeholder="Nueva contraseña"
+                  /><button
+                    class="confirm-btn"
+                    onclick="confirmEdit('password')"
+                  >
                     <i class="fa fa-check"></i>
                   </button>
                 </div>
-
                 <div class="account-row readonly">
-                  <i class="fa fa-calendar"></i>
-                  <span>Miembro desde enero 2024</span>
+                  <i class="fa fa-calendar"></i
+                  ><span>Miembro desde enero 2024</span>
                 </div>
               </div>
             </div>
@@ -196,9 +185,8 @@
                         .classList.toggle('d-none');
                       return false;
                     "
+                    ><i class="fa fa-plus"></i> Nueva lista</a
                   >
-                    <i class="fa fa-plus"></i> Nueva lista
-                  </a>
                 </div>
               </div>
 
@@ -246,17 +234,18 @@
                     <div class="list-icon" style="background: #3a86ff">
                       <i class="fa fa-map-marker"></i>
                     </div>
-
                     <span class="list-name">{{name}}</span>
                     <span class="list-count" style="font-size: 11px"
                       >{{description}}</span
                     >
-
                     <div class="list-actions">
-                      <button title="Ver/Editar">
-                        <i class="fa fa-edit"></i>
-                      </button>
-
+                      <a
+                        href="/lista/{{id}}"
+                        class="btn btn-sm"
+                        style="color: #333"
+                        title="Ver interior de la lista"
+                        ><i class="fa fa-eye"></i
+                      ></a>
                       <form
                         action="/lists/delete/{{id}}"
                         method="post"
@@ -276,7 +265,7 @@
                     style="border-radius: 20px"
                   >
                     Aún no tienes listas. ¡Crea una para guardar tus
-                    restaurantes sin gluten favoritos!
+                    restaurantes!
                   </div>
                 </div>
                 {{/myLists}}
@@ -300,18 +289,9 @@
                   <span class="review-restaurant">Bío Bistró</span>
                   <div class="stars">★★★★☆</div>
                   <p class="review-text">
-                    "Muy buenas opciones veganas y sin gluten. Ambiente
-                    acogedor."
+                    "Muy buenas opciones veganas y sin gluten."
                   </p>
                   <span class="review-date">5 ene 2026</span>
-                </div>
-                <div class="review-card">
-                  <span class="review-restaurant">Trigo Libre</span>
-                  <div class="stars">★★★☆☆</div>
-                  <p class="review-text">
-                    "Bien de sabor pero el servicio fue algo lento."
-                  </p>
-                  <span class="review-date">28 dic 2025</span>
                 </div>
               </div>
             </div>
@@ -333,7 +313,7 @@
     </footer>
 
     <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/custom.js"></script>
     <script>
       function toggleEdit(field) {
