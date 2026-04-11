@@ -11,53 +11,37 @@
       rel="stylesheet"
     />
     <title>Celis&Ud - Inicio</title>
+
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/fontawesome.css" />
     <link rel="stylesheet" href="/assets/css/templatemo-woox-travel.css" />
     <link rel="stylesheet" href="/assets/css/owl.css" />
     <link rel="stylesheet" href="/assets/css/animate.css" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
-    />
   </head>
 
   <body>
-    <div id="js-preloader" class="js-preloader">
-      <div class="preloader-inner">
-        <span class="dot"></span>
-        <div class="dots"></div>
-      </div>
-    </div>
-
     <header class="header-area header-sticky">
       <div class="container">
         <div class="row">
           <div class="col-12">
             <nav class="main-nav">
-              <a href="/" class="logo">
-                <i class="fa fa-utensils"></i> Celis&Ud
-              </a>
+              <a href="/" class="logo"
+                ><i class="fa fa-utensils"></i> Celis&Ud</a
+              >
               <ul class="nav">
                 <li><a href="/" class="active">Inicio</a></li>
                 <li><a href="/restaurants">Restaurantes</a></li>
 
                 {{#user}}
                 <li class="user-profile-item">
-                  <span class="d-none d-md-block"
-                    >Hola, <strong>{{user.username}}</strong></span
-                  >
-                  <a href="/profile" class="avatar-link">
-                    <img
+                  <span>Hola, <strong>{{user.username}}</strong></span>
+                  <a href="/profile"
+                    ><img
                       src="/assets/images/chochote.jpg"
-                      alt="Foto de perfil"
                       class="avatar-img"
-                      id="avatarPreview"
-                    />
-                  </a>
-                  <a href="/logout" class="logout-btn" title="Cerrar sesión">
-                    <i class="fa fa-sign-out-alt"></i>
-                  </a>
+                      style="width: 30px; border-radius: 50%; margin: 0 10px"
+                  /></a>
+                  <a href="/logout"><i class="fa fa-sign-out-alt"></i></a>
                 </li>
                 {{/user}} {{^user}}
                 <li class="login-item">
@@ -70,14 +54,13 @@
                 </li>
                 {{/user}}
               </ul>
-              <a class="menu-trigger">
-                <span>Menu</span>
-              </a>
+              <a class="menu-trigger"><span>Menu</span></a>
             </nav>
           </div>
         </div>
       </div>
     </header>
+
     <section id="section-1">
       <div class="content-slider">
         <input
@@ -102,7 +85,6 @@
                               name="q"
                               class="searchText"
                               placeholder="¿En qué municipio buscas?"
-                              autocomplete="on"
                               required
                             />
                           </div>
@@ -127,14 +109,9 @@
           <div class="col-lg-12">
             <div class="section-heading">
               <h2>Recomendaciones para ti</h2>
-              <p>
-                Basado en tus preferencias, estos son los mejores restaurantes
-                100% Sin Gluten en Madrid para hoy.
-              </p>
             </div>
           </div>
         </div>
-
         <div class="row">
           <div class="col-lg-12">
             <div class="items">
@@ -151,20 +128,22 @@
                             class="favorite-badge"
                             data-toggle="modal"
                             data-target="#listasModal-{{id}}"
-                            title="Guardar en lista"
                             style="
-                              cursor: pointer;
                               position: absolute;
                               right: 20px;
                               top: 20px;
                               z-index: 10;
                             "
                           >
-                            {{#isSavedInAnyList}}
-                            <i class="fa fa-heart" style="color: #dc3545"></i>
-                            {{/isSavedInAnyList}} {{^isSavedInAnyList}}
-                            <i class="fa fa-plus" style="color: #333"></i>
-                            {{/isSavedInAnyList}}
+                            {{#isSavedInAnyList}}<i
+                              class="fa fa-heart"
+                              style="color: #dc3545"
+                            ></i
+                            >{{/isSavedInAnyList}} {{^isSavedInAnyList}}<i
+                              class="fa fa-plus"
+                              style="color: #333"
+                            ></i
+                            >{{/isSavedInAnyList}}
                           </a>
 
                           <div
@@ -229,13 +208,6 @@
                                     </form>
                                     {{/userListsWithStatus}}
                                   </div>
-                                  {{^userListsWithStatus}}
-                                  <p class="text-center text-muted">
-                                    Aún no tienes listas.
-                                    <a href="/profile">Ve a tu perfil</a> para
-                                    crear una.
-                                  </p>
-                                  {{/userListsWithStatus}}
                                 </div>
                               </div>
                             </div>
@@ -244,7 +216,6 @@
                           <a
                             href="/login"
                             class="favorite-badge"
-                            title="Inicia sesión para guardar"
                             style="
                               position: absolute;
                               right: 20px;
@@ -252,42 +223,39 @@
                               z-index: 10;
                             "
                           >
-                            <i class="fa fa-heart-o" style="color: #333"></i>
+                            <i
+                              class="fa fa-heart"
+                              style="color: rgba(0, 0, 0, 0.2)"
+                            ></i>
                           </a>
                           {{/user}}
 
                           <img
-                            src="/assets/images/{{imagePath}}"
+                            src="/assets/images/Pizza-Natura-sin-gluten.jpg"
                             alt="{{name}}"
                           />
                         </div>
                       </div>
-
                       <div class="col-lg-8 col-sm-7">
                         <div class="right-content">
                           <h4>{{name}}</h4>
-                          <span>{{category}}</span>
+                          <span>{{specialty}}</span>
                           <div class="main-button">
                             <a href="/restaurant/{{id}}">Ver detalles</a>
                           </div>
                           <p>{{description}}</p>
                           <ul class="info">
                             <li>
-                              <i class="fa fa-map-marker"></i> {{location}}
+                              <i class="fa fa-map-marker"></i> {{municipality}}
                             </li>
                             <li>
-                              <i class="fa fa-star"></i> {{averagePrice}}€ /
-                              pers
+                              <i class="fa fa-money-bill"></i> {{averagePrice}}€
                             </li>
                           </ul>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                {{/restaurants}} {{^restaurants}}
-                <div class="col-12 text-center p-5">
-                  <h4>Aún no hay restaurantes registrados en el sistema.</h4>
                 </div>
                 {{/restaurants}}
               </div>
@@ -297,23 +265,8 @@
       </div>
     </div>
 
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="copyright-text">
-              <p>Copyright © 2026 Celis&Ud. Todos los derechos reservados.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-
     <script src="/vendor/jquery/jquery.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/assets/js/isotope.min.js"></script>
-    <script src="/assets/js/owl-carousel.js"></script>
-    <script src="/assets/js/wow.js"></script>
     <script src="/assets/js/custom.js"></script>
   </body>
 </html>

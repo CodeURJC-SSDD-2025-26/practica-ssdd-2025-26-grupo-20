@@ -6,11 +6,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
+import jakarta.servlet.http.HttpServletRequest;
 
 import es.urjc.model.Lists;
 import es.urjc.model.User;
+import es.urjc.model.Restaurant;
 import es.urjc.services.ListsService;
 import es.urjc.services.UserService;
+import es.urjc.repositories.RestaurantRepository;
 
 import java.security.Principal;
 import java.util.List;
@@ -19,67 +22,98 @@ import java.util.List;
 public class ListsController {
 
     private final ListsService listsService;
-    private final UserService userService; // Lo necesitamos para saber quién está logueado
+    private final UserService userService;
+    private final RestaurantRepository restaurantRepository;
 
-    public ListsController(ListsService listsService, UserService userService) {
+    public ListsController(ListsService listsService, UserService userService, RestaurantRepository restaurantRepository) {
         this.listsService = listsService;
         this.userService = userService;
+        this.restaurantRepository = restaurantRepository;
     }
 
+    // ==========================================
     // 1. MOSTRAR LAS LISTAS EN EL PERFIL
-    // Cuando el usuario entra a /profile, interceptamos la ruta para inyectar sus listas
+    // ==========================================
     @GetMapping("/profile")
     public String showProfileAndLists(Model model, Principal principal) {
-        // ¿Hay alguien logueado?
-        if (principal != null) {
-            String username = principal.getName();
-            User user = userService.findByUsername(username).orElse(null);
+        // HACK TEMPORAL: Forzamos a Chicote para poder probar sin login real
+        User user = userService.findByUsername("chicote_gluten").orElse(null);
 
-            if (user != null) {
-                // Pasamos los datos del usuario a la vista
-                model.addAttribute("user", user);
-
-                // Buscamos sus listas y se las pasamos a la vista
-                List<Lists> userLists = listsService.getListsByUser(user);
-                model.addAttribute("myLists", userLists);
-            }
+        if (user != null) {
+            model.addAttribute("user", user);
+            List<Lists> userLists = listsService.getListsByUser(user);
+            model.addAttribute("myLists", userLists);
         }
-        return "profile"; // Esto busca tu archivo profile.mustache
+        
+        return "profile"; 
     }
 
+    // ==========================================
     // 2. CREAR UNA LISTA NUEVA
+    // ==========================================
     @PostMapping("/lists/create")
     public String createNewList(@RequestParam String name, @RequestParam String description, Principal principal) {
-        
-        // Validación básica: que el nombre no esté vacío
         if (name == null || name.trim().isEmpty()) {
             return "redirect:/profile?error=NombreVacio"; 
         }
 
-        if (principal != null) {
-            User user = userService.findByUsername(principal.getName()).orElse(null);
-            
-            if (user != null) {
-                // Creamos la lista y la guardamos
-                Lists newList = new Lists(name, description, user);
-                listsService.saveList(newList);
-            }
+        // HACK TEMPORAL: Forzamos a Chicote
+        User user = userService.findByUsername("chicote_gluten").orElse(null);
+        
+        if (user != null) {
+            Lists newList = new Lists(name, description, user);
+            listsService.saveList(newList);
         }
-        // Redirigimos al perfil para que vea su nueva lista creada
+        
         return "redirect:/profile";
     }
 
+    // ==========================================
     // 3. BORRAR UNA LISTA
+    // ==========================================
     @PostMapping("/lists/delete/{id}")
     public String deleteList(@PathVariable Long id, Principal principal) {
-        if (principal != null) {
+        // HACK TEMPORAL: Forzamos a Chicote
+        User user = userService.findByUsername("chicote_gluten").orElse(null);
+        
+        if (user != null) {
             Lists listToDelete = listsService.getListById(id).orElse(null);
             
-            // SEGURIDAD: Comprobamos que la lista existe Y que el dueño es el usuario que intenta borrarla (Punto 12 de la rúbrica)
-            if (listToDelete != null && listToDelete.getOwner().getUsername().equals(principal.getName())) {
+            // Comprobamos que la lista existe y pertenece al usuario
+            if (listToDelete != null && listToDelete.getOwner().getId().equals(user.getId())) {
                 listsService.deleteList(id);
             }
         }
         return "redirect:/profile";
+    }
+
+    // ==========================================
+    // 4. METER O SACAR UN RESTAURANTE (Estilo Spotify)
+    // ==========================================
+    @PostMapping("/lists/{listId}/toggleRestaurant/{restaurantId}")
+    public String toggleRestaurantInList(@PathVariable Long listId, @PathVariable Long restaurantId, Principal principal, HttpServletRequest request) {
+        // HACK TEMPORAL: Forzamos a Chicote
+        User user = userService.findByUsername("chicote_gluten").orElse(null);
+
+        if (user != null) {
+            Lists list = listsService.getListById(listId).orElse(null);
+            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElse(null); 
+            
+            if (list != null && restaurant != null && list.getOwner().getId().equals(user.getId())) {
+                // Si el restaurante ya está en la lista, lo quitamos. Si no está, lo añadimos.
+                if (list.getRestaurants().contains(restaurant)) {
+                    listsService.removeRestaurantFromList(list, restaurant);
+                } else {
+                    listsService.addRestaurantToList(list, restaurant);
+                }
+            }
+        }
+        
+        // Te devuelve a la página exacta en la que hiciste clic (portada, catálogo o detalles)
+        String referer = request.getHeader("Referer");
+        if (referer != null) {
+            return "redirect:" + referer;
+        }
+        return "redirect:/restaurants";
     }
 }
