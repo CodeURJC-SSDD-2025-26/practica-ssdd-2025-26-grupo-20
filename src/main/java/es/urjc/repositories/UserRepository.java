@@ -1,11 +1,17 @@
 package es.urjc.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import es.urjc.model.User;
-import java.util.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
+public interface UserRepository extends JpaRepository<User, Long> {
 
-public interface UserRepository extends JpaRepository<User, Long>{
+    // Spring genera: SELECT * FROM user_table WHERE username = ?
     Optional<User> findByUsername(String username);
+
+    // Para comprobar si un email ya está registrado
+    boolean existsByEmail(String email);
+
+    // Para comprobar si un username ya está cogido
+    boolean existsByUsername(String username);
 }
