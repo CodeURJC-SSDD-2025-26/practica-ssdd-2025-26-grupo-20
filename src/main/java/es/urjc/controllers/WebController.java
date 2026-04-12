@@ -17,7 +17,7 @@ import es.urjc.model.Lists;
 
 @Controller
 public class WebController {
-
+    
     private final RestaurantRepository restaurantRepository;
     private final UserService userService;
     private final ListsService listsService;

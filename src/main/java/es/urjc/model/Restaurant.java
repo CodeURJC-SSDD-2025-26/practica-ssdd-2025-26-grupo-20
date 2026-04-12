@@ -38,7 +38,7 @@ public class Restaurant {
     @ManyToMany(mappedBy = "restaurants")
     private List<Lists> includedInLists = new ArrayList<>();
 
-    protected Restaurant() {}
+    public Restaurant() {}
 
     public Restaurant(String name, String municipality, String specialty, double averagePrice, String address, String phone, String description) {
         this.name = name;

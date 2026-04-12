@@ -38,7 +38,7 @@ public class User {
     @OneToMany(mappedBy = "owner")
     private List<Lists> favoriteLists = new ArrayList<>();
 
-    protected User() {}
+    public User() {}
 
     public User(String firstName, String lastName, String email, String username, String encodedPassword, String bio, String... roles) {
         this.firstName = firstName;
