@@ -24,7 +24,7 @@ public class Lists {
     @ManyToMany
     private List<Restaurant> restaurants = new ArrayList<>();
 
-    protected Lists() {}
+    public Lists() {}
 
     public Lists(String name, String description, User owner) {
         this.name = name;

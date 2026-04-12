@@ -24,7 +24,7 @@ public class Review {
     @ManyToOne
     private Restaurant restaurant; 
 
-    protected Review() {}
+    public Review() {}
 
     public Review(String comment, int rating, User author, Restaurant restaurant) {
         this.comment = comment;

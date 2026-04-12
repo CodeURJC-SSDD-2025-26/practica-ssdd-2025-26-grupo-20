@@ -1,5 +1,90 @@
 package es.urjc.services;
 
-public class DatabaseInitializer {
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Service;
 
+import es.urjc.model.Lists;
+import es.urjc.model.Restaurant;
+import es.urjc.model.User;
+import es.urjc.repositories.ListsRepository;
+import es.urjc.repositories.RestaurantRepository;
+import es.urjc.repositories.UserRepository;
+
+@Service
+public class DatabaseInitializer implements CommandLineRunner {
+
+    private final RestaurantRepository restaurantRepository;
+    private final UserRepository userRepository;
+    private final ListsRepository listsRepository; // ¡Añadimos tu repositorio!
+
+    public DatabaseInitializer(RestaurantRepository restaurantRepository, UserRepository userRepository, ListsRepository listsRepository) {
+        this.restaurantRepository = restaurantRepository;
+        this.userRepository = userRepository;
+        this.listsRepository = listsRepository;
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        // Solo ejecutamos esto si la base de datos está vacía para no duplicar datos
+        if (restaurantRepository.count() == 0) {
+            
+            // 1. Creamos los Restaurantes
+            Restaurant pizzaNatura = new Restaurant(
+                "Pizza Natura", 
+                "Madrid", 
+                "Italiana", 
+                20.0, 
+                "Calle de Jovellanos, 6, Madrid", 
+                "+34 910 55 55 55", 
+                "El templo de la pizza saludable. Masas elaboradas artesanalmente con mijo y quinoa."
+            );
+            
+            Restaurant okashiSanda = new Restaurant(
+                "Okashi Sanda", 
+                "Madrid", 
+                "Japonés", 
+                25.0, 
+                "Calle de San Vicente Ferrer, 22, Madrid", 
+                "+34 911 22 33 44", 
+                "El primer japonés certificado sin gluten de Madrid."
+            );
+            
+            restaurantRepository.save(pizzaNatura);
+            restaurantRepository.save(okashiSanda);
+
+            // 2. Creamos los Usuarios
+            User admin = new User(
+                "Cristian", "Admin", "admin@celisud.com", "admin", "{noop}admin123", 
+                "Administrador del sistema", "ADMIN", "USER"
+            );
+            
+            User chicote = new User(
+                "Alberto", "Chicote", "alberto@gmail.com", "chicote_gluten", "{noop}1234", 
+                "Celíaco desde 2018. Buscando los mejores rincones sin gluten.", "USER"
+            );
+            
+            userRepository.save(admin);
+            userRepository.save(chicote);
+
+            // ==========================================
+            // 3. ¡LO NUEVO! TUS LISTAS DE PRUEBA
+            // ==========================================
+            
+            // Creamos una lista para Chicote
+            Lists listaFavoritos = new Lists("Favoritos", "Mis restaurantes top de Madrid", chicote);
+            // Le metemos un restaurante a la lista (Relación N:M en acción)
+            listaFavoritos.getRestaurants().add(pizzaNatura); 
+            
+            // Creamos otra lista diferente
+            Lists listaPorVisitar = new Lists("Por visitar", "Sitios a los que quiero ir este finde", chicote);
+            // Le metemos otro restaurante
+            listaPorVisitar.getRestaurants().add(okashiSanda);
+
+            // Guardamos las listas en la base de datos
+            listsRepository.save(listaFavoritos);
+            listsRepository.save(listaPorVisitar);
+
+            System.out.println("✅ ¡Base de datos inicializada con restaurantes, usuarios y LISTAS!");
+        }
+    }
 }

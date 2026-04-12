@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Detalles de la lista - Celis&Ud</title>
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="/assets/css/templatemo-woox-travel.css" />
+    <link rel="stylesheet" href="/assets/css/owl.css" />
+  </head>
+
+  <body>
+    <header class="header-area header-sticky">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <a href="/" class="logo"
+                ><i class="fa fa-utensils"></i> Celis&Ud</a
+              >
+              <ul class="nav">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/restaurants">Restaurantes</a></li>
+                <li class="user-profile-item">
+                  <span class="d-none d-md-block"
+                    >Hola, <strong>{{user.username}}</strong></span
+                  >
+                  <a href="/profile" class="avatar-link"
+                    ><img
+                      src="/assets/images/chochote.jpg"
+                      class="avatar-img"
+                      style="width: 30px; border-radius: 50%; margin: 0 10px"
+                  /></a>
+                  <a href="/logout" class="logout-btn" title="Cerrar sesión"
+                    ><i class="fa fa-sign-out-alt"></i
+                  ></a>
+                </li>
+              </ul>
+              <a class="menu-trigger"><span>Menu</span></a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="visit-country" style="margin-top: 100px">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-heading">
+              <h2>Lista: {{list.name}}</h2>
+              <p>{{list.description}}</p>
+              <div class="main-button mt-3">
+                <a href="/profile"
+                  ><i class="fa fa-arrow-left"></i> Volver al perfil</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="items">
+              <div class="row">
+                {{#isEmpty}}
+                <div class="col-12 text-center mt-5">
+                  <div class="alert alert-warning" style="border-radius: 20px">
+                    <h3><i class="fa fa-frown-o"></i> Esta lista está vacía</h3>
+                    <p class="mt-2">
+                      Vete a la sección de
+                      <a href="/restaurants">Restaurantes</a> y empieza a añadir
+                      tus favoritos pinchando en el corazón.
+                    </p>
+                  </div>
+                </div>
+                {{/isEmpty}} {{#listRestaurants}}
+                <div class="col-lg-12">
+                  <div class="item">
+                    <div class="row">
+                      <div class="col-lg-4 col-sm-5">
+                        <div class="image">
+                          <img
+                            src="/assets/images/Pizza-Natura-sin-gluten.jpg"
+                            alt="{{name}}"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-sm-7">
+                        <div class="right-content">
+                          <h4>{{name}}</h4>
+                          <span>{{specialty}}</span>
+                          <div class="main-button">
+                            <a href="/restaurant/{{id}}">Ver detalles</a>
+                          </div>
+                          <p>{{description}}</p>
+                          <ul class="info">
+                            <li>
+                              <i class="fa fa-map-marker"></i> {{municipality}}
+                            </li>
+                            <li>
+                              <i class="fa fa-money-bill"></i> {{averagePrice}}€
+                              / pers
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {{/listRestaurants}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="copyright-text">
+              <p>Copyright © 2026 Celis&Ud. Todos los derechos reservados.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
