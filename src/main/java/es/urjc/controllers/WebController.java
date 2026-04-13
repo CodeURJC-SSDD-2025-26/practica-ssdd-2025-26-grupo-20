@@ -11,6 +11,7 @@ import java.util.*;
 import es.urjc.repositories.RestaurantRepository;
 import es.urjc.services.UserService;
 import es.urjc.services.ListsService;
+import es.urjc.services.RestaurantService;
 import es.urjc.model.User;
 import es.urjc.model.Restaurant;
 import es.urjc.model.Lists;
@@ -21,11 +22,13 @@ public class WebController {
     private final RestaurantRepository restaurantRepository;
     private final UserService userService;
     private final ListsService listsService;
+    private final RestaurantService restaurantService;
 
-    public WebController(RestaurantRepository restaurantRepository, UserService userService, ListsService listsService) {
+    public WebController(RestaurantRepository restaurantRepository, UserService userService, ListsService listsService, RestaurantService restaurantService) {
         this.restaurantRepository = restaurantRepository;
         this.userService = userService;
         this.listsService = listsService;
+        this.restaurantService = restaurantService;
     }
 
     @GetMapping("/")
@@ -40,14 +43,19 @@ public class WebController {
     }
 
     @GetMapping("/restaurants")
-    public String showRestaurants(@RequestParam(required = false) String q, Model model, Principal principal) {
-        User user = userService.findByUsername("chicote_gluten").orElse(null);
-        if (user != null) {
-            model.addAttribute("user", user);
-            model.addAttribute("isAuthenticated", true);
-        }
-        model.addAttribute("restaurants", getRestaurantsWithListStatus(user, q));
-        model.addAttribute("searchQuery", q); 
+    public String showRestaurants(
+            @RequestParam(required = false) String query,
+            @RequestParam(required = false) String municipality,
+            @RequestParam(required = false) String specialty,
+            Model model) {
+
+        List<Restaurant> restaurants = restaurantService.search(query, municipality, specialty);
+
+        model.addAttribute("restaurants", restaurants);
+        model.addAttribute("query", query);
+        model.addAttribute("municipality", municipality);
+        model.addAttribute("specialty", specialty);
+
         return "restaurants";
     }
 
