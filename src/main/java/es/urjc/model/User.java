@@ -1,5 +1,11 @@
 package es.urjc.model;
 
+import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,9 +14,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
-
-import java.sql.Blob;
-import java.util.*;
 
 @Entity(name="USER_TABLE") 
 public class User {
@@ -31,11 +34,15 @@ public class User {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles; 
-    // mappedBy = "author" significa: "Busca la relación en la variable 'author' de la clase Review"
-    @OneToMany(mappedBy = "author")
+
+    // RELACIÓN CON RESEÑAS: 
+    // fetch EAGER para que el modal las cargue al instante.
+    // Cascade ALL para que si borras al usuario, se borren sus reseñas.
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
-    @OneToMany(mappedBy = "owner")
+    // RELACIÓN CON LISTAS FAVORITAS
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Lists> favoriteLists = new ArrayList<>();
 
     protected User() {}
@@ -47,9 +54,10 @@ public class User {
         this.username = username;
         this.encodedPassword = encodedPassword;
         this.bio = bio;
-        this.roles = List.of(roles);
+        this.roles = new ArrayList<>(Arrays.asList(roles));
     }
 
+    // --- GETTERS Y SETTERS ---
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getFirstName() { return firstName; }

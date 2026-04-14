@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <title>Celis&amp;Ud</title>
+    <link href="/templatemo_580_woox_travel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/templatemo-woox-travel.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/owl.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/animate.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  </head>
+
+  <body>
+    <!-- Preloader -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots"></div>
+      </div>
+    </div>
+
+<!-- Header -->
+<header class="header-area header-sticky">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <a href="/" class="logo">
+            <i class="fa fa-utensils"></i> Celis&Ud
+          </a>
+          <ul class="nav">
+            <li><a href="/" class="active">Inicio</a></li>
+            <li><a href="/restaurants">Restaurantes</a></li>
+
+            {{#username}}
+            <li class="user-profile-item">
+              <span class="d-none d-md-block">Hola, <strong>{{firstName}}</strong></span>
+              <a href="/profile" class="avatar-link">
+                {{#hasAvatar}}
+                <img src="/user/{{user.id}}/avatar" alt="Foto de perfil" class="avatar-img" />
+                {{/hasAvatar}}
+                {{^hasAvatar}}
+                <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Foto de perfil" class="avatar-img" />
+                {{/hasAvatar}}
+              </a>
+              <form action="/logout" method="post" style="display:inline;">
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                <button type="submit" class="logout-btn" title="Cerrar sesión" style="background:none;border:none;cursor:pointer;color: white;">
+                  <i class="fa fa-sign-out-alt"></i>
+                </button>
+              </form>
+            </li>
+            {{/username}}
+
+            {{^username}}
+            <li class="login-item"><a href="/login">Iniciar Sesión</a></li>
+            {{/username}}
+          </ul>
+          <a class="menu-trigger"><span>Menu</span></a>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+
+    <!-- Banner principal -->
+    <section id="section-1">
+      <div class="content-slider">
+        <input type="radio" id="banner1" class="sec-1-input" name="banner" checked />
+        <div class="slider">
+          <div id="top-banner-1" class="banner">
+            <div class="banner-inner-wrapper header-text">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="more-info">
+                      <form id="search-form" action="/restaurants" method="get">
+                        <div class="row align-items-center">
+                          <div class="col-lg-10 col-sm-9 col-8">
+                            <input
+                              type="text"
+                              name="q"
+                              class="searchText"
+                              placeholder="¿En qué municipio buscas?"
+                              autocomplete="on"
+                            />
+                          </div>
+                          <div class="col-lg-2 col-sm-3 col-4">
+                            <button class="main-button" type="submit">Buscar</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recomendaciones -->
+    <div class="visit-country">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-heading">
+              {{#username}}
+              <h2>Bienvenido/a, {{firstName}} 👋</h2>
+              <p>Estos son algunos de los mejores restaurantes 100% Sin Gluten para ti.</p>
+              {{/username}}
+              {{^username}}
+              <h2>Recomendaciones para ti</h2>
+              <p>Basado en tus preferencias, estos son los mejores restaurantes 100% Sin Gluten en Madrid para hoy.</p>
+              {{/username}}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="items">
+              <div class="row">
+
+                <div class="col-lg-12">
+                  <div class="item">
+                    <div class="row">
+                      <div class="col-lg-4 col-sm-5">
+                        <div class="image">
+                          <img src="/templatemo_580_woox_travel/assets/images/Pizza-Natura-sin-gluten.jpg" alt="Pizza-Natura" />
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-sm-7">
+                        <div class="right-content">
+                          <h4>Pizza Natura</h4>
+                          <span>Pizzas con harinas alternativas</span>
+                          <div class="main-button">
+                            <a href="/restaurants">Ver detalles</a>
+                          </div>
+                          <p>Pizzas con masa de mijo y quinoa. 100% Sin Gluten y opciones veganas deliciosas en el corazón de Madrid.</p>
+                          <ul class="info">
+                            <li><i class="fa fa-map-marker"></i> Madrid - Centro</li>
+                            <li><i class="fa fa-star"></i> 4.9 Valoración</li>
+                            <li><i class="fa fa-money-bill"></i> 15-25€</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="item">
+                    <div class="row">
+                      <div class="col-lg-4 col-sm-5">
+                        <div class="image">
+                          <img src="/templatemo_580_woox_travel/assets/images/As-De-Bastos-Sin-Gluten.jpg" alt="As-De-Bastos" />
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-sm-7">
+                        <div class="right-content">
+                          <h4>AS DE BASTOS</h4>
+                          <span>El pionero</span>
+                          <div class="main-button">
+                            <a href="/restaurants">Ver Detalles</a>
+                          </div>
+                          <p>El templo del celíaco. Fue el primer restaurante con una carta 100% sin gluten en Madrid.</p>
+                          <ul class="info">
+                            <li><i class="fa fa-map-marker"></i> Majadahonda</li>
+                            <li><i class="fa fa-star"></i> 4.8 Valoración</li>
+                            <li><i class="fa fa-money-bill"></i> 25-35€</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-lg-12">
+                  <div class="item last-item">
+                    <div class="row">
+                      <div class="col-lg-4 col-sm-5">
+                        <div class="image">
+                          <img src="/templatemo_580_woox_travel/assets/images/Okashi-Sanda.jpg" alt="Okashi-Sanda" />
+                        </div>
+                      </div>
+                      <div class="col-lg-8 col-sm-7">
+                        <div class="right-content">
+                          <h4>OKASHI SANDA</h4>
+                          <span>Japonés 100% Gluten Free</span>
+                          <div class="main-button">
+                            <a href="/restaurants">Ver Detalles</a>
+                          </div>
+                          <p>El primer japonés certificado sin gluten de Madrid. Takoyakis, Katsu Curry y postres increíbles sin lácteos.</p>
+                          <ul class="info">
+                            <li><i class="fa fa-map-marker"></i> Madrid - Lavapiés</li>
+                            <li><i class="fa fa-star"></i> 4.7 Valoración</li>
+                            <li><i class="fa fa-money-bill"></i> 20-30€</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="copyright-text">
+              <p>Copyright &copy; 2026 Celis&amp;Ud. Todos los derechos reservados.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/templatemo_580_woox_travel/vendor/jquery/jquery.min.js"></script>
+    <script src="/templatemo_580_woox_travel/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/templatemo_580_woox_travel/assets/js/isotope.min.js"></script>
+    <script src="/templatemo_580_woox_travel/assets/js/owl-carousel.js"></script>
+    <script src="/templatemo_580_woox_travel/assets/js/tabs.js"></script>
+    <script src="/templatemo_580_woox_travel/assets/js/popup.js"></script>
+    <script src="/templatemo_580_woox_travel/assets/js/custom.js"></script>
+
+    <script>
+      function bannerSwitcher() {
+        var next = $(".sec-1-input").filter(":checked").next(".sec-1-input");
+        if (next.length) next.prop("checked", true);
+        else $(".sec-1-input").first().prop("checked", true);
+      }
+      var bannerTimer = setInterval(bannerSwitcher, 5000);
+      $("nav .controls label").click(function () {
+        clearInterval(bannerTimer);
+        bannerTimer = setInterval(bannerSwitcher, 5000);
+      });
+    </script>
+  </body>
+</html>

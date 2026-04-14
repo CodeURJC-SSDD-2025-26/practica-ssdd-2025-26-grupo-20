@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <title>Gestión de Usuarios | Celis&Ud</title>
+    <link href="/templatemo_580_woox_travel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/templatemo-woox-travel.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/owl.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/animate.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/admin-style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+
+    <!-- Header -->
+    <header class="admin-header header-sticky">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-3">
+      <i class="fa fa-utensils fs-3"></i>
+      <a href="/admin">
+        <h1 class="m-0 fs-4 fw-bold text-white">Celis&Ud <span class="fw-light">| Admin</span></h1>
+      </a>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <span class="d-none d-md-inline">Hola, <strong>{{adminName}}</strong></span>
+      <a href="/profile" class="avatar-link">
+        <!-- EXACTO como profile.html que SÍ funciona -->
+        {{#hasAdminAvatar}}
+          <img src="/user/{{adminId}}/avatar" alt="Admin" class="user-profile" style="width:45px;height:45px;border-radius:50%;">
+        {{/hasAdminAvatar}}
+        {{^hasAdminAvatar}}
+          <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Admin" class="user-profile" style="width:45px;height:45px;border-radius:50%;">
+        {{/hasAdminAvatar}}
+      </a>
+      <form action="/logout" method="post" style="display:inline;">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <button class="btn btn-outline-light btn-sm" title="Cerrar sesión">
+          <i class="fa fa-sign-out-alt"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<section class="admin-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="format-table">
+                    <table class="table table-hover align-middle">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Avatar</th>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#users}}
+                            <tr class="text-center">
+                                <td>
+                                    {{#avatarImage}}
+                                    <img src="/user/{{id}}/avatar" class="rounded-circle image-table" alt="Avatar">
+                                    {{/avatarImage}}
+                                    {{^avatarImage}}
+                                    <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" class="rounded-circle image-table" alt="Avatar">
+                                    {{/avatarImage}}
+                                </td>
+                                <td><strong>{{firstName}} {{lastName}}</strong></td>
+                                <td>{{email}}</td>
+                                <td>{{#roles}}{{.}} {{/roles}}</td>
+                                <td class="text-center">
+                                    <button class="main-button-small" data-bs-toggle="modal" data-bs-target="#modalUsuario{{id}}">
+                                        Ver Detalles
+                                    </button>
+
+                                    <form action="/admin/users/{{id}}/delete" method="post" style="display:inline;">
+                                        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro de eliminar este usuario?')">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </form>
+
+                                    <div class="modal fade" id="modalUsuario{{id}}" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Gestión de Perfil: {{firstName}} {{lastName}}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <div class="col-md-4 d-flex flex-column align-items-center border-end">
+                                                            {{#avatarImage}}
+                                                            <img src="/user/{{id}}/avatar" class="img-fluid rounded shadow mb-3" style="max-height: 150px;">
+                                                            {{/avatarImage}}
+                                                            {{^avatarImage}}
+                                                            <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" class="img-fluid rounded shadow mb-3" style="max-height: 150px;">
+                                                            {{/avatarImage}}
+                                                            
+                                                            <p class="mb-1"><strong>Username:</strong> @{{username}}</p>
+                                                            <p class="small text-muted text-center px-2">{{bio}}</p>
+                                                        </div>
+
+                                                        <div class="col-md-8 text-start">
+                                                            <h5 class="mb-3">Reseñas de la comunidad</h5>
+                                                            <hr>
+                                                            <div style="max-height: 300px; overflow-y: auto;">
+                                                                {{#reviews}}
+                                                                <div class="mb-3 p-3 bg-light rounded border card-review">
+                                                                    <p class="mb-1"><strong>{{restaurant.name}}:</strong> "{{content}}"</p>
+                                                                    <div class="d-flex justify-content-between align-items-center">
+                                                                        <small class="text-warning">
+                                                                            Puntuación: {{rating}} / 5 ⭐
+                                                                        </small>
+                                                                        <form action="/admin/reviews/{{id}}/delete" method="post">
+                                                                            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                                                                            <button type="submit" class="btn btn-link text-danger btn-sm p-0">Eliminar reseña</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                {{/reviews}}
+                                                                {{^reviews}}
+                                                                <p class="text-muted italic">Este usuario no ha publicado reseñas todavía.</p>
+                                                                {{/reviews}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> </td>
+                            </tr>
+                            {{/users}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="copyright-text">
+              <p>Copyright © 2026 Celis&Ud. Todos los derechos reservados.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/templatemo_580_woox_travel/vendor/jquery/jquery.min.js"></script>
+    <script src="/templatemo_580_woox_travel/vendor/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

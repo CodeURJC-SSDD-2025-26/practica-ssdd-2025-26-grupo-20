@@ -73,6 +73,39 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User updateUserFull(User user, String firstName, String lastName, String bio, String email, String username, String password, MultipartFile avatarFile) throws Exception {
+    
+    // Validaciones
+    if (email != null && !email.isEmpty() && !email.equals(user.getEmail())) {
+        if (existsByEmail(email)) {
+            throw new Exception("Email ya registrado por otro usuario");
+        }
+        user.setEmail(email);
+    }
+    
+    if (username != null && !username.isEmpty() && !username.equals(user.getUsername())) {
+        if (existsByUsername(username)) {
+            throw new Exception("Username ya registrado por otro usuario");
+        }
+        user.setUsername(username);
+    }
+    
+    user.setFirstName(firstName);
+    user.setLastName(lastName);
+    user.setBio(bio);
+    
+    if (password != null && !password.isEmpty()) {
+        user.setEncodedPassword(passwordEncoder.encode(password));
+    }
+    
+    // Avatar
+    if (avatarFile != null && !avatarFile.isEmpty()) {
+        user.setAvatarImage(new SerialBlob(avatarFile.getBytes()));
+    }
+
+    return userRepository.save(user);
+}
+
     // --- DELETE ---
 
     public void deleteUser(Long id) {

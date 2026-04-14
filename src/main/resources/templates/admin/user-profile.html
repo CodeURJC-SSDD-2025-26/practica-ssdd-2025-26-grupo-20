@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <title>Perfil de Usuario | Celis&Ud Admin</title>
+    <link href="/templatemo_580_woox_travel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/templatemo-woox-travel.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/admin-style.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/profile.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+
+    <!-- Preloader -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+
+    <!-- Header admin -->
+    <header class="admin-header header-sticky">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <i class="fa fa-utensils fs-3"></i>
+          <a href="/admin">
+            <h1 class="m-0 fs-4 fw-bold text-white">Celis&Ud <span class="fw-light">| Admin</span></h1>
+          </a>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <span class="d-none d-md-inline">Administra, <strong>{{adminName}}</strong></span>
+          {{#hasAdminAvatar}}
+          <img src="/user/{{adminId}}/avatar" alt="Admin"
+               class="user-profile" style="width:45px;height:45px;border-radius:50%;">
+          {{/hasAdminAvatar}}
+          {{^hasAdminAvatar}}
+          <img src="/templatemo_580_woox_travel/assets/images/admin-logo.jpg" alt="Admin"
+               class="user-profile" style="width:45px;height:45px;border-radius:50%;">
+          {{/hasAdminAvatar}}
+          <form action="/logout" method="post" style="display:inline;">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+            <button class="btn btn-outline-light btn-sm" title="Cerrar sesión">
+              <i class="fa fa-sign-out-alt"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <section class="profile-section">
+      <div class="container">
+
+        <!-- Back button -->
+        <div class="mb-4">
+          <a href="/admin/users" class="btn btn-outline-secondary">
+            <i class="fa fa-arrow-left"></i> Volver a la lista
+          </a>
+        </div>
+
+        <div class="row">
+          <!-- COLUMNA IZQUIERDA -->
+          <div class="col-lg-3 col-md-4">
+            <div class="profile-card">
+
+              <!-- Avatar -->
+              <div class="avatar-wrapper">
+                {{#hasAvatar}}
+                <img src="/user/{{user.id}}/avatar" alt="Foto de perfil" class="img-fluid rounded shadow mb-3" />
+                {{/hasAvatar}}
+                {{^hasAvatar}}
+                <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Foto de perfil" class="img-fluid rounded shadow mb-3" />
+                {{/hasAvatar}}
+              </div>
+
+              <!-- Nombre -->
+              <div class="profile-field">
+                <span class="field-value">{{user.firstName}} {{user.lastName}}</span>
+              </div>
+
+              <!-- Username -->
+              <div class="profile-field">
+                <span class="field-value username-text">@{{user.username}}</span>
+              </div>
+
+              <!-- Bio -->
+              <div class="profile-field bio-field">
+                <span class="field-value bio-text">{{user.bio}}</span>
+              </div>
+
+              <div class="profile-divider"></div>
+
+              <!-- Datos de cuenta -->
+              <div class="account-info">
+                <div class="account-row">
+                  <i class="fa fa-envelope"></i>
+                  <span>{{user.email}}</span>
+                </div>
+                <div class="account-row">
+                  <i class="fa fa-shield-alt"></i>
+                  <span>{{#user.roles}}{{.}} {{/user.roles}}</span>
+                </div>
+              </div>
+
+              <div class="profile-divider"></div>
+
+              <!-- Botón eliminar usuario -->
+              <form action="/admin/users/{{user.id}}/delete" method="post"
+                    onsubmit="return confirm('¿Seguro que quieres eliminar este usuario?')">
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                <button type="submit" class="btn btn-danger w-100">
+                  <i class="fa fa-trash"></i> Eliminar usuario
+                </button>
+              </form>
+
+            </div>
+          </div>
+
+          <!-- COLUMNA DERECHA -->
+          <div class="col-lg-9 col-md-8">
+
+            <!-- Listas del usuario -->
+            <div class="profile-block">
+              <div class="section-heading profile-section-heading">
+                <h2><i class="fa fa-list"></i> Listas de {{user.firstName}}</h2>
+              </div>
+              <div class="row">
+                {{#user.favoriteLists}}
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="list-card">
+                    <div class="list-icon">
+                      <i class="fa fa-star"></i>
+                    </div>
+                    <span class="list-name">{{name}}</span>
+                    <span class="list-count">{{description}}</span>
+                  </div>
+                </div>
+                {{/user.favoriteLists}}
+              </div>
+            </div>
+
+            <!-- Reseñas del usuario -->
+            <div class="profile-block">
+              <div class="section-heading profile-section-heading">
+                <h2><i class="fa fa-comment"></i> Reseñas de {{user.firstName}}</h2>
+              </div>
+              <div class="reviews-scroll">
+                {{#user.reviews}}
+                <div class="review-card">
+                  <span class="review-restaurant">{{restaurant.name}}</span>
+                  <div class="stars">{{rating}} ★</div>
+                  <p class="review-text">{{comment}}</p>
+                </div>
+                {{/user.reviews}}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="copyright-text">
+              <p>Copyright 2026 Celis&Ud. Todos los derechos reservados.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/templatemo_580_woox_travel/vendor/jquery/jquery.min.js"></script>
+    <script src="/templatemo_580_woox_travel/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/templatemo_580_woox_travel/assets/js/custom.js"></script>
+  </body>
+</html>

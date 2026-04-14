@@ -28,41 +28,45 @@ public class SecurityConfig {
     // Connects Spring Security with our database user loader
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        return new DaoAuthenticationProvider(userDetailsService);
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
     }
     
     // Main security rules: who can access what
-    @Bean
+@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
-
-                // Public pages — anyone can access
                 .requestMatchers("/", "/restaurants", "/restaurants/{id}").permitAll()
-                .requestMatchers("/login", "/signup", "/logout").permitAll()
-                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**").permitAll()
+                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout").permitAll() // <-- Añadidas las rutas de los formularios
+                .requestMatchers("/templatemo_580_woox_travel/**").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**", "/assets/**").permitAll()
                 .requestMatchers("/user/{id}/avatar").permitAll()
-
-                // Admin only pages
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-
-                // Logged in users only
                 .requestMatchers("/profile/**", "/user/**").hasAnyRole("USER", "ADMIN")
-
-                // Everything else requires login
                 .anyRequest().authenticated()
             )
             .formLogin(login -> login
-                .loginPage("/login")           // Our custom login page
-                .defaultSuccessUrl("/", true)  // Redirect here after login
-                .failureUrl("/login?error")    // Redirect here if login fails
+                .loginPage("/login") // El selector
+                .loginProcessingUrl("/process-login") // URL donde disparar el POST desde los HTML
+                .successHandler((request, response, authentication) -> {
+                    boolean isAdmin = authentication.getAuthorities().stream()
+                        .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+                    if (isAdmin) {
+                        response.sendRedirect("/admin"); // O a tu ruta de admin
+                    } else {
+                        response.sendRedirect("/");
+                    }
+                })
+                .failureUrl("/login?error")
                 .permitAll()
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")  // Redirect here after logout
+                .logoutSuccessUrl("/login?logout")
                 .permitAll()
             );
 
