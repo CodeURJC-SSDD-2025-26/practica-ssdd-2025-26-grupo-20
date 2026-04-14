@@ -32,7 +32,7 @@ public class RestauranRepositorytest {
 
         restaurantRepository.save(restaurant);
 
-        List<Restaurant> results = restaurantRepository.findByMunicipalityIgnoreCase("madrid");
+        List<Restaurant> results = restaurantRepository.findByMunicipalityContainingIgnoreCase("madrid");
 
         assertNotNull(results);
         assertFalse(results.isEmpty());
@@ -74,7 +74,7 @@ public class RestauranRepositorytest {
         restaurantRepository.save(restaurant);
 
         List<Restaurant> results = restaurantRepository
-            .findByMunicipalityIgnoreCaseAndSpecialtyIgnoreCase("mostoles", "japonesa");
+            .findByMunicipalityContainingIgnoreCaseAndSpecialtyIgnoreCase("mostoles", "japonesa");
 
         assertNotNull(results);
         assertFalse(results.isEmpty());

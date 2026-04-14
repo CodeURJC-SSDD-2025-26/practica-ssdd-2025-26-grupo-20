@@ -40,10 +40,9 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
 
                 // Public pages — anyone can access
-                .requestMatchers("/", "/restaurants", "/restaurants/{id}").permitAll()
+                .requestMatchers("/", "/restaurants", "/restaurant/**").permitAll()
                 .requestMatchers("/login", "/signup", "/logout").permitAll()
-                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**").permitAll()
-                .requestMatchers("/user/{id}/avatar").permitAll()
+                .requestMatchers("/assets/**", "/vendor/**","/css/**", "/js/**", "/images/**", "/static/**").permitAll()
 
                 // Admin only pages
                 .requestMatchers("/admin/**").hasRole("ADMIN")

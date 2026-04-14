@@ -61,11 +61,15 @@ public class RestaurantService {
         boolean hasSpecialty = specialty != null && !specialty.isBlank();
 
         if (hasMunicipality && hasSpecialty) {
-            return restaurantRepository.findByMunicipalityIgnoreCaseAndSpecialtyIgnoreCase(municipality, specialty);
+            return restaurantRepository.findByMunicipalityContainingIgnoreCaseAndSpecialtyIgnoreCase(municipality, specialty);
         }
 
         if (hasMunicipality) {
-            return restaurantRepository.findByMunicipalityIgnoreCase(municipality);
+            return restaurantRepository.findByMunicipalityContainingIgnoreCase(municipality);
+        }
+
+        if (hasSpecialty) {
+            return restaurantRepository.findBySpecialtyIgnoreCase(specialty);
         }
 
         if (hasQuery) {
