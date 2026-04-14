@@ -27,7 +27,7 @@ public class ReviewController {
     }
 
     //Metodo para saber cuando alguien envia un formulario
-    @PostMapping("/restaurant/{restaurantId}/addReview")
+    @PostMapping("/restaurant/{restaurantId}/review")
     public String addReview(
         @PathVariable Long restaurantId, // El ID del restaurante de la URL
         @RequestParam int rating,        // La nota que viene del formulario HTML
@@ -55,6 +55,34 @@ public class ReviewController {
 
         // 5. Volvemos a la pagina del restaurante
         return "redirect:/restaurant/" + restaurantId;
+    }
+
+    //Eliminar reseña
+    @PostMapping("/review/{reviewId}/delete")
+    public String deleteReview(@PathVariable Long reviewId) {
+        //Simulacion de usuario actual (ya se metera con el spring security)
+        User usuarioActual = new User();
+        usuarioActual.setId(1L);
+
+        reviewService.deleteReview(reviewId, usuarioActual);
+
+        return "redirect:/profile";
+    }
+
+    //Editar reseña
+    @PostMapping("/review/{reviewId}/edit")
+    public String editReview(
+            @PathVariable Long reviewId,
+            @RequestParam int rating,
+            @RequestParam String comment) {
+        
+        User usuarioActual = new User(); 
+        usuarioActual.setId(1L); // Simulamos usuario
+        
+        // Llamamos al servicio para que lo actualice (Te lo pongo abajo)
+        reviewService.editReview(reviewId, rating, comment, usuarioActual);
+        
+        return "redirect:/profile";
     }
 
     @GetMapping("/admin/restaurants")

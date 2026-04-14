@@ -50,4 +50,26 @@ public class ReviewService {
     public List<ReviewRepository.RestaurantStats> getTop5Restaurants() {
         return reviewRepository.findTop5Restaurants();
     }
+
+    // Editar reseña
+    public void editReview(Long reviewId, int newRating, String newComment, User currentUser) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new IllegalArgumentException("Reseña no encontrada"));
+
+        // Comprobamos que el usuario es el dueño de la reseña
+        if (!review.getAuthor().getId().equals(currentUser.getId())) {
+            throw new IllegalArgumentException("No puedes editar una reseña que no es tuya.");
+        }
+        // Validamos los nuevos datos
+        if (newRating < 1 || newRating > 5) {
+            throw new IllegalArgumentException("La valoración debe estar entre 1 y 5.");
+        }
+        if (newComment == null || newComment.trim().isEmpty()) {
+            throw new IllegalArgumentException("El comentario no puede estar vacío.");
+        }
+
+        // Guardamos
+        review.setRating(newRating);
+        review.setComment(newComment);
+        reviewRepository.save(review);
+    }
 }

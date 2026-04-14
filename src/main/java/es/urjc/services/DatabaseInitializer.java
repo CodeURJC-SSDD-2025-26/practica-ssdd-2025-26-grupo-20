@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 
 import es.urjc.model.Lists;
 import es.urjc.model.Restaurant;
+import es.urjc.model.Review;
 import es.urjc.model.User;
 import es.urjc.repositories.ListsRepository;
 import es.urjc.repositories.RestaurantRepository;
 import es.urjc.repositories.UserRepository;
+import es.urjc.repositories.ReviewRepository;
 
 @Service
 public class DatabaseInitializer implements CommandLineRunner {
@@ -16,11 +18,13 @@ public class DatabaseInitializer implements CommandLineRunner {
     private final RestaurantRepository restaurantRepository;
     private final UserRepository userRepository;
     private final ListsRepository listsRepository; // ¡Añadimos tu repositorio!
+    private final ReviewRepository reviewRepository;
 
-    public DatabaseInitializer(RestaurantRepository restaurantRepository, UserRepository userRepository, ListsRepository listsRepository) {
+    public DatabaseInitializer(RestaurantRepository restaurantRepository, UserRepository userRepository, ListsRepository listsRepository, ReviewRepository reviewRepository) {
         this.restaurantRepository = restaurantRepository;
         this.userRepository = userRepository;
         this.listsRepository = listsRepository;
+        this.reviewRepository = reviewRepository;
     }
 
     @Override
@@ -83,6 +87,15 @@ public class DatabaseInitializer implements CommandLineRunner {
             // Guardamos las listas en la base de datos
             listsRepository.save(listaFavoritos);
             listsRepository.save(listaPorVisitar);
+
+            //Reseñas de prueba
+            Review review1 = new Review("Pizza de puta mierda la odio joder me cago en todo y en la puta de tu madre. Repetiria", 5, chicote, pizzaNatura);
+            Review review2 = new Review("Sushi caro y encima contaminao", 2, chicote, okashiSanda);
+            Review review3 = new Review("Local muy bonito y seguro para celíacos.", 4, chicote, okashiSanda);
+
+            reviewRepository.save(review1);
+            reviewRepository.save(review2);
+            reviewRepository.save(review3);
 
             System.out.println("✅ ¡Base de datos inicializada con restaurantes, usuarios y LISTAS!");
         }
