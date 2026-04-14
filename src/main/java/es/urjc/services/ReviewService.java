@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.List;
 
 @Service
 public class ReviewService {
@@ -44,5 +45,9 @@ public class ReviewService {
         }
 
         reviewRepository.save(review);
+    }
+
+    public List<ReviewRepository.RestaurantStats> getTop5Restaurants() {
+        return reviewRepository.findTop5Restaurants();
     }
 }

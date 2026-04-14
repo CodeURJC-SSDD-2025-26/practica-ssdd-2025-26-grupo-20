@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -63,7 +64,6 @@ public class ReviewServiceTest {
         when(reviewRepository.findById(100L)).thenReturn(Optional.of(resena));
 
         // Intentamos borrar la reseña siendo el usuario falso. 
-        // Esperamos que el servicio nos lance un error (IllegalArgumentException)
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             reviewService.deleteReview(100L, usuarioFalso);
         });
@@ -107,5 +107,13 @@ public class ReviewServiceTest {
 
         assertEquals("El comentario no puede estar vacío.", exception.getMessage());
         verify(reviewRepository, never()).save(any());
+    }
+
+    @Test
+    void getTop5Restaurants_ShouldCallRepository(){
+
+        reviewService.getTop5Restaurants();
+
+        verify(reviewRepository, times(1)).findTop5Restaurants();
     }
 }
