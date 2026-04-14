@@ -42,12 +42,11 @@ public class SecurityConfig {
                 // Public pages — anyone can access
                 .requestMatchers("/", "/restaurants", "/restaurants/{id}").permitAll()
                 .requestMatchers("/login", "/signup", "/logout").permitAll()
-                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**", "/assets/**").permitAll()
                 .requestMatchers("/user/{id}/avatar").permitAll()
 
                 // Admin only pages
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-
                 // Logged in users only
                 .requestMatchers("/profile/**", "/user/**").hasAnyRole("USER", "ADMIN")
 
