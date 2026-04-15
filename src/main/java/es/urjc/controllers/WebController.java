@@ -9,11 +9,13 @@ import java.security.Principal;
 import java.util.*;
 
 import es.urjc.repositories.RestaurantRepository;
+import es.urjc.repositories.ReviewRepository;
 import es.urjc.services.UserService;
 import es.urjc.services.ListsService;
 import es.urjc.services.RestaurantService;
 import es.urjc.model.User;
 import es.urjc.model.Restaurant;
+import es.urjc.model.Review;
 import es.urjc.model.Lists;
 
 @Controller
@@ -23,12 +25,18 @@ public class WebController {
     private final UserService userService;
     private final ListsService listsService;
     private final RestaurantService restaurantService;
+    private final ReviewRepository reviewRepository;
 
-    public WebController(RestaurantRepository restaurantRepository, UserService userService, ListsService listsService, RestaurantService restaurantService) {
+    public WebController(RestaurantRepository restaurantRepository,
+                        UserService userService,
+                        ListsService listsService,
+                        RestaurantService restaurantService,
+                        ReviewRepository reviewRepository) {
         this.restaurantRepository = restaurantRepository;
         this.userService = userService;
         this.listsService = listsService;
         this.restaurantService = restaurantService;
+        this.reviewRepository = reviewRepository;
     }
 
     @GetMapping("/restaurants")
@@ -97,10 +105,10 @@ public class WebController {
                 model.addAttribute("isAuthenticated", true);
             }
         }
-
         Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
         if (restaurant != null) {
-
+            List<Review> reviews = reviewRepository.findByRestaurant(restaurant);
+            model.addAttribute("reviews", reviews);
             boolean isSavedInAnyList = false;
             List<Map<String, Object>> listsStatus = new ArrayList<>();
 

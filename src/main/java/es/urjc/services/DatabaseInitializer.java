@@ -36,7 +36,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             Restaurant pizzaNatura = new Restaurant(
                 "Pizza Natura", 
                 "Madrid", 
-                "Italiana", 
+                "Italiano", 
                 20.0, 
                 "Calle de Jovellanos, 6, Madrid", 
                 "+34 910 55 55 55", 

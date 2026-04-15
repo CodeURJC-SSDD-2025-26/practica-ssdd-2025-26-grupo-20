@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import es.urjc.model.Restaurant;
 
 public interface ReviewRepository extends JpaRepository<Review, Long>{
 
@@ -21,4 +22,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long>{
                     "ORDER BY averageRating DESC LIMIT 5", 
             nativeQuery = true)
     List<RestaurantStats> findTop5Restaurants();
+    List<Review> findByRestaurant(Restaurant restaurant);
 }
