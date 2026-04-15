@@ -52,6 +52,19 @@ public class AdminController {
         return "admin-restaurants";
     }
 
+    //IMPORTANTE BORRAR ANTES DEL GIT
+    @GetMapping("/dev/admin/restaurants")
+    public String devAdminRestaurants(Model model) {
+        model.addAttribute("restaurants", restaurantService.findAll());
+        model.addAttribute("restaurantForm", new Restaurant());
+        model.addAttribute("topRestaurants", reviewService.getTop5Restaurants());
+        model.addAttribute("adminName", "Modo desarrollo");
+        model.addAttribute("adminId", 0);
+        model.addAttribute("hasAdminAvatar", false);
+        return "admin-restaurants";
+    }
+    // SOLO HASTA AQUI 
+    
     @PostMapping("/admin/restaurants/new")
     public String createRestaurant(@ModelAttribute("restaurantForm") Restaurant restaurant) {
         restaurantService.save(restaurant);

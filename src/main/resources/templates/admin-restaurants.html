@@ -14,13 +14,13 @@
 
     <title>Gestión | Celis&Ud</title>
 
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-    <link rel="stylesheet" href="assets/css/fontawesome.css" />
-    <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css" />
-    <link rel="stylesheet" href="assets/css/owl.css" />
-    <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/admin-style.css" />
+    <link rel="stylesheet" href="/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="/assets/css/templatemo-woox-travel.css" />
+    <link rel="stylesheet" href="/assets/css/owl.css" />
+    <link rel="stylesheet" href="/assets/css/animate.css" />
+    <link rel="stylesheet" href="/assets/css/admin-style.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
@@ -102,31 +102,35 @@
               <th>Acciones</th>
             </tr>
           </thead>
-          <tbody>
-            <tr class="text-center">
-              <td>
-                <img
-                  src="assets/images/Pizza-Natura-sin-gluten.jpg"
-                  alt="Pizza Natura"
-                  class="image-table"
-                />
-              </td>
-              <td>Pizza Natura</td>
-              <td>Madrid</td>
-              <td>Italiano</td>
-              <td>15€</td>
-              <td class="acciones">
-                <button
-                  class="boton boton-edit"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modalRestaurante"
-                >
-                  Editar
-                </button>
-                <button class="boton boton-eliminar">Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
+            <tbody>
+              <tr class="text-center" th:each="restaurant : ${restaurants}">
+                <td>
+                  <img
+                    th:src="@{/assets/images/Pizza-Natura-sin-gluten.jpg}"
+                    th:alt="${restaurant.name}"
+                    class="image-table"
+                  />
+                </td>
+                <td th:text="${restaurant.name}"></td>
+                <td th:text="${restaurant.municipality}"></td>
+                <td th:text="${restaurant.specialty}"></td>
+                <td th:text="${restaurant.averagePrice} + '€'"></td>
+                <td class="acciones">
+                  <button
+                    class="boton boton-edit"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalRestaurante"
+                    type="button"
+                  >
+                    Editar
+                  </button>
+
+                  <form th:action="@{/admin/restaurants/{id}/delete(id=${restaurant.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="boton boton-eliminar">Eliminar</button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
         </table>
         <div class="col-lg-12 visit-country">
           <ul class="page-numbers">
@@ -167,74 +171,74 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
-            <form class="admin-form">
-              <div class="form-group">
-                <label for="nombre">Nombre del restaurante</label>
-                <input type="text" id="nombre" required />
-              </div>
-
-              <div class="form-columns">
+            <div class="modal-body">
+              <form class="admin-form"
+                    th:action="@{/admin/restaurants/new}"
+                    th:object="${restaurantForm}"
+                    method="post" enctype="multipart/form-data">
                 <div class="form-group">
-                  <label for="municipio">Municipio</label>
-                  <select id="municipio" required>
-                    <option value="">Seleccionar</option>
-                    <option value="madrid">Madrid</option>
-                    <option value="mostoles">Mostoles</option>
-                  </select>
+                  <label for="nombre">Nombre del restaurante</label>
+                  <input type="text" id="nombre" th:field="*{name}" required />
                 </div>
 
-                <div class="form-group">
-                  <label for="especialidad">Especialidad</label>
-                  <select id="especialidad" required>
-                    <option value="">Seleccionar</option>
-                    <option value="italiano">Italiano</option>
-                    <option value="japones">Japonés</option>
-                    <option value="mexicano">Mexicano</option>
-                    <option value="mediterraneo">Mediterráneo</option>
-                  </select>
+                <div class="form-columns">
+                  <div class="form-group">
+                    <label for="municipio">Municipio</label>
+                    <select id="municipio" th:field="*{municipality}" required>
+                      <option value="">Seleccionar</option>
+                      <option value="Madrid">Madrid</option>
+                      <option value="Móstoles">Móstoles</option>
+                      <option value="Alcorcón">Alcorcón</option>
+                      <option value="Leganés">Leganés</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="especialidad">Especialidad</label>
+                    <select id="especialidad" th:field="*{specialty}" required>
+                      <option value="">Seleccionar</option>
+                      <option value="Italiano">Italiano</option>
+                      <option value="Japonés">Japonés</option>
+                      <option value="Mexicano">Mexicano</option>
+                      <option value="Mediterraneo">Mediterráneo</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" th:field="*{address}" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="precio">Precio Medio (€)</label>
+                    <input type="number" id="precio" th:field="*{averagePrice}" min="1" required />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" th:field="*{phone}" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" th:field="*{description}" required></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="imagen">Imagen de la portada</label>
+                    <input type="file" id="imagen" th:field="*{imageFile}" accept="image/*" />
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <label for="direccion">Dirección</label>
-                  <input type="text" id="direccion" required />
+                <div class="form-actions">
+                  <button type="button" class="boton boton-cancel" data-bs-dismiss="modal">
+                    Cancelar
+                  </button>
+                  <button type="submit" class="boton boton-guardar">
+                    Guardar datos
+                  </button>
                 </div>
-
-                <div class="form-group">
-                  <label for="precio">Precio Medio (€)</label>
-                  <input type="number" id="precio" min="1" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="telefono">Teléfono</label>
-                  <input type="tel" id="telefono" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="descripcion">Descripción</label>
-                  <textarea id="descripcion" required></textarea>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="imagen">Imagen de la portada</label>
-                <input type="file" id="imagen" accept="image/*" required />
-              </div>
-
-              <div class="form-actions">
-                <button
-                  type="button"
-                  class="boton boton-cancel"
-                  data-bs-dismiss="modal"
-                >
-                  Cancelar
-                </button>
-                <button type="submit" class="boton boton-guardar">
-                  Guardar datos
-                </button>
-              </div>
-            </form>
-          </div>
+              </form>
+            </div>
         </div>
       </div>
     </div>

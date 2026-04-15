@@ -57,6 +57,35 @@ public class WebController {
 
         return "restaurants";
     }
+    @GetMapping("/")
+    public String showIndex(Model model, Principal principal) {
+
+        User user = null;
+        if (principal != null) {
+            user = userService.findByUsername(principal.getName()).orElse(null);
+            if (user != null) {
+                model.addAttribute("user", user);
+                model.addAttribute("isAuthenticated", true);
+            }
+        }
+
+        List<Restaurant> allRestaurants = restaurantRepository.findAll();
+
+        List<Map<String, Object>> restaurantsData = getRestaurantsWithListStatus(user, allRestaurants);
+        model.addAttribute("restaurants", restaurantsData);
+
+        List<Map<String, Object>> recommendedRestaurants = new ArrayList<>();
+        for (Map<String, Object> restaurantData : restaurantsData) {
+            recommendedRestaurants.add(restaurantData);
+            if (recommendedRestaurants.size() == 6) {
+                break;
+            }
+        }
+
+        model.addAttribute("recommendedRestaurants", recommendedRestaurants);
+
+        return "index";
+    }
 
     @GetMapping("/restaurant/{id}")
     public String showRestaurantDetails(@PathVariable Long id, Model model, Principal principal) {
