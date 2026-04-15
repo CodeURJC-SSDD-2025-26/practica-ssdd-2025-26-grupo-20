@@ -43,10 +43,11 @@ public class SecurityConfig {
                 .requestMatchers("/", "/restaurants", "/restaurant/**").permitAll()
                 .requestMatchers("/login", "/signup", "/logout").permitAll()
                 .requestMatchers("/assets/**", "/vendor/**","/css/**", "/js/**", "/images/**", "/static/**").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**", "/assets/**").permitAll()
+                .requestMatchers("/user/{id}/avatar").permitAll()
 
                 // Admin only pages
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-
                 // Logged in users only
                 .requestMatchers("/profile/**", "/user/**").hasAnyRole("USER", "ADMIN")
 

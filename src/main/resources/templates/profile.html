@@ -277,22 +277,37 @@
                 <h2><i class="fa fa-comment"></i> Mis Reseñas</h2>
               </div>
               <div class="reviews-scroll">
-                <div class="review-card">
-                  <span class="review-restaurant">La Mesa Celíaca</span>
-                  <div class="stars">★★★★★</div>
-                  <p class="review-text">
-                    "Increíble carta sin gluten, personal muy atento."
-                  </p>
-                  <span class="review-date">12 feb 2026</span>
+                {{#myReviews}}
+                <div class="review-card" style="position: relative;">
+                  <span class="review-restaurant">{{restaurant.name}}</span>
+                  <div class="stars">Valoración: {{rating}}/5 ★</div>
+                  <p class="review-text">"{{comment}}"</p>
+                  
+                  <div style="position: absolute; right: 10px; top: 10px;">
+                      <form action="/review/{{id}}/delete" method="post" style="display:inline;">
+                          <button type="submit" class="btn btn-sm btn-danger" title="Borrar reseña">
+                              <i class="fa fa-trash"></i>
+                          </button>
+                      </form>
+                      <button onclick="document.getElementById('edit-form-{{id}}').classList.toggle('d-none')" class="btn btn-sm btn-primary" title="Editar reseña">
+                          <i class="fa fa-pencil"></i>
+                      </button>
+                  </div>
+
+                  <div id="edit-form-{{id}}" class="d-none mt-2">
+                      <form action="/review/{{id}}/edit" method="post">
+                          <input type="number" name="rating" min="1" max="5" value="{{rating}}" required style="width: 60px;">
+                          <textarea name="comment" required class="form-control mt-1">{{comment}}</textarea>
+                          <button type="submit" class="btn btn-sm btn-success mt-1">Guardar cambios</button>
+                      </form>
+                  </div>
+
                 </div>
-                <div class="review-card">
-                  <span class="review-restaurant">Bío Bistró</span>
-                  <div class="stars">★★★★☆</div>
-                  <p class="review-text">
-                    "Muy buenas opciones veganas y sin gluten."
-                  </p>
-                  <span class="review-date">5 ene 2026</span>
-                </div>
+                {{/myReviews}}
+                
+                {{^myReviews}}
+                <p>Aún no has escrito ninguna reseña.</p>
+                {{/myReviews}}
               </div>
             </div>
           </div>
