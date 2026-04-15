@@ -11,6 +11,7 @@ import java.util.*;
 import es.urjc.repositories.RestaurantRepository;
 import es.urjc.services.UserService;
 import es.urjc.services.ListsService;
+import es.urjc.services.RestaurantService;
 import es.urjc.model.User;
 import es.urjc.model.Restaurant;
 import es.urjc.model.Lists;
@@ -21,42 +22,67 @@ public class WebController {
     private final RestaurantRepository restaurantRepository;
     private final UserService userService;
     private final ListsService listsService;
+    private final RestaurantService restaurantService;
 
-    public WebController(RestaurantRepository restaurantRepository, UserService userService, ListsService listsService) {
+    public WebController(RestaurantRepository restaurantRepository, UserService userService, ListsService listsService, RestaurantService restaurantService) {
         this.restaurantRepository = restaurantRepository;
         this.userService = userService;
         this.listsService = listsService;
+        this.restaurantService = restaurantService;
     }
 
     @GetMapping("/")
     public String showIndex(Model model, Principal principal) {
-        User user = userService.findByUsername("chicote_gluten").orElse(null);
-        if (user != null) {
-            model.addAttribute("user", user);
-            model.addAttribute("isAuthenticated", true);
+        User user = null;
+        if (principal != null) {
+            user = userService.findByUsername(principal.getName()).orElse(null);
+            if (user != null) {
+                model.addAttribute("user", user);
+                model.addAttribute("isAuthenticated", true);
+            }
         }
-        model.addAttribute("restaurants", getRestaurantsWithListStatus(user, null));
+        model.addAttribute("restaurants", getRestaurantsWithListStatus(user, restaurantRepository.findAll()));
         return "index";
     }
 
     @GetMapping("/restaurants")
-    public String showRestaurants(@RequestParam(required = false) String q, Model model, Principal principal) {
-        User user = userService.findByUsername("chicote_gluten").orElse(null);
-        if (user != null) {
-            model.addAttribute("user", user);
-            model.addAttribute("isAuthenticated", true);
+    public String showRestaurants(
+            @RequestParam(required = false) String query,
+            @RequestParam(required = false) String municipality,
+            @RequestParam(required = false) String specialty,
+            Model model,
+            Principal principal) {
+
+        User user = null;
+        if (principal != null) {
+            user = userService.findByUsername(principal.getName()).orElse(null);
+            if (user != null) {
+                model.addAttribute("user", user);
+                model.addAttribute("isAuthenticated", true);
+            }
         }
-        model.addAttribute("restaurants", getRestaurantsWithListStatus(user, q));
-        model.addAttribute("searchQuery", q); 
+
+        List<Restaurant> filteredRestaurants = restaurantService.search(query, municipality, specialty);
+        model.addAttribute("restaurants", getRestaurantsWithListStatus(user, filteredRestaurants));
+
+        model.addAttribute("query", query);
+        model.addAttribute("municipality", municipality);
+        model.addAttribute("specialty", specialty);
+
         return "restaurants";
     }
 
+    
+
     @GetMapping("/restaurant/{id}")
     public String showRestaurantDetails(@PathVariable Long id, Model model, Principal principal) {
-        User user = userService.findByUsername("chicote_gluten").orElse(null);
-        if (user != null) {
-            model.addAttribute("user", user);
-            model.addAttribute("isAuthenticated", true);
+        User user = null;
+        if (principal != null) {
+            user = userService.findByUsername(principal.getName()).orElse(null);
+            if (user != null) {
+                model.addAttribute("user", user);
+                model.addAttribute("isAuthenticated", true);
+            }
         }
         
         Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
@@ -91,7 +117,7 @@ public class WebController {
             model.addAttribute("userListsWithStatus", listsStatus);
 
             // 2. MAGIA NUEVA: Lógica de Restaurantes Recomendados (misma especialidad)
-            List<Map<String, Object>> allRestData = getRestaurantsWithListStatus(user, null);
+            List<Map<String, Object>> allRestData = getRestaurantsWithListStatus(user, restaurantRepository.findAll());
             List<Map<String, Object>> recommended = new ArrayList<>();
             for(Map<String, Object> rMap : allRestData) {
                 // Si es de la misma especialidad y NO es el mismo restaurante que estamos viendo...
@@ -106,22 +132,12 @@ public class WebController {
         return "details"; 
     }
 
-    private List<Map<String, Object>> getRestaurantsWithListStatus(User user, String query) {
+    private List<Map<String, Object>> getRestaurantsWithListStatus(User user, List<Restaurant> restaurants) {
         List<Map<String, Object>> restaurantsData = new ArrayList<>();
-        List<Restaurant> allRestaurants = restaurantRepository.findAll();
-        
-        if (query != null && !query.trim().isEmpty()) {
-            String q = query.toLowerCase();
-            allRestaurants = allRestaurants.stream()
-                .filter(r -> (r.getMunicipality() != null && r.getMunicipality().toLowerCase().contains(q)) || 
-                             (r.getName() != null && r.getName().toLowerCase().contains(q)) ||
-                             (r.getSpecialty() != null && r.getSpecialty().toLowerCase().contains(q)))
-                .toList();
-        }
 
         List<Lists> userLists = (user != null) ? listsService.getListsByUser(user) : new ArrayList<>();
 
-        for (Restaurant r : allRestaurants) {
+        for (Restaurant r : restaurants) {
             Map<String, Object> rData = new HashMap<>();
             rData.put("id", r.getId());
             rData.put("name", r.getName());
@@ -129,17 +145,17 @@ public class WebController {
             rData.put("municipality", r.getMunicipality());
             rData.put("averagePrice", r.getAveragePrice());
             rData.put("description", r.getDescription());
-            
+
             boolean isSavedInAnyList = false;
             List<Map<String, Object>> listsStatus = new ArrayList<>();
-            
+
             if (user != null) {
                 for (Lists lst : userLists) {
                     Map<String, Object> listInfo = new HashMap<>();
                     listInfo.put("id", lst.getId());
                     listInfo.put("name", lst.getName());
-                    listInfo.put("restaurantId", r.getId()); 
-                    
+                    listInfo.put("restaurantId", r.getId());
+
                     boolean contains = false;
                     for (Restaurant listRest : lst.getRestaurants()) {
                         if (listRest.getId().equals(r.getId())) {
@@ -147,17 +163,20 @@ public class WebController {
                             break;
                         }
                     }
-                    listInfo.put("contains", contains); 
+
+                    listInfo.put("contains", contains);
                     if (contains) {
-                        isSavedInAnyList = true; 
+                        isSavedInAnyList = true;
                     }
                     listsStatus.add(listInfo);
                 }
             }
+
             rData.put("isSavedInAnyList", isSavedInAnyList);
             rData.put("userListsWithStatus", listsStatus);
             restaurantsData.add(rData);
         }
+
         return restaurantsData;
     }
 }

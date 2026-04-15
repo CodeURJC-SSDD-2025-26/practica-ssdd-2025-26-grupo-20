@@ -40,8 +40,27 @@ public class WebControllerTest {
     @Test
     public void testShowRestaurantsPage() throws Exception {
         mockMvc.perform(get("/restaurants"))
-               .andExpect(status().isOk())
-               .andExpect(view().name("restaurants"))
-               .andExpect(model().attributeExists("restaurants"));
+            .andExpect(status().isOk())
+            .andExpect(view().name("restaurants"))
+            .andExpect(model().attributeExists("restaurants"));
+    }
+    @Test
+    public void testShowRestaurantsPageWithFilters() throws Exception {
+        mockMvc.perform(get("/restaurants")
+                .param("query", "pizza")
+                .param("municipality", "Madrid")
+                .param("specialty", "Italiana"))
+            .andExpect(status().isOk())
+            .andExpect(view().name("restaurants"))
+            .andExpect(model().attributeExists("restaurants"))
+            .andExpect(model().attribute("query", "pizza"))
+            .andExpect(model().attribute("municipality", "Madrid"))
+            .andExpect(model().attribute("specialty", "Italiana"));
+    }
+    @Test
+    public void testShowRestaurantDetailsPage() throws Exception {
+        mockMvc.perform(get("/restaurant/1"))
+            .andExpect(status().isOk())
+            .andExpect(view().name("details"));
     }
 }
