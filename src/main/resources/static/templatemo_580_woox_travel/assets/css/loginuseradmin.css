@@ -1,0 +1,171 @@
+body {
+  min-height: 100vh !important;
+  display: flex;
+  flex-direction: column;
+  background: #2b2b2b;
+}
+
+
+.background {
+  width: 100% !important;
+  height: 100% !important;
+  background: #f8f9fa !important;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  padding-top: 100px; /* espacio header */
+  padding-bottom: 50px;
+  position: relative !important;
+}
+
+/* Contenedor principal del login */
+.login-container {
+  text-align: center;
+  color: #eb7e34;
+  width: 350px !important; /* Ocupa el ancho disponible... */
+  max-width: 350px !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+.login-container h2 {
+  color: #2b2b2b; /* el color que quieras para el título */
+  letter-spacing: 4px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* Tarjeta del formulario */
+.login-card {
+  background: rgba(5, 5, 5, 0.5);
+  padding: 20px 30px;
+  width: 100% !important;
+  height: 80% !important;
+  border-radius: 6px;
+  box-shadow: 0 10px 30px rgba(5, 5, 5, 0.5);
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column; /* Alinea los elementos uno debajo de otro */
+  align-items: center; /* Centra los elementos horizontalmente */
+  gap: 20px;
+}
+
+/* Input + icono */
+.input-group {
+  display: flex !important;
+  align-items: stretch !important;
+  flex-wrap: initial !important;
+  margin-bottom: 10px;
+  background: rgba(5, 5, 5, 0.5);
+  border: 1px solid rgba(200, 200, 200, 0.2);
+  border-radius: 4px;
+}
+
+.input-group .icon {
+  padding: 10px;
+  background: rgba(5, 5, 5, 0.5);
+}
+
+.input-group input {
+  border: none;
+  padding: 10px;
+  width: 100%;
+  background: #e1e1e1;
+  outline: none;
+}
+
+/* Recordar contraseña + enlace */
+.options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 25px;
+  min-width: 0px !important;
+  height: 20px !important;
+}
+
+.options a {
+  color: #e1e1e1;
+  text-decoration: none;
+}
+
+.options a:hover {
+  text-decoration: underline;
+}
+
+/* Botón de iniciar sesión */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #c41;
+  border: none;
+  color: #e1e1e1 !important;
+  font-weight: 600;
+  letter-spacing: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 4px;
+}
+
+.login-btn:hover {
+  background: #a30;
+}
+/* Corrección del color de texto del botón USUARIO */
+.login-btn a {
+  color: #e1e1e1 !important; /* Fuerza a que el texto sea blanco */
+  text-decoration: none;
+}
+
+/* Opcional: para asegurar que siga blanco al pasar el ratón */
+.login-btn:hover a {
+  color: #e1e1e1 !important;
+}
+
+/* Botón de registro debajo del formulario */
+.register-btn {
+  width: 100% !important;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.65);
+  border: none;
+  color: rgb(231, 111, 63);
+  font-weight: 600;
+  letter-spacing: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 4px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+.register-btn a {
+  color: rgb(231, 111, 63) !important;
+  text-decoration: none;
+}
+
+.register-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.register-btn:hover a {
+  color: rgb(231, 111, 63) !important;
+}
+
+/* (Opcional) Contenedor para el texto + botón de registro */
+.register-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.no-account {
+  color: #2b2b2b;
+  font-size: 14px;
+}
+
+footer {
+  margin-top: 18em !important;
+}
