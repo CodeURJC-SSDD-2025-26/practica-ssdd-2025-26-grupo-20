@@ -3,96 +3,71 @@ package es.urjc.controllers;
 import es.urjc.model.Restaurant;
 import es.urjc.model.Review;
 import es.urjc.model.User;
+import es.urjc.repositories.RestaurantRepository;
 import es.urjc.services.ReviewService;
+import es.urjc.services.UserService;
+
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class ReviewController {
 
-    private final DaoAuthenticationProvider authenticationProvider;
     @Autowired
     private ReviewService reviewService;
-    //Luego tengo que añadir los demas servicios
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RestaurantRepository restaurantRepository;
 
-    ReviewController(DaoAuthenticationProvider authenticationProvider) {
-        this.authenticationProvider = authenticationProvider;
-    }
-
-    //Metodo para saber cuando alguien envia un formulario
     @PostMapping("/restaurant/{restaurantId}/review")
     public String addReview(
-        @PathVariable Long restaurantId, // El ID del restaurante de la URL
-        @RequestParam int rating,        // La nota que viene del formulario HTML
-        @RequestParam String comment     // El texto que viene del formulario HTML
+        @PathVariable Long restaurantId,
+        @RequestParam int rating,
+        @RequestParam String comment,
+        Principal principal
     ) {
+        if (principal == null) return "redirect:/login";
 
         try {
-            // 1. Aquí (cuando tu compañero 1 termine) cogeremos al usuario que ha iniciado sesión.
-            // De momento, nos inventamos uno para que no dé error.
-            User usuarioActual = new User();
+            User usuarioActual = userService.findByUsername(principal.getName()).orElseThrow();
+            Restaurant restauranteActual = restaurantRepository.findById(restaurantId).orElseThrow();
 
-            // 2. Aquí lo mismo pero con restaurante. Y lo buscaremos por su ID
-            Restaurant restauranteActual = new Restaurant();
-
-            // 3. Creamos la reseña 
             Review nuevaResena = new Review(comment, rating, usuarioActual, restauranteActual);
-
-            // 4. La guardamos en el service
             reviewService.saveReview(nuevaResena);
-        } catch (IllegalArgumentException e) {
-            // Si el servicio se queja (ej. nota mayor a 5), podríamos redirigir a una página de error
-            // De momento, si falla, simplemente volvemos al restaurante
+        } catch (Exception e) {
             return "redirect:/restaurant/" + restaurantId + "?error=true";
         }
-
-        // 5. Volvemos a la pagina del restaurante
         return "redirect:/restaurant/" + restaurantId;
     }
 
-    //Eliminar reseña
     @PostMapping("/review/{reviewId}/delete")
-    public String deleteReview(@PathVariable Long reviewId) {
-        //Simulacion de usuario actual (ya se metera con el spring security)
-        User usuarioActual = new User();
-        usuarioActual.setId(1L);
+    public String deleteReview(@PathVariable Long reviewId, Principal principal) {
+        if (principal == null) return "redirect:/login";
 
+        User usuarioActual = userService.findByUsername(principal.getName()).orElseThrow();
         reviewService.deleteReview(reviewId, usuarioActual);
 
         return "redirect:/profile";
     }
 
-    //Editar reseña
     @PostMapping("/review/{reviewId}/edit")
     public String editReview(
             @PathVariable Long reviewId,
             @RequestParam int rating,
-            @RequestParam String comment) {
-        
-        User usuarioActual = new User(); 
-        usuarioActual.setId(1L); // Simulamos usuario
-        
-        // Llamamos al servicio para que lo actualice (Te lo pongo abajo)
+            @RequestParam String comment,
+            Principal principal) {
+
+        if (principal == null) return "redirect:/login";
+
+        User usuarioActual = userService.findByUsername(principal.getName()).orElseThrow();
         reviewService.editReview(reviewId, rating, comment, usuarioActual);
-        
+
         return "redirect:/profile";
     }
-
-    @GetMapping("/admin/restaurants")
-    public String showStatistics(Model model) {
-
-        var top5 = reviewService.getTop5Restaurants();
-
-        model.addAttribute("topRestaurants", top5);
-
-        return "admin-restaurants";
-    }
-
 }

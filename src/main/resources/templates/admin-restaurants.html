@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css" />
     <link rel="stylesheet" href="assets/css/owl.css" />
     <link rel="stylesheet" href="assets/css/animate.css" />
-    <link rel="stylesheet" href="assets/css/admin-style.css"/>
+    <link rel="stylesheet" href="assets/css/admin-style.css" />
     <link
       rel="stylesheet"
       href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
@@ -28,106 +28,150 @@
   </head>
   <body>
     <header class="admin-header header-sticky">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center gap-3">
-              <i class="fa fa-utensils fs-3"></i> <a href="admin.html"><h1 class="m-0 fs-4 fw-bold text-white">Celis&Ud <span class="fw-light">| Admin</span></h1></a>
-            </div>
-
-            <div class="d-flex align-items-center gap-3">
-                <span class="d-none d-md-inline">Administra, <strong>Cristian</strong></span>
-                <img src="assets/images/admin-logo.jpg" alt="Admin" class="user-profile" style="width: 45px; height: 45px; border-radius: 50%;">
-                <a href="index.html">
-                  <button class="btn btn-outline-light btn-sm" title="Cerrar sesión">
-                    <i class="fa fa-sign-out-alt"></i>
-                  </button>
-                </a>
-            </div>
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <i class="fa fa-utensils fs-3"></i>
+          <a href="admin.html"
+            ><h1 class="m-0 fs-4 fw-bold text-white">
+              Celis&Ud <span class="fw-light">| Admin</span>
+            </h1></a
+          >
         </div>
+
+        <div class="d-flex align-items-center gap-3">
+          <span class="d-none d-md-inline"
+            >Administra, <strong>Cristian</strong></span
+          >
+          <img
+            src="assets/images/admin-logo.jpg"
+            alt="Admin"
+            class="user-profile"
+            style="width: 45px; height: 45px; border-radius: 50%"
+          />
+          <a href="index.html">
+            <button class="btn btn-outline-light btn-sm" title="Cerrar sesión">
+              <i class="fa fa-sign-out-alt"></i>
+            </button>
+          </a>
+        </div>
+      </div>
     </header>
 
     <section class="admin-container">
-        <div>
+      <div>
+        <div class="col-lg-12">
+          <div class="section-heading text-center">
+            <h2 class="header-text">Listado de restaurantes</h2>
+            <p class="header-text">
+              Añadir, editar o eliminar locales registrados.
+            </p>
+          </div>
           <div class="col-lg-12">
-            <div class="section-heading text-center">
-              <h2 class="header-text">Listado de restaurantes</h2>
-              <p class="header-text">Añadir, editar o eliminar locales registrados.</p>
-            </div>
-            <div class="col-lg-12">
-              <div class="d-flex align-items-center justify-content-end gap-2 my-margin">
-    
-                <button class="boton boton-graphics" data-bs-toggle="modal" data-bs-target="#modalEstadisticas">
-                  Estadisticas
-                </button>
-    
-                <button class="boton boton-add" data-bs-toggle="modal" data-bs-target="#modalRestaurante">
-                  + Añadir Restaurante
-                </button>
-    
-              </div>
+            <div
+              class="d-flex align-items-center justify-content-end gap-2 my-margin"
+            >
+              <button
+                class="boton boton-graphics"
+                data-bs-toggle="modal"
+                data-bs-target="#modalEstadisticas"
+              >
+                Estadisticas
+              </button>
+
+              <button
+                class="boton boton-add"
+                data-bs-toggle="modal"
+                data-bs-target="#modalRestaurante"
+              >
+                + Añadir Restaurante
+              </button>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="format-table">
-          <table class="table align-middle">
-            <thead>
-              <tr class="text-center">
-                <th>Portada</th>
-                <th>Nombre</th>
-                <th>Municipio</th>
-                <th>Especialidad</th>
-                <th>Precio Medio</th>
-                <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-              <tr class="text-center">
-                <td><img src="assets/images/Pizza-Natura-sin-gluten.jpg" alt="Pizza Natura" class="image-table"></td>
-                <td>Pizza Natura</td>
-                <td>Madrid</td>
-                <td>Italiano</td>
-                <td>15€</td>
-                <td class="acciones">
-                  <button class="boton boton-edit" data-bs-toggle="modal" data-bs-target="#modalRestaurante">Editar</button>
-                  <button class="boton boton-eliminar">Eliminar</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-             <div class="col-lg-12 visit-country">
-                <ul class="page-numbers">
-                  <li>
-                      <a href="#"><i class="fa fa-arrow-left"></i></a>
-                  </li>
-                  <li class="active">
-                      <a href="#">1</a>
-                  </li>
-                  <li>
-                      <a href="#">2</a>
-                  </li>
-                  <li>
-                      <a href="#">3</a>
-                  </li>
-                  <li>
-                      <a href="#"><i class="fa fa-arrow-right"></i></a>
-                  </li>
-                </ul>
-              </div>
+      <div class="format-table">
+        <table class="table align-middle">
+          <thead>
+            <tr class="text-center">
+              <th>Portada</th>
+              <th>Nombre</th>
+              <th>Municipio</th>
+              <th>Especialidad</th>
+              <th>Precio Medio</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="text-center">
+              <td>
+                <img
+                  src="assets/images/Pizza-Natura-sin-gluten.jpg"
+                  alt="Pizza Natura"
+                  class="image-table"
+                />
+              </td>
+              <td>Pizza Natura</td>
+              <td>Madrid</td>
+              <td>Italiano</td>
+              <td>15€</td>
+              <td class="acciones">
+                <button
+                  class="boton boton-edit"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalRestaurante"
+                >
+                  Editar
+                </button>
+                <button class="boton boton-eliminar">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-lg-12 visit-country">
+          <ul class="page-numbers">
+            <li>
+              <a href="#"><i class="fa fa-arrow-left"></i></a>
+            </li>
+            <li class="active">
+              <a href="#">1</a>
+            </li>
+            <li>
+              <a href="#">2</a>
+            </li>
+            <li>
+              <a href="#">3</a>
+            </li>
+            <li>
+              <a href="#"><i class="fa fa-arrow-right"></i></a>
+            </li>
+          </ul>
         </div>
+      </div>
     </section>
 
-    <div class="modal fade" id="modalRestaurante" tabindex="-1" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="modalRestaurante"
+      tabindex="-1"
+      aria-hidden="true"
+    >
       <div class="modal-dialog modal-lg">
         <div class="modal-content custom-modal">
           <div class="modal-header">
             <h5 class="modal-title">Gestión del restaurante</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
           <div class="modal-body">
             <form class="admin-form">
               <div class="form-group">
                 <label for="nombre">Nombre del restaurante</label>
-                <input type="text" id="nombre" required>
+                <input type="text" id="nombre" required />
               </div>
 
               <div class="form-columns">
@@ -153,17 +197,17 @@
 
                 <div class="form-group">
                   <label for="direccion">Dirección</label>
-                  <input type="text" id="direccion" required>
+                  <input type="text" id="direccion" required />
                 </div>
 
                 <div class="form-group">
                   <label for="precio">Precio Medio (€)</label>
-                  <input type="number" id="precio" min="1" required>
+                  <input type="number" id="precio" min="1" required />
                 </div>
 
                 <div class="form-group">
                   <label for="telefono">Teléfono</label>
-                  <input type="tel" id="telefono" required>
+                  <input type="tel" id="telefono" required />
                 </div>
 
                 <div class="form-group">
@@ -174,12 +218,20 @@
 
               <div class="form-group">
                 <label for="imagen">Imagen de la portada</label>
-                <input type="file" id="imagen" accept="image/*" required>
+                <input type="file" id="imagen" accept="image/*" required />
               </div>
 
               <div class="form-actions">
-                <button type="button" class="boton boton-cancel" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="boton boton-guardar">Guardar datos</button>
+                <button
+                  type="button"
+                  class="boton boton-cancel"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+                <button type="submit" class="boton boton-guardar">
+                  Guardar datos
+                </button>
               </div>
             </form>
           </div>
@@ -187,19 +239,34 @@
       </div>
     </div>
 
-    <div class="modal fade" id="modalEstadisticas" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg"> <div class="modal-content custom-modal">
+    <div
+      class="modal fade"
+      id="modalEstadisticas"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content custom-modal">
           <div class="modal-header">
             <h5 class="modal-title">Top 5 Restaurantes (Valoración Media)</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
           </div>
           <div class="modal-body d-flex flex-column align-items-center">
-            
             <canvas id="miGraficoTop5" width="400" height="200"></canvas>
-
           </div>
-          <div class="modal-footer" style="border-top: none;">
-            <button type="button" class="boton boton-cancel" data-bs-dismiss="modal">Cerrar</button>
+          <div class="modal-footer" style="border-top: none">
+            <button
+              type="button"
+              class="boton boton-cancel"
+              data-bs-dismiss="modal"
+            >
+              Cerrar
+            </button>
           </div>
         </div>
       </div>
@@ -210,51 +277,52 @@
 
     <script th:inline="javascript">
       // Esperamos a que el modal se abra
-      const modalEstadisticas = document.getElementById('modalEstadisticas');
+      const modalEstadisticas = document.getElementById("modalEstadisticas");
       let chartInstancia = null;
 
-      modalEstadisticas.addEventListener('shown.bs.modal', function () {
-          // Si ya se ha dibujado un gráfico antes, se destruye
-          if (chartInstancia != null) {
-              chartInstancia.destroy();
-          }
+      modalEstadisticas.addEventListener("shown.bs.modal", function () {
+        // Si ya se ha dibujado un gráfico antes, se destruye
+        if (chartInstancia != null) {
+          chartInstancia.destroy();
+        }
 
-          // Thymeleaf inyecta los datos aquí. Si no hay datos, ponemos un array vacío
-          const restaurantesData = /*[[${topRestaurants}]]*/ [];
+        // Thymeleaf inyecta los datos aquí. Si no hay datos, ponemos un array vacío
+        const restaurantesData = /*[[${topRestaurants}]]*/ [];
 
-          const nombres = restaurantesData.map(r => r.name);
-          const notas = restaurantesData.map(r => r.averageRating);
+        const nombres = restaurantesData.map((r) => r.name);
+        const notas = restaurantesData.map((r) => r.averageRating);
 
-          const ctx = document.getElementById('miGraficoTop5').getContext('2d');
-          chartInstancia = new Chart(ctx, {
-              type: 'bar',
-              data: {
-                  labels: nombres,
-                  datasets: [{
-                      label: 'Nota Media (Estrellas)',
-                      data: notas,
-                      backgroundColor: 'rgba(255, 165, 0, 0.5)',
-                      borderColor: 'rgba(255, 165, 0, 1)',
-                      borderWidth: 1
-                  }]
+        const ctx = document.getElementById("miGraficoTop5").getContext("2d");
+        chartInstancia = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: nombres,
+            datasets: [
+              {
+                label: "Nota Media (Estrellas)",
+                data: notas,
+                backgroundColor: "rgba(255, 165, 0, 0.5)",
+                borderColor: "rgba(255, 165, 0, 1)",
+                borderWidth: 1,
               },
-              options: {
-                  scales: { y: { beginAtZero: true, max: 5 } }
-              }
-          });
+            ],
+          },
+          options: {
+            scales: { y: { beginAtZero: true, max: 5 } },
+          },
+        });
       });
     </script>
-
   </body>
   <footer>
-      <div class="container">
-       <div class="row">
+    <div class="container">
+      <div class="row">
         <div class="col-lg-12">
-           <div class="copyright-text">
-             <p>Copyright © 2026 Celis&Ud. Todos los derechos reservados.</p>
-           </div>
-         </div>
-       </div>
+          <div class="copyright-text">
+            <p>Copyright © 2026 Celis&Ud. Todos los derechos reservados.</p>
+          </div>
+        </div>
       </div>
-</footer>
+    </div>
+  </footer>
 </html>

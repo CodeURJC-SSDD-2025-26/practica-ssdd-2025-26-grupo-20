@@ -49,7 +49,6 @@ public class UserService {
     }
 
     // --- CREATE (Register) ---
-    // Avatar and bio are added later from the profile page
 
     public User registerNewUser(String firstName, String lastName, String email, String username, String rawPassword) {
         String encodedPassword = passwordEncoder.encode(rawPassword);
@@ -57,15 +56,42 @@ public class UserService {
         return userRepository.save(newUser);
     }
 
-    // --- UPDATE (Edit Profile) ---
+    // --- UPDATE (Edit Profile - básico: nombre, apellido, bio, avatar) ---
 
     public User updateUser(User user, String firstName, String lastName, String bio, MultipartFile avatarFile) throws Exception {
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setBio(bio);
+
+        if (avatarFile != null && !avatarFile.isEmpty()) {
+            user.setAvatarImage(new SerialBlob(avatarFile.getBytes()));
+        }
+
+        return userRepository.save(user);
+    }
+
+    // --- UPDATE (Edit Profile - completo: también email, username, password) ---
+
+    public User updateUserFull(User user, String firstName, String lastName, String bio,
+                               String email, String username, String password,
+                               MultipartFile avatarFile) throws Exception {
 
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setBio(bio);
 
-        // Only update avatar if a new one was uploaded
+        if (email != null && !email.isBlank()) {
+            user.setEmail(email);
+        }
+
+        if (username != null && !username.isBlank()) {
+            user.setUsername(username);
+        }
+
+        if (password != null && !password.isBlank()) {
+            user.setEncodedPassword(passwordEncoder.encode(password));
+        }
+
         if (avatarFile != null && !avatarFile.isEmpty()) {
             user.setAvatarImage(new SerialBlob(avatarFile.getBytes()));
         }

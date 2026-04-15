@@ -18,7 +18,7 @@ import es.urjc.model.Lists;
 
 @Controller
 public class WebController {
-    
+
     private final RestaurantRepository restaurantRepository;
     private final UserService userService;
     private final ListsService listsService;
@@ -29,20 +29,6 @@ public class WebController {
         this.userService = userService;
         this.listsService = listsService;
         this.restaurantService = restaurantService;
-    }
-
-    @GetMapping("/")
-    public String showIndex(Model model, Principal principal) {
-        User user = null;
-        if (principal != null) {
-            user = userService.findByUsername(principal.getName()).orElse(null);
-            if (user != null) {
-                model.addAttribute("user", user);
-                model.addAttribute("isAuthenticated", true);
-            }
-        }
-        model.addAttribute("restaurants", getRestaurantsWithListStatus(user, restaurantRepository.findAll()));
-        return "index";
     }
 
     @GetMapping("/restaurants")
@@ -72,8 +58,6 @@ public class WebController {
         return "restaurants";
     }
 
-    
-
     @GetMapping("/restaurant/{id}")
     public String showRestaurantDetails(@PathVariable Long id, Model model, Principal principal) {
         User user = null;
@@ -84,14 +68,13 @@ public class WebController {
                 model.addAttribute("isAuthenticated", true);
             }
         }
-        
+
         Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
         if (restaurant != null) {
-            
-            // 1. Lógica del restaurante actual
+
             boolean isSavedInAnyList = false;
             List<Map<String, Object>> listsStatus = new ArrayList<>();
-            
+
             if (user != null) {
                 List<Lists> userLists = listsService.getListsByUser(user);
                 for (Lists lst : userLists) {
@@ -99,7 +82,7 @@ public class WebController {
                     listInfo.put("id", lst.getId());
                     listInfo.put("name", lst.getName());
                     listInfo.put("restaurantId", restaurant.getId());
-                    
+
                     boolean contains = false;
                     for (Restaurant r : lst.getRestaurants()) {
                         if (r.getId().equals(restaurant.getId())) {
@@ -116,20 +99,18 @@ public class WebController {
             model.addAttribute("isSavedInAnyList", isSavedInAnyList);
             model.addAttribute("userListsWithStatus", listsStatus);
 
-            // 2. MAGIA NUEVA: Lógica de Restaurantes Recomendados (misma especialidad)
             List<Map<String, Object>> allRestData = getRestaurantsWithListStatus(user, restaurantRepository.findAll());
             List<Map<String, Object>> recommended = new ArrayList<>();
-            for(Map<String, Object> rMap : allRestData) {
-                // Si es de la misma especialidad y NO es el mismo restaurante que estamos viendo...
-                if(rMap.get("specialty") != null && 
-                   rMap.get("specialty").equals(restaurant.getSpecialty()) && 
-                   !rMap.get("id").equals(restaurant.getId())) {
+            for (Map<String, Object> rMap : allRestData) {
+                if (rMap.get("specialty") != null &&
+                    rMap.get("specialty").equals(restaurant.getSpecialty()) &&
+                    !rMap.get("id").equals(restaurant.getId())) {
                     recommended.add(rMap);
                 }
             }
             model.addAttribute("recommendedRestaurants", recommended);
         }
-        return "details"; 
+        return "details";
     }
 
     private List<Map<String, Object>> getRestaurantsWithListStatus(User user, List<Restaurant> restaurants) {

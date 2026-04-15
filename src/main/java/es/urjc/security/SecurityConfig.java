@@ -19,50 +19,43 @@ public class SecurityConfig {
     @Autowired
     private RepositoryUserDetailsService userDetailsService;
 
-    // Defines the password encryption algorithm (BCrypt is the standard)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Connects Spring Security with our database user loader
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         return new DaoAuthenticationProvider(userDetailsService);
     }
     
-    // Main security rules: who can access what
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+            // APAGAMOS EL CSRF para que los botones de AJAX de Mustache no den Error 500
+            .csrf(csrf -> csrf.disable())
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
-
-                // Public pages — anyone can access
+                // AÑADIDAS TUS RUTAS DE LOGIN PERSONALIZADAS
                 .requestMatchers("/", "/restaurants", "/restaurant/**").permitAll()
-                .requestMatchers("/login", "/signup", "/logout").permitAll()
+                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout").permitAll()
                 .requestMatchers("/assets/**", "/vendor/**","/css/**", "/js/**", "/images/**", "/static/**").permitAll()
-                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**", "/assets/**").permitAll()
-                .requestMatchers("/user/{id}/avatar").permitAll()
-
-                // Admin only pages
+                
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                // Logged in users only
-                .requestMatchers("/profile/**", "/user/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/profile/**", "/user/**", "/lists/**", "/review/**").hasAnyRole("USER", "ADMIN")
 
-                // Everything else requires login
                 .anyRequest().authenticated()
             )
             .formLogin(login -> login
-                .loginPage("/login")           // Our custom login page
-                .defaultSuccessUrl("/", true)  // Redirect here after login
-                .failureUrl("/login?error")    // Redirect here if login fails
+                .loginPage("/login")
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/login?error")
                 .permitAll()
             )
             .logout(logout -> logout
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")  // Redirect here after logout
+                .logoutSuccessUrl("/login?logout")
                 .permitAll()
             );
 
