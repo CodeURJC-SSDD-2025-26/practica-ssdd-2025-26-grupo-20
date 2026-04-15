@@ -41,7 +41,6 @@ public class SecurityConfig {
                 .requestMatchers("/", "/restaurants", "/restaurant/**").permitAll()
                 .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout").permitAll()
                 .requestMatchers("/assets/**", "/vendor/**","/css/**", "/js/**", "/images/**", "/static/**").permitAll()
-                .requestMatchers("/dev/admin/restaurants").permitAll() //quitar luego
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/profile/**", "/user/**", "/lists/**", "/review/**").hasAnyRole("USER", "ADMIN")
 
