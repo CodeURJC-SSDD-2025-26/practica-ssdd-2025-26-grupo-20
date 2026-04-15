@@ -188,38 +188,14 @@
     </div>
 
     <div class="modal fade" id="modalEstadisticas" tabindex="-1" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content custom-modal">
+      <div class="modal-dialog modal-dialog-centered modal-lg"> <div class="modal-content custom-modal">
           <div class="modal-header">
-            <h5 class="modal-title">Tipos de Restaurantes</h5>
+            <h5 class="modal-title">Top 5 Restaurantes (Valoración Media)</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
           <div class="modal-body d-flex flex-column align-items-center">
             
-            <div class="pie-chart my-4"></div>
-
-            <div class="w-100 px-4 mt-2" style="color: #2a2a2a;">
-              <div class="d-flex justify-content-between mb-2">
-                <div><span class="color-box bg-italiana"></span> Italiana</div>
-                <div class="fw-bold">35%</div>
-              </div>
-              <div class="d-flex justify-content-between mb-2">
-                <div><span class="color-box bg-asiatica"></span> Japonés</div>
-                <div class="fw-bold">25%</div>
-              </div>
-              <div class="d-flex justify-content-between mb-2">
-                <div><span class="color-box bg-mexicana"></span> Mexicana</div>
-                <div class="fw-bold">20%</div>
-              </div>
-              <div class="d-flex justify-content-between mb-2">
-                <div><span class="color-box bg-mediterranea"></span> Mediterránea</div>
-                <div class="fw-bold">15%</div>
-              </div>
-              <div class="d-flex justify-content-between mb-2">
-                <div><span class="color-box bg-otras"></span> Otras</div>
-                <div class="fw-bold">5%</div>
-              </div>
-            </div>
+            <canvas id="miGraficoTop5" width="400" height="200"></canvas>
 
           </div>
           <div class="modal-footer" style="border-top: none;">
@@ -230,6 +206,44 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script th:inline="javascript">
+      // Esperamos a que el modal se abra
+      const modalEstadisticas = document.getElementById('modalEstadisticas');
+      let chartInstancia = null;
+
+      modalEstadisticas.addEventListener('shown.bs.modal', function () {
+          // Si ya se ha dibujado un gráfico antes, se destruye
+          if (chartInstancia != null) {
+              chartInstancia.destroy();
+          }
+
+          // Thymeleaf inyecta los datos aquí. Si no hay datos, ponemos un array vacío
+          const restaurantesData = /*[[${topRestaurants}]]*/ [];
+
+          const nombres = restaurantesData.map(r => r.name);
+          const notas = restaurantesData.map(r => r.averageRating);
+
+          const ctx = document.getElementById('miGraficoTop5').getContext('2d');
+          chartInstancia = new Chart(ctx, {
+              type: 'bar',
+              data: {
+                  labels: nombres,
+                  datasets: [{
+                      label: 'Nota Media (Estrellas)',
+                      data: notas,
+                      backgroundColor: 'rgba(255, 165, 0, 0.5)',
+                      borderColor: 'rgba(255, 165, 0, 1)',
+                      borderWidth: 1
+                  }]
+              },
+              options: {
+                  scales: { y: { beginAtZero: true, max: 5 } }
+              }
+          });
+      });
+    </script>
 
   </body>
   <footer>
