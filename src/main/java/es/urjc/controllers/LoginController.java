@@ -1,26 +1,45 @@
 package es.urjc.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
 
-    // 1. Pantalla para elegir Usuario o Admin
     @GetMapping("/login")
     public String showLoginSelection() {
         return "login";
     }
 
-    // 2. Pantalla del formulario de Usuario
     @GetMapping("/loginuser")
-    public String showUserLogin() {
+    public String showUserLogin(
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "registered", required = false) String registered,
+            Model model) {
+
+        if (error != null) {
+            model.addAttribute("error", true);
+        }
+        if (registered != null) {
+            model.addAttribute("registered", true);
+        }
         return "loginuser";
     }
 
-    // 3. Pantalla del formulario de Admin
     @GetMapping("/loginadmin")
-    public String showAdminLogin() {
+    public String showAdminLogin(
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout,
+            Model model) {
+
+        if (error != null) {
+            model.addAttribute("error", true);
+        }
+        if (logout != null) {
+            model.addAttribute("logout", true);
+        }
         return "loginadmin";
     }
 }

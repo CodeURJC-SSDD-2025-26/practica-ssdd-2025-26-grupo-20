@@ -182,6 +182,7 @@ public class WebController {
                 }
             }
 
+            rData.put("isAuthenticated", user != null);
             rData.put("isSavedInAnyList", isSavedInAnyList);
             rData.put("userListsWithStatus", listsStatus);
             restaurantsData.add(rData);

@@ -1,169 +1,249 @@
 <!doctype html>
 <html lang="es">
-    <head>
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
-
-        <link
-            href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
-            rel="stylesheet"
-        />
-
-        <title>Gestión | Celis&Ud</title>
-
-        <!-- Bootstrap core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
-        <!-- Additional CSS Files -->
-        <link rel="stylesheet" href="assets/css/fontawesome.css" />
-        <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css" />
-        <link rel="stylesheet" href="assets/css/owl.css" />
-        <link rel="stylesheet" href="assets/css/animate.css" />
-        <link rel="stylesheet" href="assets/css/admin-style.css"/>
-        <link
-            rel="stylesheet"
-        href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
-        />
-<!--
-
-TemplateMo 580 Woox Travel
-
-https://templatemo.com/tm-580-woox-travel
-
--->
-    </head>
-    <body>
-        <header class="admin-header header-sticky">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center gap-3">
-              <i class="fa fa-utensils fs-3"></i> <a href="admin.html"><h1 class="m-0 fs-4 fw-bold text-white">Celis&Ud <span class="fw-light">| Admin</span></h1></a>
-            </div>
-
-            <div class="d-flex align-items-center gap-3">
-                <span class="d-none d-md-inline">Administra, <strong>Cristian</strong></span>
-                <img src="assets/images/admin-logo.jpg" alt="Admin" class="user-profile" style="width: 45px; height: 45px; border-radius: 50%;">
-                <a href="index.html">
-                  <button class="btn btn-outline-light btn-sm" title="Cerrar sesión">
-                    <i class="fa fa-sign-out-alt"></i>
-                  </button>
-                </a>
-            </div>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Gestión de Usuarios | Celis&amp;Ud</title>
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="/assets/css/templatemo-woox-travel.css" />
+    <link rel="stylesheet" href="/assets/css/animate.css" />
+    <link rel="stylesheet" href="/assets/css/admin-style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header class="admin-header header-sticky">
+      <div class="container d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <i class="fa fa-utensils fs-3"></i>
+          <a href="/admin">
+            <h1 class="m-0 fs-4 fw-bold text-white">
+              Celis&amp;Ud <span class="fw-light">| Admin</span>
+            </h1>
+          </a>
         </div>
+        <div class="d-flex align-items-center gap-3">
+          <span class="d-none d-md-inline"
+            >Hola, <strong>{{adminName}}</strong></span
+          >
+          {{#hasAdminAvatar}}
+          <img
+            src="/user/{{adminId}}/avatar"
+            alt="Admin"
+            class="user-profile"
+            style="width: 45px; height: 45px; border-radius: 50%"
+          />
+          {{/hasAdminAvatar}} {{^hasAdminAvatar}}
+          <img
+            src="/assets/images/admin-logo.jpg"
+            alt="Admin"
+            class="user-profile"
+            style="width: 45px; height: 45px; border-radius: 50%"
+          />
+          {{/hasAdminAvatar}}
+          <form action="/logout" method="post" style="display: inline">
+            <button class="btn btn-outline-light btn-sm" title="Cerrar sesión">
+              <i class="fa fa-sign-out-alt"></i>
+            </button>
+          </form>
+        </div>
+      </div>
     </header>
-        <section class="admin-container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-heading text-center">
-                            <h2 class="header-text">Gestión de Usuarios</h2>
-                            <p class="header-text">Administra los perfiles y revisa las reseñas de la comunidad.</p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="format-table">
-                            <table class="table table-hover align-middle">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>Avatar</th>
-                                        <th>Nombre</th>
-                                        <th>Email</th>
-                                        <th>Rol</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-center">
-                                        <td><img src="assets/images/chochote.jpg" class="rounded-circle image-table" alt=""></td>
-                                        <td><strong>Alberto Chicote</strong></td>
-                                        <td>alberto.chicote@gmail.com</td>
-                                        <td>Usuario</td>
-                                        <td class="text-center">
-                                            <button class="main-button-small" data-bs-toggle="modal" data-bs-target="#modalUsuario1">
-                                                Ver Detalles
-                                            </button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="col-lg-12 visit-country">
-                                <ul class="page-numbers">
-                                    <li>
-                                        <a href="#"><i class="fa fa-arrow-left"></i></a>
-                                    </li>
-                                    <li class="active">
-                                        <a href="#">1</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">2</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">3</a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-arrow-right"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <section class="admin-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-heading text-center">
+              <h2 class="header-text">Gestión de Usuarios</h2>
+              <p class="header-text">
+                Administra los perfiles y revisa las reseñas de la comunidad.
+              </p>
             </div>
+          </div>
+        </div>
 
-            <div class="modal fade" id="modalUsuario1" tabindex="-1" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="format-table">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr class="text-center">
+                    <th>Avatar</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#users}}
+                  <tr class="text-center">
+                    <td>
+                      {{#avatarImage}}
+                      <img
+                        src="/user/{{id}}/avatar"
+                        class="rounded-circle image-table"
+                        alt="Avatar"
+                      />
+                      {{/avatarImage}} {{^avatarImage}}
+                      <img
+                        src="/assets/images/admin-logo.jpg"
+                        class="rounded-circle image-table"
+                        alt="Avatar"
+                      />
+                      {{/avatarImage}}
+                    </td>
+                    <td><strong>{{firstName}} {{lastName}}</strong></td>
+                    <td>{{email}}</td>
+                    <td>{{#roles}}{{.}} {{/roles}}</td>
+                    <td class="text-center">
+                      <button
+                        class="main-button-small"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-{{id}}"
+                      >
+                        Ver Detalles
+                      </button>
+                      <form
+                        action="/admin/users/{{id}}/delete"
+                        method="post"
+                        style="display: inline"
+                        onsubmit="return confirm('¿Seguro que quieres eliminar a {{firstName}} {{lastName}}?')"
+                      >
+                        <button
+                          type="submit"
+                          class="btn btn-sm btn-outline-danger ms-1"
+                        >
+                          <i class="fa fa-trash"></i>
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+
+                  <!-- Modal de detalles del usuario -->
+                  <div
+                    class="modal fade"
+                    id="modal-{{id}}"
+                    tabindex="-1"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Usuario: Alberto Chicote</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          <h5 class="modal-title">
+                            {{firstName}} {{lastName}}
+                          </h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
                         </div>
                         <div class="modal-body">
-                            <div class="row user-profile-info">
-                                <div class="col-md-4 d-flex justify-content-center align-items-center">
-                                    <img src="assets/images/chochote.jpg" class="img-fluid rounded shadow mb-3" alt="">
-                                </div>
-                                <div class="col-md-8">
-                                    <h4 class="user-profile-info">Listado de Reseñas</h4>
-                                    <hr>
-                                <div class="mb-3 p-2 bg-light rounded card-review">
-                                    <p class="user-profile-info"><strong>Pizza Natura:</strong> "Increíble masa de mijo, ¡volveré seguro!"</p>
-                                    <small class="text-muted">Valoración: ★★★★★</small>
-                                </div>
-                                <div class="mb-3 p-2 bg-light rounded card-review">
-                                    <p class="user-profile-info"><strong>Okashi Sanda:</strong> "El mejor japonés sin gluten de Madrid."</p>
-                                    <small class="text-muted">Valoración: ★★★★☆</small>
-                                </div>
-                                <div class="p-2 bg-light rounded card-review">
-                                    <p class="user-profile-info"><strong>Casa Pepe:</strong> "En una palabra: mierda. En dos: puta mierda."</p>
-                                    <small class="text-muted">Valoración: ★☆☆☆☆</small>
-                                </div>
+                          <div class="row">
+                            <div
+                              class="col-md-4 d-flex flex-column align-items-center border-end"
+                            >
+                              {{#avatarImage}}
+                              <img
+                                src="/user/{{id}}/avatar"
+                                class="img-fluid rounded shadow mb-3"
+                                style="max-height: 150px"
+                              />
+                              {{/avatarImage}} {{^avatarImage}}
+                              <img
+                                src="/assets/images/admin-logo.jpg"
+                                class="img-fluid rounded shadow mb-3"
+                                style="max-height: 150px"
+                              />
+                              {{/avatarImage}}
+                              <p class="mb-1"><strong>@{{username}}</strong></p>
+                              <p class="small text-muted text-center px-2">
+                                {{bio}}
+                              </p>
+                              <p class="small">
+                                <i class="fa fa-envelope"></i> {{email}}
+                              </p>
                             </div>
+                            <div class="col-md-8 text-start">
+                              <h5 class="mb-3">Reseñas de {{firstName}}</h5>
+                              <hr />
+                              <div style="max-height: 300px; overflow-y: auto">
+                                {{#reviews}}
+                                <div
+                                  class="mb-3 p-3 bg-light rounded border card-review"
+                                >
+                                  <p class="mb-1">
+                                    <strong>{{restaurant.name}}:</strong>
+                                    "{{comment}}"
+                                  </p>
+                                  <div
+                                    class="d-flex justify-content-between align-items-center"
+                                  >
+                                    <small class="text-warning"
+                                      >Puntuación: {{rating}}/5 ⭐</small
+                                    >
+                                    <form
+                                      action="/review/{{id}}/delete"
+                                      method="post"
+                                    >
+                                      <button
+                                        type="submit"
+                                        class="btn btn-link text-danger btn-sm p-0"
+                                      >
+                                        Eliminar
+                                      </button>
+                                    </form>
+                                  </div>
+                                </div>
+                                {{/reviews}} {{^reviews}}
+                                <p class="text-muted fst-italic">
+                                  Este usuario no tiene reseñas todavía.
+                                </p>
+                                {{/reviews}}
+                              </div>
+                            </div>
+                          </div>
                         </div>
+                      </div>
                     </div>
-                </div>
+                  </div>
+                  {{/users}}
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <footer>
       <div class="container">
-       <div class="row">
-        <div class="col-lg-12">
-           <div class="copyright-text">
-             <p>Copyright © 2026 Celis&Ud. Todos los derechos reservados.</p>
-           </div>
-         </div>
-       </div>
-     </div>
-</footer>
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="copyright-text">
+              <p>
+                Copyright © 2026 Celis&amp;Ud. Todos los derechos reservados.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    </body>
-    </html>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

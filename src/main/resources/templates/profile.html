@@ -32,12 +32,13 @@
                   <span class="d-none d-md-block"
                     >Hola, <strong>{{user.firstName}}</strong></span
                   >
-                  <a href="/profile" class="avatar-link"
-                    ><img
-                      src="/assets/images/chochote.jpg"
-                      class="avatar-img"
-                      id="avatarPreview"
-                  /></a>
+                  <a href="/profile" class="avatar-link">
+                    {{#hasAvatar}}
+                    <img src="/user/{{user.id}}/avatar" class="avatar-img" />
+                    {{/hasAvatar}} {{^hasAvatar}}
+                    <img src="/assets/images/chochote.jpg" class="avatar-img" />
+                    {{/hasAvatar}}
+                  </a>
                   <a href="/logout" class="logout-btn" title="Cerrar sesión"
                     ><i class="fa fa-sign-out-alt"></i
                   ></a>
@@ -56,19 +57,28 @@
           <div class="col-lg-3 col-md-4">
             <div class="profile-card">
               <div class="avatar-wrapper">
+                {{#hasAvatar}}
+                <img
+                  src="/user/{{user.id}}/avatar"
+                  class="avatar-img"
+                  id="avatarPreview"
+                />
+                {{/hasAvatar}} {{^hasAvatar}}
                 <img
                   src="/assets/images/chochote.jpg"
                   class="avatar-img"
                   id="avatarPreview"
                 />
-                <label class="avatar-edit-btn" title="Cambiar foto"
-                  ><i class="fa fa-camera"></i
-                  ><input
+                {{/hasAvatar}}
+                <label class="avatar-edit-btn" title="Cambiar foto">
+                  <i class="fa fa-camera"></i>
+                  <input
                     type="file"
                     accept="image/*"
                     hidden
                     onchange="previewAvatar(this)"
-                /></label>
+                  />
+                </label>
               </div>
 
               <div class="profile-field">
@@ -278,34 +288,59 @@
               </div>
               <div class="reviews-scroll">
                 {{#myReviews}}
-                <div class="review-card" style="position: relative;">
+                <div class="review-card" style="position: relative">
                   <span class="review-restaurant">{{restaurant.name}}</span>
                   <div class="stars">Valoración: {{rating}}/5 ★</div>
                   <p class="review-text">"{{comment}}"</p>
-                  
-                  <div style="position: absolute; right: 10px; top: 10px;">
-                      <form action="/review/{{id}}/delete" method="post" style="display:inline;">
-                          <button type="submit" class="btn btn-sm btn-danger" title="Borrar reseña">
-                              <i class="fa fa-trash"></i>
-                          </button>
-                      </form>
-                      <button onclick="document.getElementById('edit-form-{{id}}').classList.toggle('d-none')" class="btn btn-sm btn-primary" title="Editar reseña">
-                          <i class="fa fa-pencil"></i>
+
+                  <div style="position: absolute; right: 10px; top: 10px">
+                    <form
+                      action="/review/{{id}}/delete"
+                      method="post"
+                      style="display: inline"
+                    >
+                      <button
+                        type="submit"
+                        class="btn btn-sm btn-danger"
+                        title="Borrar reseña"
+                      >
+                        <i class="fa fa-trash"></i>
                       </button>
+                    </form>
+                    <button
+                      onclick="document.getElementById('edit-form-{{id}}').classList.toggle('d-none')"
+                      class="btn btn-sm btn-primary"
+                      title="Editar reseña"
+                    >
+                      <i class="fa fa-pencil"></i>
+                    </button>
                   </div>
 
                   <div id="edit-form-{{id}}" class="d-none mt-2">
-                      <form action="/review/{{id}}/edit" method="post">
-                          <input type="number" name="rating" min="1" max="5" value="{{rating}}" required style="width: 60px;">
-                          <textarea name="comment" required class="form-control mt-1">{{comment}}</textarea>
-                          <button type="submit" class="btn btn-sm btn-success mt-1">Guardar cambios</button>
-                      </form>
+                    <form action="/review/{{id}}/edit" method="post">
+                      <input
+                        type="number"
+                        name="rating"
+                        min="1"
+                        max="5"
+                        value="{{rating}}"
+                        required
+                        style="width: 60px"
+                      />
+                      <textarea
+                        name="comment"
+                        required
+                        class="form-control mt-1"
+                      >
+{{comment}}</textarea
+                      >
+                      <button type="submit" class="btn btn-sm btn-success mt-1">
+                        Guardar cambios
+                      </button>
+                    </form>
                   </div>
-
                 </div>
-                {{/myReviews}}
-                
-                {{^myReviews}}
+                {{/myReviews}} {{^myReviews}}
                 <p>Aún no has escrito ninguna reseña.</p>
                 {{/myReviews}}
               </div>

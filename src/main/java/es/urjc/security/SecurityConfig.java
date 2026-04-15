@@ -26,31 +26,39 @@ public class SecurityConfig {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        return new DaoAuthenticationProvider(userDetailsService);
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
     }
-    
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            // APAGAMOS EL CSRF para que los botones de AJAX de Mustache no den Error 500
             .csrf(csrf -> csrf.disable())
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
-                // AÑADIDAS TUS RUTAS DE LOGIN PERSONALIZADAS
                 .requestMatchers("/", "/restaurants", "/restaurant/**").permitAll()
                 .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout").permitAll()
-                .requestMatchers("/assets/**", "/vendor/**","/css/**", "/js/**", "/images/**", "/static/**").permitAll()
-                .requestMatchers("/dev/admin/restaurants").permitAll() //quitar luego
+                .requestMatchers("/assets/**", "/vendor/**", "/css/**", "/js/**", "/images/**", "/static/**").permitAll()
+                .requestMatchers("/user/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/profile/**", "/user/**", "/lists/**", "/review/**").hasAnyRole("USER", "ADMIN")
-
+                .requestMatchers("/profile/**", "/lists/**", "/review/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
             )
             .formLogin(login -> login
                 .loginPage("/login")
-                .defaultSuccessUrl("/", true)
-                .failureUrl("/login?error")
+                .loginProcessingUrl("/process-login")
+                .successHandler((request, response, authentication) -> {
+                    boolean isAdmin = authentication.getAuthorities().stream()
+                        .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+                    if (isAdmin) {
+                        response.sendRedirect("/admin");
+                    } else {
+                        response.sendRedirect("/");
+                    }
+                })
+                .failureUrl("/loginuser?error")
                 .permitAll()
             )
             .logout(logout -> logout
