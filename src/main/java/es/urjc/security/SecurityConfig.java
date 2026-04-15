@@ -19,36 +19,48 @@ public class SecurityConfig {
     @Autowired
     private RepositoryUserDetailsService userDetailsService;
 
+    // Defines the password encryption algorithm (BCrypt is the standard)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // Connects Spring Security with our database user loader
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        return new DaoAuthenticationProvider(userDetailsService);
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
     }
     
-    @Bean
+    // Main security rules: who can access what
+@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            // APAGAMOS EL CSRF para que los botones de AJAX de Mustache no den Error 500
-            .csrf(csrf -> csrf.disable())
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
-                // AÑADIDAS TUS RUTAS DE LOGIN PERSONALIZADAS
-                .requestMatchers("/", "/restaurants", "/restaurant/**").permitAll()
-                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout").permitAll()
-                .requestMatchers("/assets/**", "/vendor/**","/css/**", "/js/**", "/images/**", "/static/**").permitAll()
+                .requestMatchers("/", "/restaurants", "/restaurants/{id}").permitAll()
+                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout").permitAll() // <-- Añadidas las rutas de los formularios
+                .requestMatchers("/templatemo_580_woox_travel/**").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**", "/assets/**").permitAll()
+                .requestMatchers("/user/{id}/avatar").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/profile/**", "/user/**", "/lists/**", "/review/**").hasAnyRole("USER", "ADMIN")
-
+                .requestMatchers("/profile/**", "/user/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
             )
             .formLogin(login -> login
-                .loginPage("/login")
-                .defaultSuccessUrl("/", true)
+                .loginPage("/login") // El selector
+                .loginProcessingUrl("/process-login") // URL donde disparar el POST desde los HTML
+                .successHandler((request, response, authentication) -> {
+                    boolean isAdmin = authentication.getAuthorities().stream()
+                        .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+                    if (isAdmin) {
+                        response.sendRedirect("/admin"); // O a tu ruta de admin
+                    } else {
+                        response.sendRedirect("/");
+                    }
+                })
                 .failureUrl("/login?error")
                 .permitAll()
             )

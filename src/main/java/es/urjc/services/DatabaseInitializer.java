@@ -9,8 +9,8 @@ import es.urjc.model.Review;
 import es.urjc.model.User;
 import es.urjc.repositories.ListsRepository;
 import es.urjc.repositories.RestaurantRepository;
-import es.urjc.repositories.UserRepository;
 import es.urjc.repositories.ReviewRepository;
+import es.urjc.repositories.UserRepository;
 
 @Service
 public class DatabaseInitializer implements CommandLineRunner {
@@ -58,8 +58,8 @@ public class DatabaseInitializer implements CommandLineRunner {
 
             // 2. Creamos los Usuarios
             User admin = new User(
-                "Cristian", "Admin", "admin@celisud.com", "admin", "{noop}admin123", 
-                "Administrador del sistema", "ADMIN", "USER"
+                "Cristian", "Admin", "admin@celisud.com", "admin2", "{noop}admin", 
+                "Administrador del sistema", "ADMIN"
             );
             
             User chicote = new User(
@@ -97,7 +97,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             reviewRepository.save(review2);
             reviewRepository.save(review3);
 
-            System.out.println("✅ ¡Base de datos inicializada con restaurantes, usuarios y LISTAS!");
+            System.out.println("¡Base de datos inicializada con restaurantes, usuarios y LISTAS!");
         }
     }
 }

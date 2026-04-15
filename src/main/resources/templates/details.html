@@ -36,35 +36,30 @@
         <div class="row">
           <div class="col-12">
             <nav class="main-nav">
-              <a href="/" class="logo"
-                ><i class="fa fa-utensils"></i> Celis&Ud</a
-              >
+              <a href="/" class="logo">
+                <i class="fa fa-utensils"></i> Celis&Ud
+              </a>
               <ul class="nav">
                 <li><a href="/">Inicio</a></li>
-                <li><a href="/restaurants" class="active">Restaurantes</a></li>
-
-                {{#isAuthenticated}}
+                <li><a href="/restaurants">Restaurantes</a></li>
                 <li class="user-profile-item">
-                  <span class="d-none d-md-block"
-                    >Hola, <strong>{{user.username}}</strong></span
-                  >
-                  <a href="/profile" class="avatar-link"
-                    ><img src="/assets/images/chochote.jpg" class="avatar-img"
-                  /></a>
-                  <a href="/logout" class="logout-btn" title="Cerrar sesión"
-                    ><i class="fa fa-sign-out-alt"></i
-                  ></a>
+                  <span class="d-none d-md-block">Hola, <strong>{{user.firstName}}</strong></span>
+                  <a href="/profile" class="avatar-link">
+                    {{#hasAvatar}}
+                    <img src="/user/{{user.id}}/avatar" alt="Foto de perfil" class="avatar-img" />
+                    {{/hasAvatar}}
+                    {{^hasAvatar}}
+                    <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Foto de perfil" class="avatar-img" />
+                    {{/hasAvatar}}
+                  </a>
+                  <form action="/logout" method="post" style="display:inline;">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                    <button type="submit" class="logout-btn" title="Cerrar sesión"
+                            style="background:none;border:none;cursor:pointer;color:inherit;">
+                      <i class="fa fa-sign-out-alt"></i>
+                    </button>
+                  </form>
                 </li>
-                {{/isAuthenticated}} {{^isAuthenticated}}
-                <li class="login-item">
-                  <a
-                    href="/login"
-                    class="btn btn-primary"
-                    style="padding: 8px 20px; border-radius: 20px; color: white"
-                    >Iniciar Sesión</a
-                  >
-                </li>
-                {{/isAuthenticated}}
               </ul>
               <a class="menu-trigger"><span>Menu</span></a>
             </nav>

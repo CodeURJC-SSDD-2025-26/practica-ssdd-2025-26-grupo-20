@@ -1,71 +1,76 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Celis&Ud</title>
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="assets/css/loginuseradmin.css" />
-    <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css" />
-  </head>
-  <body>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <title>Celis&amp;Ud</title>
+    <link href="/templatemo_580_woox_travel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/fontawesome.css"/>
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/loginuseradmin.css"/>
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/owl.css"/>
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/animate.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/templatemo-woox-travel.css"/>
+</head>
+<body>
     <header class="header-area header-sticky">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <nav class="main-nav">
-              <a href="index.html" class="logo">
-                <i class="fa fa-utensils"></i> Celis&Ud
-              </a>
-              <ul class="nav">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="restaurants.html">Restaurantes</a></li>
-                <li class="login-item">
-                  <a href="login.html" class="active">Iniciar Sesión</a>
-                </li>
-              </ul>
-              <a class="menu-trigger">
-                <span>Menu</span>
-              </a>
-            </nav>
-          </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <a href="/" class="logo">
+                            <i class="fa fa-utensils"></i> Celis&amp;Ud
+                        </a>
+                        <ul class="nav">
+                            <li><a href="/">Inicio</a></li>
+                            <li><a href="/restaurants">Restaurantes</a></li>
+                            <li class="login-item"><a href="/login" class="active">Iniciar Sesión</a></li>
+                        </ul>
+                        <a class="menu-trigger"><span>Menu</span></a>
+                    </nav>
+                </div>
+            </div>
         </div>
-      </div>
     </header>
+
     <div class="background">
-      <div id="login-especial" class="login-container">
-        <h2>Administrador</h2>
-        <div class="login-card">
-          <form action="admin.html" method="get">
-            <div class="input-group">
-              <span class="icon"><i class="fa-solid fa-user"></i></span>
-              <input type="text" placeholder="Nombre admin" required/>
+        <div id="login-especial" class="login-container">
+            <h2>Administrador</h2>
+
+            {{#error}}
+            <div class="alert alert-danger text-center mb-3">{{error}}</div>
+            {{/error}}
+
+            {{#logout}}
+            <div class="alert alert-info text-center mb-3">{{logout}}</div>
+            {{/logout}}
+
+            <div class="login-card">
+                <form action="/process-login" method="post">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+
+                    <div class="input-group">
+                        <span class="icon"><i class="fa-solid fa-user"></i></span>
+                        <input type="text" name="username" placeholder="Nombre de usuario" required/>
+                    </div>
+                    <div class="input-group">
+                        <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                        <input type="password" name="password" placeholder="Contraseña" required/>
+                    </div>
+
+                    <button class="login-btn" type="submit">INICIAR SESIÓN</button>
+                </form>
             </div>
-            <div class="input-group">
-              <span class="icon"><i class="fa-solid fa-lock"></i></span>
-              <input type="password" placeholder="Contraseña" required/>
-            </div>
-            <div class="options">
-              <label><input type="checkbox" /> Recuerdame</label>
-              <a href="#">¿Olvidaste tu contraseña?</a>
-            </div>
-            <button class="login-btn">
-              INICIAR SESIÓN
-            </button>
-          </form>
         </div>
-      </div>
     </div>
 
     <footer>
-      <p>© 2026 Celis&Ud - Todos los derechos reservados</p>
+        <p>© 2026 Celis&amp;Ud - Todos los derechos reservados</p>
     </footer>
-  </body>
+
+    <script src="/templatemo_580_woox_travel/vendor/jquery/jquery.min.js"></script>
+    <script src="/templatemo_580_woox_travel/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/templatemo_580_woox_travel/assets/js/custom.js"></script>
+</body>
 </html>

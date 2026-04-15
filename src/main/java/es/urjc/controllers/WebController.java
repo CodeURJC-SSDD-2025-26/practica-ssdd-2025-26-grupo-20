@@ -1,22 +1,26 @@
 package es.urjc.controllers;
 
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.security.Principal;
-import java.util.*;
 
-import es.urjc.repositories.RestaurantRepository;
-import es.urjc.repositories.ReviewRepository;
-import es.urjc.services.UserService;
-import es.urjc.services.ListsService;
-import es.urjc.services.RestaurantService;
-import es.urjc.model.User;
+import es.urjc.model.Lists;
 import es.urjc.model.Restaurant;
 import es.urjc.model.Review;
-import es.urjc.model.Lists;
+import es.urjc.model.User;
+import es.urjc.repositories.RestaurantRepository;
+import es.urjc.repositories.ReviewRepository;
+import es.urjc.services.ListsService;
+import es.urjc.services.RestaurantService;
+import es.urjc.services.UserService;
 
 @Controller
 public class WebController {
@@ -65,35 +69,47 @@ public class WebController {
 
         return "restaurants";
     }
+    
     @GetMapping("/")
-    public String showIndex(Model model, Principal principal) {
+public String showIndex(Model model, Principal principal) {
+    User user = null;
 
-        User user = null;
-        if (principal != null) {
-            user = userService.findByUsername(principal.getName()).orElse(null);
-            if (user != null) {
-                model.addAttribute("user", user);
-                model.addAttribute("isAuthenticated", true);
+    // 1. LÓGICA DE USUARIO (Extraída de UserController)
+    if (principal != null) {
+        user = userService.findByUsername(principal.getName()).orElse(null);
+        if (user != null) {
+            model.addAttribute("user", user);
+            model.addAttribute("isAuthenticated", true);
+            
+            // Añadimos la lógica de isAdmin que tenías en UserController
+            // Suponiendo que usas Spring Security, esto comprueba el rol:
+            boolean isAdmin = false;
+            if (principal instanceof org.springframework.security.authentication.UsernamePasswordAuthenticationToken) {
+                isAdmin = ((org.springframework.security.authentication.UsernamePasswordAuthenticationToken) principal)
+                    .getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
             }
+            model.addAttribute("isAdmin", isAdmin);
         }
-
-        List<Restaurant> allRestaurants = restaurantRepository.findAll();
-
-        List<Map<String, Object>> restaurantsData = getRestaurantsWithListStatus(user, allRestaurants);
-        model.addAttribute("restaurants", restaurantsData);
-
-        List<Map<String, Object>> recommendedRestaurants = new ArrayList<>();
-        for (Map<String, Object> restaurantData : restaurantsData) {
-            recommendedRestaurants.add(restaurantData);
-            if (recommendedRestaurants.size() == 6) {
-                break;
-            }
-        }
-
-        model.addAttribute("recommendedRestaurants", recommendedRestaurants);
-
-        return "index";
     }
+
+    // 2. LÓGICA DE RESTAURANTES (La que ya tenías en WebController)
+    List<Restaurant> allRestaurants = restaurantRepository.findAll();
+    
+    // Esta función es clave para que funcionen los corazones/listas
+    List<Map<String, Object>> restaurantsData = getRestaurantsWithListStatus(user, allRestaurants);
+    model.addAttribute("restaurants", restaurantsData);
+
+    // 3. RECOMENDACIONES (Top 6)
+    List<Map<String, Object>> recommendedRestaurants = new ArrayList<>();
+    for (Map<String, Object> restaurantData : restaurantsData) {
+        recommendedRestaurants.add(restaurantData);
+        if (recommendedRestaurants.size() == 6) break;
+    }
+    model.addAttribute("recommendedRestaurants", recommendedRestaurants);
+
+    return "index";
+}
 
     @GetMapping("/restaurant/{id}")
     public String showRestaurantDetails(@PathVariable Long id, Model model, Principal principal) {

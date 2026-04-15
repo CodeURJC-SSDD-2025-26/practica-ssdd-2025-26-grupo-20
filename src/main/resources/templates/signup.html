@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Celis&Ud</title>
+  <link href="/templatemo_580_woox_travel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/registeruser.css">
+  <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/templatemo-woox-travel.css" />
+</head>
+<body>
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <a href="/" class="logo">
+              <i class="fa fa-utensils"></i> Celis&Ud
+            </a>
+            <ul class="nav">
+              <li><a href="/">Inicio</a></li>
+              <li><a href="/restaurants">Restaurantes</a></li>
+              <li class="login-item">
+                <a href="/login">Iniciar Sesión</a>
+              </li>
+            </ul>
+            <a class="menu-trigger"><span>Menu</span></a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="background">
+    <div class="register-wrapper">
+
+      <!-- Left panel -->
+      <div class="left-panel">
+        <h1>Únete<br>a lo bueno,<br>únete<br>al sin glúten.</h1>
+      </div>
+
+      <!-- Right panel: form -->
+      <form action="/signup" method="post">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <div class="register-card">
+          <h2>Crea una cuenta:</h2>
+
+          <!-- Error message from backend -->
+          {{#error}}
+          <div class="alert alert-danger text-center">{{error}}</div>
+          {{/error}}
+
+          <div class="form-row">
+            <div class="form-group">
+              <input type="text" name="firstName" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="lastName" placeholder="Apellido" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <input type="text" name="username" placeholder="Nombre de usuario" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Crear contraseña" required minlength="6">
+            </div>
+            <div class="form-group">
+              <input type="password" name="confirmPassword" placeholder="Confirmar contraseña" required minlength="6">
+            </div>
+          </div>
+
+          <div class="terms">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">Aceptas los términos y condiciones.</label>
+          </div>
+
+          <button class="create-btn" type="submit">Crear cuenta</button>
+
+          <div class="text-center mt-3">
+            <p>¿Ya tienes cuenta? <a href="/login">Inicia sesión</a></p>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Celis&Ud - Todos los derechos reservados</p>
+  </footer>
+
+  <script src="/templatemo_580_woox_travel/vendor/jquery/jquery.min.js"></script>
+  <script src="/templatemo_580_woox_travel/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="/templatemo_580_woox_travel/assets/js/custom.js"></script>
+</body>
+</html>

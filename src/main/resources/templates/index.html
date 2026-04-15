@@ -19,39 +19,35 @@
   </head>
 
   <body>
-    <header class="header-area header-sticky">
+<header class="header-area header-sticky">
       <div class="container">
         <div class="row">
           <div class="col-12">
             <nav class="main-nav">
-              <a href="/" class="logo"
-                ><i class="fa fa-utensils"></i> Celis&Ud</a
-              >
+              <a href="/" class="logo">
+                <i class="fa fa-utensils"></i> Celis&Ud
+              </a>
               <ul class="nav">
-                <li><a href="/" class="active">Inicio</a></li>
+                <li><a href="/">Inicio</a></li>
                 <li><a href="/restaurants">Restaurantes</a></li>
-
-                {{#isAuthenticated}}
                 <li class="user-profile-item">
-                  <span>Hola, <strong>{{user.username}}</strong></span>
-                  <a href="/profile"
-                    ><img
-                      src="/assets/images/chochote.jpg"
-                      class="avatar-img"
-                      style="width: 30px; border-radius: 50%; margin: 0 10px"
-                  /></a>
-                  <a href="/logout"><i class="fa fa-sign-out-alt"></i></a>
+                  <span class="d-none d-md-block">Hola, <strong>{{user.firstName}}</strong></span>
+                  <a href="/profile" class="avatar-link">
+                    {{#hasAvatar}}
+                    <img src="/user/{{user.id}}/avatar" alt="Foto de perfil" class="avatar-img" />
+                    {{/hasAvatar}}
+                    {{^hasAvatar}}
+                    <img src="/assets/images/perfil-user.jpg" alt="Foto de perfil" class="avatar-img" />
+                    {{/hasAvatar}}
+                  </a>
+                  <form action="/logout" method="post" style="display:inline;">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                    <button type="submit" class="logout-btn" title="Cerrar sesión"
+                            style="background:none;border:none;cursor:pointer;color:inherit;">
+                      <i class="fa fa-sign-out-alt"></i>
+                    </button>
+                  </form>
                 </li>
-                {{/isAuthenticated}} {{^isAuthenticated}}
-                <li class="login-item">
-                  <a
-                    href="/login"
-                    class="btn btn-primary"
-                    style="padding: 8px 20px; border-radius: 20px; color: white"
-                    >Iniciar Sesión</a
-                  >
-                </li>
-                {{/isAuthenticated}}
               </ul>
               <a class="menu-trigger"><span>Menu</span></a>
             </nav>
@@ -59,6 +55,7 @@
         </div>
       </div>
     </header>
+
 
     <section id="section-1">
       <div class="content-slider">
