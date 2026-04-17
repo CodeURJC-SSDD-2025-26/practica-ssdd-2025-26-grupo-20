@@ -36,7 +36,7 @@ public class AdminController {
             model.addAttribute("hasAdminAvatar", u.getAvatarImage() != null);
             model.addAttribute("adminUser", u);
         });
-        return "admin";
+        return "admin/admin";
     }
 
     // ── Gestión de restaurantes ──────────────────────────────────────────────
@@ -79,8 +79,7 @@ public class AdminController {
     }
 
     @PostMapping("/admin/restaurants/{id}/edit")
-    public String updateRestaurant(@PathVariable Long id,
-                                   @ModelAttribute("restaurantForm") Restaurant restaurant) {
+    public String updateRestaurant(@PathVariable Long id, @ModelAttribute("restaurantForm") Restaurant restaurant) {
         restaurantService.update(id, restaurant);
         return "redirect:/admin/restaurants";
     }
