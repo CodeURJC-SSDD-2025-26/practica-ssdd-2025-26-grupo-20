@@ -19,45 +19,49 @@ public class SecurityConfig {
     @Autowired
     private RepositoryUserDetailsService userDetailsService;
 
+    // Defines the password encryption algorithm (BCrypt is the standard)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // Connects Spring Security with our database user loader
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
-
-    @Bean
+    
+    // Main security rules: who can access what
+@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            .csrf(csrf -> csrf.disable())
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/restaurants", "/restaurant/**").permitAll()
-                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout").permitAll()
-                .requestMatchers("/assets/**", "/vendor/**","/css/**", "/js/**", "/images/**", "/static/**").permitAll()
+                .requestMatchers("/", "/restaurants", "/restaurants/{id}").permitAll()
+                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout").permitAll() 
+                .requestMatchers("/templatemo_580_woox_travel/**").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**", "/assets/**").permitAll()
+                .requestMatchers("/user/{id}/avatar").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/profile/**", "/lists/**", "/review/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/profile/**", "/user/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
             )
             .formLogin(login -> login
-                .loginPage("/login")
-                .loginProcessingUrl("/process-login")
+                .loginPage("/login") // El selector
+                .loginProcessingUrl("/process-login") // URL donde disparar el POST desde los HTML
                 .successHandler((request, response, authentication) -> {
                     boolean isAdmin = authentication.getAuthorities().stream()
                         .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
                     if (isAdmin) {
-                        response.sendRedirect("/admin");
+                        response.sendRedirect("/admin"); 
                     } else {
                         response.sendRedirect("/");
                     }
                 })
-                .failureUrl("/loginuser?error")
+                .failureUrl("/login?error")
                 .permitAll()
             )
             .logout(logout -> logout

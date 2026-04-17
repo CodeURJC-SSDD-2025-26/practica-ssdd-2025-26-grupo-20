@@ -28,34 +28,32 @@
   </head>
   <body>
     <header class="admin-header header-sticky">
-      <div class="container d-flex justify-content-between align-items-center">
-        <div class="d-flex align-items-center gap-3">
-          <i class="fa fa-utensils fs-3"></i>
-          <a href="admin.html"
-            ><h1 class="m-0 fs-4 fw-bold text-white">
-              Celis&Ud <span class="fw-light">| Admin</span>
-            </h1></a
-          >
-        </div>
-
-        <div class="d-flex align-items-center gap-3">
-          <span class="d-none d-md-inline"
-            >Administra, <strong>Cristian</strong></span
-          >
-          <img
-            src="assets/images/admin-logo.jpg"
-            alt="Admin"
-            class="user-profile"
-            style="width: 45px; height: 45px; border-radius: 50%"
-          />
-          <a href="index.html">
-            <button class="btn btn-outline-light btn-sm" title="Cerrar sesión">
-              <i class="fa fa-sign-out-alt"></i>
-            </button>
-          </a>
-        </div>
-      </div>
-    </header>
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-3">
+      <i class="fa fa-utensils fs-3"></i>
+      <a href="/admin">
+        <h1 class="m-0 fs-4 fw-bold text-white">Celis&Ud <span class="fw-light">| Admin</span></h1>
+      </a>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <span class="d-none d-md-inline">Hola, <strong>{{adminName}}</strong></span>
+      <a href="/profile" class="avatar-link">
+        {{#hasAdminAvatar}}
+          <img src="/user/{{adminId}}/avatar" alt="Admin" class="user-profile" style="width:45px;height:45px;border-radius:50%;">
+        {{/hasAdminAvatar}}
+        {{^hasAdminAvatar}}
+          <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Admin" class="user-profile" style="width:45px;height:45px;border-radius:50%;">
+        {{/hasAdminAvatar}}
+      </a>
+      <form action="/logout" method="post" style="display:inline;">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <button class="btn btn-outline-light btn-sm" title="Cerrar sesión">
+          <i class="fa fa-sign-out-alt"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</header>
 
     <section class="admin-container">
       <div>

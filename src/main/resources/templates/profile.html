@@ -10,38 +10,224 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <title>Mi Perfil – CelisUd</title>
+    <title>Mi Perfil – Celis&amp;Ud</title>
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="/assets/css/fontawesome.css" />
     <link rel="stylesheet" href="/assets/css/templatemo-woox-travel.css" />
     <link rel="stylesheet" href="/assets/css/profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      /* Toast de confirmación */
+      #toast {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #c41;
+        color: #fff;
+        padding: 12px 22px;
+        border-radius: 23px;
+        font-size: 0.85rem;
+        font-family: "Poppins", sans-serif;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+        opacity: 0;
+        transform: translateY(12px);
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+        z-index: 9999;
+        pointer-events: none;
+      }
+      #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      #toast.error {
+        background: #e74c3c;
+      }
+
+      /* Spinner en botón guardar */
+      .confirm-btn .fa-spinner {
+        display: none;
+      }
+      .confirm-btn.saving .fa-check {
+        display: none;
+      }
+      .confirm-btn.saving .fa-spinner {
+        display: inline-block;
+      }
+
+      /* Inputs de nombre en columna */
+      #firstNameEdit {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      #firstNameEdit input + input {
+        margin-top: 6px;
+      }
+      #firstNameEdit .confirm-btn {
+        margin-top: 6px;
+      }
+
+      /* Modal nueva lista / editar lista */
+      .modal-content {
+        background: #2a2a2a;
+        border: 1px solid #444;
+        border-radius: 23px;
+        color: #fff;
+      }
+      .modal-header {
+        border-bottom: 1px solid #444;
+      }
+      .modal-footer {
+        border-top: 1px solid #444;
+      }
+      .modal-title {
+        color: #fff;
+      }
+      .modal-content .form-label {
+        color: #afafaf;
+        font-size: 0.85rem;
+      }
+      .modal-content .form-control {
+        background: #1a1a1a;
+        color: #fff;
+        border: 1px solid #444;
+        border-radius: 12px;
+      }
+      .modal-content .form-control:focus {
+        border-color: #c41;
+        box-shadow: none;
+      }
+      .modal-content .btn-close {
+        filter: invert(1);
+      }
+
+      /* Botón editar reseña */
+      .review-card .review-actions {
+        margin-top: 8px;
+        display: flex;
+        gap: 8px;
+      }
+      .review-card .review-actions button {
+        background: transparent;
+        border: none;
+        font-size: 0.75rem;
+        cursor: pointer;
+        padding: 2px 6px;
+        border-radius: 8px;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .review-card .review-actions .btn-edit-review {
+        color: #afafaf;
+      }
+      .review-card .review-actions .btn-edit-review:hover {
+        color: #c41;
+      }
+      .review-card .review-actions .btn-del-review {
+        color: #afafaf;
+      }
+      .review-card .review-actions .btn-del-review:hover {
+        color: #e74c3c;
+      }
+
+      /* Mini formulario de edición de reseña inline */
+      .review-edit-form {
+        display: none;
+        margin-top: 10px;
+      }
+      .review-edit-form textarea {
+        width: 100%;
+        background: #1a1a1a;
+        color: #e0e0e0;
+        border: 1px solid #444;
+        border-radius: 12px;
+        padding: 8px;
+        font-size: 0.78rem;
+        resize: none;
+        font-family: "Poppins", sans-serif;
+      }
+      .review-edit-form textarea:focus {
+        outline: none;
+        border-color: #c41;
+      }
+      .review-edit-form .star-row {
+        display: flex;
+        gap: 4px;
+        margin: 6px 0;
+      }
+      .review-edit-form .star-row label {
+        color: #555;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: color 0.15s;
+      }
+      .review-edit-form .star-row input[type="radio"] {
+        display: none;
+      }
+      .review-edit-form .star-row input:checked ~ label,
+      .review-edit-form .star-row label:hover,
+      .review-edit-form .star-row label:hover ~ label {
+        color: #f4c542;
+      }
+      .review-edit-form .btn-save-review {
+        background: #c41;
+        border: none;
+        color: #fff;
+        padding: 5px 14px;
+        border-radius: 12px;
+        font-size: 0.78rem;
+        cursor: pointer;
+        margin-top: 4px;
+        transition: background 0.2s;
+      }
+      .review-edit-form .btn-save-review:hover {
+        background: #a30;
+      }
+    </style>
   </head>
   <body>
+    <!-- Preloader -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+
+    <!-- Header -->
     <header class="header-area header-sticky">
       <div class="container">
         <div class="row">
           <div class="col-12">
             <nav class="main-nav">
               <a href="/" class="logo"
-                ><i class="fa fa-utensils"></i> Celis&Ud</a
+                ><i class="fa fa-utensils"></i> Celis&amp;Ud</a
               >
               <ul class="nav">
                 <li><a href="/">Inicio</a></li>
                 <li><a href="/restaurants">Restaurantes</a></li>
                 <li class="user-profile-item">
-                  <span class="d-none d-md-block"
-                    >Hola, <strong>{{user.firstName}}</strong></span
-                  >
+                  <span class="d-none d-md-block">Hola, <strong id="headerName">{{user.firstName}}</strong></span>
                   <a href="/profile" class="avatar-link">
                     {{#hasAvatar}}
-                    <img src="/user/{{user.id}}/avatar" class="avatar-img" />
-                    {{/hasAvatar}} {{^hasAvatar}}
-                    <img src="/assets/images/chochote.jpg" class="avatar-img" />
+                    <img src="/user/{{user.id}}/avatar" alt="Foto de perfil" class="avatar-img" id="headerAvatar" />
+                    {{/hasAvatar}}
+                    {{^hasAvatar}}
+                    <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Foto de perfil" class="avatar-img" id="headerAvatar" />
                     {{/hasAvatar}}
                   </a>
-                  <a href="/logout" class="logout-btn" title="Cerrar sesión"
-                    ><i class="fa fa-sign-out-alt"></i
-                  ></a>
+                  <form action="/logout" method="post" style="display:inline;">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                    <button type="submit" class="logout-btn" title="Cerrar sesión"
+                            style="background:none;border:none;cursor:pointer;color:inherit;">
+                      <i class="fa fa-sign-out-alt"></i>
+                    </button>
+                  </form>
                 </li>
               </ul>
               <a class="menu-trigger"><span>Menu</span></a>
@@ -51,244 +237,259 @@
       </div>
     </header>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <section class="profile-section">
       <div class="container">
+        <!-- Token CSRF para JS -->
+        <span
+          id="csrf-token"
+          data-token="{{_csrf.token}}"
+          style="display: none"
+        ></span>
+
         <div class="row">
+          <!-- ── COLUMNA IZQUIERDA ── -->
           <div class="col-lg-3 col-md-4">
             <div class="profile-card">
+              <!-- Avatar -->
               <div class="avatar-wrapper">
                 {{#hasAvatar}}
-                <img
-                  src="/user/{{user.id}}/avatar"
-                  class="avatar-img"
-                  id="avatarPreview"
-                />
-                {{/hasAvatar}} {{^hasAvatar}}
-                <img
-                  src="/assets/images/chochote.jpg"
-                  class="avatar-img"
-                  id="avatarPreview"
-                />
+                <img src="/user/{{user.id}}/avatar" alt="Foto de perfil" class="avatar-img" id="avatarPreview" />
+                {{/hasAvatar}}
+                {{^hasAvatar}}
+                <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Foto de perfil" class="avatar-img" id="avatarPreview" />
                 {{/hasAvatar}}
                 <label class="avatar-edit-btn" title="Cambiar foto">
                   <i class="fa fa-camera"></i>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    hidden
-                    onchange="previewAvatar(this)"
-                  />
+                  <input type="file" accept="image/*" hidden id="avatarInput" onchange="uploadAvatar(this)">
                 </label>
               </div>
 
+              <!-- Nombre -->
               <div class="profile-field">
-                <span class="field-value" id="nombreVal"
-                  >{{user.firstName}} {{user.lastName}}</span
+                <span class="field-value" id="firstNameVal"
+                  >{{user.firstName}}</span
+                >
+                <span class="field-value" id="lastNameVal"
+                  >&nbsp;{{user.lastName}}</span
                 >
                 <button
                   class="edit-icon"
-                  onclick="toggleEdit('nombre')"
-                  title="Editar"
+                  onclick="toggleEdit('firstName')"
+                  title="Editar nombre"
                 >
                   <i class="fa fa-pencil"></i>
                 </button>
-                <div class="edit-row hidden" id="nombreEdit">
-                  <input
-                    type="text"
-                    value="{{user.firstName}} {{user.lastName}}"
-                    placeholder="Nombre completo"
-                  />
-                  <button class="confirm-btn" onclick="confirmEdit('nombre')">
-                    <i class="fa fa-check"></i>
-                  </button>
-                </div>
+              </div>
+              <div class="edit-row hidden" id="firstNameEdit">
+                <input
+                  type="text"
+                  id="firstNameInput"
+                  value="{{user.firstName}}"
+                  placeholder="Nombre"
+                />
+                <input
+                  type="text"
+                  id="lastNameInput"
+                  value="{{user.lastName}}"
+                  placeholder="Apellido"
+                />
+                <button
+                  class="confirm-btn"
+                  onclick="saveName()"
+                  title="Guardar"
+                >
+                  <i class="fa fa-check"></i
+                  ><i class="fa fa-spinner fa-spin"></i>
+                </button>
+                <button
+                  class="confirm-btn"
+                  style="background: #555"
+                  onclick="toggleEdit('firstName')"
+                  title="Cancelar"
+                >
+                  <i class="fa fa-times"></i>
+                </button>
               </div>
 
+              <!-- Username (solo lectura) -->
               <div class="profile-field">
-                <span class="field-value username-text" id="usernameVal"
+                <span class="field-value username-text"
                   >@{{user.username}}</span
                 >
-                <button class="edit-icon" onclick="toggleEdit('username')">
-                  <i class="fa fa-pencil"></i>
-                </button>
-                <div class="edit-row hidden" id="usernameEdit">
-                  <input
-                    type="text"
-                    value="@{{user.username}}"
-                    placeholder="Usuario"
-                  />
-                  <button class="confirm-btn" onclick="confirmEdit('username')">
-                    <i class="fa fa-check"></i>
-                  </button>
-                </div>
               </div>
 
+              <!-- Bio -->
               <div class="profile-field bio-field">
+                {{#user.bio}}
                 <span class="field-value bio-text" id="bioVal"
                   >{{user.bio}}</span
                 >
-                <button class="edit-icon" onclick="toggleEdit('bio')">
+                {{/user.bio}} {{^user.bio}}
+                <span
+                  class="field-value bio-text"
+                  id="bioVal"
+                  style="color: #555; font-style: italic"
+                  >Sin bio todavía...</span
+                >
+                {{/user.bio}}
+                <button
+                  class="edit-icon"
+                  onclick="toggleEdit('bio')"
+                  title="Editar bio"
+                >
                   <i class="fa fa-pencil"></i>
                 </button>
-                <div class="edit-row hidden" id="bioEdit">
-                  <textarea placeholder="Escribe una bio...">
-{{user.bio}}</textarea
-                  >
-                  <button class="confirm-btn" onclick="confirmEdit('bio')">
-                    <i class="fa fa-check"></i>
-                  </button>
-                </div>
               </div>
+              <div class="edit-row hidden" id="bioEdit">
+                <textarea
+                  id="bioInput"
+                  placeholder="Cuéntanos algo sobre ti..."
+                >
+{{user.bio}}</textarea
+                >
+                <button class="confirm-btn" onclick="saveBio()" title="Guardar">
+                  <i class="fa fa-check"></i
+                  ><i class="fa fa-spinner fa-spin"></i>
+                </button>
+                <button
+                  class="confirm-btn"
+                  style="background: #555"
+                  onclick="toggleEdit('bio')"
+                  title="Cancelar"
+                >
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+
               <div class="profile-divider"></div>
+
+              <!-- Datos de cuenta (solo lectura) -->
               <div class="account-info">
                 <div class="account-row">
-                  <i class="fa fa-envelope"></i
-                  ><span id="emailVal">{{user.email}}</span
-                  ><button class="edit-icon" onclick="toggleEdit('email')">
-                    <i class="fa fa-pencil"></i>
-                  </button>
-                </div>
-                <div class="edit-row hidden" id="emailEdit">
-                  <input
-                    type="email"
-                    value="{{user.email}}"
-                    placeholder="Email"
-                  /><button class="confirm-btn" onclick="confirmEdit('email')">
-                    <i class="fa fa-check"></i>
-                  </button>
+                  <i class="fa fa-envelope"></i><span>{{user.email}}</span>
                 </div>
                 <div class="account-row">
-                  <i class="fa fa-lock"></i><span>••••••••</span
-                  ><button class="edit-icon" onclick="toggleEdit('password')">
-                    <i class="fa fa-pencil"></i>
+                  <i class="fa fa-lock"></i><span>••••••••</span>
+                </div>
+                <div class="account-row">
+                  <i class="fa fa-shield-alt"></i>
+                  <span>{{#user.roles}}{{.}} {{/user.roles}}</span>
+                </div>
+              </div>
+
+              <div class="profile-divider"></div>
+
+              <!-- Eliminar cuenta -->
+              <div class="d-grid gap-2 mt-2" style="width: 100%">
+                <form
+                  action="/profile/delete"
+                  method="post"
+                  onsubmit="
+                    return confirm(
+                      '¿Seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer.',
+                    );
+                  "
+                >
+                  <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+                  <button type="submit" class="btn btn-danger w-100">
+                    <i class="fa fa-trash"></i> Eliminar cuenta
                   </button>
-                </div>
-                <div class="edit-row hidden" id="passwordEdit">
-                  <input
-                    type="password"
-                    placeholder="Nueva contraseña"
-                  /><button
-                    class="confirm-btn"
-                    onclick="confirmEdit('password')"
-                  >
-                    <i class="fa fa-check"></i>
-                  </button>
-                </div>
-                <div class="account-row readonly">
-                  <i class="fa fa-calendar"></i
-                  ><span>Miembro desde enero 2024</span>
-                </div>
+                </form>
               </div>
             </div>
           </div>
 
+          <!-- ── COLUMNA DERECHA ── -->
           <div class="col-lg-9 col-md-8">
+            <!-- Mis Listas -->
             <div class="profile-block">
               <div class="section-heading profile-section-heading">
                 <h2><i class="fa fa-list"></i> Mis Listas</h2>
                 <div class="main-button">
                   <a
                     href="#"
-                    onclick="
-                      document
-                        .getElementById('form-nueva-lista')
-                        .classList.toggle('d-none');
-                      return false;
-                    "
-                    ><i class="fa fa-plus"></i> Nueva lista</a
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalNuevaLista"
                   >
+                    <i class="fa fa-plus"></i> Nueva lista
+                  </a>
                 </div>
               </div>
 
-              <div
-                id="form-nueva-lista"
-                class="d-none mb-4 p-3"
-                style="background: #f8f9fa; border-radius: 15px"
-              >
-                <form action="/lists/create" method="post">
-                  <div class="row align-items-center">
-                    <div class="col-md-4">
-                      <input
-                        type="text"
-                        name="name"
-                        class="form-control"
-                        placeholder="Nombre (ej: Favoritos)"
-                        required
-                      />
-                    </div>
-                    <div class="col-md-6">
-                      <input
-                        type="text"
-                        name="description"
-                        class="form-control"
-                        placeholder="Descripción breve"
-                      />
-                    </div>
-                    <div class="col-md-2">
-                      <button
-                        type="submit"
-                        class="btn btn-primary w-100"
-                        style="border-radius: 20px"
-                      >
-                        Guardar
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-
               <div class="row">
-                {{#myLists}}
-                <div class="col-lg-4 col-md-6 col-sm-6 mb-4">
+                {{#user.favoriteLists}}
+                <div class="col-lg-3 col-md-6 col-sm-6">
                   <div class="list-card">
-                    <div class="list-icon" style="background: #3a86ff">
-                      <i class="fa fa-map-marker"></i>
-                    </div>
+                    <div class="list-icon"><i class="fa fa-star"></i></div>
                     <span class="list-name">{{name}}</span>
-                    <span class="list-count" style="font-size: 11px"
-                      >{{description}}</span
-                    >
+                    <span class="list-count">{{description}}</span>
+
                     <div class="list-actions">
-                      <a
-                        href="/lista/{{id}}"
-                        class="btn btn-sm"
-                        style="color: #333"
-                        title="Ver interior de la lista"
-                        ><i class="fa fa-eye"></i
-                      ></a>
+                      <a href="/lista/{{id}}">
+                        <button type="button" title="Ver lista">
+                          <i class="fa fa-eye"></i>
+                        </button>
+                      </a>
+
                       <form
                         action="/lists/delete/{{id}}"
                         method="post"
                         style="display: inline"
+                        onsubmit="return confirm('¿Seguro que quieres eliminar la lista \'{{name}}\'?')"
                       >
-                        <button type="submit" class="del" title="Borrar lista">
+                        <input
+                          type="hidden"
+                          name="_csrf"
+                          value="{{_csrf.token}}"
+                        />
+                        <button
+                          type="submit"
+                          class="del"
+                          title="Eliminar"
+                          style="
+                            background: none;
+                            border: none;
+                            color: #e74c3c;
+                            cursor: pointer;
+                          "
+                        >
                           <i class="fa fa-trash"></i>
                         </button>
                       </form>
                     </div>
                   </div>
                 </div>
-                {{/myLists}} {{^myLists}}
-                <div class="col-12">
-                  <div
-                    class="alert alert-info text-center"
-                    style="border-radius: 20px"
-                  >
-                    Aún no tienes listas. ¡Crea una para guardar tus
-                    restaurantes!
-                  </div>
+                {{/user.favoriteLists}} {{^user.favoriteLists}}
+                <div class="col-12 text-center py-4">
+                  <p style="color: #666; font-style: italic">
+                    Todavía no has creado ninguna lista.
+                    <a
+                      href="#"
+                      data-bs-toggle="modal"
+                      data-bs-target="#modalNuevaLista"
+                      style="color: #c41"
+                    >
+                      ¡Crea tu primera lista!
+                    </a>
+                  </p>
                 </div>
-                {{/myLists}}
+                {{/user.favoriteLists}}
               </div>
             </div>
 
-            <div class="profile-block mt-5">
+            <!-- Mis Reseñas -->
+            <div class="profile-block">
               <div class="section-heading profile-section-heading">
                 <h2><i class="fa fa-comment"></i> Mis Reseñas</h2>
               </div>
+
+              {{#user.reviews}}
               <div class="reviews-scroll">
                 {{#myReviews}}
                 <div class="review-card" style="position: relative">
+                {{#user.reviews}}
+                <div class="review-card">
                   <span class="review-restaurant">{{restaurant.name}}</span>
                   <div class="stars">Valoración: {{rating}}/5 ★</div>
                   <p class="review-text">"{{comment}}"</p>
@@ -338,24 +539,133 @@
                         Guardar cambios
                       </button>
                     </form>
+                  <div class="stars">{{rating}} ★</div>
+                  <p class="review-text">{{comment}}</p>
+
+                  <!-- Acciones de reseña -->
+                  <div class="review-actions">
+                    <button class="btn-edit-review" onclick="toggleReviewEdit('reviewEdit{{id}}')" title="Editar">
+                      <i class="fa fa-pencil"></i> Editar
+                    </button>
+                    <form action="/review/{{id}}/delete" method="post" style="display:inline;"
+                          onsubmit="return confirm('¿Eliminar esta reseña?')">
+                      <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                      <button type="submit" class="btn-del-review" title="Eliminar">
+                        <i class="fa fa-trash"></i> Borrar
+                      </button>
+                    </form>
                   </div>
+
+                  <!-- Formulario de edición inline -->
+                  <form class="review-edit-form" id="reviewEdit{{id}}"
+                        action="/review/{{id}}/edit" method="post">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                    <!-- Estrellas -->
+                    <div class="star-row" style="flex-direction:row-reverse;justify-content:flex-end;">
+                      <input type="radio" name="rating" id="s5-{{id}}" value="5" {{#rating5}}checked{{/rating5}}><label for="s5-{{id}}">★</label>
+                      <input type="radio" name="rating" id="s4-{{id}}" value="4" {{#rating4}}checked{{/rating4}}><label for="s4-{{id}}">★</label>
+                      <input type="radio" name="rating" id="s3-{{id}}" value="3" {{#rating3}}checked{{/rating3}}><label for="s3-{{id}}">★</label>
+                      <input type="radio" name="rating" id="s2-{{id}}" value="2" {{#rating2}}checked{{/rating2}}><label for="s2-{{id}}">★</label>
+                      <input type="radio" name="rating" id="s1-{{id}}" value="1" {{#rating1}}checked{{/rating1}}><label for="s1-{{id}}">★</label>
+                    </div>
+                    <textarea name="comment" rows="3">{{comment}}</textarea>
+                    <button type="submit" class="btn-save-review">
+                      <i class="fa fa-check"></i> Guardar
+                    </button>
+                  </form>
                 </div>
                 {{/myReviews}} {{^myReviews}}
                 <p>Aún no has escrito ninguna reseña.</p>
                 {{/myReviews}}
+                {{/user.reviews}}
               </div>
+              {{/user.reviews}}
+
+              {{^user.reviews}}
+              <div class="text-center py-4">
+                <p style="color:#666;font-style:italic;">Todavía no has escrito ninguna reseña.
+                  <a href="/restaurants" style="color:#c41;">¡Explora restaurantes!</a>
+                </p>
+              </div>
+              {{/user.reviews}}
             </div>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ── Modal: Nueva Lista ── -->
+    <div
+      class="modal fade"
+      id="modalNuevaLista"
+      tabindex="-1"
+      aria-labelledby="modalNuevaListaLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalNuevaListaLabel">
+              <i class="fa fa-plus"></i> Nueva Lista
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <!-- POST /lists/create — endpoint real del ListsController -->
+          <form action="/lists/create" method="post">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">Nombre de la lista *</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="name"
+                  placeholder="Ej: Favoritos, Por visitar..."
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Descripción (opcional)</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="description"
+                  placeholder="Una pequeña descripción..."
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-primary">
+                <i class="fa fa-check"></i> Crear lista
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast"></div>
+
+    <!-- Footer -->
     <footer>
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
             <div class="copyright-text">
-              <p>Copyright © 2026 CelisUd. Todos los derechos reservados.</p>
+              <p>Copyright 2026 Celis&amp;Ud. Todos los derechos reservados.</p>
             </div>
           </div>
         </div>
@@ -363,26 +673,123 @@
     </footer>
 
     <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="/assets/js/custom.js"></script>
+
     <script>
+      const CSRF = document.getElementById("csrf-token").dataset.token;
+
+      // ── Toast ───────────────────────────────────────────────────
+      function showToast(msg, isError = false) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.className = "show" + (isError ? " error" : "");
+        clearTimeout(t._timer);
+        t._timer = setTimeout(() => {
+          t.className = "";
+        }, 3000);
+      }
+
+      // ── Mostrar/ocultar editor de campo ────────────────────────
       function toggleEdit(field) {
         document.getElementById(field + "Edit").classList.toggle("hidden");
       }
-      function confirmEdit(field) {
-        const editDiv = document.getElementById(field + "Edit");
-        const input = editDiv.querySelector("input, textarea");
-        const valSpan = document.getElementById(field + "Val");
-        if (valSpan && input) valSpan.textContent = input.value;
-        editDiv.classList.add("hidden");
+
+      // ── Mostrar/ocultar formulario de edición de reseña ────────
+      function toggleReviewEdit(id) {
+        const el = document.getElementById(id);
+        el.style.display = el.style.display === "block" ? "none" : "block";
       }
-      function previewAvatar(input) {
-        if (input.files && input.files[0]) {
-          const reader = new FileReader();
-          reader.onload = (e) =>
-            (document.getElementById("avatarPreview").src = e.target.result);
-          reader.readAsDataURL(input.files[0]);
+
+      // ── Envío al backend /profile/edit ──────────────────────────
+      async function postProfile(firstName, lastName, bio, avatarFile) {
+        const fd = new FormData();
+        fd.append("firstName", firstName);
+        fd.append("lastName", lastName);
+        fd.append("bio", bio);
+        fd.append("_csrf", CSRF);
+        if (avatarFile) fd.append("avatarFile", avatarFile);
+        const res = await fetch("/profile/edit", { method: "POST", body: fd });
+        return res.ok || res.redirected;
+      }
+
+      // ── Guardar nombre ──────────────────────────────────────────
+      async function saveName() {
+        const btn = document.querySelector("#firstNameEdit .confirm-btn");
+        btn.classList.add("saving");
+        const firstName = document
+          .getElementById("firstNameInput")
+          .value.trim();
+        const lastName = document.getElementById("lastNameInput").value.trim();
+        if (!firstName || !lastName) {
+          showToast("Nombre y apellido son obligatorios.", true);
+          btn.classList.remove("saving");
+          return;
         }
+        const bioText = document.getElementById("bioVal").textContent.trim();
+        const bio = bioText === "Sin bio todavía..." ? "" : bioText;
+        const ok = await postProfile(firstName, lastName, bio, null);
+        btn.classList.remove("saving");
+        if (ok) {
+          document.getElementById("firstNameVal").textContent = firstName;
+          document.getElementById("lastNameVal").textContent =
+            "\u00a0" + lastName;
+          document.getElementById("headerName").textContent = firstName;
+          toggleEdit("firstName");
+          showToast("✓ Nombre guardado");
+        } else {
+          showToast("Error al guardar el nombre.", true);
+        }
+      }
+
+      // ── Guardar bio ─────────────────────────────────────────────
+      async function saveBio() {
+        const btn = document.querySelector("#bioEdit .confirm-btn");
+        btn.classList.add("saving");
+        const bio = document.getElementById("bioInput").value.trim();
+        const firstName = document
+          .getElementById("firstNameVal")
+          .textContent.trim();
+        const lastName = document
+          .getElementById("lastNameVal")
+          .textContent.trim();
+        const ok = await postProfile(firstName, lastName, bio, null);
+        btn.classList.remove("saving");
+        if (ok) {
+          const span = document.getElementById("bioVal");
+          span.textContent = bio || "Sin bio todavía...";
+          span.style.color = bio ? "" : "#555";
+          span.style.fontStyle = bio ? "normal" : "italic";
+          toggleEdit("bio");
+          showToast("✓ Bio guardada");
+        } else {
+          showToast("Error al guardar la bio.", true);
+        }
+      }
+
+      // ── Subir avatar ────────────────────────────────────────────
+      async function uploadAvatar(input) {
+        if (!input.files || !input.files[0]) return;
+        const file = input.files[0];
+        // Preview inmediato
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.getElementById("avatarPreview").src = e.target.result;
+          document.getElementById("headerAvatar").src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+        // Mantiene nombre y bio actuales
+        const firstName = document
+          .getElementById("firstNameVal")
+          .textContent.trim();
+        const lastName = document
+          .getElementById("lastNameVal")
+          .textContent.trim();
+        const bioText = document.getElementById("bioVal").textContent.trim();
+        const bio = bioText === "Sin bio todavía..." ? "" : bioText;
+        const ok = await postProfile(firstName, lastName, bio, file);
+        if (ok) showToast("✓ Foto actualizada");
+        else showToast("Error al subir la foto.", true);
       }
     </script>
   </body>

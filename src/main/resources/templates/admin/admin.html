@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <title>Admin | Celis&Ud</title>
+    <link href="/templatemo_580_woox_travel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/templatemo-woox-travel.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/owl.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/animate.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/admin-style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+
+<header class="admin-header header-sticky">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-3">
+      <i class="fa fa-utensils fs-3"></i>
+      <a href="/admin">
+        <h1 class="m-0 fs-4 fw-bold text-white">Celis&Ud <span class="fw-light">| Admin</span></h1>
+      </a>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <span class="d-none d-md-inline">Hola, <strong>{{adminName}}</strong></span>
+      <a href="/profile" class="avatar-link">
+        <!-- EXACTO como profile.html que SÍ funciona -->
+        {{#hasAdminAvatar}}
+          <img src="/user/{{adminId}}/avatar" alt="Admin" class="user-profile" style="width:45px;height:45px;border-radius:50%;">
+        {{/hasAdminAvatar}}
+        {{^hasAdminAvatar}}
+          <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Admin" class="user-profile" style="width:45px;height:45px;border-radius:50%;">
+        {{/hasAdminAvatar}}
+      </a>
+      <form action="/logout" method="post" style="display:inline;">
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <button class="btn btn-outline-light btn-sm" title="Cerrar sesión">
+          <i class="fa fa-sign-out-alt"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</header>
+
+    <section class="admin-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="section-heading text-center">
+              <h2 class="header-text">Panel de Control</h2>
+              <p class="header-text">Selecciona una categoría para gestionar el contenido</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6 col-md-6">
+            <div class="item admin-card">
+              <div class="image">
+                <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Usuarios">
+              </div>
+              <div class="down-content">
+                <h4>Lista Usuarios</h4>
+                <p class="card-text">Gestión completa de cuentas y permisos.</p>
+                <div class="main-button">
+                  <a href="/admin/users">Acceder</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <div class="item admin-card">
+              <div class="image">
+                <img src="/templatemo_580_woox_travel/assets/images/gestion-restaurate-bg.jpg" alt="Restaurantes">
+              </div>
+              <div class="down-content">
+                <h4>Gestión Restaurantes</h4>
+                <p class="card-text">Añadir, editar o eliminar locales registrados.</p>
+                <div class="main-button">
+                  <a href="/admin/restaurants">Acceder</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="copyright-text">
+              <p>Copyright © 2026 Celis&Ud. Todos los derechos reservados.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/templatemo_580_woox_travel/vendor/jquery/jquery.min.js"></script>
+    <script src="/templatemo_580_woox_travel/vendor/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>

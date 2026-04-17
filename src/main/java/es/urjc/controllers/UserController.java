@@ -33,7 +33,7 @@ public class UserController {
 
     @GetMapping("/signup")
     public String showSignupForm() {
-        return "registeruser"; // el HTML se llama registeruser.html
+        return "registeruser"; 
     }
 
     @PostMapping("/signup")
@@ -93,7 +93,6 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("hasAvatar", user.getAvatarImage() != null);
         model.addAttribute("updated", updated != null);
-        // profile.html itera {{myLists}} y {{myReviews}} directamente
         model.addAttribute("myLists", user.getFavoriteLists());
         model.addAttribute("myReviews", user.getReviews());
         return "profile";
@@ -163,7 +162,7 @@ public class UserController {
     }
 
     // -------------------------------------------------------
-    // ADMIN - lista de usuarios
+    // ADMIN - list all users
     // -------------------------------------------------------
 
     @GetMapping("/admin/users")
@@ -177,7 +176,28 @@ public class UserController {
             model.addAttribute("hasAdminAvatar", u.getAvatarImage() != null);
         });
 
-        return "user-list"; // el HTML está en la raíz de templates, no en subcarpeta admin/
+        return "admin/user-list";
+    }
+
+    @GetMapping("/admin/users/{id}")
+    public String viewUserProfile(@PathVariable Long id, @AuthenticationPrincipal UserDetails currentUser, Model model) {
+
+        Optional<User> optUser = userService.findById(id);
+
+        if (optUser.isEmpty()) {
+            return "redirect:/admin/users";
+        }
+
+        model.addAttribute("user", optUser.get());
+        model.addAttribute("hasAvatar", optUser.get().getAvatarImage() != null);
+
+        userService.findByUsername(currentUser.getUsername()).ifPresent(u -> {
+            model.addAttribute("adminName", u.getFirstName());
+            model.addAttribute("adminId", u.getId());
+            model.addAttribute("hasAdminAvatar", u.getAvatarImage() != null);
+        });
+
+        return "admin/user-profile";
     }
 
     @PostMapping("/admin/users/{id}/delete")

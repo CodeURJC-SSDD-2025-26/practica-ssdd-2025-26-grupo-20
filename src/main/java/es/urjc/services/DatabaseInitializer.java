@@ -10,8 +10,8 @@ import es.urjc.model.Review;
 import es.urjc.model.User;
 import es.urjc.repositories.ListsRepository;
 import es.urjc.repositories.RestaurantRepository;
-import es.urjc.repositories.UserRepository;
 import es.urjc.repositories.ReviewRepository;
+import es.urjc.repositories.UserRepository;
 
 @Service
 public class DatabaseInitializer implements CommandLineRunner {
