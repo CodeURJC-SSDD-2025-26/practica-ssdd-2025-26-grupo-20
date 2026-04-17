@@ -38,12 +38,12 @@ public class DatabaseInitializer implements CommandLineRunner {
 
             // 1. Restaurantes
             Restaurant pizzaNatura = new Restaurant(
-                "Pizza Natura",
-                "Madrid",
-                "Italiana",
-                20.0,
-                "Calle de Jovellanos, 6, Madrid",
-                "+34 910 55 55 55",
+                "Pizza Natura", 
+                "Madrid", 
+                "Italiano", 
+                20.0, 
+                "Calle de Jovellanos, 6, Madrid", 
+                "+34 910 55 55 55", 
                 "El templo de la pizza saludable. Masas elaboradas artesanalmente con mijo y quinoa."
             );
 
