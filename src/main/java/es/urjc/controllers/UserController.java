@@ -33,7 +33,7 @@ public class UserController {
 
     @GetMapping("/signup")
     public String showSignupForm() {
-        return "registeruser"; 
+        return "signup"; 
     }
 
     @PostMapping("/signup")
@@ -48,23 +48,23 @@ public class UserController {
 
         if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Las contraseñas no coinciden");
-            return "registeruser";
+            return "signup";
         }
         if (password.length() < 6) {
             model.addAttribute("error", "La contraseña debe tener al menos 6 caracteres");
-            return "registeruser";
+            return "signup";
         }
         if (!email.contains("@")) {
             model.addAttribute("error", "Formato de email inválido");
-            return "registeruser";
+            return "signup";
         }
         if (userService.existsByUsername(username)) {
             model.addAttribute("error", "Nombre de usuario ya registrado");
-            return "registeruser";
+            return "signup";
         }
         if (userService.existsByEmail(email)) {
             model.addAttribute("error", "Email ya registrado");
-            return "registeruser";
+            return "signup";
         }
 
         try {
@@ -72,7 +72,7 @@ public class UserController {
             return "redirect:/loginuser?registered";
         } catch (Exception e) {
             model.addAttribute("error", "Ocurrió un error, por favor inténtalo de nuevo");
-            return "registeruser";
+            return "signup";
         }
     }
 
@@ -124,6 +124,57 @@ public class UserController {
             model.addAttribute("myLists", user.getFavoriteLists());
             model.addAttribute("myReviews", user.getReviews());
             return "profile";
+        }
+    }
+
+    // -------------------------------------------------------
+    // PROFILE ADMIN
+    // -------------------------------------------------------
+
+    @GetMapping("/profileadmin")
+    public String showMyProfileAdmin(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @RequestParam(value = "updated", required = false) String updated,
+            Model model) {
+
+        Optional<User> optUser = userService.findByUsername(currentUser.getUsername());
+        if (optUser.isEmpty()) return "redirect:/loginadmin";
+
+        User user = optUser.get();
+        model.addAttribute("user", user);
+        model.addAttribute("hasAvatar", user.getAvatarImage() != null);
+        model.addAttribute("adminName", user.getFirstName());
+        model.addAttribute("adminId", user.getId());
+        model.addAttribute("updated", updated != null);
+        return "profileadmin";
+    }
+
+    @PostMapping("/profileadmin/edit")
+    public String processEditProfileAdmin(
+            @AuthenticationPrincipal UserDetails currentUser,
+            @RequestParam String firstName,
+            @RequestParam String lastName,
+            @RequestParam String bio,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String username,
+            @RequestParam(required = false) String password,
+            @RequestParam(required = false) MultipartFile avatarFile,
+            Model model) {
+
+        Optional<User> optUser = userService.findByUsername(currentUser.getUsername());
+        if (optUser.isEmpty()) return "redirect:/login";
+
+        try {
+            userService.updateUserFull(optUser.get(), firstName, lastName, bio, email, username, password, avatarFile);
+            return "redirect:/profile?updated";
+        } catch (Exception e) {
+            User user = optUser.get();
+            model.addAttribute("error", "Error: " + e.getMessage());
+            model.addAttribute("user", user);
+            model.addAttribute("hasAvatar", user.getAvatarImage() != null);
+            model.addAttribute("myLists", user.getFavoriteLists());
+            model.addAttribute("myReviews", user.getReviews());
+            return "profileadmin";
         }
     }
 

@@ -39,7 +39,9 @@
             <h2>Administrador</h2>
 
             {{#error}}
-            <div class="alert alert-danger text-center mb-3">{{error}}</div>
+            <div class="alert alert-danger text-center mb-3" role="alert">
+                <i class="fa-solid fa-circle-exclamation" style="margin-right:6px;"></i>{{error}}
+            </div>
             {{/error}}
 
             {{#logout}}

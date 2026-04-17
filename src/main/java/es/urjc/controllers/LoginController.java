@@ -31,10 +31,10 @@ public class LoginController {
             Model model) {
 
         if (error != null) {
-            model.addAttribute("error", true);
+            model.addAttribute("error", "Nombre de usuario o contraseña incorrectos.");
         }
         if (registered != null) {
-            model.addAttribute("registered", true);
+            model.addAttribute("registered", "¡Cuenta creada con éxito! Ya puedes iniciar sesión.");
         }
         return "loginuser";
     }
@@ -46,10 +46,10 @@ public class LoginController {
             Model model) {
 
         if (error != null) {
-            model.addAttribute("error", true);
+            model.addAttribute("error", "Credenciales de administrador incorrectas.");
         }
         if (logout != null) {
-            model.addAttribute("logout", true);
+            model.addAttribute("logout", "Has cerrado sesión correctamente.");
         }
         return "loginadmin";
     }

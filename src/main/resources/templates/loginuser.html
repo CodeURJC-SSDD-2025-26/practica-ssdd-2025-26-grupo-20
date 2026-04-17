@@ -46,9 +46,11 @@
       <div id="login-especial" class="login-container">
         <h2>Usuario</h2>
 
-        {{#error}}
-        <div class="alert alert-danger text-center mb-3">{{error}}</div>
-        {{/error}}
+            {{#error}}
+            <div class="alert alert-danger text-center mb-3" role="alert">
+                <i class="fa-solid fa-circle-exclamation" style="margin-right:6px;"></i>{{error}}
+            </div>
+            {{/error}}
 
         <div class="login-card">
           <form action="/process-login" method="post">

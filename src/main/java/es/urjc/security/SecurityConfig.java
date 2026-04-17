@@ -38,12 +38,12 @@ public class SecurityConfig {
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/restaurants", "/restaurants/**", "/restaurant/**").permitAll()
-                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout").permitAll()
+                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout", "/lists/**").permitAll()
                 .requestMatchers("/templatemo_580_woox_travel/**").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**", "/assets/**").permitAll()
                 .requestMatchers("/user/{id}/avatar").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/profile/**", "/user/**").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/profile/**", "/profileadmin/**", "/user/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
             )
             .formLogin(login -> login
@@ -61,10 +61,16 @@ public class SecurityConfig {
                 // Si el login falla, redirige al formulario desde el que vino
                 .failureHandler((request, response, exception) -> {
                     String referer = request.getHeader("Referer");
-                    if (referer != null && referer.contains("/loginadmin")) {
-                        response.sendRedirect("/loginadmin?error");
+                    if (referer != null) {
+                        if (referer.contains("/loginadmin")) {
+                            response.sendRedirect("/loginadmin?error");
+                        } else if (referer.contains("/loginuser") || referer.contains("/signup")) {
+                            response.sendRedirect("/loginuser?error");
+                        } else {
+                            response.sendRedirect("/login?error");
+                        }
                     } else {
-                        response.sendRedirect("/loginuser?error");
+                        response.sendRedirect("/login?error");
                     }
                 })
                 .permitAll()

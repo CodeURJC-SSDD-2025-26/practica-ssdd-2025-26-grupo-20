@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <title>Admin | Celis&Ud</title>
+    <link href="/templatemo_580_woox_travel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/templatemo-woox-travel.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/owl.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/animate.css" />
+    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/admin-style.css" />
+    <link rel="stylesheet" href="/assets/css/profile.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* Toast de confirmación */
+        #toast {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #c41; color: #fff;
+            padding: 12px 22px; border-radius: 23px;
+            font-size: 0.85rem; font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+            opacity: 0; transform: translateY(12px);
+            transition: opacity .3s, transform .3s;
+            z-index: 9999; pointer-events: none;
+        }
+        #toast.show  { opacity: 1; transform: translateY(0); }
+        #toast.error { background: #e74c3c; }
+
+        /* Spinner en botón guardar */
+        .confirm-btn .fa-spinner { display: none; }
+        .confirm-btn.saving .fa-check   { display: none; }
+        .confirm-btn.saving .fa-spinner { display: inline-block; }
+
+        /* Estilos específicos para la tarjeta de estadísticas */
+        .stats-card {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: #c41;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .stat-item p {
+            font-size: 0.9rem;
+            color: #afafaf;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="admin-header header-sticky">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center gap-3">
+                <i class="fa fa-utensils fs-3"></i>
+                <a href="/admin">
+                    <h1 class="m-0 fs-4 fw-bold text-white">Celis&Ud <span class="fw-light">| Admin</span></h1>
+                </a>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="d-none d-md-inline">Hola, <strong>{{adminName}}</strong></span>
+                <a href="/profileadmin" class="avatar-link">
+                    {{#hasAdminAvatar}}
+                        <img src="/user/{{adminId}}/avatar" alt="Admin" class="user-profile" style="width:45px;height:45px;border-radius:50%;">
+                    {{/hasAdminAvatar}}
+                    {{^hasAdminAvatar}}
+                        <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Admin" class="user-profile" style="width:45px;height:45px;border-radius:50%;">
+                    {{/hasAdminAvatar}}
+                </a>
+                <form action="/logout" method="post" style="display:inline;">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                    <button class="btn btn-outline-light btn-sm" title="Cerrar sesión">
+                        <i class="fa fa-sign-out-alt"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <section class="profile-section">
+        <div class="container">
+            <span id="csrf-token" data-token="{{_csrf.token}}" style="display:none;"></span>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-4">
+                    <div class="profile-card">
+                        <div class="avatar-wrapper">
+                            {{#hasAvatar}}
+                            <img src="/user/{{user.id}}/avatar" alt="Foto de perfil" class="avatar-img" id="avatarPreview" />
+                            {{/hasAvatar}}
+                            {{^hasAvatar}}
+                            <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Foto de perfil" class="avatar-img" id="avatarPreview" />
+                            {{/hasAvatar}}
+                            <label class="avatar-edit-btn" title="Cambiar foto">
+                                <i class="fa fa-camera"></i>
+                                <input type="file" accept="image/*" hidden id="avatarInput" onchange="uploadAvatar(this)">
+                            </label>
+                        </div>
+
+                        <div class="profile-field">
+                            <span class="field-value" id="firstNameVal">{{user.firstName}}</span>
+                            <span class="field-value" id="lastNameVal">&nbsp;{{user.lastName}}</span>
+                            <button class="edit-icon" onclick="toggleEdit('firstName')" title="Editar nombre">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                        </div>
+                        <div class="edit-row hidden" id="firstNameEdit">
+                            <input type="text" id="firstNameInput" value="{{user.firstName}}" placeholder="Nombre" />
+                            <input type="text" id="lastNameInput"  value="{{user.lastName}}"  placeholder="Apellido" />
+                            <button class="confirm-btn" onclick="saveName()" title="Guardar">
+                                <i class="fa fa-check"></i><i class="fa fa-spinner fa-spin"></i>
+                            </button>
+                            <button class="confirm-btn" style="background:#555;" onclick="toggleEdit('firstName')" title="Cancelar">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+
+                        <div class="profile-field">
+                            <span class="field-value username-text">@{{user.username}}</span>
+                        </div>
+
+                        <div class="profile-field bio-field">
+                            {{#user.bio}}
+                            <span class="field-value bio-text" id="bioVal">{{user.bio}}</span>
+                            {{/user.bio}}
+                            {{^user.bio}}
+                            <span class="field-value bio-text" id="bioVal" style="color:#555;font-style:italic;">Sin bio todavía...</span>
+                            {{/user.bio}}
+                            <button class="edit-icon" onclick="toggleEdit('bio')" title="Editar bio">
+                                <i class="fa fa-pencil"></i>
+                            </button>
+                        </div>
+                        <div class="edit-row hidden" id="bioEdit">
+                            <textarea id="bioInput" placeholder="Cuéntanos algo sobre ti...">{{user.bio}}</textarea>
+                            <button class="confirm-btn" onclick="saveBio()" title="Guardar">
+                                <i class="fa fa-check"></i><i class="fa fa-spinner fa-spin"></i>
+                            </button>
+                            <button class="confirm-btn" style="background:#555;" onclick="toggleEdit('bio')" title="Cancelar">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+
+                        <div class="profile-divider"></div>
+
+                        <div class="account-info">
+                            <div class="account-row">
+                                <i class="fa fa-envelope"></i><span>{{user.email}}</span>
+                            </div>
+                            <div class="account-row">
+                                <i class="fa fa-lock"></i><span>••••••••</span>
+                            </div>
+                            <div class="account-row">
+                                <i class="fa fa-shield-alt"></i>
+                                <span>{{#user.roles}}{{.}} {{/user.roles}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9 col-md-8">
+                    <div class="profile-block">
+                        <div class="section-heading profile-section-heading">
+                            <h2><i class="fa fa-chart-line"></i> Estadísticas Celis&Ud</h2>
+                        </div>
+                        
+                        <div class="profile-card stats-card">
+                            <div class="stat-item">
+                                <i class="fa fa-users" style="color: #c41; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                                <h3>{{totalUsers}}</h3>
+                                <p>Usuarios Registrados</p>
+                            </div>
+                            <div class="stat-item" style="border-left: 1px solid #444; height: 80px;"></div>
+                            <div class="stat-item">
+                                <i class="fa fa-utensils" style="color: #c41; font-size: 1.5rem; margin-bottom: 10px;"></i>
+                                <h3>{{totalRestaurants}}</h3>
+                                <p>Restaurantes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="copyright-text">
+                        <p>Copyright 2026 Celis&amp;Ud. Todos los derechos reservados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/templatemo_580_woox_travel/vendor/jquery/jquery.min.js"></script>
+    <script src="/templatemo_580_woox_travel/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/templatemo_580_woox_travel/assets/js/custom.js"></script>
+
+    <script>
+        const CSRF = document.getElementById('csrf-token').dataset.token;
+        function showToast(msg, isError = false) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = 'show' + (isError ? ' error' : '');
+            clearTimeout(t._timer);
+            t._timer = setTimeout(() => { t.className = ''; }, 3000);
+        }
+        function toggleEdit(field) {
+            document.getElementById(field + 'Edit').classList.toggle('hidden');
+        }
+        async function postProfile(firstName, lastName, bio, avatarFile) {
+            const fd = new FormData();
+            fd.append('firstName', firstName);
+            fd.append('lastName',  lastName);
+            fd.append('bio',       bio);
+            fd.append('_csrf',     CSRF);
+            if (avatarFile) fd.append('avatarFile', avatarFile);
+            const res = await fetch('/profile/edit', { method: 'POST', body: fd });
+            return res.ok || res.redirected;
+        }
+        async function saveName() {
+            const btn = document.querySelector('#firstNameEdit .confirm-btn');
+            btn.classList.add('saving');
+            const firstName = document.getElementById('firstNameInput').value.trim();
+            const lastName  = document.getElementById('lastNameInput').value.trim();
+            if (!firstName || !lastName) {
+                showToast('Nombre y apellido son obligatorios.', true);
+                btn.classList.remove('saving'); return;
+            }
+            const bioText = document.getElementById('bioVal').textContent.trim();
+            const bio = bioText === 'Sin bio todavía...' ? '' : bioText;
+            const ok = await postProfile(firstName, lastName, bio, null);
+            btn.classList.remove('saving');
+            if (ok) {
+                document.getElementById('firstNameVal').textContent = firstName;
+                document.getElementById('lastNameVal').textContent  = '\u00a0' + lastName;
+                toggleEdit('firstName');
+                showToast('✓ Nombre guardado');
+            } else {
+                showToast('Error al guardar el nombre.', true);
+            }
+        }
+        async function saveBio() {
+            const btn = document.querySelector('#bioEdit .confirm-btn');
+            btn.classList.add('saving');
+            const bio       = document.getElementById('bioInput').value.trim();
+            const firstName = document.getElementById('firstNameVal').textContent.trim();
+            const lastName  = document.getElementById('lastNameVal').textContent.trim();
+            const ok = await postProfile(firstName, lastName, bio, null);
+            btn.classList.remove('saving');
+            if (ok) {
+                const span = document.getElementById('bioVal');
+                span.textContent    = bio || 'Sin bio todavía...';
+                span.style.color    = bio ? '' : '#555';
+                span.style.fontStyle = bio ? 'normal' : 'italic';
+                toggleEdit('bio');
+                showToast('✓ Bio guardada');
+            } else {
+                showToast('Error al guardar la bio.', true);
+            }
+        }
+        async function uploadAvatar(input) {
+            if (!input.files || !input.files[0]) return;
+            const file = input.files[0];
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById("avatarPreview").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+            const firstName = document.getElementById('firstNameVal').textContent.trim();
+            const lastName  = document.getElementById('lastNameVal').textContent.trim();
+            const bioText   = document.getElementById('bioVal').textContent.trim();
+            const bio       = bioText === 'Sin bio todavía...' ? '' : bioText;
+            const ok = await postProfile(firstName, lastName, bio, file);
+            if (ok) showToast('✓ Foto actualizada');
+            else    showToast('Error al subir la foto.', true);
+        }
+    </script>
+
+    <div id="toast"></div>
+</body>
+</html>

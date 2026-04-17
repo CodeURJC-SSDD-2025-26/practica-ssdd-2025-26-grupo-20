@@ -57,6 +57,7 @@ public class WebController {
             if (user != null) {
                 model.addAttribute("user", user);
                 model.addAttribute("isAuthenticated", true);
+                model.addAttribute("hasAvatar", user.getAvatarImage() != null);
             }
         }
 
