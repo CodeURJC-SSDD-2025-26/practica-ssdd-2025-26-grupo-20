@@ -200,6 +200,7 @@ public String showIndex(Model model, Principal principal) {
                 }
             }
 
+            rData.put("isAuthenticated", user != null);
             rData.put("isSavedInAnyList", isSavedInAnyList);
             rData.put("userListsWithStatus", listsStatus);
             restaurantsData.add(rData);

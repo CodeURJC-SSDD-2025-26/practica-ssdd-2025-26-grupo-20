@@ -24,15 +24,33 @@ public class LoginController {
         return "login";
     }
 
-    // 2. Pantalla del formulario de Usuario
     @GetMapping("/loginuser")
-    public String loginUser() {
+    public String showUserLogin(
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "registered", required = false) String registered,
+            Model model) {
+
+        if (error != null) {
+            model.addAttribute("error", true);
+        }
+        if (registered != null) {
+            model.addAttribute("registered", true);
+        }
         return "loginuser";
     }
 
-    // 3. Pantalla del formulario de Admin
     @GetMapping("/loginadmin")
-    public String loginAdmin() {
+    public String showAdminLogin(
+            @RequestParam(value = "error", required = false) String error,
+            @RequestParam(value = "logout", required = false) String logout,
+            Model model) {
+
+        if (error != null) {
+            model.addAttribute("error", true);
+        }
+        if (logout != null) {
+            model.addAttribute("logout", true);
+        }
         return "loginadmin";
     }
 }

@@ -36,7 +36,7 @@ public class AdminController {
             model.addAttribute("hasAdminAvatar", u.getAvatarImage() != null);
             model.addAttribute("adminUser", u);
         });
-        return "admin/admin";
+        return "admin";
     }
 
     // ── Gestión de restaurantes ──────────────────────────────────────────────

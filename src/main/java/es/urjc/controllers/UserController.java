@@ -33,7 +33,7 @@ public class UserController {
 
     @GetMapping("/signup")
     public String showSignupForm() {
-        return "signup";
+        return "registeruser"; 
     }
 
     @PostMapping("/signup")
@@ -46,45 +46,33 @@ public class UserController {
             @RequestParam String confirmPassword,
             Model model) {
 
-        // --- Backend validations ---
-
-        // Check passwords match
         if (!password.equals(confirmPassword)) {
             model.addAttribute("error", "Las contraseñas no coinciden");
-            return "signup";
+            return "registeruser";
         }
-
-        // Check password length
         if (password.length() < 6) {
             model.addAttribute("error", "La contraseña debe tener al menos 6 caracteres");
-            return "signup";
+            return "registeruser";
         }
-
-        // Check email format
         if (!email.contains("@")) {
             model.addAttribute("error", "Formato de email inválido");
-            return "signup";
+            return "registeruser";
         }
-
-        // Check if username already exists
         if (userService.existsByUsername(username)) {
             model.addAttribute("error", "Nombre de usuario ya registrado");
-            return "signup";
+            return "registeruser";
         }
-
-        // Check if email already exists
         if (userService.existsByEmail(email)) {
             model.addAttribute("error", "Email ya registrado");
-            return "signup";
+            return "registeruser";
         }
 
-        // --- Save the new user ---
         try {
             userService.registerNewUser(firstName, lastName, email, username, password);
-            return "redirect:/login?registered";
+            return "redirect:/loginuser?registered";
         } catch (Exception e) {
             model.addAttribute("error", "Ocurrió un error, por favor inténtalo de nuevo");
-            return "signup";
+            return "registeruser";
         }
     }
 
@@ -93,31 +81,21 @@ public class UserController {
     // -------------------------------------------------------
 
     @GetMapping("/profile")
-    public String showMyProfile(@AuthenticationPrincipal UserDetails currentUser, @RequestParam(value = "updated", required = false) String updated, Model model) {
-
-        Optional<User> user = userService.findByUsername(currentUser.getUsername());
-        if (user.isEmpty()) return "redirect:/login";
-
-        model.addAttribute("user", user.get());
-        model.addAttribute("hasAvatar", user.get().getAvatarImage() != null);
-        model.addAttribute("updated", updated != null); // ← y esto
-        return "profile";
-    }
-
-    @GetMapping("/profile/edit")
-    public String showEditProfile(
+    public String showMyProfile(
             @AuthenticationPrincipal UserDetails currentUser,
+            @RequestParam(value = "updated", required = false) String updated,
             Model model) {
 
-        Optional<User> user = userService.findByUsername(currentUser.getUsername());
+        Optional<User> optUser = userService.findByUsername(currentUser.getUsername());
+        if (optUser.isEmpty()) return "redirect:/login";
 
-        if (user.isEmpty()) {
-            return "redirect:/login";
-        }
-
-        model.addAttribute("user", user.get());
-        model.addAttribute("hasAvatar", user.get().getAvatarImage() != null);
-        return "edit-profile";
+        User user = optUser.get();
+        model.addAttribute("user", user);
+        model.addAttribute("hasAvatar", user.getAvatarImage() != null);
+        model.addAttribute("updated", updated != null);
+        model.addAttribute("myLists", user.getFavoriteLists());
+        model.addAttribute("myReviews", user.getReviews());
+        return "profile";
     }
 
     @PostMapping("/profile/edit")
@@ -133,19 +111,19 @@ public class UserController {
             Model model) {
 
         Optional<User> optUser = userService.findByUsername(currentUser.getUsername());
-
-        if (optUser.isEmpty()) {
-            return "redirect:/login";
-        }
+        if (optUser.isEmpty()) return "redirect:/login";
 
         try {
             userService.updateUserFull(optUser.get(), firstName, lastName, bio, email, username, password, avatarFile);
             return "redirect:/profile?updated";
         } catch (Exception e) {
+            User user = optUser.get();
             model.addAttribute("error", "Error: " + e.getMessage());
-            model.addAttribute("user", optUser.get());
-            model.addAttribute("hasAvatar", optUser.get().getAvatarImage() != null);
-            return "profile"; // Vuelve con error
+            model.addAttribute("user", user);
+            model.addAttribute("hasAvatar", user.getAvatarImage() != null);
+            model.addAttribute("myLists", user.getFavoriteLists());
+            model.addAttribute("myReviews", user.getReviews());
+            return "profile";
         }
     }
 
@@ -177,9 +155,7 @@ public class UserController {
     // -------------------------------------------------------
 
     @PostMapping("/profile/delete")
-    public String deleteAccount(
-            @AuthenticationPrincipal UserDetails currentUser) {
-
+    public String deleteAccount(@AuthenticationPrincipal UserDetails currentUser) {
         Optional<User> optUser = userService.findByUsername(currentUser.getUsername());
         optUser.ifPresent(user -> userService.deleteUser(user.getId()));
         return "redirect:/logout";
