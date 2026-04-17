@@ -40,8 +40,8 @@ public class SecurityConfig {
         http
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/restaurants", "/restaurants/{id}").permitAll()
-                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout").permitAll() // <-- Añadidas las rutas de los formularios
+                .requestMatchers("/", "/restaurants", "/restaurants/**", "/restaurant/**").permitAll()
+                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup").permitAll()
                 .requestMatchers("/templatemo_580_woox_travel/**").permitAll()
                 .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**", "/assets/**").permitAll()
                 .requestMatchers("/user/{id}/avatar").permitAll()

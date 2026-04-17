@@ -74,15 +74,13 @@ public class WebController {
 public String showIndex(Model model, Principal principal) {
     User user = null;
 
-    // 1. LÓGICA DE USUARIO (Extraída de UserController)
     if (principal != null) {
         user = userService.findByUsername(principal.getName()).orElse(null);
         if (user != null) {
             model.addAttribute("user", user);
+            model.addAttribute("hasAvatar", user.getAvatarImage() != null);
             model.addAttribute("isAuthenticated", true);
             
-            // Añadimos la lógica de isAdmin que tenías en UserController
-            // Suponiendo que usas Spring Security, esto comprueba el rol:
             boolean isAdmin = false;
             if (principal instanceof org.springframework.security.authentication.UsernamePasswordAuthenticationToken) {
                 isAdmin = ((org.springframework.security.authentication.UsernamePasswordAuthenticationToken) principal)
@@ -93,14 +91,10 @@ public String showIndex(Model model, Principal principal) {
         }
     }
 
-    // 2. LÓGICA DE RESTAURANTES (La que ya tenías en WebController)
     List<Restaurant> allRestaurants = restaurantRepository.findAll();
-    
-    // Esta función es clave para que funcionen los corazones/listas
     List<Map<String, Object>> restaurantsData = getRestaurantsWithListStatus(user, allRestaurants);
     model.addAttribute("restaurants", restaurantsData);
 
-    // 3. RECOMENDACIONES (Top 6)
     List<Map<String, Object>> recommendedRestaurants = new ArrayList<>();
     for (Map<String, Object> restaurantData : restaurantsData) {
         recommendedRestaurants.add(restaurantData);
