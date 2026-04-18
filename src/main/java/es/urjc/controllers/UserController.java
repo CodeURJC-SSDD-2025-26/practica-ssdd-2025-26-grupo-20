@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.urjc.model.User;
+import es.urjc.services.EmailService;
+import es.urjc.services.RestaurantService;
 import es.urjc.services.UserService;
 
 @Controller
@@ -27,13 +29,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RestaurantService restaurantService;
+
+    @Autowired
+    private EmailService emailService;
+
     // -------------------------------------------------------
     // SIGNUP
     // -------------------------------------------------------
 
     @GetMapping("/signup")
     public String showSignupForm() {
-        return "signup"; 
+        return "signup";
     }
 
     @PostMapping("/signup")
@@ -69,6 +77,7 @@ public class UserController {
 
         try {
             userService.registerNewUser(firstName, lastName, email, username, password);
+            emailService.sendWelcomeEmail(email, firstName); // correo de bienvenida
             return "redirect:/loginuser?registered";
         } catch (Exception e) {
             model.addAttribute("error", "Ocurrió un error, por favor inténtalo de nuevo");
@@ -146,6 +155,8 @@ public class UserController {
         model.addAttribute("adminName", user.getFirstName());
         model.addAttribute("adminId", user.getId());
         model.addAttribute("updated", updated != null);
+        model.addAttribute("totalUsers", userService.findAll().size());
+        model.addAttribute("totalRestaurants", restaurantService.findAll().size());
         return "profileadmin";
     }
 
@@ -166,14 +177,14 @@ public class UserController {
 
         try {
             userService.updateUserFull(optUser.get(), firstName, lastName, bio, email, username, password, avatarFile);
-            return "redirect:/profile?updated";
+            return "redirect:/profileadmin?updated";
         } catch (Exception e) {
             User user = optUser.get();
             model.addAttribute("error", "Error: " + e.getMessage());
             model.addAttribute("user", user);
             model.addAttribute("hasAvatar", user.getAvatarImage() != null);
-            model.addAttribute("myLists", user.getFavoriteLists());
-            model.addAttribute("myReviews", user.getReviews());
+            model.addAttribute("adminName", user.getFirstName());
+            model.addAttribute("adminId", user.getId());
             return "profileadmin";
         }
     }

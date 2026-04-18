@@ -68,12 +68,12 @@
             <div class="d-flex align-items-center gap-3">
                 <span class="d-none d-md-inline">Hola, <strong>{{adminName}}</strong></span>
                 <a href="/profileadmin" class="avatar-link">
-                    {{#hasAdminAvatar}}
+                    {{#hasAvatar}}
                         <img src="/user/{{adminId}}/avatar" alt="Admin" class="user-profile" style="width:45px;height:45px;border-radius:50%;">
-                    {{/hasAdminAvatar}}
-                    {{^hasAdminAvatar}}
+                    {{/hasAvatar}}
+                    {{^hasAvatar}}
                         <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Admin" class="user-profile" style="width:45px;height:45px;border-radius:50%;">
-                    {{/hasAdminAvatar}}
+                    {{/hasAvatar}}
                 </a>
                 <form action="/logout" method="post" style="display:inline;">
                     <input type="hidden" name="_csrf" value="{{_csrf.token}}">
@@ -225,7 +225,7 @@
             fd.append('bio',       bio);
             fd.append('_csrf',     CSRF);
             if (avatarFile) fd.append('avatarFile', avatarFile);
-            const res = await fetch('/profile/edit', { method: 'POST', body: fd });
+            const res = await fetch('/profileadmin/edit', { method: 'POST', body: fd });
             return res.ok || res.redirected;
         }
         async function saveName() {

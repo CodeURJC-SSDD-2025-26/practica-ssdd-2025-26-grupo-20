@@ -19,6 +19,7 @@ body {
   padding-top: 100px; /* espacio header */
   padding-bottom: 50px;
   position: relative !important;
+  flex: 1;
 }
 
 /* Contenedor principal del login */
@@ -167,5 +168,5 @@ body {
 }
 
 footer {
-  margin-top: 18em !important;
+  margin-top: auto;
 }
