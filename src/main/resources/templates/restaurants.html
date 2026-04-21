@@ -11,10 +11,22 @@
       rel="stylesheet"
     />
     <title>Celis&Ud - Restaurantes</title>
-    <link href="/templatemo_580_woox_travel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/fontawesome.css" />
-    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/templatemo-woox-travel.css" />
-    <link rel="stylesheet" href="/templatemo_580_woox_travel/assets/css/owl.css" />
+    <link
+      href="/templatemo_580_woox_travel/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="/templatemo_580_woox_travel/assets/css/fontawesome.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/templatemo_580_woox_travel/assets/css/templatemo-woox-travel.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/templatemo_580_woox_travel/assets/css/owl.css"
+    />
   </head>
 
   <body>
@@ -31,25 +43,42 @@
                 <li><a href="/restaurants">Restaurantes</a></li>
                 {{#isAuthenticated}}
                 <li class="user-profile-item">
-                  <span class="d-none d-md-block">Hola, <strong>{{user.firstName}}</strong></span>
+                  <span class="d-none d-md-block"
+                    >Hola, <strong>{{user.firstName}}</strong></span
+                  >
                   <a href="/profile" class="avatar-link">
                     {{#hasAvatar}}
-                    <img src="/user/{{user.id}}/avatar" alt="Foto de perfil" class="avatar-img" />
-                    {{/hasAvatar}}
-                    {{^hasAvatar}}
-                    <img src="/assets/images/perfil-user.jpg" alt="Foto de perfil" class="avatar-img" />
+                    <img
+                      src="/user/{{user.id}}/avatar"
+                      alt="Foto de perfil"
+                      class="avatar-img"
+                    />
+                    {{/hasAvatar}} {{^hasAvatar}}
+                    <img
+                      src="/assets/images/perfil-user.jpg"
+                      alt="Foto de perfil"
+                      class="avatar-img"
+                    />
                     {{/hasAvatar}}
                   </a>
-                  <form action="/logout" method="post" style="display:inline;">
-                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-                    <button type="submit" class="logout-btn" title="Cerrar sesión"
-                            style="background:none;border:none;cursor:pointer;color:inherit;">
+                  <form action="/logout" method="post" style="display: inline">
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+                    <button
+                      type="submit"
+                      class="logout-btn"
+                      title="Cerrar sesión"
+                      style="
+                        background: none;
+                        border: none;
+                        cursor: pointer;
+                        color: inherit;
+                      "
+                    >
                       <i class="fa fa-sign-out-alt"></i>
                     </button>
                   </form>
                 </li>
-                {{/isAuthenticated}}
-                {{^isAuthenticated}}
+                {{/isAuthenticated}} {{^isAuthenticated}}
                 <li><a href="/login">Iniciar sesión</a></li>
                 {{/isAuthenticated}}
               </ul>
@@ -260,7 +289,17 @@
     <script>
       function toggleRestaurantList(event, form) {
         event.preventDefault();
-        fetch(form.action, { method: "POST" }).then((response) => {
+        // Leemos el token CSRF del input oculto del form de logout (ya presente en la cabecera)
+        const csrfInput = document.querySelector('input[name="_csrf"]');
+        const headers = {};
+        if (csrfInput) {
+          headers["X-CSRF-TOKEN"] = csrfInput.value;
+        }
+        fetch(form.action, {
+          method: "POST",
+          headers: headers,
+          credentials: "same-origin",
+        }).then((response) => {
           if (response.ok) {
             const badge = form.querySelector(".badge");
             const icon = badge.querySelector("i");
