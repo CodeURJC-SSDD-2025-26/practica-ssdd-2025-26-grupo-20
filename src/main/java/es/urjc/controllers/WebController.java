@@ -114,6 +114,7 @@ public String showIndex(Model model, Principal principal) {
             if (user != null) {
                 model.addAttribute("user", user);
                 model.addAttribute("isAuthenticated", true);
+                model.addAttribute("hasAvatar", user.getAvatarImage() != null);
             }
         }
         Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
