@@ -221,7 +221,7 @@ public class UserController {
     public String deleteAccount(@AuthenticationPrincipal UserDetails currentUser) {
         Optional<User> optUser = userService.findByUsername(currentUser.getUsername());
         optUser.ifPresent(user -> userService.deleteUser(user.getId()));
-        return "redirect:/logout";
+        return "redirect:/login?deleted";
     }
 
     // -------------------------------------------------------
