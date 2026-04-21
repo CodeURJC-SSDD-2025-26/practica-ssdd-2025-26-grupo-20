@@ -4,8 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Review {
@@ -33,6 +33,7 @@ public class Review {
         this.restaurant = restaurant;
     }
 
+    
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getComment() { return comment; }
@@ -43,4 +44,10 @@ public class Review {
     public void setAuthor(User author) { this.author = author; }
     public Restaurant getRestaurant() { return restaurant; }
     public void setRestaurant(Restaurant restaurant) { this.restaurant = restaurant; }
+
+    public boolean isRating1() { return this.rating == 1; }
+    public boolean isRating2() { return this.rating == 2; }
+    public boolean isRating3() { return this.rating == 3; }
+    public boolean isRating4() { return this.rating == 4; }
+    public boolean isRating5() { return this.rating == 5; }
 }

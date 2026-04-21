@@ -300,9 +300,9 @@
                 <h2><i class="fa fa-comment"></i> Mis Reseñas</h2>
               </div>
 
-              {{#user.reviews}}
+              {{#hasReviews}}
               <div class="reviews-scroll">
-                {{#user.reviews}}
+                {{#myReviews}}
                 <div class="review-card">
                   <span class="review-restaurant">{{restaurant.name}}</span>
                   <div class="stars">{{rating}} ★</div>
@@ -326,11 +326,11 @@
                     <input type="hidden" name="_csrf" value="{{_csrf.token}}">
                     <!-- Estrellas -->
                     <div class="star-row" style="flex-direction:row-reverse;justify-content:flex-end;">
-                      <input type="radio" name="rating" id="s5-{{id}}" value="5" {{#rating5}}checked{{/rating5}}><label for="s5-{{id}}">★</label>
-                      <input type="radio" name="rating" id="s4-{{id}}" value="4" {{#rating4}}checked{{/rating4}}><label for="s4-{{id}}">★</label>
-                      <input type="radio" name="rating" id="s3-{{id}}" value="3" {{#rating3}}checked{{/rating3}}><label for="s3-{{id}}">★</label>
-                      <input type="radio" name="rating" id="s2-{{id}}" value="2" {{#rating2}}checked{{/rating2}}><label for="s2-{{id}}">★</label>
-                      <input type="radio" name="rating" id="s1-{{id}}" value="1" {{#rating1}}checked{{/rating1}}><label for="s1-{{id}}">★</label>
+                      <input type="radio" name="rating" id="s5-{{id}}" value="5" {{#isRating5}}checked{{/isRating5}}><label for="s5-{{id}}">★</label>
+                      <input type="radio" name="rating" id="s4-{{id}}" value="4" {{#isRating4}}checked{{/isRating4}}><label for="s4-{{id}}">★</label>
+                      <input type="radio" name="rating" id="s3-{{id}}" value="3" {{#isRating3}}checked{{/isRating3}}><label for="s3-{{id}}">★</label>
+                      <input type="radio" name="rating" id="s2-{{id}}" value="2" {{#isRating2}}checked{{/isRating2}}><label for="s2-{{id}}">★</label>
+                      <input type="radio" name="rating" id="s1-{{id}}" value="1" {{#isRating1}}checked{{/isRating1}}><label for="s1-{{id}}">★</label>
                     </div>
                     <textarea name="comment" rows="3">{{comment}}</textarea>
                     <button type="submit" class="btn-save-review">
@@ -338,17 +338,17 @@
                     </button>
                   </form>
                 </div>
-                {{/user.reviews}}
+                {{/myReviews}}
               </div>
-              {{/user.reviews}}
+              {{/hasReviews}}
 
-              {{^user.reviews}}
+              {{^hasReviews}}
               <div class="text-center py-4">
                 <p style="color:#666;font-style:italic;">Todavía no has escrito ninguna reseña.
                   <a href="/restaurants" style="color:#c41;">¡Explora restaurantes!</a>
                 </p>
               </div>
-              {{/user.reviews}}
+              {{/hasReviews}}
             </div>
 
           </div>

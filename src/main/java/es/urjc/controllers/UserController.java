@@ -104,6 +104,7 @@ public class UserController {
         model.addAttribute("updated", updated != null);
         model.addAttribute("myLists", user.getFavoriteLists());
         model.addAttribute("myReviews", user.getReviews());
+        model.addAttribute("hasReviews", !user.getReviews().isEmpty());
         return "profile";
     }
 
