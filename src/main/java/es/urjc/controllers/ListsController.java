@@ -49,14 +49,38 @@ public class ListsController {
 
     @PostMapping("/lists/delete/{id}")
     public String deleteList(@PathVariable Long id, Principal principal) {
-        if (principal == null) return "redirect:/login";
+        System.out.println("============================================");
+        System.out.println(">>> DELETE LIST ENDPOINT HIT <<< id=" + id);
+        System.out.println(">>> Principal: " + (principal == null ? "NULL" : principal.getName()));
+        System.out.println("============================================");
 
-        User user = userService.findByUsername(principal.getName()).orElse(null);
-        if (user != null) {
-            Lists listToDelete = listsService.getListById(id).orElse(null);
-            if (listToDelete != null && listToDelete.getOwner().getId().equals(user.getId())) {
-                listsService.deleteList(id);
+        if (principal == null) {
+            System.out.println(">>> No principal, redirecting to login");
+            return "redirect:/login";
+        }
+
+        try {
+            User user = userService.findByUsername(principal.getName()).orElse(null);
+            System.out.println(">>> User found: " + (user != null ? user.getUsername() + " (id=" + user.getId() + ")" : "NULL"));
+
+            if (user != null) {
+                Lists listToDelete = listsService.getListById(id).orElse(null);
+                System.out.println(">>> List found: " + (listToDelete != null ? listToDelete.getName() : "NULL"));
+
+                if (listToDelete != null) {
+                    System.out.println(">>> List owner id: " + listToDelete.getOwner().getId() + " | User id: " + user.getId());
+                    if (listToDelete.getOwner().getId().equals(user.getId())) {
+                        System.out.println(">>> Ownership matches, deleting...");
+                        listsService.deleteList(id);
+                        System.out.println(">>> DELETED OK");
+                    } else {
+                        System.out.println(">>> Ownership MISMATCH, not deleting");
+                    }
+                }
             }
+        } catch (Exception e) {
+            System.out.println(">>> EXCEPTION in deleteList:");
+            e.printStackTrace();
         }
         return "redirect:/profile";
     }

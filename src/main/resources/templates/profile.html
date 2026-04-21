@@ -247,52 +247,52 @@
 
             <!-- Mis Listas -->
             <div class="profile-block">
-  <div class="section-heading profile-section-heading">
-    <h2><i class="fa fa-list"></i> Mis Listas</h2>
-    <div class="main-button">
-      <a href="#" data-bs-toggle="modal" data-bs-target="#modalNuevaLista">
-        <i class="fa fa-plus"></i> Nueva lista
-      </a>
-    </div>
-  </div>
+              <div class="section-heading profile-section-heading">
+                <h2><i class="fa fa-list"></i> Mis Listas</h2>
+                <div class="main-button">
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#modalNuevaLista">
+                    <i class="fa fa-plus"></i> Nueva lista
+                  </a>
+                </div>
+              </div>
 
-  <div class="row">
-    {{#user.favoriteLists}}
-    <div class="col-lg-3 col-md-6 col-sm-6">
-      <div class="list-card">
-        <div class="list-icon"><i class="fa fa-star"></i></div>
-        <span class="list-name">{{name}}</span>
-        <span class="list-count">{{description}}</span>
-        
-        <div class="list-actions">
-          <a href="/lista/{{id}}">
-            <button type="button" title="Ver lista"><i class="fa fa-eye"></i></button>
-          </a>
-          
-          <form action="/lists/delete/{{id}}" method="post" style="display:inline;"
-                onsubmit="return confirm('¿Seguro que quieres eliminar la lista \'{{name}}\'?')">
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-            <button type="submit" class="del" title="Eliminar" 
-                    style="background:none; border:none; color:#e74c3c; cursor:pointer;">
-              <i class="fa fa-trash"></i>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-    {{/user.favoriteLists}}
-    
-    {{^user.favoriteLists}}
-    <div class="col-12 text-center py-4">
-      <p style="color:#666;font-style:italic;">Todavía no has creado ninguna lista.
-        <a href="#" data-bs-toggle="modal" data-bs-target="#modalNuevaLista" style="color:#c41;">
-          ¡Crea tu primera lista!
-        </a>
-      </p>
-    </div>
-    {{/user.favoriteLists}}
-  </div>
-</div>
+              <div class="row">
+                {{#user.favoriteLists}}
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                  <div class="list-card">
+                    <div class="list-icon"><i class="fa fa-star"></i></div>
+                    <span class="list-name">{{name}}</span>
+                    <span class="list-count">{{description}}</span>
+
+                    <div class="list-actions">
+                      <a href="/lista/{{id}}" title="Ver lista" class="btn-view-list"
+                         style="background:none; border:none; color:#afafaf; cursor:pointer; padding:2px 6px;">
+                        <i class="fa fa-eye"></i>
+                      </a>
+
+                      <button type="button" class="del" title="Eliminar"
+                              data-list-id="{{id}}"
+                              data-list-name="{{name}}"
+                              onclick="deleteList(this)"
+                              style="background:none; border:none; color:#e74c3c; cursor:pointer;">
+                        <i class="fa fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {{/user.favoriteLists}}
+
+                {{^user.favoriteLists}}
+                <div class="col-12 text-center py-4">
+                  <p style="color:#666;font-style:italic;">Todavía no has creado ninguna lista.
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalNuevaLista" style="color:#c41;">
+                      ¡Crea tu primera lista!
+                    </a>
+                  </p>
+                </div>
+                {{/user.favoriteLists}}
+              </div>
+            </div>
 
             <!-- Mis Reseñas -->
             <div class="profile-block">
@@ -313,13 +313,11 @@
                     <button class="btn-edit-review" onclick="toggleReviewEdit('reviewEdit{{id}}')" title="Editar">
                       <i class="fa fa-pencil"></i> Editar
                     </button>
-                    <form action="/review/{{id}}/delete" method="post" style="display:inline;"
-                          onsubmit="return confirm('¿Eliminar esta reseña?')">
-                      <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-                      <button type="submit" class="btn-del-review" title="Eliminar">
-                        <i class="fa fa-trash"></i> Borrar
-                      </button>
-                    </form>
+                    <button type="button" class="btn-del-review" title="Eliminar"
+                            data-review-id="{{id}}"
+                            onclick="deleteReview(this)">
+                      <i class="fa fa-trash"></i> Borrar
+                    </button>
                   </div>
 
                   <!-- Formulario de edición inline -->
@@ -435,6 +433,43 @@
       function toggleReviewEdit(id) {
         const el = document.getElementById(id);
         el.style.display = el.style.display === 'block' ? 'none' : 'block';
+      }
+
+      // ── Borrar lista (genera form dinámico con CSRF global) ────
+      function deleteList(btn) {
+        const id = btn.dataset.listId;
+
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/lists/delete/' + id;
+
+        const csrfInput = document.createElement('input');
+        csrfInput.type  = 'hidden';
+        csrfInput.name  = '_csrf';
+        csrfInput.value = CSRF;
+        form.appendChild(csrfInput);
+
+        document.body.appendChild(form);
+        form.submit();
+      }
+
+      // ── Borrar reseña (mismo patrón) ───────────────────────────
+      function deleteReview(btn) {
+        const id = btn.dataset.reviewId;
+        if (!confirm('¿Eliminar esta reseña?')) return;
+
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/review/' + id + '/delete';
+
+        const csrfInput = document.createElement('input');
+        csrfInput.type  = 'hidden';
+        csrfInput.name  = '_csrf';
+        csrfInput.value = CSRF;
+        form.appendChild(csrfInput);
+
+        document.body.appendChild(form);
+        form.submit();
       }
 
       // ── Envío al backend /profile/edit ──────────────────────────
