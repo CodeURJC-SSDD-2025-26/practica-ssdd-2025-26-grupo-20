@@ -1,22 +1,21 @@
 package es.urjc.controllers;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
-import jakarta.servlet.http.HttpServletRequest;
 
 import es.urjc.model.Lists;
-import es.urjc.model.User;
 import es.urjc.model.Restaurant;
+import es.urjc.model.User;
+import es.urjc.repositories.RestaurantRepository;
 import es.urjc.services.ListsService;
 import es.urjc.services.UserService;
-import es.urjc.repositories.RestaurantRepository;
-
-import java.security.Principal;
-import java.util.List;
+import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class ListsController {
@@ -123,6 +122,7 @@ public class ListsController {
         if (user != null) {
             model.addAttribute("user", user);
             model.addAttribute("isAuthenticated", true);
+            model.addAttribute("hasAvatar", user.getAvatarImage() != null);
         }
 
         Lists list = listsService.getListById(id).orElse(null);

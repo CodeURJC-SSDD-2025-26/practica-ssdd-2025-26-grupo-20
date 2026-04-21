@@ -42,6 +42,7 @@
               <ul class="nav">
                 <li><a href="/">Inicio</a></li>
                 <li><a href="/restaurants">Restaurantes</a></li>
+                {{#isAuthenticated}}
                 <li class="user-profile-item">
                   <span class="d-none d-md-block">Hola, <strong>{{user.firstName}}</strong></span>
                   <a href="/profile" class="avatar-link">
@@ -49,7 +50,7 @@
                     <img src="/user/{{user.id}}/avatar" alt="Foto de perfil" class="avatar-img" />
                     {{/hasAvatar}}
                     {{^hasAvatar}}
-                    <img src="/templatemo_580_woox_travel/assets/images/perfil-user.jpg" alt="Foto de perfil" class="avatar-img" />
+                    <img src="/assets/images/perfil-user.jpg" alt="Foto de perfil" class="avatar-img" />
                     {{/hasAvatar}}
                   </a>
                   <form action="/logout" method="post" style="display:inline;">
@@ -60,6 +61,10 @@
                     </button>
                   </form>
                 </li>
+                {{/isAuthenticated}}
+                {{^isAuthenticated}}
+                <li><a href="/login">Iniciar sesión</a></li>
+                {{/isAuthenticated}}
               </ul>
               <a class="menu-trigger"><span>Menu</span></a>
             </nav>
