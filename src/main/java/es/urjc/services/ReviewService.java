@@ -1,13 +1,15 @@
 package es.urjc.services;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import es.urjc.model.Review;
 import es.urjc.model.User;
 import es.urjc.repositories.ReviewRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-import java.util.List;
 
 @Service
 public class ReviewService {
@@ -15,6 +17,7 @@ public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
+    @Transactional
     public void deleteReview(long reviewId, User currentUser) {
 
         Optional<Review> reviewOptional = reviewRepository.findById(reviewId);
@@ -23,10 +26,18 @@ public class ReviewService {
             Review review = reviewOptional.get();
 
             if (review.getAuthor().getId().equals(currentUser.getId())) {
-                //Si coinciden los IDS los borramos
+                // Desvinculamos la reseña de la memoria
+                currentUser.getReviews().removeIf(r -> r.getId().equals(review.getId()));
+                
+                // Por si el restaurante llega en un futuro MUY lejano a tener una lista de reseñas se limpia
+                if (review.getRestaurant() != null && review.getRestaurant().getReviews() != null) {
+                    review.getRestaurant().getReviews().removeIf(r -> r.getId().equals(review.getId()));
+                }
+
+                // Borrar la reseña
                 reviewRepository.delete(review);
             } else {
-                //Si no coinciden, lanzamos un error
+                // Si no coinciden, lanzamos un error
                 throw new IllegalArgumentException("No tienes permiso para borrar esta reseña.");
             }
         } else {
