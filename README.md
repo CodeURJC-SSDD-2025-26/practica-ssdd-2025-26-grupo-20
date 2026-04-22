@@ -349,6 +349,7 @@ También encargado de realizar los merges de las ramas de mis compañeros.
 |7| [added alexis branch](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/7471be5f94a1ba252648a0f5e097a0d9949d248c)  | Branch feature-usuarios(hubo un problema con el merge)  |
 |8| [fixed a bug where you cant delete lists](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/b68a1291c92a2924f876a4a0c2db15390907be6d)  | [ListsController.java](src/main/java/es/urjc/controllers/ListsController.java)   |
 |9| [lists bugs fixed](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/5d6487c0e2bc5c016bcede4d60ede37b6bf07dd4)  | [index.html,details.html,restaurants.html](src/main/resources/templates/index.html)   |
+|10| [added error page](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/f1ef43c0574fde6ee928874c39c11e41d2891e0b)  | [error.html,CustomErrorController.java](src/main/java/es/urjc/controllers/CustomErrorController.java)   |
 
 ---
 
