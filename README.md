@@ -325,11 +325,16 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [actualización parte usuarios](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/8b533f647d229aa8d0d1f002c09890b1129cec96)  | [AdminController.java, LoginController.java, UserController.java, WebController.java, User.java](src/main/java/es/urjc/controllers/AdminController.java)   |
+|2| [corrección usuarios](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/1665e97b4d4b14d7701f12d474f4f08168715791)  | [assets, vendor](‎src/main/resources/static/templatemo_580_woox_travel)   |
+|3| [cambios interfaz usuario](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/84427b515715d174d50ee96cfee24861e7067594)  | [WebController.java, SecurityConfig.java, index.html, restaurants.html](‎src/main/java/es/urjc/controllers/WebController.java)   |
+|4| [merge](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/f5c4891c7b149a788b64634feb4ed7c58c0c672a)  | [AdminController.java, LoginController.java, UserController.java, WebController.java, DatabaseInitializer.java](src/main/java/es/urjc/controllers/AdminController.java)   |
+|5| [corrección inicio sesión admin](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/4237853b18d8b9a618250c923c2faaa284047025)  | [AdminController.java, login.html, loginadmin.html, loginuser.html](src/main/resources/templates/login.html)   |
+|6| [avance página administradores y corrección perfil](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/76b27192f2804cb29cf18db38c2bf769000d0298)  | [LoginController.java, UserController.java, WebController.java, SecurityConfig.java, admin.html, user-list.html, loginuser.html, loginadmin.html, profile.html](src/main/java/es/urjc/controllers/LoginController.java) |
+|7| [correcciones y envío de email casi completado](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/101c0965acddb82e56a0c06fdc8ee1098c558ac4)  | [pox.xml, EmailService.java, application.properties, UserController.java](src/main/java/es/urjc/services/EmailService.java) |
+|8| [envío de email implementado correctamente](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/0c1afc5e4e2043c866c620acd01e8eb84c96caad)  | [pom.xml, application.properties](src/main/resources/application.properties) |
+|9| [corrección headers de restaurantes (detalles) y listas](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/2462e79adb576f7aaff694189074e0fce40b645a)  | [ListsController.java, WebController.java](src/main/java/es/urjc/controllers/ListsController.java) |
+|10| [corrección encabezado lista de usuarios y redirección al eliminar tu propia cuenta](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/7ceef1501376319d3214cd043c250f09024d1fe6)  | [UserController.java, user-list.html](src/main/java/es/urjc/controllers/UserController.java) |
 
 ---
 
