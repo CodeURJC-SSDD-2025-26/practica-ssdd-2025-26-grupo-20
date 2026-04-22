@@ -60,6 +60,20 @@ public class ReviewController {
         return "redirect:/profile";
     }
 
+    @PostMapping("/admin/reviews/{reviewId}/delete")
+    public String adminDeleteReview(@PathVariable Long reviewId, Principal principal) {
+        // Vamos al login si no hay sesion
+        if (principal == null) return "redirect:/loginadmin";
+
+        try {
+            // RECORDATORIO: Spring security deberia estar protegiendo las URL que empiezan por /admin/**
+            reviewService.deleteReviewAdmin(reviewId);
+        } catch (Exception e) {
+            return "redirect:/admin/users?error=true";
+        }
+        return "redirect:/admin/users";
+    }
+
     @PostMapping("/review/{reviewId}/edit")
     public String editReview(
             @PathVariable Long reviewId,

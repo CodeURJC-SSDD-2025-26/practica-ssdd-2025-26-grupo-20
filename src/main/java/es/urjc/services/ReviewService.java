@@ -45,6 +45,21 @@ public class ReviewService {
         }
     }
 
+    @Transactional
+    public void deleteReviewAdmin(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(() -> new IllegalArgumentException("Reseña no encontrada"));
+
+        if (review.getAuthor() != null) {
+            review.getAuthor().getReviews().removeIf(r -> r.getId().equals(reviewId));
+        }
+
+        if (review.getRestaurant() != null && review.getRestaurant().getReviews() != null) {
+            review.getRestaurant().getReviews().removeIf(r -> r.getId().equals(reviewId));
+        }
+
+        reviewRepository.delete(review);
+    }
+
     public void saveReview(Review review) {
 
         if (review.getRating() < 1 || review.getRating() > 5) {
