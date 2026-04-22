@@ -358,11 +358,13 @@ También encargado de realizar los merges de las ramas de mis compañeros.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [De las reseñas hecho crear y borrar reseñas](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/36460f2a33606aef9c8ef2baec6da62d5a93db73)  | [ReviewController.java, ReviewService.java, ReviewServiceTest.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/36460f2a33606aef9c8ef2baec6da62d5a93db73#diff-c3078f136673113171ce77066c33799ad19420b1d84bf593f2a5f66095f1d265)   |
+|2| [Controlador, graficos y mas](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/294de16072d8870b63b962dcbf49628dbfd4e706)  | [ReviewController.java, ReviewRepository.java, ReviewService.java, admin-restaurants.html, ReviewServiceTest.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/294de16072d8870b63b962dcbf49628dbfd4e706#diff-c3078f136673113171ce77066c33799ad19420b1d84bf593f2a5f66095f1d265)   |
+|3| [Botones de editar y borrar reseñas propias](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/da733e68a446929854580a61a1ff03f5d1da0e84)  | [ReviewController.java, ReviewService.java, DatabaseInitializer.java, application.properties, profile.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/da733e68a446929854580a61a1ff03f5d1da0e84#diff-c3078f136673113171ce77066c33799ad19420b1d84bf593f2a5f66095f1d265)   |
+|4| [Assets publicos](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/0caed92ac84f9681a09587f7da2c8845d9d56fd3)  | [SecurityConfig.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/0caed92ac84f9681a09587f7da2c8845d9d56fd3#diff-f2ebbfdc5732be658e63be206c44e3946c3cfd27f811d61d8e61866f0755702c)   |
+|5| [Publicar y editar reseñas funcional](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/0b84a32e44177d69d84362a4f756e3fd3c042700)  | [UserController.java, Review.java, details.html, profile.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/0b84a32e44177d69d84362a4f756e3fd3c042700#diff-3b176303e9fbdcb147c2b778217f68dc665910d7b85954adda5678850db00563)   |
+|6| [Eliminar reseñas FUNCIONA](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/ed7e183f588805df920b71351d62d4f2bd2fe020)  | [ReviewController.java, ReviewService.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/ed7e183f588805df920b71351d62d4f2bd2fe020#diff-c3078f136673113171ce77066c33799ad19420b1d84bf593f2a5f66095f1d265)   |
+|7| [Funcion de eliminar reseña para admin](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/bbfae3b10c7e98fa24970eec2783baf9ce959ebf)  | [ReviewController.java, ReviewService.java, user-list.html, details.html](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/bbfae3b10c7e98fa24970eec2783baf9ce959ebf#diff-c3078f136673113171ce77066c33799ad19420b1d84bf593f2a5f66095f1d265)   |
 
 ---
 
