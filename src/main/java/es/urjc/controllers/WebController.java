@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import es.urjc.model.Lists;
 import es.urjc.model.Restaurant;
 import es.urjc.model.Review;
@@ -175,6 +174,7 @@ public String showIndex(Model model, Principal principal) {
             rData.put("municipality", r.getMunicipality());
             rData.put("averagePrice", r.getAveragePrice());
             rData.put("description", r.getDescription());
+            rData.put("hasImage", r.isHasImage());
 
             boolean isSavedInAnyList = false;
             List<Map<String, Object>> listsStatus = new ArrayList<>();
@@ -210,4 +210,5 @@ public String showIndex(Model model, Principal principal) {
 
         return restaurantsData;
     }
+
 }

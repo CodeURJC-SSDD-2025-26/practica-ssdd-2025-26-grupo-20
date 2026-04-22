@@ -1,14 +1,26 @@
 package es.urjc.services;
 
+import es.urjc.model.Lists;
 import es.urjc.model.Restaurant;
+import es.urjc.repositories.ListsRepository;
 import es.urjc.repositories.RestaurantRepository;
-import org.springframework.stereotype.Service;
+import es.urjc.repositories.ReviewRepository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class RestaurantService {
+
+    @Autowired
+    private ListsRepository listsRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     private final RestaurantRepository restaurantRepository;
 
@@ -50,7 +62,21 @@ public class RestaurantService {
         return restaurantRepository.save(restaurant);
     }
 
+    @Autowired
+    private ListsRepository ListsRepository; // o como se llame tu repo de Lists
+
+    @Autowired  
+    private ReviewRepository ReviewRepository; // o como se llame tu repo de Reviews
+
+    @Transactional
     public void deleteById(Long id) {
+        // 1. Borrar de la tabla join lists_restaurants
+        listsRepository.deleteRestaurantFromAllLists(id);
+
+        // 2. Borrar las reseñas con SQL nativo directo
+        reviewRepository.deleteByRestaurantId(id);
+
+        // 3. Borrar el restaurante
         restaurantRepository.deleteById(id);
     }
 
@@ -100,4 +126,5 @@ public class RestaurantService {
             throw new IllegalArgumentException("El precio medio debe ser mayor que 0");
         }
     }
+
 }

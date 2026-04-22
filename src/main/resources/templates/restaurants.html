@@ -121,6 +121,12 @@
                     <div class="row">
                       <div class="col-lg-4 col-sm-5">
                         <div class="image" style="position: relative">
+                          {{#hasImage}}
+                          <img src="/restaurant/{{id}}/image" alt="{{name}}" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+                          {{/hasImage}}
+                          {{^hasImage}}
+                          <img src="/templatemo_580_woox_travel/assets/images/templatemo-destination-04.jpg" alt="{{name}}" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+                          {{/hasImage}}
                           {{#isAuthenticated}}
                           <a
                             href="#"

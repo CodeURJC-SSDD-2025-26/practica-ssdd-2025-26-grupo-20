@@ -2,8 +2,10 @@ package es.urjc.repositories;
 
 import es.urjc.model.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import es.urjc.model.Restaurant;
 
@@ -23,4 +25,8 @@ public interface ReviewRepository extends JpaRepository<Review, Long>{
             nativeQuery = true)
     List<RestaurantStats> findTop5Restaurants();
     List<Review> findByRestaurant(Restaurant restaurant);
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM review WHERE restaurant_id = :restaurantId", nativeQuery = true)
+    void deleteByRestaurantId(@Param("restaurantId") Long restaurantId);
 }

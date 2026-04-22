@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 import java.sql.Blob;
 import java.util.*;
@@ -31,13 +32,12 @@ public class Restaurant {
     @Lob
     private Blob imageFile;
     // mappedBy = "restaurant" significa: "Busca la relación en la variable 'restaurant' de la clase Review"
-    @OneToMany(mappedBy = "restaurant")
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
-    // mappedBy = "restaurants" significa que esta es la parte "pasiva" de la relación Muchos a Muchos con las listas
     @ManyToMany(mappedBy = "restaurants")
     private List<Lists> includedInLists = new ArrayList<>();
-
+    
     public Restaurant() {}
 
     public Restaurant(String name, String municipality, String specialty, double averagePrice, String address, String phone, String description) {
@@ -72,4 +72,15 @@ public class Restaurant {
     public void setReviews(List<Review> reviews) { this.reviews = reviews; }
     public List<Lists> getIncludedInLists() { return includedInLists; }
     public void setIncludedInLists(List<Lists> includedInLists) { this.includedInLists = includedInLists; }
+    public boolean isHasImage() {
+        try {
+            return this.imageFile != null && this.imageFile.length() > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean getHasImage() {
+        return isHasImage();
+    }
 }

@@ -26,4 +26,8 @@ public interface ListsRepository extends JpaRepository<Lists, Long> {
     @Transactional
     @Query(value = "DELETE FROM lists WHERE id = :listId", nativeQuery = true)
     void deleteListById(@Param("listId") Long listId);
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM lists_restaurants WHERE restaurants_id = :restaurantId", nativeQuery = true)
+    void deleteRestaurantFromAllLists(@Param("restaurantId") Long restaurantId);
 }
