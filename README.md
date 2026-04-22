@@ -323,7 +323,7 @@ Encargada de la entidad de restaurantes, buscador por municipios y especialidad,
 
 #### **Alumno 2 - Alexis Maestro López**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+[Encargado del sistema de gestión de usuarios: registro, login (usuario/admin), perfiles (edición, borrado, etc.), listado usuarios en la faceta de amdin y seguridad de la web]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
@@ -337,6 +337,7 @@ Encargada de la entidad de restaurantes, buscador por municipios y especialidad,
 |8| [envío de email implementado correctamente](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/0c1afc5e4e2043c866c620acd01e8eb84c96caad)  | [pom.xml, application.properties](src/main/resources/application.properties) |
 |9| [corrección headers de restaurantes (detalles) y listas](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/2462e79adb576f7aaff694189074e0fce40b645a)  | [ListsController.java, WebController.java](src/main/java/es/urjc/controllers/ListsController.java) |
 |10| [corrección encabezado lista de usuarios y redirección al eliminar tu propia cuenta](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/7ceef1501376319d3214cd043c250f09024d1fe6)  | [UserController.java, user-list.html](src/main/java/es/urjc/controllers/UserController.java) |
+|11| [seguridad agregada](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/960f26f2f473c2ab867e9be991853d70f048b54f)  | [application.properties, keystore.p12](src/main/resources/application.properties) |
 
 ---
 
