@@ -30,4 +30,5 @@ public interface ListsRepository extends JpaRepository<Lists, Long> {
     @Transactional
     @Query(value = "DELETE FROM lists_restaurants WHERE restaurants_id = :restaurantId", nativeQuery = true)
     void deleteRestaurantFromAllLists(@Param("restaurantId") Long restaurantId);
+    org.springframework.data.domain.Page<Lists> findByOwner(User owner, org.springframework.data.domain.Pageable pageable);
 }

@@ -21,12 +21,16 @@ import org.springframework.web.multipart.MultipartFile;
 import es.urjc.model.User;
 import es.urjc.services.RestaurantService;
 import es.urjc.services.UserService;
+import es.urjc.services.UtilityClient;
 
 @Controller
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UtilityClient utilityClient;
 
     @Autowired
     private RestaurantService restaurantService;
@@ -57,7 +61,7 @@ public class UserController {
 
         try {
             userService.registerNewUser(firstName, lastName, email, username, password);
-            // TODO: notify utility-service to send welcome email (Persona C - UtilityClient)
+            utilityClient.sendWelcomeEmail(email, firstName);
             return "redirect:/loginuser?registered";
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
