@@ -1,4 +1,4 @@
-package es.urjc.services;
+package es.urjc.utilityservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
