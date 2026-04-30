@@ -15,31 +15,26 @@ import es.urjc.model.Lists;
 import es.urjc.model.Restaurant;
 import es.urjc.model.Review;
 import es.urjc.model.User;
-import es.urjc.repositories.RestaurantRepository;
-import es.urjc.repositories.ReviewRepository;
 import es.urjc.services.ListsService;
 import es.urjc.services.RestaurantService;
 import es.urjc.services.UserService;
+import es.urjc.services.ReviewService;
 
 @Controller
 public class WebController {
 
-    private final RestaurantRepository restaurantRepository;
+    
     private final UserService userService;
     private final ListsService listsService;
     private final RestaurantService restaurantService;
-    private final ReviewRepository reviewRepository;
+    private final ReviewService reviewService;
+    
 
-    public WebController(RestaurantRepository restaurantRepository,
-                        UserService userService,
-                        ListsService listsService,
-                        RestaurantService restaurantService,
-                        ReviewRepository reviewRepository) {
-        this.restaurantRepository = restaurantRepository;
+    public WebController(UserService userService,ListsService listsService, RestaurantService restaurantService, ReviewService reviewService) {
         this.userService = userService;
         this.listsService = listsService;
         this.restaurantService = restaurantService;
-        this.reviewRepository = reviewRepository;
+        this.reviewService = reviewService;
     }
 
     @GetMapping("/restaurants")
@@ -91,7 +86,7 @@ public String showIndex(Model model, Principal principal) {
         }
     }
 
-    List<Restaurant> allRestaurants = restaurantRepository.findAll();
+    List<Restaurant> allRestaurants = restaurantService.findAll();
     List<Map<String, Object>> restaurantsData = getRestaurantsWithListStatus(user, allRestaurants);
     model.addAttribute("restaurants", restaurantsData);
 
@@ -116,9 +111,9 @@ public String showIndex(Model model, Principal principal) {
                 model.addAttribute("hasAvatar", user.getAvatarImage() != null);
             }
         }
-        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
+        Restaurant restaurant = restaurantService.findById(id).orElse(null);
         if (restaurant != null) {
-            List<Review> reviews = reviewRepository.findByRestaurant(restaurant);
+            List<Review> reviews = reviewService.findByRestaurant(restaurant);
             model.addAttribute("reviews", reviews);
             boolean isSavedInAnyList = false;
             List<Map<String, Object>> listsStatus = new ArrayList<>();
@@ -147,7 +142,7 @@ public String showIndex(Model model, Principal principal) {
             model.addAttribute("isSavedInAnyList", isSavedInAnyList);
             model.addAttribute("userListsWithStatus", listsStatus);
 
-            List<Map<String, Object>> allRestData = getRestaurantsWithListStatus(user, restaurantRepository.findAll());
+            List<Map<String, Object>> allRestData = getRestaurantsWithListStatus(user, restaurantService.findAll());
             List<Map<String, Object>> recommended = new ArrayList<>();
             for (Map<String, Object> rMap : allRestData) {
                 if (rMap.get("specialty") != null &&

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
-public class controllerAdvice {
+public class WebControllerAdvice {
 
     @ModelAttribute("_csrf_token")
     public String csrfToken(HttpServletRequest request) {

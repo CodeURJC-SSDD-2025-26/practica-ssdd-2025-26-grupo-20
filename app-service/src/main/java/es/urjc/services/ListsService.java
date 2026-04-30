@@ -32,10 +32,16 @@ public class ListsService {
     }
 
     @Transactional
-    public void deleteList(Long id) {
-        // Borrado por SQL nativo para evitar problemas del estado JPA
-        listsRepository.deleteRestaurantsFromList(id); // limpia tabla intermedia
-        listsRepository.deleteListById(id);            // borra la lista
+    public void deleteList(Long id, User currentUser) {
+        Lists list = listsRepository.findById(id)
+            .orElseThrow(() -> new IllegalArgumentException("List not found"));
+
+        if (!list.getOwner().getId().equals(currentUser.getId())) {
+        throw new IllegalArgumentException("You do not own this list");
+        }
+
+        listsRepository.deleteRestaurantsFromList(id);
+        listsRepository.deleteListById(id);
     }
 
     public void addRestaurantToList(Lists list, Restaurant restaurant) {

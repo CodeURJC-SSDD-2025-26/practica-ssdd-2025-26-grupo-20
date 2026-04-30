@@ -51,10 +51,23 @@ public class UserService {
     // --- CREATE (Register) ---
 
     public User registerNewUser(String firstName, String lastName, String email, String username, String rawPassword) {
-        String encodedPassword = passwordEncoder.encode(rawPassword);
-        User newUser = new User(firstName, lastName, email, username, encodedPassword, "", "USER");
-        return userRepository.save(newUser);
+    if (rawPassword == null || rawPassword.length() < 6) {
+        throw new IllegalArgumentException("Password must be at least 6 characters");
     }
+    if (email == null || !email.contains("@")) {
+        throw new IllegalArgumentException("Invalid email format");
+    }
+    if (existsByUsername(username)) {
+        throw new IllegalArgumentException("Username already taken");
+    }
+    if (existsByEmail(email)) {
+        throw new IllegalArgumentException("Email already registered");
+    }
+
+    String encodedPassword = passwordEncoder.encode(rawPassword);
+    User newUser = new User(firstName, lastName, email, username, encodedPassword, "", "USER");
+    return userRepository.save(newUser);
+}
 
     // --- UPDATE (Edit Profile - básico: nombre, apellido, bio, avatar) ---
 

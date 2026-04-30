@@ -12,22 +12,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import es.urjc.model.Lists;
 import es.urjc.model.Restaurant;
 import es.urjc.model.User;
-import es.urjc.repositories.RestaurantRepository;
+import es.urjc.services.RestaurantService;
 import es.urjc.services.ListsService;
 import es.urjc.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Controller
 public class ListsController {
-
+    private static final Logger log = LoggerFactory.getLogger(ListsController.class);
     private final ListsService listsService;
     private final UserService userService;
-    private final RestaurantRepository restaurantRepository;
+    private final RestaurantService restaurantService;
 
-    public ListsController(ListsService listsService, UserService userService, RestaurantRepository restaurantRepository) {
+    public ListsController(ListsService listsService, UserService userService, RestaurantService restaurantService) {
         this.listsService = listsService;
         this.userService = userService;
-        this.restaurantRepository = restaurantRepository;
+        this.restaurantService = restaurantService;
     }
 
     @PostMapping("/lists/create")
@@ -47,41 +49,20 @@ public class ListsController {
     }
 
     @PostMapping("/lists/delete/{id}")
-    public String deleteList(@PathVariable Long id, Principal principal) {
-        System.out.println("============================================");
-        System.out.println(">>> DELETE LIST ENDPOINT HIT <<< id=" + id);
-        System.out.println(">>> Principal: " + (principal == null ? "NULL" : principal.getName()));
-        System.out.println("============================================");
+        public String deleteList(@PathVariable Long id, Principal principal) {
+    if (principal == null) return "redirect:/login";
 
-        if (principal == null) {
-            System.out.println(">>> No principal, redirecting to login");
-            return "redirect:/login";
+    try {
+        User user = userService.findByUsername(principal.getName()).orElse(null);
+        if (user != null) {
+            listsService.deleteList(id, user);
         }
-
-        try {
-            User user = userService.findByUsername(principal.getName()).orElse(null);
-            System.out.println(">>> User found: " + (user != null ? user.getUsername() + " (id=" + user.getId() + ")" : "NULL"));
-
-            if (user != null) {
-                Lists listToDelete = listsService.getListById(id).orElse(null);
-                System.out.println(">>> List found: " + (listToDelete != null ? listToDelete.getName() : "NULL"));
-
-                if (listToDelete != null) {
-                    System.out.println(">>> List owner id: " + listToDelete.getOwner().getId() + " | User id: " + user.getId());
-                    if (listToDelete.getOwner().getId().equals(user.getId())) {
-                        System.out.println(">>> Ownership matches, deleting...");
-                        listsService.deleteList(id);
-                        System.out.println(">>> DELETED OK");
-                    } else {
-                        System.out.println(">>> Ownership MISMATCH, not deleting");
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(">>> EXCEPTION in deleteList:");
-            e.printStackTrace();
-        }
-        return "redirect:/profile";
+    } catch (IllegalArgumentException e) {
+        log.warn("Unauthorized list deletion attempt: {}", e.getMessage());
+    } catch (Exception e) {
+        log.error("Error deleting list {}: {}", id, e.getMessage(), e);
+    }
+    return "redirect:/profile";
     }
 
     @PostMapping("/lists/{listId}/toggleRestaurant/{restaurantId}")
@@ -91,7 +72,7 @@ public class ListsController {
         User user = userService.findByUsername(principal.getName()).orElse(null);
         if (user != null) {
             Lists list = listsService.getListById(listId).orElse(null);
-            Restaurant restaurant = restaurantRepository.findById(restaurantId).orElse(null);
+            Restaurant restaurant = restaurantService.findById(restaurantId).orElse(null);
 
             if (list != null && restaurant != null && list.getOwner().getId().equals(user.getId())) {
                 boolean contains = false;

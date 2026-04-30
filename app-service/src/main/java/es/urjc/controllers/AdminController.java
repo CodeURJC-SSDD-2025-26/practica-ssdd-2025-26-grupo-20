@@ -21,7 +21,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import es.urjc.model.Restaurant;
 import es.urjc.services.RestaurantService;
 import es.urjc.services.ReviewService;
@@ -31,7 +32,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class AdminController {
-
+    private static final Logger log = LoggerFactory.getLogger(AdminController.class);
     @Autowired
     private UserService userService;
 
@@ -86,7 +87,7 @@ public class AdminController {
             HttpServletRequest request) {
 
         if (bindingResult.hasErrors()) {
-            System.out.println("ERRORES DE BINDING: " + bindingResult.getAllErrors());
+            log.warn("Binding errors on restaurant form: {}", bindingResult.getAllErrors());
             model.addAttribute("restaurants", restaurantService.findAll());
             model.addAttribute("restaurantForm", restaurant);
             model.addAttribute("topRestaurants", reviewService.getTop5Restaurants());
@@ -114,8 +115,7 @@ public class AdminController {
 
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("ERROR CREAR: " + e.getMessage());
-            System.out.println("CAUSA: " + e.getCause());
+            log.error("Error creating restaurant: {}", e.getMessage(), e);
             model.addAttribute("restaurants", restaurantService.findAll());
             model.addAttribute("restaurantForm", restaurant);
             model.addAttribute("topRestaurants", reviewService.getTop5Restaurants());
@@ -158,8 +158,7 @@ public class AdminController {
             restaurantService.deleteById(id);
         } catch (Exception e) {
             e.printStackTrace(); // <-- AÑADE ESTO
-            System.out.println("ERROR REAL: " + e.getMessage()); // <-- Y ESTO
-            System.out.println("CAUSA: " + e.getCause()); // <-- Y ESTO
+            log.error("Error deleting restaurant {}: {}", id, e.getMessage(), e);
             redirectAttributes.addFlashAttribute("error", 
                 "No se pudo eliminar el restaurante. Puede tener reseñas o listas asociadas.");
         }

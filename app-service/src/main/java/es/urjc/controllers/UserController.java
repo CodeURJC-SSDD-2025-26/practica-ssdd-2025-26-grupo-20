@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.urjc.model.User;
-import es.urjc.services.EmailService;
 import es.urjc.services.RestaurantService;
 import es.urjc.services.UserService;
 
@@ -32,9 +31,6 @@ public class UserController {
     @Autowired
     private RestaurantService restaurantService;
 
-    @Autowired
-    private EmailService emailService;
-
     // -------------------------------------------------------
     // SIGNUP
     // -------------------------------------------------------
@@ -46,44 +42,31 @@ public class UserController {
 
     @PostMapping("/signup")
     public String processSignup(
-            @RequestParam String firstName,
-            @RequestParam String lastName,
-            @RequestParam String email,
-            @RequestParam String username,
-            @RequestParam String password,
-            @RequestParam String confirmPassword,
-            Model model) {
+        @RequestParam String firstName,
+        @RequestParam String lastName,
+        @RequestParam String email,
+        @RequestParam String username,
+        @RequestParam String password,
+        @RequestParam String confirmPassword,
+        Model model) {
 
         if (!password.equals(confirmPassword)) {
-            model.addAttribute("error", "Las contraseñas no coinciden");
-            return "signup";
-        }
-        if (password.length() < 6) {
-            model.addAttribute("error", "La contraseña debe tener al menos 6 caracteres");
-            return "signup";
-        }
-        if (!email.contains("@")) {
-            model.addAttribute("error", "Formato de email inválido");
-            return "signup";
-        }
-        if (userService.existsByUsername(username)) {
-            model.addAttribute("error", "Nombre de usuario ya registrado");
-            return "signup";
-        }
-        if (userService.existsByEmail(email)) {
-            model.addAttribute("error", "Email ya registrado");
+            model.addAttribute("error", "Passwords do not match");
             return "signup";
         }
 
         try {
             userService.registerNewUser(firstName, lastName, email, username, password);
-            emailService.sendWelcomeEmail(email, firstName); // correo de bienvenida
+            // TODO: notify utility-service to send welcome email (Persona C - UtilityClient)
             return "redirect:/loginuser?registered";
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "signup";
         } catch (Exception e) {
-            model.addAttribute("error", "Ocurrió un error, por favor inténtalo de nuevo");
+            model.addAttribute("error", "An error occurred, please try again");
             return "signup";
         }
-    }
+    }   
 
     // -------------------------------------------------------
     // PROFILE

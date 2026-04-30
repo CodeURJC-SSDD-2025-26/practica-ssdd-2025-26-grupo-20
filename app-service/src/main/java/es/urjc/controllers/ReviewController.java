@@ -35,11 +35,10 @@ public class ReviewController {
         if (principal == null) return "redirect:/login";
 
         try {
-            User usuarioActual = userService.findByUsername(principal.getName()).orElseThrow();
-            Restaurant restauranteActual = restaurantRepository.findById(restaurantId).orElseThrow();
-
-            Review nuevaResena = new Review(comment, rating, usuarioActual, restauranteActual);
-            reviewService.saveReview(nuevaResena);
+            User currentUser = userService.findByUsername(principal.getName()).orElseThrow();
+            Restaurant currentRestaurant = restaurantRepository.findById(restaurantId).orElseThrow();
+            Review newReview = new Review(comment, rating, currentUser, currentRestaurant);
+            reviewService.saveReview(newReview);
         } catch (Exception e) {
             return "redirect:/restaurant/" + restaurantId + "?error=true";
         }
@@ -51,8 +50,8 @@ public class ReviewController {
         if (principal == null) return "redirect:/login";
 
         try {
-            User usuarioActual = userService.findByUsername(principal.getName()).orElseThrow();
-            reviewService.deleteReview(reviewId, usuarioActual);
+            User currentUser = userService.findByUsername(principal.getName()).orElseThrow();
+            reviewService.deleteReview(reviewId, currentUser);
         } catch (Exception e) {
             return "redirect:/profile?error=true";
         }
@@ -83,8 +82,8 @@ public class ReviewController {
 
         if (principal == null) return "redirect:/login";
 
-        User usuarioActual = userService.findByUsername(principal.getName()).orElseThrow();
-        reviewService.editReview(reviewId, rating, comment, usuarioActual);
+        User currentUser = userService.findByUsername(principal.getName()).orElseThrow();
+        reviewService.editReview(reviewId, rating, comment, currentUser);
 
         return "redirect:/profile";
     }
