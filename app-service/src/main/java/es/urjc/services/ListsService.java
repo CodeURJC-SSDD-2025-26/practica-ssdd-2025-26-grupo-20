@@ -55,4 +55,7 @@ public class ListsService {
         list.getRestaurants().remove(restaurant);
         listsRepository.save(list);
     }
+    public org.springframework.data.domain.Page<Lists> getListsByUserPaged(User user, org.springframework.data.domain.Pageable pageable) {
+        return listsRepository.findByOwner(user, pageable);
+    }
 }

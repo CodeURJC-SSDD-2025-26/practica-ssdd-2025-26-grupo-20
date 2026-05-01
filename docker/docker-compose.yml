@@ -1,0 +1,49 @@
+# =========================================================
+# RODRI
+# =========================================================
+# Orquesta los 3 contenedores de la aplicación:
+#   - mysql       → base de datos
+#   - app-service → web + API REST (puerto 8443)
+#   - utility-service → envío de emails (puerto 8080)
+#
+# Para ejecutarlo:
+#   docker compose up
+#
+# Para ejecutarlo descargando desde DockerHub directamente
+# (sin necesitar el código fuente):
+#   docker compose -f docker-compose.yml up
+# =========================================================
+
+# TODO: define la versión (puedes omitirla en compose v2)
+
+services:
+  mysql:
+    # TODO: usa la imagen oficial mysql:8.0 (rúbrica #30)
+    # TODO: configura variables de entorno:
+    #   MYSQL_ROOT_PASSWORD: (la contraseña de root)
+    #   MYSQL_DATABASE: practica2
+    # TODO: añade un healthcheck para saber cuándo MySQL está listo:
+    #   test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
+
+  app-service:
+    # TODO: referencia tu imagen de DockerHub:
+    #   image: TU_USUARIO_DOCKERHUB/app-service:latest
+    # TODO: configura las variables de entorno:
+    #   SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/practica2
+    #   SPRING_DATASOURCE_USERNAME: root
+    #   SPRING_DATASOURCE_PASSWORD: (misma que MYSQL_ROOT_PASSWORD)
+    #   UTILITY_SERVICE_URL: http://utility-service:8080
+    # TODO: expón el puerto 8443
+    # TODO: añade depends_on con condition: service_healthy
+    #   para esperar a que MySQL esté listo (rúbrica #29)
+
+  utility-service:
+    # TODO: referencia tu imagen de DockerHub:
+    #   image: TU_USUARIO_DOCKERHUB/utility-service:latest
+    # TODO: configura las variables de entorno:
+    #   MAIL_USERNAME: (el email de Gmail)
+    #   MAIL_PASSWORD: (la app password de Gmail)
+    # TODO: expón el puerto 8080
