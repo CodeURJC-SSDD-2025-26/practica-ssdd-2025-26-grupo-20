@@ -15,12 +15,42 @@ import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import es.urjc.services.RepositoryUserDetailsService;
 
+// =========================================================
+// ALEXIS
+// =========================================================
+// Este fichero necesita dos modificaciones principales:
+//
+// MODIFICACIÓN 1 — Añadir un segundo SecurityFilterChain para la API REST
+//   Crea un nuevo método anotado con @Bean y @Order(1) ANTES del método
+//   securityFilterChain que ya existe (que pasará a ser @Order(2)).
+//   El nuevo método debe:
+//     - Usar securityMatcher("/api/v1/**") para que solo aplique a la API
+//     - Deshabilitar CSRF (rúbrica #26)
+//     - Configurar sesión como STATELESS (rúbrica #27)
+//     - Definir qué URLs son públicas y cuáles requieren rol (rúbrica #14)
+//     - Añadir tu JwtFilter antes de UsernamePasswordAuthenticationFilter
+//     - Configurar un AuthenticationEntryPoint que devuelva JSON 401
+//       en vez de redirigir al login de la web (rúbrica #18)
+//
+// MODIFICACIÓN 2 — Añadir el método securityFilterChain existente con @Order(2)
+//   Simplemente añade @Order(2) encima de @Bean en el método que ya existe.
+//   NO cambies nada más de ese método — está funcionando correctamente.
+//
+// IMPORTS que necesitarás añadir:
+//   import org.springframework.context.annotation.Order;
+//   import org.springframework.security.config.http.SessionCreationPolicy;
+//   import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+//   import es.urjc.security.JwtFilter;
+// =========================================================
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     @Autowired
     private RepositoryUserDetailsService userDetailsService;
+
+    // TODO (Persona A): añade aquí @Autowired de JwtFilter cuando lo hayas creado
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -34,6 +64,10 @@ public class SecurityConfig {
         return provider;
     }
 
+    // TODO (Persona A): añade aquí el nuevo @Bean @Order(1) para la API REST
+    // según las instrucciones del comentario de arriba
+
+    @Order(2) 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -65,7 +99,6 @@ public class SecurityConfig {
                         response.sendRedirect("/");
                     }
                 })
-                // Si el login falla, redirige al formulario desde el que vino
                 .failureHandler((request, response, exception) -> {
                     String referer = request.getHeader("Referer");
                     if (referer != null) {
@@ -90,6 +123,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
     @Bean
     public FilterRegistrationBean<MultipartFilter> multipartFilter() {
         FilterRegistrationBean<MultipartFilter> filterBean = new FilterRegistrationBean<>();
