@@ -10,5 +10,13 @@ REM
 REM Uso: docker\publish_image.bat
 REM =========================================================
 
-REM TODO: docker push TU_USUARIO/app-service:latest
-REM TODO: docker push TU_USUARIO/utility-service:latest
+echo Subiendo app-service a DockerHub...
+docker push rodrigodefrutos/app-service:latest
+
+echo Subiendo utility-service a DockerHub...
+docker push rodrigodefrutos/utility-service:latest
+
+echo =========================================================
+echo ¡Imagenes publicadas con exito en DockerHub!
+echo =========================================================
+pause

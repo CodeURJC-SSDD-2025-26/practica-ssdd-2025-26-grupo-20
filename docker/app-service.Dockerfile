@@ -16,21 +16,34 @@
 # =========================================================
 
 # -- Stage 1: compilar --
-# TODO: usa la imagen maven:3.9-eclipse-temurin-21 como base
-# TODO: establece /app como directorio de trabajo (WORKDIR)
-# TODO: copia primero solo el pom.xml y descarga dependencias
-#       (esto aprovecha la caché de Docker)
-# TODO: copia el resto del código fuente
-# TODO: ejecuta mvn clean package -DskipTests para generar el jar
+FROM maven:3.9-eclipse-temurin-21 AS builder
+
+WORKDIR /app
+
+COPY app-service/pom.xml .
+RUN mvn dependency:go-offline
+
+COPY app-service/src ./src
+
+RUN mvn package -DskipTests
 
 # -- Stage 2: ejecutar --
-# TODO: usa la imagen eclipse-temurin:21-jre como base
-# TODO: establece /app como directorio de trabajo
-# TODO: copia el jar generado en el stage 1
+# Usa la imagen eclipse-temurin:21-jre como base
+FROM eclipse-temurin:21-jre
+
+# Establece /app como directorio de trabajo
+WORKDIR /app
+
+# Copia el jar generado en el stage 1
 #       (está en /app/target/*.jar)
-# TODO: expón el puerto 8443
-# TODO: define el ENTRYPOINT para ejecutar el jar:
-#       java -jar app.jar
+COPY --from=builder /app/target/*.jar app.jar
+
+# Expón el puerto 8443
+EXPOSE 8443
+
+# Define el ENTRYPOINT para ejecutar el jar:
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
 #
 # Variables de entorno que acepta este servicio
 # (se configuran desde docker-compose.yml):
