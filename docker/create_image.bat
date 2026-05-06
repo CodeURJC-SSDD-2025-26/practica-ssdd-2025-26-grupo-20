@@ -10,11 +10,14 @@ REM Uso: ejecutar desde la RAÍZ del proyecto:
 REM   docker\create_image.bat
 REM =========================================================
 
-REM TODO: construir la imagen de app-service con:
-REM   docker build -f docker/app-service.Dockerfile -t TU_USUARIO/app-service:latest .
-REM   (el punto final es importante — indica el contexto de build)
+echo Construyendo la imagen de app-service...
+docker build -f docker/app-service.Dockerfile -t rodrigodefrutos/app-service:latest .
 
-REM TODO: construir la imagen de utility-service con:
-REM   docker build -f docker/utility-service.Dockerfile -t TU_USUARIO/utility-service:latest .
+echo Construyendo la imagen de db-service...
+docker build -f docker/utility-service.Dockerfile -t rodrigodefrutos/utility-service:latest .
 
-REM TODO: mostrar mensaje de éxito al terminar
+echo =========================================================
+echo ¡Imagenes construidas con exito!
+echo Puedes comprobarlas ejecutando: docker images
+echo =========================================================
+pause

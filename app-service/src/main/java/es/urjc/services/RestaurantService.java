@@ -1,5 +1,8 @@
 package es.urjc.services;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 import es.urjc.model.Lists;
 import es.urjc.model.Restaurant;
 import es.urjc.repositories.ListsRepository;
@@ -125,6 +128,51 @@ public class RestaurantService {
         if (restaurant.getAveragePrice() <= 0) {
             throw new IllegalArgumentException("El precio medio debe ser mayor que 0");
         }
+    }
+    
+    public Page<Restaurant> searchPaged(String query, String municipality, String specialty, Pageable pageable) {
+
+        boolean hasMunicipality = municipality != null && !municipality.isBlank();
+        boolean hasSpecialty    = specialty    != null && !specialty.isBlank();
+        boolean hasQuery        = query        != null && !query.isBlank();
+
+        if (hasMunicipality && hasSpecialty)
+            return restaurantRepository.findByMunicipalityContainingIgnoreCaseAndSpecialtyIgnoreCase(municipality, specialty, pageable);
+
+        if (hasMunicipality)
+            return restaurantRepository.findByMunicipalityContainingIgnoreCase(municipality, pageable);
+
+        if (hasSpecialty)
+            return restaurantRepository.findBySpecialtyIgnoreCase(specialty, pageable);
+
+        if (hasQuery)
+            return restaurantRepository.findByNameContainingIgnoreCaseOrSpecialtyContainingIgnoreCase(query, query, pageable);
+
+        return restaurantRepository.findAll(pageable);
+    }
+
+    public Restaurant saveWithImage(Restaurant restaurant, MultipartFile imageFile) {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                java.sql.Blob blob = new javax.sql.rowset.serial.SerialBlob(imageFile.getBytes());
+                restaurant.setImageFile(blob);
+            } catch (Exception e) {
+                // continúa sin imagen si falla
+            }
+        }
+        return save(restaurant);
+    }
+
+    public Restaurant updateWithImage(Long id, Restaurant updatedRestaurant, MultipartFile imageFile) {
+        if (imageFile != null && !imageFile.isEmpty()) {
+            try {
+                java.sql.Blob blob = new javax.sql.rowset.serial.SerialBlob(imageFile.getBytes());
+                updatedRestaurant.setImageFile(blob);
+            } catch (Exception e) {
+                // continúa sin imagen si falla
+            }
+        }
+        return update(id, updatedRestaurant);
     }
 
 }

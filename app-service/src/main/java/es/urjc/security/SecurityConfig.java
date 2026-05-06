@@ -1,47 +1,22 @@
 package es.urjc.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.csrf.CsrfTokenRepository;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.multipart.support.MultipartFilter;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import es.urjc.services.RepositoryUserDetailsService;
 
-// =========================================================
-// ALEXIS
-// =========================================================
-// Este fichero necesita dos modificaciones principales:
-//
-// MODIFICACIÓN 1 — Añadir un segundo SecurityFilterChain para la API REST
-//   Crea un nuevo método anotado con @Bean y @Order(1) ANTES del método
-//   securityFilterChain que ya existe (que pasará a ser @Order(2)).
-//   El nuevo método debe:
-//     - Usar securityMatcher("/api/v1/**") para que solo aplique a la API
-//     - Deshabilitar CSRF (rúbrica #26)
-//     - Configurar sesión como STATELESS (rúbrica #27)
-//     - Definir qué URLs son públicas y cuáles requieren rol (rúbrica #14)
-//     - Añadir tu JwtFilter antes de UsernamePasswordAuthenticationFilter
-//     - Configurar un AuthenticationEntryPoint que devuelva JSON 401
-//       en vez de redirigir al login de la web (rúbrica #18)
-//
-// MODIFICACIÓN 2 — Añadir el método securityFilterChain existente con @Order(2)
-//   Simplemente añade @Order(2) encima de @Bean en el método que ya existe.
-//   NO cambies nada más de ese método — está funcionando correctamente.
-//
-// IMPORTS que necesitarás añadir:
-//   import org.springframework.context.annotation.Order;
-//   import org.springframework.security.config.http.SessionCreationPolicy;
-//   import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-//   import es.urjc.security.JwtFilter;
-// =========================================================
+import es.urjc.services.RepositoryUserDetailsService;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 @EnableWebSecurity
@@ -50,7 +25,8 @@ public class SecurityConfig {
     @Autowired
     private RepositoryUserDetailsService userDetailsService;
 
-    // TODO (Persona A): añade aquí @Autowired de JwtFilter cuando lo hayas creado
+    @Autowired
+    private JwtFilter jwtFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -64,11 +40,54 @@ public class SecurityConfig {
         return provider;
     }
 
-    // TODO (Persona A): añade aquí el nuevo @Bean @Order(1) para la API REST
-    // según las instrucciones del comentario de arriba
-
-    @Order(2) 
+    // -------------------------------------------------------
+    // CADENA 1: API REST — sin CSRF, sin sesión, con JWT
+    // -------------------------------------------------------
     @Bean
+    @Order(1)
+    public SecurityFilterChain apiSecurityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .securityMatcher("/api/v1/**")
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authenticationProvider(authenticationProvider())
+            .authorizeHttpRequests(auth -> auth
+                // Endpoints públicos de auth
+                .requestMatchers("/api/v1/auth/**").permitAll()
+                // Avatares públicos
+                .requestMatchers("/api/v1/users/*/avatar").permitAll()
+                // Imágenes de restaurantes públicas
+                .requestMatchers("/api/v1/restaurants/*/image").permitAll()
+                // Lectura pública de restaurantes
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/restaurants/**").permitAll()
+                // Lista de usuarios solo para ADMIN
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/users").hasRole("ADMIN")
+                // El resto requiere autenticación
+                .anyRequest().authenticated()
+            )
+            .exceptionHandling(ex -> ex
+                .authenticationEntryPoint((request, response, authException) -> {
+                    response.setContentType("application/json");
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.getWriter().write("{\"error\":\"Unauthorized\",\"message\":\"" + authException.getMessage() + "\"}");
+                })
+                .accessDeniedHandler((request, response, accessDeniedException) -> {
+                    response.setContentType("application/json");
+                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                    response.getWriter().write("{\"error\":\"Forbidden\",\"message\":\"" + accessDeniedException.getMessage() + "\"}");
+                })
+            )
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+    // -------------------------------------------------------
+    // CADENA 2: Web tradicional — con CSRF, con sesión, con login form
+    // -------------------------------------------------------
+    @Bean
+    @Order(2)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http

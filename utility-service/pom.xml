@@ -54,6 +54,11 @@
     		<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
     		<version>2.8.8</version>
 		</dependency>
+		<dependency>
+    		<groupId>org.springdoc</groupId>
+    		<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    		<version>2.3.0</version> <!-- Asegúrate de usar una versión compatible con Spring Boot 3 -->
+		</dependency>
 	</dependencies>
 
 	<build>

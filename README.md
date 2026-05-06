@@ -404,27 +404,40 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 #### **Pasos para ejecutar con docker-compose:**
 
-1. **Clonar el repositorio** (si no lo has hecho ya):
+1. **Descargar el artefacto OCI:** No necesitas clonar el repositorio de GitHub. Simplemente ejecuta este comando para descargar la configuración orquestada:
    ```bash
-   git clone https://github.com/[usuario]/[repositorio].git
-   cd [repositorio]
+   docker pull TU_USUARIO/docker-compose:latest
    ```
 
-2. **AQUÍ LOS SIGUIENTES PASOS**:
+2. **Ejecutar la aplicación:** Levanta todos los servicios (Base de Datos, App Principal y Servicio de Emails) ejecutando:
+   ```
+   docker compose -f oci://TU_USUARIO/docker-compose:latest up
+   ```
+3. **Acceder a la aplicación:** Una vez que la consola indique que los servicios están listos, puedes acceder a la API y la Web en:
+   ```
+   https://localhost:8443
+   ```
 
 ### **Construcción de la Imagen Docker**
 
 #### **Requisitos:**
 - Docker instalado en el sistema
+- Cuenta en DockerHub (y haber hecho `docker login` en la terminal)
 
 #### **Pasos para construir y publicar la imagen:**
 
-1. **Navegar al directorio de Docker**:
-   ```bash
-   cd docker
-   ```
+1. **Construir las imágenes locales:** Desde la raíz del proyecto, ejecuta el script de creación:
+   - En Windows: `docker\create_image.bat`
+   - En Linux/Mac: `./docker/create_image.sh`
+   *(Esto compilará el código fuente en dos fases usando Maven y Java 21, generando imágenes ligeras solo con el JRE).*
 
-2. **AQUÍ LOS SIGUIENTES PASOS**
+2. **Publicar los microservicios:** Sube las imágenes a DockerHub ejecutando:
+   - En Windows: `docker\publish_image.bat`
+   - En Linux/Mac: `./docker/publish_image.sh`
+
+3. **Publicar la orquestación:** Finalmente, empaqueta y publica el `docker-compose.yml` como un OCI Artifact:
+   - En Windows: `docker\publish_docker-compose.bat`
+   - En Linux/Mac: `./docker/publish_docker-compose.sh`
 
 ### **Despliegue en Máquina Virtual**
 
@@ -463,49 +476,43 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 ### **Participación de Miembros en la Práctica 3**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Sara Torres García**
+
+Adaptación de las entidades restaurantes y reseñas para API REST.
+
+| Nº    | Commits      | Files      |
+|:------------: |:------------:| :------------:|
+|1| [Toda la adaptacion de restaurantes y reseñas](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/27a5a44ae4853b68bbdc9093c4041a3ea861543a)  | [AdminController.java, ReviewController.java, RestaurantRestController.java, ReviewRestController.java, RestaurantDTO.java, ReviewsDTO.java, RestaurantRepository.java, ReviewsRepository.java, RestaurantService.java, ReviewsService.java](https://github.com/CodeURJC-SSDD-2025-26/ssdd-2025-26-project-base/commit/27a5a44ae4853b68bbdc9093c4041a3ea861543a#diff-d69f968637db361b8eba8e3b7255f9722ff8e8bab395dd568eb4bfaa56cbc8a7)   |
+
+---
+
+#### **Alumno 2 - Alexis Maestro López**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Adaptación tokens y demás de la app](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/7c81f3eb8bff4f8c150050e00862c232ba9ef355)  | [JWT auth, SecurityConfig dual chain, UserDTO, AuthRestController, UserRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/7c81f3eb8bff4f8c150050e00862c232ba9ef355#diff-4a365154d0dccaa5d5c8198a15f21b63bb6cff0224ecaf08055d83f1960938b6)   |
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 3 - Diego Iglesias Peña**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Adaptación de la entidad listas para API REST. También responsable de la corrección de errores base del proyecto y de los merges del equipo.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Add UtilityClient](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/6c1a5a2af0d22162952565bc70d9d440be148f85)  | [UtilityClient.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/6c1a5a2af0d22162952565bc70d9d440be148f85#diff-9720632068095d8ac82f95831dc95021677b7a08974a9389099efdf94715e6f8)   |
+|2| [Add Lists DTO](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/293c63d453606a1caf266550afc89499daef410a)  | [ListsDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/293c63d453606a1caf266550afc89499daef410a#diff-6e913c899fe5b77a682e480620064c5bd4c1afdb0637d6040e0bf133bbd8b3cd)   |
+|3| [Add ListsRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/46dc2a5b2b7fcc5b91390df5bc4d13f1cabbf517)  | [ListsRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/46dc2a5b2b7fcc5b91390df5bc4d13f1cabbf517#diff-0f9c50d04ed11103c97610ecb78035c1c708334810c514a679d263075540a0ab)   |
+|4| [Add ChartsRestController(and organice proyect structure)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/c832085e995577e22f8944d79d00e5ebd14caa2e)  | [ChartsRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/c832085e995577e22f8944d79d00e5ebd14caa2e#diff-f99c0370a8046afb98b423c10e03642e29444d3860bdf80427438e2ea57bb9c9)   |
+|5| [Merge pull request #5 from CodeURJC-SSDD-2025-26/feature/lists-utility](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/bcf6ca0973aa35e401e2eb79a630d8930184feeb)  | Merge Branch feature/lists-utility   |
+|6| [Merge pull request #6 from CodeURJC-SSDD-2025-26/sararestaurant](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/81ed6b044c54eb034450741186f6e2f55c9e42a1)  | Merge Branch sararestaurant  |
+|7| [Merge pull request #7 from CodeURJC-SSDD-2025-26/Docker](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/4b70f2bb33a8b2d7b2d6d55d135711e6cb1bfa9d)  | Merge Branch Docker  |
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
-
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
-
-| Nº    | Commits      | Files      |
-|:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
-
----
-
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Rodrigo de Frutos Suárez**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 

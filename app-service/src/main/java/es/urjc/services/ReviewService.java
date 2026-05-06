@@ -2,7 +2,9 @@ package es.urjc.services;
 
 import java.util.List;
 import java.util.Optional;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -101,4 +103,17 @@ public class ReviewService {
     public List<Review> findByRestaurant(Restaurant restaurant) {
         return reviewRepository.findByRestaurant(restaurant);
     }   
+    public Optional<Review> findById(Long id) {
+        return reviewRepository.findById(id);
+    }
+
+    public Page<Review> findByRestaurantPaged(Restaurant restaurant, Pageable pageable) {
+        return reviewRepository.findByRestaurant(restaurant, pageable);
+    }
+
+    public Review createReview(Restaurant restaurant, int rating, String comment, User author) {
+        Review review = new Review(comment, rating, author, restaurant);
+        saveReview(review);
+        return review;
+    }
 }

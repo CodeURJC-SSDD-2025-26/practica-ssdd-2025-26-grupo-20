@@ -11,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import es.urjc.model.Restaurant;
 import es.urjc.model.Review;
 import es.urjc.model.User;
-import es.urjc.repositories.RestaurantRepository;
+
 import es.urjc.services.ReviewService;
 import es.urjc.services.UserService;
+import es.urjc.services.RestaurantService;
 
 @Controller
 public class ReviewController {
@@ -23,7 +24,7 @@ public class ReviewController {
     @Autowired
     private UserService userService;
     @Autowired
-    private RestaurantRepository restaurantRepository;
+    private RestaurantService restaurantService;
 
     @PostMapping("/restaurant/{restaurantId}/review")
     public String addReview(
@@ -36,9 +37,8 @@ public class ReviewController {
 
         try {
             User currentUser = userService.findByUsername(principal.getName()).orElseThrow();
-            Restaurant currentRestaurant = restaurantRepository.findById(restaurantId).orElseThrow();
-            Review newReview = new Review(comment, rating, currentUser, currentRestaurant);
-            reviewService.saveReview(newReview);
+            Restaurant currentRestaurant = restaurantService.findById(restaurantId).orElseThrow();
+            reviewService.createReview(currentRestaurant, rating, comment, currentUser);
         } catch (Exception e) {
             return "redirect:/restaurant/" + restaurantId + "?error=true";
         }
