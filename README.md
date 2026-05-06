@@ -404,27 +404,40 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 #### **Pasos para ejecutar con docker-compose:**
 
-1. **Clonar el repositorio** (si no lo has hecho ya):
+1. **Descargar el artefacto OCI:** No necesitas clonar el repositorio de GitHub. Simplemente ejecuta este comando para descargar la configuración orquestada:
    ```bash
-   git clone https://github.com/[usuario]/[repositorio].git
-   cd [repositorio]
+   docker pull TU_USUARIO/docker-compose:latest
    ```
 
-2. **AQUÍ LOS SIGUIENTES PASOS**:
+2. **Ejecutar la aplicación:** Levanta todos los servicios (Base de Datos, App Principal y Servicio de Emails) ejecutando:
+   ```
+   docker compose -f oci://TU_USUARIO/docker-compose:latest up
+   ```
+3. **Acceder a la aplicación:** Una vez que la consola indique que los servicios están listos, puedes acceder a la API y la Web en:
+   ```
+   https://localhost:8443
+   ```
 
 ### **Construcción de la Imagen Docker**
 
 #### **Requisitos:**
 - Docker instalado en el sistema
+- Cuenta en DockerHub (y haber hecho `docker login` en la terminal)
 
 #### **Pasos para construir y publicar la imagen:**
 
-1. **Navegar al directorio de Docker**:
-   ```bash
-   cd docker
-   ```
+1. **Construir las imágenes locales:** Desde la raíz del proyecto, ejecuta el script de creación:
+   - En Windows: `docker\create_image.bat`
+   - En Linux/Mac: `./docker/create_image.sh`
+   *(Esto compilará el código fuente en dos fases usando Maven y Java 21, generando imágenes ligeras solo con el JRE).*
 
-2. **AQUÍ LOS SIGUIENTES PASOS**
+2. **Publicar los microservicios:** Sube las imágenes a DockerHub ejecutando:
+   - En Windows: `docker\publish_image.bat`
+   - En Linux/Mac: `./docker/publish_image.sh`
+
+3. **Publicar la orquestación:** Finalmente, empaqueta y publica el `docker-compose.yml` como un OCI Artifact:
+   - En Windows: `docker\publish_docker-compose.bat`
+   - En Linux/Mac: `./docker/publish_docker-compose.sh`
 
 ### **Despliegue en Máquina Virtual**
 
