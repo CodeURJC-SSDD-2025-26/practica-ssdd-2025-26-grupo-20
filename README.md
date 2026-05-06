@@ -473,7 +473,7 @@ Adaptación de las entidades restaurantes y reseñas para API REST.
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Alexis Maestro López**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
@@ -487,21 +487,23 @@ Adaptación de las entidades restaurantes y reseñas para API REST.
 
 ---
 
-#### **Alumno 3 - [Nombre Completo]**
+#### **Alumno 3 - Diego Iglesias Peña**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Adaptación de la entidad listas para API REST. También responsable de la corrección de errores base del proyecto y de los merges del equipo.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Add UtilityClient](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/6c1a5a2af0d22162952565bc70d9d440be148f85)  | [UtilityClient.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/6c1a5a2af0d22162952565bc70d9d440be148f85#diff-9720632068095d8ac82f95831dc95021677b7a08974a9389099efdf94715e6f8)   |
+|2| [Add Lists DTO](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/293c63d453606a1caf266550afc89499daef410a)  | [ListsDTO.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/293c63d453606a1caf266550afc89499daef410a#diff-6e913c899fe5b77a682e480620064c5bd4c1afdb0637d6040e0bf133bbd8b3cd)   |
+|3| [Add ListsRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/46dc2a5b2b7fcc5b91390df5bc4d13f1cabbf517)  | [ListsRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/46dc2a5b2b7fcc5b91390df5bc4d13f1cabbf517#diff-0f9c50d04ed11103c97610ecb78035c1c708334810c514a679d263075540a0ab)   |
+|4| [Add ChartsRestController(and organice proyect structure)](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/c832085e995577e22f8944d79d00e5ebd14caa2e)  | [ChartsRestController.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/c832085e995577e22f8944d79d00e5ebd14caa2e#diff-f99c0370a8046afb98b423c10e03642e29444d3860bdf80427438e2ea57bb9c9)   |
+|5| [Merge pull request #5 from CodeURJC-SSDD-2025-26/feature/lists-utility](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/bcf6ca0973aa35e401e2eb79a630d8930184feeb)  | Merge Branch feature/lists-utility   |
+|6| [Merge pull request #6 from CodeURJC-SSDD-2025-26/sararestaurant](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/81ed6b044c54eb034450741186f6e2f55c9e42a1)  | Merge Branch sararestaurant  |
+|7| [Merge pull request #7 from CodeURJC-SSDD-2025-26/Docker](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/4b70f2bb33a8b2d7b2d6d55d135711e6cb1bfa9d)  | Merge Branch Docker  |
 
 ---
 
-#### **Alumno 4 - [Nombre Completo]**
+#### **Alumno 4 - Rodrigo de Frutos Suárez**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
