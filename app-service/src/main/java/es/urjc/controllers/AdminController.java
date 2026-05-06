@@ -102,15 +102,7 @@ public class AdminController {
         }
 
         try {
-            if (imageFile != null && !imageFile.isEmpty()) {
-                try {
-                    Blob blob = new javax.sql.rowset.serial.SerialBlob(imageFile.getBytes());
-                    restaurant.setImageFile(blob);
-                } catch (Exception ex) {
-                    // si falla la imagen, continúa sin ella
-                }
-            }
-            restaurantService.save(restaurant);
+            restaurantService.saveWithImage(restaurant, imageFile);
             return "redirect:/admin/restaurants";
 
         } catch (Exception e) {
@@ -139,15 +131,8 @@ public class AdminController {
             @PathVariable Long id,
             @ModelAttribute("restaurantForm") Restaurant restaurant,
             @RequestParam(value = "imageFile", required = false) MultipartFile imageFile) {
-        try {
-            if (imageFile != null && !imageFile.isEmpty()) {
-                Blob blob = new javax.sql.rowset.serial.SerialBlob(imageFile.getBytes());
-                restaurant.setImageFile(blob);
-            }
-        } catch (Exception e) {
-            // continúa sin imagen
-        }
-        restaurantService.update(id, restaurant);
+                
+        restaurantService.updateWithImage(id, restaurant, imageFile);
         return "redirect:/admin/restaurants";
     }
 
