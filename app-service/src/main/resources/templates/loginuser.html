@@ -11,13 +11,34 @@
       rel="stylesheet"
     />
     <title>Celis&amp;Ud</title>
-    <link href="/templatemo_580_woox_travel/vendor/bootstrap/css/bootstrap.min.css"rel="stylesheet"/>
-    <link rel="stylesheet"href="/templatemo_580_woox_travel/assets/css/fontawesome.css"/>
-    <link rel="stylesheet"href="/templatemo_580_woox_travel/assets/css/loginuseradmin.css"/>
-    <link rel="stylesheet"href="/templatemo_580_woox_travel/assets/css/owl.css"/>
-    <link rel="stylesheet"href="/templatemo_580_woox_travel/assets/css/animate.css"/>
-    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-    <link rel="stylesheet"href="/templatemo_580_woox_travel/assets/css/templatemo-woox-travel.css"/>
+    <link
+      href="/templatemo_580_woox_travel/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="/templatemo_580_woox_travel/assets/css/fontawesome.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/templatemo_580_woox_travel/assets/css/loginuseradmin.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/templatemo_580_woox_travel/assets/css/owl.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/templatemo_580_woox_travel/assets/css/animate.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/templatemo_580_woox_travel/assets/css/templatemo-woox-travel.css"
+    />
   </head>
   <body>
     <header class="header-area header-sticky">
@@ -46,15 +67,19 @@
       <div id="login-especial" class="login-container">
         <h2>Usuario</h2>
 
-            {{#error}}
-            <div class="alert alert-danger text-center mb-3" role="alert">
-                <i class="fa-solid fa-circle-exclamation" style="margin-right:6px;"></i>{{error}}
-            </div>
-            {{/error}}
+        {{#error}}
+        <div class="alert alert-danger text-center mb-3" role="alert">
+          <i
+            class="fa-solid fa-circle-exclamation"
+            style="margin-right: 6px"
+          ></i
+          >{{error}}
+        </div>
+        {{/error}}
 
         <div class="login-card">
           <form action="/process-login" method="post">
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+            <input type="hidden" name="_csrf" value="{{csrfToken}}" />
 
             <div class="input-group">
               <span class="icon"><i class="fa-solid fa-user"></i></span>

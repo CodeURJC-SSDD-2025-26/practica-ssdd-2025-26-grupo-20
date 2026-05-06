@@ -91,15 +91,14 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            .csrf(csrf -> csrf
-            .ignoringRequestMatchers("/admin/**")
+            .csrf(org.springframework.security.config.Customizer.withDefaults()
             )
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/", "/restaurants", "/restaurants/**", "/restaurant/**").permitAll()
-                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout", "/lists/**").permitAll()
+                .requestMatchers("/login", "/loginuser", "/loginadmin", "/signup", "/logout", "/lists/**", "/error").permitAll()
                 .requestMatchers("/templatemo_580_woox_travel/**").permitAll()
-                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**", "/assets/**").permitAll()
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/static/**", "/assets/**", "/vendor/**").permitAll()
                 .requestMatchers("/restaurants/*/image", "/restaurant/*/image").permitAll()
                 .requestMatchers("/user/{id}/avatar").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
