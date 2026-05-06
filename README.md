@@ -394,7 +394,9 @@ También encargado de realizar los merges de las ramas de mis compañeros.
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
 
-![Diagrama de Clases Actualizado](images/complete-classes-diagram.png)
+![Diagrama de Clases Actualizado-P1](images/diagrama1-p3.jpeg)
+![Diagrama de Clases Actualizado-P2](images/diagrama2-p3.jpeg)
+![Diagrama de Clases Actualizado-P3](images/diagrama3-p3.jpeg)
 
 ### **Instrucciones de Ejecución con Docker**
 
@@ -491,6 +493,7 @@ Adaptación de las entidades restaurantes y reseñas para API REST.
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
 |1| [Adaptación tokens y demás de la app](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/7c81f3eb8bff4f8c150050e00862c232ba9ef355)  | [JWT auth, SecurityConfig dual chain, UserDTO, AuthRestController, UserRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/7c81f3eb8bff4f8c150050e00862c232ba9ef355#diff-4a365154d0dccaa5d5c8198a15f21b63bb6cff0224ecaf08055d83f1960938b6)   |
+|2| [corrección RestApiExceptionHandler, CustomErrorController y SecurityConfig](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/eca619053f93dc8effaa7be3ce585fdf62199e00)  | [RestApiExceptionHandler, CustomErrorController y SecurityConfig](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/eca619053f93dc8effaa7be3ce585fdf62199e00#diff-4aea1eb8f2cb8aa00da68df5840c29021c606cee61100f8ce134242c72e70f59)   |
 
 ---
 
