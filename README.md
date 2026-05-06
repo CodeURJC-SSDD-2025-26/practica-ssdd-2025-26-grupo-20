@@ -394,7 +394,9 @@ También encargado de realizar los merges de las ramas de mis compañeros.
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
 
-![Diagrama de Clases Actualizado](images/complete-classes-diagram.png)
+![Diagrama de Clases Actualizado-P1](images/diagrama1-p3.jpeg)
+![Diagrama de Clases Actualizado-P2](images/diagrama2-p3.jpeg)
+![Diagrama de Clases Actualizado-P3](images/diagrama3-p3.jpeg)
 
 ### **Instrucciones de Ejecución con Docker**
 
