@@ -1,37 +1,53 @@
 package es.urjc.controllers.rest;
 
-// =========================================================
-// RODRI
-// =========================================================
-// Manejador global de errores para la API REST.
-// Rúbrica #18: cuando falla algo en la API REST, la respuesta
-// debe ser JSON, NO HTML.
-//
-// Sin esto, Spring devuelve una página HTML de error cuando
-// por ejemplo no se encuentra un recurso o hay un 403.
-// Eso rompe cualquier cliente de la API (Postman, app móvil).
-//
-// Lo que debe hacer:
-//   - Capturar excepciones comunes (404, 403, 400, 500)
-//   - Devolver siempre JSON con este formato:
-//     {
-//       "status": 404,
-//       "error": "Not Found",
-//       "message": "Restaurant not found"
-//     }
-//
-// Anota la clase con @RestControllerAdvice
-// Limita su alcance SOLO a los RestControllers con:
-//   @RestControllerAdvice(basePackages = "es.urjc.controllers.rest")
-// Así no interfiere con los errores de la web (que usan HTML).
-//
-// Excepciones a capturar como mínimo:
-//   - IllegalArgumentException → 400
-//   - AccessDeniedException → 403
-//   - NoSuchElementException → 404
-//   - Exception (genérica) → 500
-// =========================================================
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice(basePackages = "es.urjc.controllers.rest")
 public class RestApiExceptionHandler {
-    // TODO (Persona D): implementar
+
+    // Helper para generar el JSON con el formato exacto requerido:
+    // "status", "error" y "message"
+    private Map<String, Object> crearRespuesta(HttpStatus status, String error, String message) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("status", status.value());
+        body.put("error", error);
+        body.put("message", message);
+        return body;
+    }
+
+    // 1. Captura IllegalArgumentException -> Devuelve 400 (Bad Request)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handleBadRequest(IllegalArgumentException ex) {
+        Map<String, Object> body = crearRespuesta(HttpStatus.BAD_REQUEST, "Bad Request", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
+
+    // 2. Captura AccessDeniedException -> Devuelve 403 (Forbidden)
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Object> handleForbidden(AccessDeniedException ex) {
+        Map<String, Object> body = crearRespuesta(HttpStatus.FORBIDDEN, "Forbidden", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
+    }
+
+    // 3. Captura NoSuchElementException -> Devuelve 404 (Not Found)
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<Object> handleNotFound(NoSuchElementException ex) {
+        Map<String, Object> body = crearRespuesta(HttpStatus.NOT_FOUND, "Not Found", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    // 4. Captura Exception genérica -> Devuelve 500 (Internal Server Error)
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> handleGeneralException(Exception ex) {
+        Map<String, Object> body = crearRespuesta(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", ex.getMessage());
+        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

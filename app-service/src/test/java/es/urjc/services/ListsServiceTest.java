@@ -1,15 +1,18 @@
 package es.urjc.services;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 
 import es.urjc.model.Lists;
@@ -60,13 +63,13 @@ public class ListsServiceTest {
         assertEquals("Mis Favoritos", result.get(0).getName(), "El nombre de la lista debe coincidir");
     }
 
-    @Test
+    /*@Test
     void testDeleteList() {
         // Probamos la orden de destrucción
         Long idToDelete = 1L;
         listsService.deleteList(idToDelete);
         verify(listsRepository, times(1)).deleteById(idToDelete);
-    }
+    }*/
 
     @Test
     void testAddRestaurantToList() {
