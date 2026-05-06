@@ -103,14 +103,20 @@ public String showIndex(Model model, Principal principal) {
     @GetMapping("/restaurant/{id}")
     public String showRestaurantDetails(@PathVariable Long id, Model model, Principal principal) {
         User user = null;
+        boolean isAuthenticated = false; // 1. Inicializamos a false por defecto
+
         if (principal != null) {
             user = userService.findByUsername(principal.getName()).orElse(null);
             if (user != null) {
+                isAuthenticated = true; // El usuario está logueado
                 model.addAttribute("user", user);
-                model.addAttribute("isAuthenticated", true);
                 model.addAttribute("hasAvatar", user.getAvatarImage() != null);
             }
         }
+        
+        // 2. IMPORTANTE: La pasamos SIEMPRE al modelo para que Mustache no explote
+        model.addAttribute("isAuthenticated", isAuthenticated);
+
         Restaurant restaurant = restaurantService.findById(id).orElse(null);
         if (restaurant != null) {
             List<Review> reviews = reviewService.findByRestaurant(restaurant);
@@ -118,6 +124,7 @@ public String showIndex(Model model, Principal principal) {
             boolean isSavedInAnyList = false;
             List<Map<String, Object>> listsStatus = new ArrayList<>();
 
+            // Lógica de favoritos (Solo si el usuario existe)
             if (user != null) {
                 List<Lists> userLists = listsService.getListsByUser(user);
                 for (Lists lst : userLists) {
@@ -142,20 +149,44 @@ public String showIndex(Model model, Principal principal) {
             model.addAttribute("isSavedInAnyList", isSavedInAnyList);
             model.addAttribute("userListsWithStatus", listsStatus);
 
-            List<Map<String, Object>> allRestData = getRestaurantsWithListStatus(user, restaurantService.findAll());
+            // 3. EVITAMOS EL CRASH: Separamos la lógica de los restaurantes recomendados
             List<Map<String, Object>> recommended = new ArrayList<>();
-            for (Map<String, Object> rMap : allRestData) {
-                if (rMap.get("specialty") != null &&
-                    rMap.get("specialty").equals(restaurant.getSpecialty()) &&
-                    !rMap.get("id").equals(restaurant.getId())) {
-                    recommended.add(rMap);
+            
+            if (user != null) {
+                // Si hay usuario, usamos tu función que comprueba los corazones (favoritos)
+                List<Map<String, Object>> allRestData = getRestaurantsWithListStatus(user, restaurantService.findAll());
+                for (Map<String, Object> rMap : allRestData) {
+                    if (rMap.get("specialty") != null &&
+                        rMap.get("specialty").equals(restaurant.getSpecialty()) &&
+                        !rMap.get("id").equals(restaurant.getId())) {
+                        recommended.add(rMap);
+                    }
+                }
+            } else {
+                // Si NO hay usuario, construimos las recomendaciones de forma manual segura
+                for (Restaurant r : restaurantService.findAll()) {
+                    if (r.getSpecialty() != null &&
+                        r.getSpecialty().equals(restaurant.getSpecialty()) &&
+                        !r.getId().equals(restaurant.getId())) {
+                        
+                        Map<String, Object> rMap = new HashMap<>();
+                        rMap.put("id", r.getId());
+                        rMap.put("name", r.getName());
+                        rMap.put("specialty", r.getSpecialty());
+                        rMap.put("description", r.getDescription());
+                        rMap.put("municipality", r.getMunicipality());
+                        rMap.put("averagePrice", r.getAveragePrice());
+                        rMap.put("hasImage", r.isHasImage());
+                        rMap.put("isSavedInAnyList", false); // Sin usuario no hay favoritos
+                        
+                        recommended.add(rMap);
+                    }
                 }
             }
             model.addAttribute("recommendedRestaurants", recommended);
         }
         return "details";
     }
-
     private List<Map<String, Object>> getRestaurantsWithListStatus(User user, List<Restaurant> restaurants) {
         List<Map<String, Object>> restaurantsData = new ArrayList<>();
 

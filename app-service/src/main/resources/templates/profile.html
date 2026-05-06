@@ -122,7 +122,7 @@
                     {{/hasAvatar}}
                   </a>
                   <form action="/logout" method="post" style="display:inline;">
-                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
                     <button type="submit" class="logout-btn" title="Cerrar sesión"
                             style="background:none;border:none;cursor:pointer;color:inherit;">
                       <i class="fa fa-sign-out-alt"></i>
@@ -142,7 +142,7 @@
       <div class="container">
 
         <!-- Token CSRF para JS -->
-        <span id="csrf-token" data-token="{{_csrf.token}}" style="display:none;"></span>
+        <span id="csrf-token" data-token="{{csrfToken}}" style="display:none;"></span>
 
         <div class="row">
 
@@ -232,7 +232,7 @@
               <div class="d-grid gap-2 mt-2" style="width:100%;">
                 <form action="/profile/delete" method="post"
                       onsubmit="return confirm('¿Seguro que quieres eliminar tu cuenta? Esta acción no se puede deshacer.')">
-                  <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                  <input type="hidden" name="_csrf" value="{{csrfToken}}">
                   <button type="submit" class="btn btn-danger w-100">
                     <i class="fa fa-trash"></i> Eliminar cuenta
                   </button>
@@ -323,7 +323,7 @@
                   <!-- Formulario de edición inline -->
                   <form class="review-edit-form" id="reviewEdit{{id}}"
                         action="/review/{{id}}/edit" method="post">
-                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
                     <!-- Estrellas -->
                     <div class="star-row" style="flex-direction:row-reverse;justify-content:flex-end;">
                       <input type="radio" name="rating" id="s5-{{id}}" value="5" {{#isRating5}}checked{{/isRating5}}><label for="s5-{{id}}">★</label>
@@ -368,7 +368,7 @@
           </div>
           <!-- POST /lists/create — endpoint real del ListsController -->
           <form action="/lists/create" method="post">
-            <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+            <input type="hidden" name="_csrf" value="{{csrfToken}}">
             <div class="modal-body">
               <div class="mb-3">
                 <label class="form-label">Nombre de la lista *</label>

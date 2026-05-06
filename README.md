@@ -386,7 +386,7 @@ También encargado de realizar los merges de las ramas de mis compañeros.
 📄 **[Especificación OpenAPI (YAML)](/api-docs/api-docs.yaml)**
 
 #### **Documentación HTML**
-📖 **[Documentación API REST (HTML)](https://raw.githack.com/[usuario]/[repositorio]/main/api-docs/api-docs.html)**
+📖 **[Documentación API REST (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/main/api-docs/api-docs.html)**
 
 > La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
 
@@ -394,7 +394,9 @@ También encargado de realizar los merges de las ramas de mis compañeros.
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
 
-![Diagrama de Clases Actualizado](images/complete-classes-diagram.png)
+![Diagrama de Clases Actualizado-P1](images/diagrama1-p3.jpeg)
+![Diagrama de Clases Actualizado-P2](images/diagrama2-p3.jpeg)
+![Diagrama de Clases Actualizado-P3](images/diagrama3-p3.jpeg)
 
 ### **Instrucciones de Ejecución con Docker**
 
@@ -406,12 +408,12 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 1. **Descargar el artefacto OCI:** No necesitas clonar el repositorio de GitHub. Simplemente ejecuta este comando para descargar la configuración orquestada:
    ```bash
-   docker pull TU_USUARIO/docker-compose:latest
+   docker pull rodrigodefrutos/docker-compose:latest
    ```
 
 2. **Ejecutar la aplicación:** Levanta todos los servicios (Base de Datos, App Principal y Servicio de Emails) ejecutando:
    ```
-   docker compose -f oci://TU_USUARIO/docker-compose:latest up
+   docker compose -f oci://rodrigodefrutos/docker-compose:latest up
    ```
 3. **Acceder a la aplicación:** Una vez que la consola indique que los servicios están listos, puedes acceder a la API y la Web en:
    ```
@@ -469,10 +471,8 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 | Rol | Usuario | Contraseña |
 |:---|:---|:---|
 | Administrador | admin | admin123 |
-| Usuario Registrado | user1 | user123 |
-| Usuario Registrado | user2 | user123 |
+| Usuario Registrado | chicote_gluten | 1234 |
 
-### **OTRA DOCUMENTACIÓN ADICIONAL REQUERIDA EN LA PRÁCTICA**
 
 ### **Participación de Miembros en la Práctica 3**
 
@@ -493,6 +493,7 @@ Adaptación de las entidades restaurantes y reseñas para API REST.
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
 |1| [Adaptación tokens y demás de la app](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/7c81f3eb8bff4f8c150050e00862c232ba9ef355)  | [JWT auth, SecurityConfig dual chain, UserDTO, AuthRestController, UserRestController](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/7c81f3eb8bff4f8c150050e00862c232ba9ef355#diff-4a365154d0dccaa5d5c8198a15f21b63bb6cff0224ecaf08055d83f1960938b6)   |
+|2| [corrección RestApiExceptionHandler, CustomErrorController y SecurityConfig](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/eca619053f93dc8effaa7be3ce585fdf62199e00)  | [RestApiExceptionHandler, CustomErrorController y SecurityConfig](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/eca619053f93dc8effaa7be3ce585fdf62199e00#diff-4aea1eb8f2cb8aa00da68df5840c29021c606cee61100f8ce134242c72e70f59)   |
 
 ---
 
@@ -514,14 +515,12 @@ Adaptación de la entidad listas para API REST. También responsable de la corre
 
 #### **Alumno 4 - Rodrigo de Frutos Suárez**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
+Scripts y los dockerfile, documentación de la API, y la documentación del Readme.
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Dockerfiles, scripts, docker-compose](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/1fb1de8e17eca9d662b0fe41ef40e2f08234ff4f)  | [pom.xml, RestExceptionHandler.java, app-service.Dockerfile, create_image.bat, create_image.sh, docker-compose.yml, publish_docker-compose.bat, publish_docker-compose.sh, publish_image.bat, publish_image.sh, utility-service.Dockerfile](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/1fb1de8e17eca9d662b0fe41ef40e2f08234ff4f#diff-a520c0b230cbbf58b115df68f426d652f5d9d70bf5c9699f7a159844f61be732)   |
+|2| [Revise Docker setup instructions in README](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/e90aa4f19a83b27d9053ff9847741aa5450ac2b6#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5)  | [README.md](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/e90aa4f19a83b27d9053ff9847741aa5450ac2b6#diff-b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5)   |
+|3| [api-docs, postman.](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/eb7740cf68c238a9fadc43b8ba955291c643ce1d)  | [Celis&Ud API.postman_collection.json, api-docs.html, api-docs.yaml, pom.xml, RestApiExceptionHandler.java‎, ListsServiceTest.java](https://github.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/commit/eb7740cf68c238a9fadc43b8ba955291c643ce1d#diff-821405d18e2d6818be554154c950f0a06065b1c5b3eb19b0dfa7dadeaf72cc31)   |
 
 ---

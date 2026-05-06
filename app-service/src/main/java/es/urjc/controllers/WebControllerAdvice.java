@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class WebControllerAdvice {
 
-    @ModelAttribute("_csrf_token")
+    @ModelAttribute("csrfToken")
     public String csrfToken(HttpServletRequest request) {
         CsrfToken token = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
         return token != null ? token.getToken() : "";
