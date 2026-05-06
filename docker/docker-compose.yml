@@ -55,7 +55,7 @@ services:
   utility-service:
     image: rodrigodefrutos/utility-service:latest
     environment:
-    MAIL_USERNAME: rdefrutossuarez@gmail.com
-    MAIL_PASSWORD: ${GMAIL_PASSWORD} # Cambiar por la app password de Gmail
+      MAIL_USERNAME: rdefrutossuarez@gmail.com
+      MAIL_PASSWORD: ${GMAIL_PASSWORD} # Cambiar por la app password de Gmail
     ports:
       - "8080:8080"

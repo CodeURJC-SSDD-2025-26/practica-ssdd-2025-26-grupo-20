@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import es.urjc.dto.UserDTO;
 import es.urjc.model.User;
 import es.urjc.services.UserService;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 
@@ -80,7 +81,7 @@ public class UserRestController {
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(
             @PathVariable Long id,
-            @RequestBody UpdateUserRequest req,
+            @Valid @RequestBody UpdateUserRequest req,
             @AuthenticationPrincipal UserDetails currentUser) {
 
         Optional<User> opt = userService.findById(id);

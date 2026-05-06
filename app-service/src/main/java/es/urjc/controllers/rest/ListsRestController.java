@@ -7,6 +7,7 @@ import es.urjc.model.User;
 import es.urjc.services.ListsService;
 import es.urjc.services.RestaurantService;
 import es.urjc.services.UserService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -66,12 +67,8 @@ public class ListsRestController {
 
     // POST /api/v1/lists
     @PostMapping
-    public ResponseEntity<ListsDTO> createList(@RequestBody ListsDTO dto, Principal principal) {
+    public ResponseEntity<ListsDTO> createList(@Valid @RequestBody ListsDTO dto, Principal principal) {
         if (principal == null) return ResponseEntity.status(401).build();
-
-        if (dto.getName() == null || dto.getName().isBlank()) {
-            return ResponseEntity.badRequest().build();
-        }
 
         User user = userService.findByUsername(principal.getName()).orElse(null);
         if (user == null) return ResponseEntity.status(401).build();

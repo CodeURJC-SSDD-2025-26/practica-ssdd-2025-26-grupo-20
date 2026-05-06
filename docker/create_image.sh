@@ -7,10 +7,10 @@
 # =========================================================
 
 echo "Construyendo la imagen de app-service..."
-docker build -f docker/app-service.Dockerfile -t TU_USUARIO/app-service:latest .
+docker build -f docker/app-service.Dockerfile -t rodrigodefrutos/app-service:latest .
 
 echo "Construyendo la imagen de utility-service..."
-docker build -f docker/utility-service.Dockerfile -t TU_USUARIO/utility-service:latest .
+docker build -f docker/utility-service.Dockerfile -t rodrigodefrutos/utility-service:latest .
 
 echo "========================================================="
 echo "¡Imágenes construidas con éxito!"

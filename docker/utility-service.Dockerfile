@@ -20,7 +20,7 @@ WORKDIR /app
 COPY utility-service/pom.xml .
 RUN mvn dependency:go-offline
 
-COPY utility-service/src -/src
+COPY utility-service/src ./src
 RUN mvn package -DskipTests
 
 # -- Stage 2: ejecutar --

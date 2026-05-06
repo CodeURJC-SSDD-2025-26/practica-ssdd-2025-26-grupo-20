@@ -5,6 +5,7 @@ import es.urjc.model.Restaurant;
 import es.urjc.services.RestaurantService;
 import es.urjc.services.ReviewService;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +56,7 @@ public class RestaurantRestController {
     // POST /api/v1/restaurants
     @PostMapping
     public ResponseEntity<RestaurantDTO> createRestaurant(
-            @RequestBody RestaurantDTO dto,
+            @Valid @RequestBody RestaurantDTO dto,
             Principal principal) {
 
         if (principal == null) return ResponseEntity.status(401).build();
@@ -75,7 +76,7 @@ public class RestaurantRestController {
     @PutMapping("/{id}")
     public ResponseEntity<RestaurantDTO> updateRestaurant(
             @PathVariable Long id,
-            @RequestBody RestaurantDTO dto,
+            @Valid @RequestBody RestaurantDTO dto,
             Principal principal) {
 
         if (principal == null) return ResponseEntity.status(401).build();
