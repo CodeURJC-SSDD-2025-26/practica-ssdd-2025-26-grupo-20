@@ -387,8 +387,19 @@ También encargado de realizar los merges de las ramas de mis compañeros.
 
 #### **Documentación HTML**
 📖 **[Documentación API REST (HTML)](https://raw.githack.com/CodeURJC-SSDD-2025-26/practica-ssdd-2025-26-grupo-20/main/api-docs/api-docs.html)**
+Link: (https://localhost:8443/swagger-ui.html)
 
 > La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
+
+### **Diagrama de Servicios**
+
+El siguiente diagrama muestra cómo se comunican los dos microservicios entre sí y con la base de datos:
+
+![Diagrama de Servicios](images/services-diagram.svg)
+
+- **app-service** expone la web (Mustache) y la API REST (JWT) en el puerto HTTPS 8443.
+- **utility-service** expone un endpoint REST interno para el envío de emails en el puerto HTTP 8080. Solo es accesible desde `app-service` dentro de la red Docker.
+- Ambos servicios comparten la misma red Docker definida en `docker-compose.yml`.
 
 ### **Diagrama de Clases y Templates Actualizado**
 
@@ -408,12 +419,14 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 1. **Descargar el artefacto OCI:** No necesitas clonar el repositorio de GitHub. Simplemente ejecuta este comando para descargar la configuración orquestada:
    ```bash
-   docker pull rodrigodefrutos/docker-compose:latest
+   docker build -f docker/app-service.Dockerfile -t rodrigodefrutos/app-service:latest .
+   docker build -f docker/utility-service.Dockerfile -t rodrigodefrutos/utility-service:latest .
    ```
 
 2. **Ejecutar la aplicación:** Levanta todos los servicios (Base de Datos, App Principal y Servicio de Emails) ejecutando:
-   ```
-   docker compose -f oci://rodrigodefrutos/docker-compose:latest up
+   ```bash
+   cd docker
+   docker compose up
    ```
 3. **Acceder a la aplicación:** Una vez que la consola indique que los servicios están listos, puedes acceder a la API y la Web en:
    ```
@@ -440,31 +453,6 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 3. **Publicar la orquestación:** Finalmente, empaqueta y publica el `docker-compose.yml` como un OCI Artifact:
    - En Windows: `docker\publish_docker-compose.bat`
    - En Linux/Mac: `./docker/publish_docker-compose.sh`
-
-### **Despliegue en Máquina Virtual**
-
-#### **Requisitos:**
-- Acceso a la máquina virtual (SSH)
-- Clave privada para autenticación
-- Conexión a la red correspondiente o VPN configurada
-
-#### **Pasos para desplegar:**
-
-1. **Conectar a la máquina virtual**:
-   ```bash
-   ssh -i [ruta/a/clave.key] [usuario]@[IP-o-dominio-VM]
-   ```
-   
-   Ejemplo:
-   ```bash
-   ssh -i ssh-keys/app.key vmuser@10.100.139.XXX
-   ```
-
-2. **AQUÍ LOS SIGUIENTES PASOS**:
-
-### **URL de la Aplicación Desplegada**
-
-🌐 **URL de acceso**: `https://[nombre-app].etsii.urjc.es:8443`
 
 #### **Credenciales de Usuarios de Ejemplo**
 
