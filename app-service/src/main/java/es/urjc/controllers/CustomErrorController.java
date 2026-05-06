@@ -1,5 +1,6 @@
 package es.urjc.controllers;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.boot.webmvc.error.ErrorController;
@@ -11,14 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 @Controller
 public class CustomErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public Object handleError(HttpServletRequest request,
                               HttpServletResponse response,
-                              Model model) {
+                              Model model) throws IOException{
 
         Object statusObj = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         Object messageObj = request.getAttribute(RequestDispatcher.ERROR_MESSAGE);
@@ -35,9 +35,9 @@ public class CustomErrorController implements ErrorController {
             case 500 -> "Internal Server Error";
             default  -> (messageObj != null) ? messageObj.toString() : "Error";
         };
-
-        String path = (pathObj != null) ? pathObj.toString() : "";
-
+        
+        String path = pathObj != null ? pathObj.toString() : "";
+        
         // --- Rutas de la API REST: devolver JSON ---
         if (path.startsWith("/api/")) {
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
